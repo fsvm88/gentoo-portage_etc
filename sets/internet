@@ -1,0 +1,17 @@
+media-sound/teamspeak-client-bin
+net-analyzer/nmap
+net-analyzer/tcpdump
+net-dns/bind-tools
+net-ftp/lftp
+net-ftp/ncftp
+#net-irc/konversation
+net-misc/netkit-telnetd
+net-misc/tor
+net-misc/wakeonlan
+net-p2p/amule
+net-p2p/freenet
+net-p2p/transmission
+net-wireless/rfkill
+www-client/chromium
+www-plugins/chrome-binary-plugins:stable
+www-plugins/adobe-flash

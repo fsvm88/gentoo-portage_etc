@@ -1,0 +1,12 @@
+diff -Nuar seahorse-3.10.2.orig/ssh/seahorse-ssh-key-properties.c seahorse-3.10.2/ssh/seahorse-ssh-key-properties.c
+--- seahorse-3.10.2.orig/ssh/seahorse-ssh-key-properties.c	2014-01-08 16:07:14.000000000 +0100
++++ seahorse-3.10.2/ssh/seahorse-ssh-key-properties.c	2014-08-09 12:47:56.126945030 +0200
+@@ -366,7 +366,7 @@
+     do_details (swidget);
+     
+     widget = seahorse_widget_get_widget (swidget, "comment-entry");
+-    g_return_if_fail (widget != NULL);
++    g_return_val_if_fail (widget != NULL, NULL);
+ 
+     /* A public key only */
+     if (seahorse_object_get_usage (SEAHORSE_OBJECT (skey)) != SEAHORSE_USAGE_PRIVATE_KEY) {

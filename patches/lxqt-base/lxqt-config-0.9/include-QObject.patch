@@ -1,0 +1,10 @@
+--- lxqt-config-monitor/monitor.h.orig	2015-10-23 12:04:58.890149023 +0300
++++ lxqt-config-monitor/monitor.h	2015-10-23 12:05:19.721148256 +0300
+@@ -20,6 +20,7 @@
+ #ifndef _MONITOR_H_
+ #define _MONITOR_H_
+ 
++#include <QObject>
+ #include <QStringList>
+ #include <QHash>
+ #include <QList>

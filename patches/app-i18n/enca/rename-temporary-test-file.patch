@@ -1,0 +1,14 @@
+diff -Nuar enca-1.14.orig/test/test-convert-64.sh enca-1.14/test/test-convert-64.sh
+--- enca-1.14.orig/test/test-convert-64.sh	2009-08-25 10:33:34.000000000 +0200
++++ enca-1.14/test/test-convert-64.sh	2014-08-17 18:01:39.888104669 +0200
+@@ -14,8 +14,8 @@
+     for c in $lname; do
+       cp -f $srcdir/$l-s.$c $l-big.$c
+       for i in 1 2 3 4 5 6; do
+-        cat $l-big.$c $l-big.$c $l-big.$c $l-big.$c >test.tmp
+-        mv -f test.tmp $l-big.$c
++        cat $l-big.$c $l-big.$c $l-big.$c $l-big.$c >test.tmp_64
++        mv -f test.tmp_64 $l-big.$c
+       done
+       if test -z "$src"; then
+         src=$c

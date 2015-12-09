@@ -1,0 +1,12 @@
+diff -Nuar gamin-0.1.10.orig/server/gam_eq.c gamin-0.1.10/server/gam_eq.c
+--- gamin-0.1.10.orig/server/gam_eq.c	2007-07-04 15:36:49.000000000 +0200
++++ gamin-0.1.10/server/gam_eq.c	2014-08-07 13:32:23.626047313 +0200
+@@ -124,7 +124,7 @@
+ {
+ 	gboolean done_work = FALSE;
+ 	if (!eq)
+-		return;
++		return done_work;
+ 
+ #ifdef GAM_EQ_VERBOSE
+ 	GAM_DEBUG(DEBUG_INFO, "gam_eq: Flushing event queue for %s\n", gam_connection_get_pidname (conn));

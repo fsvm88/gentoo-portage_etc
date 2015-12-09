@@ -1,0 +1,9 @@
+dev-libs/libqtxdg
+dev-qt/*
+lxqt-base/*
+media-gfx/lximage-qt
+x11-misc/obconf-qt
+x11-misc/pcmanfm-qt
+x11-misc/sddm
+x11-terms/qterminal
+media-gfx/phototonic

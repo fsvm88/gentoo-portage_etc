@@ -1,0 +1,3 @@
+app-emulation/libvirt-glib python
+media-sound/pulseaudio gnome
+net-libs/gtk-vnc python

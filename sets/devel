@@ -1,0 +1,7 @@
+dev-util/cgdb
+dev-util/meld
+dev-util/ninja
+dev-util/patchutils
+dev-util/strace
+dev-vcs/git
+sys-devel/gdb

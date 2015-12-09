@@ -1,0 +1,11 @@
+app-admin/sudo
+app-misc/symlinks
+net-misc/dhcpcd
+sys-apps/gptfdisk
+sys-apps/hdparm
+sys-apps/irqbalance
+sys-apps/mlocate
+sys-boot/grub
+sys-kernel/dummy-sources
+sys-kernel/linux-firmware
+#x11-misc/bumblebee

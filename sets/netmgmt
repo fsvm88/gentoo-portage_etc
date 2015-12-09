@@ -1,0 +1,5 @@
+net-analyzer/nmap
+net-misc/netkit-telnetd
+net-wireless/iw
+sys-apps/ethtool
+net-analyzer/wireshark

@@ -1,0 +1,4 @@
+x11-libs/libva
+x11-libs/libva-intel-driver
+x11-libs/libva-vdpau-driver
+x11-misc/vdpauinfo

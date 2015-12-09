@@ -1,0 +1,2 @@
+media-libs/gst-plugins-bad wayland egl
+media-libs/mesa gles2

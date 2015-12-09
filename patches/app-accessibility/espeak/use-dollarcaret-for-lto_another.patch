@@ -1,0 +1,12 @@
+diff -Nuar espeak-1.47.11-source.orig/src/Makefile espeak-1.47.11-source/src/Makefile
+--- espeak-1.47.11-source.orig/src/Makefile	2015-11-10 22:37:04.406795926 +0100
++++ espeak-1.47.11-source/src/Makefile	2015-11-10 22:39:24.549732010 +0100
+@@ -111,7 +111,7 @@
+ 
+ x_%.o: %.cpp
+ 	$(CXX) $(CXXFLAGS) $(USE_AUDIO) -D PATH_ESPEAK_DATA=\"$(DATADIR)\" -Wall -fpic -fvisibility=hidden -pedantic \
+-	-I. -D LIBRARY -c -fno-exceptions  $<  -o x_$*.o
++	-I. -D LIBRARY -c -fno-exceptions  $^  -o x_$*.o
+ 
+ $(LIB_NAME): $(OBJS2)
+ 	$(CXX) $(LDFLAGS) -shared $(SONAME_OPT)$(LIB_NAME).$(LIB_VERSION) -o $@ \

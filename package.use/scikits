@@ -1,0 +1,4 @@
+dev-python/numpy lapack
+dev-python/matplotlib fltk pyside tk
+dev-lang/python tk
+app-text/texlive-core xetex

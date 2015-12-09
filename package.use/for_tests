@@ -1,0 +1,5 @@
+dev-libs/boost python
+dev-libs/glib utils
+dev-util/boost-build python
+media-gfx/imagemagick corefonts
+sci-libs/hdf5 -cxx -fortran

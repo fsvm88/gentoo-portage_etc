@@ -1,0 +1,12 @@
+diff -Nuar VirtualGL-2.3.3.orig/util/rrsocket.cpp VirtualGL-2.3.3/util/rrsocket.cpp
+--- VirtualGL-2.3.3.orig/util/rrsocket.cpp	2011-12-22 19:27:13.000000000 +0100
++++ VirtualGL-2.3.3/util/rrsocket.cpp	2015-05-02 21:20:32.280381948 +0200
+@@ -120,7 +120,7 @@
+ #endif // USESSL
+ 
+ 
+-rrsocket::rrsocket(bool dossl=false)
++rrsocket::rrsocket(bool dossl)
+ 	#ifdef USESSL
+ 	: _dossl(dossl)
+ 	#endif

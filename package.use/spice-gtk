@@ -1,0 +1,2 @@
+net-misc/spice-gtk -gstreamer python
+net-misc/spice-gtk usbredir

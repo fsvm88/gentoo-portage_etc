@@ -1,0 +1,14 @@
+app-office/libreoffice
+#gnome-extra/nm-applet
+#kde-plasma/plasma-meta
+#kde-misc/kcm-touchpad
+#lxqt-base/lxqt-meta
+media-sound/teamspeak-client-bin
+#net-irc/konversation
+net-print/hplip
+x11-base/xorg-server
+x11-misc/vdpauinfo
+#x11-terms/qterminal
+#kde-base/kde-meta
+x11-apps/xrandr
+#kde-apps/kde-apps-meta

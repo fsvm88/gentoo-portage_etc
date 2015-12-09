@@ -1,0 +1,12 @@
+app-arch/hardlink
+app-misc/fdupes
+sys-block/thin-provisioning-tools
+sys-fs/btrfs-progs
+sys-fs/cryptsetup
+sys-fs/dosfstools
+sys-fs/fuse
+sys-fs/lvm2
+sys-fs/ntfs3g
+sys-fs/squashfs-tools
+sys-fs/xfsprogs
+#sys-fs/bedup

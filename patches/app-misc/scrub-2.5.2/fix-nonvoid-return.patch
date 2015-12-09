@@ -1,0 +1,12 @@
+diff -Nuar scrub-2.5.2.orig/src/genrand.c scrub-2.5.2/src/genrand.c
+--- scrub-2.5.2.orig/src/genrand.c	2012-06-21 00:00:27.000000000 +0200
++++ scrub-2.5.2/src/genrand.c	2014-08-18 18:15:48.645967621 +0200
+@@ -106,7 +106,7 @@
+                 buf[n] = result;
+             }
+ #endif
+-            return;
++            return 0;
+         }
+     }
+ 

@@ -1,0 +1,12 @@
+diff -Nuar seahorse-3.10.2.orig/gkr/gkr-backend.c seahorse-3.10.2/gkr/gkr-backend.c
+--- seahorse-3.10.2.orig/gkr/gkr-backend.c	2014-08-09 12:42:10.456513526 +0200
++++ seahorse-3.10.2/gkr/gkr-backend.c	2014-08-09 12:43:06.425585815 +0200
+@@ -1176,7 +1176,7 @@
+ #line 67 "/data/src/seahorse/gkr/gkr-backend.vala"
+ 	_tmp0_ = seahorse_gkr_backend__instance;
+ #line 67 "/data/src/seahorse/gkr/gkr-backend.vala"
+-	g_return_if_fail (_tmp0_ == NULL);
++	g_return_val_if_fail (_tmp0_ == NULL, NULL);
+ #line 68 "/data/src/seahorse/gkr/gkr-backend.vala"
+ 	_tmp1_ = _g_object_ref0 (self);
+ #line 68 "/data/src/seahorse/gkr/gkr-backend.vala"

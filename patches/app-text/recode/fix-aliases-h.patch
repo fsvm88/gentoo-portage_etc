@@ -1,0 +1,11 @@
+diff -Nuar recode-3.6.orig/libiconv/aliases.h recode-3.6/libiconv/aliases.h
+--- recode-3.6.orig/libiconv/aliases.h	2000-11-20 19:45:38.000000000 +0100
++++ recode-3.6/libiconv/aliases.h	2014-08-11 14:51:35.527201288 +0200
+@@ -69,6 +69,7 @@
+ #ifdef __GNUC__
+ __inline
+ #endif
++static
+ const struct alias *
+ aliases_lookup (register const char *str, register unsigned int len)
+ {

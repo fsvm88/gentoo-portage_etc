@@ -12,3 +12,4 @@ x11-misc/vdpauinfo
 #kde-base/kde-meta
 x11-apps/xrandr
 #kde-apps/kde-apps-meta
+app-crypt/seahorse

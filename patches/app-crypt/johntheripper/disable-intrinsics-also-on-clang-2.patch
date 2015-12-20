@@ -1,0 +1,12 @@
+diff -Nuar john-1.7.9.orig/src/rawSHA1_ng_fmt.c john-1.7.9/src/rawSHA1_ng_fmt.c
+--- john-1.7.9.orig/src/rawSHA1_ng_fmt.c	2015-12-13 22:11:35.889719719 +0100
++++ john-1.7.9/src/rawSHA1_ng_fmt.c	2015-12-13 22:14:17.927714917 +0100
+@@ -530,7 +530,7 @@
+ 
+ #if defined(__SSE4_1__)
+ 
+-# if !defined(__INTEL_COMPILER)
++# if !defined(__INTEL_COMPILER) && !defined(__clang__)
+ // This intrinsic is not always available in GCC, so define it here.
+ static inline int _mm_testz_si128 (__m128i __M, __m128i __V)
+ {

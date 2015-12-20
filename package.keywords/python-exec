@@ -1,0 +1,4 @@
+dev-lang/python-exec
+app-eselect/eselect-python
+dev-lang/python:2.7
+dev-lang/python:3.4

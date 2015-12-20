@@ -47,7 +47,6 @@ x11-proto/glproto
 dev-python/markdown2
 app-text/tofrodos
 sys-kernel/linux-headers
-dev-libs/libuv
 dev-java/bcprov
 x11-misc/xdg-utils
 net-libs/http-parser

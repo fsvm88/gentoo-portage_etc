@@ -6,21 +6,13 @@ dev-libs/nspr
 dev-libs/nss
 dev-util/ninja
 dev-util/patchutils
-# move kde-base/kdebase-data kde-apps/kdebase-data
-kde-apps/kdebase-data
-kde-misc/kdiff3
-kde-misc/kscreen
-kde-misc/plasma-nm
 media-gfx/pngcrush
 media-libs/mesa
-media-libs/phonon
-media-libs/phonon-gstreamer
-media-libs/phonon-vlc
-net-libs/libbluedevil
+
 net-libs/libupnp
-net-libs/nodejs
+
 net-proxy/dante
-net-wireless/bluedevil
+
 sys-apps/dtc
 sys-apps/ethtool
 sys-apps/hdparm
@@ -49,4 +41,4 @@ app-text/tofrodos
 sys-kernel/linux-headers
 dev-java/bcprov
 x11-misc/xdg-utils
-net-libs/http-parser
+

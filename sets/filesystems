@@ -10,3 +10,4 @@ sys-fs/ntfs3g
 sys-fs/squashfs-tools
 sys-fs/xfsprogs
 #sys-fs/bedup
+sys-boot/unetbootin

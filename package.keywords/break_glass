@@ -87,6 +87,7 @@
 <media-libs/avidemux-plugins-2.7
 <media-libs/gst-plugins-bad-1.7
 <media-libs/gst-plugins-base-1.7
+<media-libs/gst-plugins-good-1.7
 <media-libs/gstreamer-1.7
 <media-libs/libpng-1.7
 <media-libs/x265-1.9

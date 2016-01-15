@@ -16,3 +16,4 @@ www-client/chromium
 www-plugins/chrome-binary-plugins:stable
 www-plugins/adobe-flash
 net-proxy/torsocks
+www-client/firefox

@@ -5,14 +5,14 @@ app-misc/fdupes
 app-misc/tmux
 app-portage/cpuinfo2cpuflags
 app-portage/layman
+app-shells/bash-completion
 dev-util/vmtouch
 net-dns/bind-tools
-#net-misc/ntp
 net-misc/chrony
+#net-misc/ntp
 net-misc/wakeonlan
 sys-apps/hdparm
 sys-apps/mlocate
 sys-fs/ncdu
-#sys-process/vixie-cron
 sys-process/fcron
-app-shells/bash-completion
+#sys-process/vixie-cron

@@ -123,3 +123,6 @@
 <x11-misc/pcmanfm-qt-0.11
 <x11-misc/sddm-0.14
 <x11-terms/qterminal-0.7
+<dev-go/go-md2man-1.1
+<dev-go/sanitized-anchor-name-0_pre20160101
+<dev-go/blackfriday-1.3

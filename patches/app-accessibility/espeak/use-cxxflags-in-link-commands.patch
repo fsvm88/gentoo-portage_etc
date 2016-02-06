@@ -1,0 +1,25 @@
+diff -Nuar espeak-1.47.11-source.orig/src/Makefile espeak-1.47.11-source/src/Makefile
+--- espeak-1.47.11-source.orig/src/Makefile	2016-02-06 23:38:32.132391603 +0100
++++ espeak-1.47.11-source/src/Makefile	2016-02-06 23:39:34.073732814 +0100
+@@ -102,10 +102,10 @@
+ 	$(CXX) $(CXXFLAGS) $(USE_AUDIO) -D PATH_ESPEAK_DATA=\"$(DATADIR)\" -Wall -pedantic -I. -c -fno-exceptions  $^
+ 
+ $(BIN_NAME): $(OBJS1)
+-	$(CXX) $(LDFLAGS) -o $@ $(OBJS1) $(LIBS1)
++	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJS1) $(LIBS1)
+ 
+ $(BIN2_NAME): $(OBJS3) $(LIB_NAME)
+-	$(CXX) $(LDFLAGS) -o $@ $(OBJS3) $(LIBS3)
++	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJS3) $(LIBS3)
+ 
+ 
+ 
+@@ -114,7 +114,7 @@
+ 	-I. -D LIBRARY -c -fno-exceptions  $^  -o x_$*.o
+ 
+ $(LIB_NAME): $(OBJS2)
+-	$(CXX) $(LDFLAGS) -shared $(SONAME_OPT)$(LIB_NAME).$(LIB_VERSION) -o $@ \
++	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared $(SONAME_OPT)$(LIB_NAME).$(LIB_VERSION) -o $@ \
+ 	$(OBJS2) $(LIBS2)
+ 	mv $(LIB_NAME) $(LIB_NAME).$(LIBTAG)
+ 	$(LN_SF) $(LIB_NAME).$(LIBTAG) $(LIB_NAME).$(LIB_VERSION)

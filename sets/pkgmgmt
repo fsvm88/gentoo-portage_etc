@@ -3,3 +3,4 @@ app-portage/euses
 app-portage/genlop
 app-portage/gentoolkit
 app-portage/layman
+sys-apps/pkgcore

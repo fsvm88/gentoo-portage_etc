@@ -1,5 +1,7 @@
 app-crypt/seahorse
 app-office/libreoffice
+dev-libs/weston
+dev-qt/qtwayland
 #gnome-extra/nm-applet
 #kde-apps/kde-apps-meta
 #kde-base/kde-meta

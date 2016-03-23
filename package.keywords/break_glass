@@ -119,6 +119,7 @@
 <sys-auth/consolekit-1.1
 <sys-block/thin-provisioning-tools-0.6
 <sys-devel/binutils-config-6
+<sys-devel/gcc-5.4
 <sys-devel/gdb-7.11
 <sys-fs/cryptsetup-1.8
 <sys-fs/ntfs3g-2015.12.31

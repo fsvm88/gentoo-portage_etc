@@ -6,7 +6,7 @@ dev-qt/qtwayland
 #kde-apps/kde-apps-meta
 #kde-base/kde-meta
 #kde-misc/kcm-touchpad
-#kde-plasma/plasma-meta
+kde-plasma/plasma-meta
 #lxqt-base/lxqt-meta
 media-sound/teamspeak-client-bin
 #net-irc/konversation

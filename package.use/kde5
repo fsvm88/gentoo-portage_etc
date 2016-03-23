@@ -1,10 +1,9 @@
->=app-crypt/qca-2.1.0.3 qt5
->=app-text/poppler-0.34.0 qt5
->=dev-libs/libdbusmenu-qt-0.9.3_pre20140619-r1 qt5
+app-crypt/qca qt4
+dev-libs/libdbusmenu-qt qt4
 >=dev-qt/qtscript-5.4.2-r1 scripttools
 kde-base/kdepim-runtime google facebook
->=media-libs/mlt-0.9.8 melt kdenlive -qt4 -kde
->=media-libs/qt-gstreamer-1.2.0-r1 qt5
+media-libs/phonon-gstreamer qt4
+media-libs/phonon qt4
+media-libs/phonon-vlc qt4
 net-analyzer/wireshark smi
->=net-libs/libproxy-0.4.11-r2 -kde
->=net-libs/telepathy-qt-0.9.5 farstream qt5
+sys-auth/polkit-qt qt4

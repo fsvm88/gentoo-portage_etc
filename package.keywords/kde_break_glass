@@ -1,0 +1,24 @@
+<app-admin/haskell-updater-1.2.11
+<app-crypt/qca-2.2
+<dev-haskell/alex-3.2
+<dev-haskell/ansi-wl-pprint-0.6.8
+<dev-haskell/cabal-1.23
+<dev-haskell/cairo-0.14
+<dev-haskell/cereal-0.4.2
+<dev-haskell/dbus-0.11
+dev-haskell/dbus lto-no-tests.conf
+<dev-haskell/glib-0.14
+<dev-haskell/gtk2hs-buildtools-0.14
+<dev-haskell/happy-1.20
+<dev-haskell/hashable-1.2.5
+<dev-haskell/mtl-2.3
+<dev-haskell/quickcheck-2.9
+<dev-haskell/test-framework-hunit-0.3.1
+<dev-haskell/transformers-0.5
+<dev-lang/ghc-7.11
+<dev-libs/libappindicator-13-r999
+<dev-libs/libindicator-13-r999
+<dev-qt/qtopengl-4.9
+<kde-apps/kio-extras-15.13
+<kde-plasma/kactivities-workspace-5.6
+<kde-plasma/oxygen-fonts-5.5

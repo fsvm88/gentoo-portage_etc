@@ -1,6 +1,0 @@
-media-libs/mesa
-sys-devel/clang
-sys-devel/llvm
-sys-fs/btrfs-progs
-sys-kernel/linux-headers
-sys-libs/glibc

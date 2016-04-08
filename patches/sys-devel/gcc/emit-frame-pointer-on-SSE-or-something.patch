@@ -1,0 +1,11 @@
+--- trunk/gcc/config/i386/i386.c	2016/01/06 20:13:19	232110
++++ trunk/gcc/config/i386/i386.c	2016/01/06 20:19:04	232111
+@@ -13065,6 +13065,8 @@
+       m->fs.fp_valid = true;
+     }
+ 
++  m->fs.sp_valid = !frame_pointer_needed;
++
+   if (!int_registers_saved)
+     ix86_emit_save_regs_using_mov (frame.reg_save_offset);
+   if (!sse_registers_saved)

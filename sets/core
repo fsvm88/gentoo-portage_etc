@@ -1,6 +1,6 @@
 app-admin/sudo
 app-misc/symlinks
-dev-util/ccache
+#dev-util/ccache
 net-misc/dhcpcd
 sys-apps/gptfdisk
 sys-apps/hdparm

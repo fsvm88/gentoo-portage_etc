@@ -4,4 +4,5 @@ lxqt-base/lxqt-meta
 media-gfx/phototonic
 sci-calculators/qalculate-gtk
 x11-apps/xbacklight
+x11-misc/xdg-user-dirs
 x11-terms/qterminal

@@ -1,6 +1,4 @@
 <app-admin/eselect-1.5
-<sci-libs/atlas-3.12
-<sci-libs/blas-reference-20151201
 <sci-libs/cblas-reference-20160101
 <sci-libs/lapacke-reference-3.7
 <sci-libs/lapack-reference-3.7

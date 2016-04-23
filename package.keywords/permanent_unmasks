@@ -10,5 +10,5 @@ sys-fs/bedup **
 sys-fs/btrfs-progs
 sys-kernel/linux-headers
 sys-libs/glibc
-x11-wm/lumina
 x11-libs/libfm **
+x11-wm/lumina

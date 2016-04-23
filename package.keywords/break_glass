@@ -1,5 +1,7 @@
 <app-arch/lrzip-0.622
+<app-emulation/containerd-0.3
 <app-emulation/lxc-1.2
+<app-emulation/runc-0.2
 <app-eselect/eselect-python-20151231
 <app-misc/scrub-2.7
 <app-portage/gentoolkit-0.4
@@ -37,11 +39,11 @@
 <dev-util/vmtouch-1.1
 <kde-apps/kde4-l10n-16.01
 <kde-base/kdelibs-4.14.19
-<kde-frameworks/extra-cmake-modules-5.21
-<kde-frameworks/kguiaddons-5.21
-<kde-frameworks/kwindowsystem-5.21
-<kde-frameworks/oxygen-icons-5.21
-<kde-frameworks/solid-5.21
+<kde-frameworks/extra-cmake-modules-5.22
+<kde-frameworks/kguiaddons-5.22
+<kde-frameworks/kwindowsystem-5.22
+<kde-frameworks/oxygen-icons-5.22
+<kde-frameworks/solid-5.22
 <kde-plasma/kwayland-5.7
 <kde-plasma/libkscreen-5.7
 <lxqt-base/liblxqt-0.11

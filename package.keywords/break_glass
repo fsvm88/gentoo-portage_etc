@@ -38,13 +38,14 @@
 <dev-qt/qtxmlpatterns-4.9
 <dev-util/vmtouch-1.1
 <kde-base/kdelibs-4.14.19
-<kde-frameworks/extra-cmake-modules-5.22
+<kde-frameworks/extra-cmake-modules-5.23
 <kde-frameworks/kguiaddons-5.22
+<kde-frameworks/kwayland-5.23
 <kde-frameworks/kwindowsystem-5.22
 <kde-frameworks/oxygen-icons-5.22
 <kde-frameworks/solid-5.22
-<kde-plasma/kwayland-5.7
 <kde-plasma/libkscreen-5.7
+<kde-plasma/libksysguard-5.6.5
 <lxqt-base/liblxqt-0.11
 <lxqt-base/libsysstat-0.4
 <lxqt-base/lxqt-about-0.11
@@ -92,7 +93,7 @@
 <x11-base/xorg-server-1.19
 <x11-drivers/xf86-input-evdev-2.11
 <x11-libs/cairo-1.15
-<x11-libs/libdrm-2.4.68
+<x11-libs/libdrm-2.4.69
 <x11-libs/libvdpau-va-gl-0.4
 <x11-misc/obconf-qt-1.0
 <x11-misc/pcmanfm-qt-0.11

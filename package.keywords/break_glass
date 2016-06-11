@@ -1,14 +1,8 @@
-<app-arch/lrzip-0.622
-<app-emulation/containerd-0.3
 <app-emulation/lxc-1.2
-<app-emulation/runc-0.2
 <app-eselect/eselect-python-20151231
 <app-misc/scrub-2.7
 <app-portage/gentoolkit-0.4
 <app-portage/layman-2.4
-<dev-go/blackfriday-1.3
-<dev-go/go-md2man-1.1
-<dev-go/sanitized-anchor-name-0_pre20160101
 <dev-java/bcprov-1.53
 <dev-java/icedtea-7.3
 <dev-lang/python-2.7.12
@@ -39,11 +33,7 @@
 <dev-util/vmtouch-1.1
 <kde-base/kdelibs-4.14.19
 <kde-frameworks/extra-cmake-modules-5.23
-<kde-frameworks/kguiaddons-5.22
 <kde-frameworks/kwayland-5.23
-<kde-frameworks/kwindowsystem-5.22
-<kde-frameworks/oxygen-icons-5.22
-<kde-frameworks/solid-5.22
 <kde-plasma/libkscreen-5.7
 <kde-plasma/libksysguard-5.6.5
 <lxqt-base/liblxqt-0.11
@@ -80,19 +70,16 @@
 <sys-apps/microcode-data-20151231
 <sys-apps/util-linux-2.28
 <sys-block/thin-provisioning-tools-0.6
-<sys-devel/clang-3.9 **
+<sys-devel/clang-3.9
 <sys-devel/gcc-5.4
-<sys-devel/llvm-3.9 **
+<sys-devel/llvm-3.9
 <sys-fs/cryptsetup-1.8
-<sys-fs/ntfs3g-2015.12.31
-<sys-fs/xfsprogs-4.6
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
 <sys-process/criu-1.9
 <x11-base/xorg-drivers-1.19
 <x11-base/xorg-server-1.19
 <x11-drivers/xf86-input-evdev-2.11
-<x11-libs/cairo-1.15
 <x11-libs/libdrm-2.4.69
 <x11-libs/libvdpau-va-gl-0.4
 <x11-misc/obconf-qt-1.0

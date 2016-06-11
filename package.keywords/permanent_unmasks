@@ -1,5 +1,4 @@
 app-arch/hardlink
-app-emulation/docker
 app-emulation/wine
 media-libs/mesa **
 media-sound/teamspeak-client-bin

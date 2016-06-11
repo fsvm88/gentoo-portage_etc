@@ -1,1 +1,1 @@
-x11-libs/cairo xlib-xcb
+x11-libs/cairo -xlib-xcb

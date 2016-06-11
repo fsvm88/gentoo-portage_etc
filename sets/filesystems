@@ -5,6 +5,7 @@ sys-boot/unetbootin
 sys-fs/bedup
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
+sys-fs/dd-rescue
 sys-fs/dosfstools
 sys-fs/fuse
 sys-fs/lvm2

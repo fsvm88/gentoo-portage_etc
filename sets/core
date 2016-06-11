@@ -2,6 +2,7 @@ app-admin/sudo
 app-misc/symlinks
 dev-util/ccache
 net-misc/dhcpcd
+sys-apps/elfix
 sys-apps/gptfdisk
 sys-apps/hdparm
 sys-apps/irqbalance

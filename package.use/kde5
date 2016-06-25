@@ -1,3 +1,2 @@
 >=dev-qt/qtscript-5.4.2-r1 scripttools
-kde-base/kdepim-runtime google facebook
 net-analyzer/wireshark smi

@@ -1,2 +1,2 @@
 sys-apps/microcode-ctl
-sys-apps/microcode-data
+sys-firmware/intel-microcode

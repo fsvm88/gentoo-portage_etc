@@ -1,5 +1,6 @@
 <app-emulation/lxc-1.2
 <app-eselect/eselect-python-20151231
+<app-eselect/eselect-rust-0.4
 <app-misc/scrub-2.7
 <app-portage/gentoolkit-0.4
 <app-portage/layman-2.4
@@ -8,6 +9,7 @@
 <dev-lang/python-2.7.12
 <dev-lang/python-3.4.4
 <dev-lang/python-exec-2.2
+<dev-lang/rust-1.11.0
 <dev-lang/tcl-8.6.5
 <dev-lang/tk-8.6.5
 <dev-libs/libevdev-1.5
@@ -74,6 +76,7 @@
 <media-libs/avidemux-core-2.7
 <media-libs/avidemux-plugins-2.7
 <media-libs/libpng-1.7
+<media-libs/libv4l-1.11
 <media-libs/phonon-4.10
 <media-libs/phonon-gstreamer-4.10
 <media-video/avidemux-2.7

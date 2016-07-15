@@ -14,5 +14,5 @@ net-proxy/torsocks
 net-wireless/rfkill
 www-client/chromium
 #www-client/firefox
-www-plugins/adobe-flash
+#www-plugins/adobe-flash
 www-plugins/chrome-binary-plugins

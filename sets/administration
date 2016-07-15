@@ -4,7 +4,7 @@ app-admin/syslog-ng
 app-arch/hardlink
 app-misc/fdupes
 app-misc/tmux
-app-portage/cpuinfo2cpuflags
+app-portage/cpuid2cpuflags
 app-portage/layman
 app-shells/bash-completion
 dev-util/vmtouch

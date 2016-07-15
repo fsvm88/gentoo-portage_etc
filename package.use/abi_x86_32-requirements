@@ -83,6 +83,7 @@ media-libs/mesa abi_x86_32
 media-libs/openal abi_x86_32
 media-libs/opencore-amr abi_x86_32
 media-libs/openjpeg abi_x86_32
+media-libs/taglib abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vo-aacenc abi_x86_32
 media-libs/x264 abi_x86_32
@@ -103,6 +104,7 @@ media-plugins/gst-plugins-meta abi_x86_32
 media-plugins/gst-plugins-mpeg2dec abi_x86_32
 media-plugins/gst-plugins-pulse abi_x86_32
 media-plugins/gst-plugins-resindvd abi_x86_32
+media-plugins/gst-plugins-taglib abi_x86_32
 media-plugins/gst-plugins-v4l2 abi_x86_32
 media-plugins/gst-plugins-vaapi abi_x86_32
 media-plugins/gst-plugins-vpx abi_x86_32

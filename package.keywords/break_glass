@@ -1,3 +1,4 @@
+<app-doc/doxygen-1.8.12
 <app-emulation/lxc-1.2
 <app-eselect/eselect-python-20151231
 <app-eselect/eselect-rust-0.4
@@ -49,6 +50,7 @@
 <dev-qt/qtx11extras-5.7
 <dev-qt/qtxml-5.7
 <dev-qt/qtxmlpatterns-5.7
+<dev-util/cargo-0.12
 <dev-util/vmtouch-1.1
 <kde-frameworks/extra-cmake-modules-5.24
 <kde-frameworks/kwayland-5.24
@@ -102,6 +104,7 @@
 <x11-base/xorg-server-1.19
 <x11-drivers/xf86-input-evdev-2.11
 <x11-libs/libdrm-2.4.69
+=x11-libs/libva-vdpau-driver-0.7.4-r4
 <x11-libs/libvdpau-va-gl-0.4
 <x11-misc/obconf-qt-1.0
 <x11-misc/pcmanfm-qt-0.11

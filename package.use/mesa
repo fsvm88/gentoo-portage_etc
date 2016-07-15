@@ -1,1 +1,2 @@
-media-libs/mesa dri3 gbm llvm-shared-libs xa
+media-libs/mesa dri3 gbm gles2 llvm-shared-libs xa
+x11-apps/mesa-progs gles2

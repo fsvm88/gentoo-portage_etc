@@ -1,1 +1,2 @@
 dev-qt/designer -phonon
+dev-qt/qtgui eglfs

@@ -1,2 +1,2 @@
-net-misc/iputils -caps -filecaps
 net-misc/iputils arping clockdiff rarpd tracepath traceroute
+net-misc/iputils -caps -filecaps

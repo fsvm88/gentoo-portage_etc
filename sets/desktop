@@ -11,7 +11,6 @@ lxqt-base/lxqt-meta
 media-sound/teamspeak-client-bin
 #net-irc/konversation
 net-print/hplip
-sys-auth/elogind
 x11-apps/setxkbmap
 x11-apps/xrandr
 x11-base/xorg-server

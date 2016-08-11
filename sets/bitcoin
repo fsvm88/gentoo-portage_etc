@@ -1,0 +1,6 @@
+dev-cpp/sparsehash
+dev-db/postgresql
+dev-python/psycopg
+dev-python/pycrypto
+net-p2p/bitcoin-cli
+net-p2p/bitcoind

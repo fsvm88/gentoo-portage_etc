@@ -1,0 +1,2 @@
+net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
+dev-libs/libsecp256k1 asm endomorphism

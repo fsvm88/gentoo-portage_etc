@@ -1,4 +1,4 @@
-dev-libs/libdbusmenu-qt qt4
+dev-libs/libdbusmenu-qt -qt4
 lxqt-base/lxqt-meta admin
 lxqt-base/lxqt-meta lximage powermanagement sddm ssh-askpass sudo
 lxqt-base/lxqt-panel colorpicker cpuload dom networkmonitor screensaver sensors sysstat teatime worldclock mount showdesktop statusnotifier

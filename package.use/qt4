@@ -1,4 +1,4 @@
-app-crypt/qca qt4
-media-libs/phonon-gstreamer qt4
-media-libs/phonon qt4
-sys-auth/polkit-qt qt4
+app-crypt/qca -qt4
+media-libs/phonon-gstreamer -qt4
+media-libs/phonon -qt4
+sys-auth/polkit-qt -qt4

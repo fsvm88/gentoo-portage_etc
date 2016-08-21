@@ -3,6 +3,8 @@ dev-util/cgdb
 dev-util/meld
 dev-util/ninja
 dev-util/patchutils
+dev-util/perf
 dev-util/strace
+dev-util/valgrind
 dev-vcs/git
 sys-devel/gdb

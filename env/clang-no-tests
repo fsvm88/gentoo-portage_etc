@@ -1,6 +1,3 @@
-AR="/usr/bin/ar"
-NM="/usr/bin/nm"
-RANLIB="/usr/bin/ranlib"
 CFLAGS="-O3 -march=native -pipe"
 CXXFLAGS="${CFLAGS}"
 FEATURES="${FEATURES} -test"

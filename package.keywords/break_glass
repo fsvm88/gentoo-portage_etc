@@ -22,6 +22,7 @@
 <dev-libs/weston-1.11
 <dev-python/hiredis-0.3
 <dev-util/cargo-0.12
+<dev-util/cmake-3.7
 <dev-util/perf-4.5
 <dev-util/valgrind-3.12
 <dev-util/vmtouch-1.1

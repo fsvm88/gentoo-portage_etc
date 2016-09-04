@@ -1,2 +1,2 @@
-#sys-devel/clang **
-#sys-devel/llvm **
+<sys-devel/clang-9999 **
+<sys-devel/llvm-9999 **

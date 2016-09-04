@@ -1,9 +1,1 @@
 <app-admin/eselect-1.5
-<sci-libs/cblas-reference-20160101
-<sci-libs/lapacke-reference-3.7
-<sci-libs/lapack-reference-3.7
-<sci-libs/openblas-0.3
-<sci-misc/kaldi-1
-<sci-misc/openfst-1.5
-<virtual/blas-2.2
-<virtual/lapacke-3.7

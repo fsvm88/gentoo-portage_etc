@@ -1,10 +1,4 @@
 <dev-python/pyGPG-0.3
-<kde-apps/khelpcenter-16.05
-<kde-apps/kholidays-16.05
-<kde-apps/kioclient-16.05
-<kde-apps/kio-extras-16.05
-<kde-apps/konsole-16.05
-<kde-apps/kwalletd-16.05
 <kde-frameworks/attica-5.26
 <kde-frameworks/baloo-5.26
 <kde-frameworks/bluez-qt-5.26
@@ -32,7 +26,6 @@
 <kde-frameworks/kdnssd-5.26
 <kde-frameworks/kdoctools-5.26
 <kde-frameworks/kemoticons-5.26
-<kde-frameworks/kf-env-3
 <kde-frameworks/kfilemetadata-5.26
 <kde-frameworks/kglobalaccel-5.26
 <kde-frameworks/kguiaddons-5.26
@@ -61,7 +54,6 @@
 <kde-frameworks/ktextwidgets-5.26
 <kde-frameworks/kunitconversion-5.26
 <kde-frameworks/kwallet-5.26
-<kde-frameworks/kwayland-5.23.0
 <kde-frameworks/kwidgetsaddons-5.26
 <kde-frameworks/kwindowsystem-5.26
 <kde-frameworks/kxmlgui-5.26
@@ -75,7 +67,6 @@
 <kde-plasma/bluedevil-5.8
 <kde-plasma/breeze-5.8
 <kde-plasma/breeze-gtk-5.8
-<kde-plasma/kactivities-workspace-5.8
 <kde-plasma/kactivitymanagerd-5.8
 <kde-plasma/kde-cli-tools-5.8
 <kde-plasma/kdecoration-5.8
@@ -97,7 +88,6 @@
 <kde-plasma/libksysguard-5.8
 <kde-plasma/milou-5.8
 <kde-plasma/oxygen-5.8
-<kde-plasma/oxygen-fonts-5.8
 <kde-plasma/plasma-desktop-5.8
 <kde-plasma/plasma-integration-5.8
 <kde-plasma/plasma-meta-5.8

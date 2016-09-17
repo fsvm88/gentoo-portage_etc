@@ -6,7 +6,6 @@ net-p2p/freenet
 sci-misc/boinc
 sys-auth/elogind
 sys-firmware/nvidia-firmware
-sys-fs/bedup **
 sys-fs/btrfs-progs
 sys-kernel/linux-headers
 sys-libs/glibc

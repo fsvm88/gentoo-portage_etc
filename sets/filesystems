@@ -1,7 +1,6 @@
 app-arch/hardlink
 app-misc/fdupes
 sys-block/thin-provisioning-tools
-sys-fs/bedup
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dd-rescue

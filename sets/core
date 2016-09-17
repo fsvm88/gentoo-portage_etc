@@ -9,5 +9,6 @@ sys-apps/irqbalance
 sys-apps/mlocate
 sys-boot/grub
 sys-kernel/dummy-sources
+sys-kernel/genkernel-next
 sys-kernel/linux-firmware
-#x11-misc/bumblebee
+www-client/links

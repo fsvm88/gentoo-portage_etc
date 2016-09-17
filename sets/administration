@@ -10,7 +10,6 @@ app-shells/bash-completion
 dev-util/vmtouch
 net-dns/bind-tools
 net-misc/chrony
-#net-misc/ntp
 net-misc/wakeonlan
 sys-apps/hdparm
 sys-apps/mlocate

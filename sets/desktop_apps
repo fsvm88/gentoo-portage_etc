@@ -1,9 +1,8 @@
 app-text/zathura-meta
-gnome-extra/nm-applet
-media-gfx/phototonic
-sci-calculators/qalculate-gtk
-x11-apps/xbacklight
-x11-misc/xdg-user-dirs
-x11-terms/qterminal
 kde-apps/dolphin
 kde-apps/dolphin-plugins
+kde-apps/gwenview
+kde-apps/kcalc
+kde-apps/konsole
+x11-apps/xbacklight
+x11-misc/xdg-user-dirs

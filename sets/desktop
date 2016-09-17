@@ -2,13 +2,8 @@ app-crypt/seahorse
 app-office/libreoffice
 dev-libs/weston
 dev-qt/qtwayland
-#gnome-extra/nm-applet
-#kde-apps/kde-apps-meta
-#kde-base/kde-meta
-#kde-misc/kcm-touchpad
 kde-plasma/plasma-meta
 media-sound/teamspeak-client-bin
-#net-irc/konversation
 net-print/hplip
 x11-apps/setxkbmap
 x11-apps/xrandr

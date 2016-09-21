@@ -1,0 +1,4145 @@
+diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c zfs-kmod-9999/cmd/raidz_test/raidz_bench.c
+--- zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c	2016-09-18 18:56:36.483123923 +0200
++++ zfs-kmod-9999/cmd/raidz_test/raidz_bench.c	2016-09-18 18:57:20.205459114 +0200
+@@ -83,8 +83,9 @@
+ 			/* create suitable raidz_map */
+ 			ncols = rto_opts.rto_dcols + fn + 1;
+ 			zio_bench.io_size = 1ULL << ds;
+-			rm_bench = vdev_raidz_map_alloc(&zio_bench,
+-			    BENCH_ASHIFT, ncols, fn+1);
++			rm_bench = vdev_raidz_map_alloc(zio_bench.io_data,
++			    zio_bench.io_size, zio_bench.io_offset,
++			    BENCH_ASHIFT, ncols, fn+1, B_TRUE);
+ 
+ 			/* estimate iteration count */
+ 			iter_cnt = GEN_BENCH_MEMORY;
+@@ -163,8 +164,9 @@
+ 			    (1ULL << BENCH_ASHIFT))
+ 				continue;
+ 
+-			rm_bench = vdev_raidz_map_alloc(&zio_bench,
+-				BENCH_ASHIFT, ncols, PARITY_PQR);
++			rm_bench = vdev_raidz_map_alloc(zio_bench.io_data,
++			    zio_bench.io_size, zio_bench.io_offset,
++			    BENCH_ASHIFT, ncols, PARITY_PQR, B_TRUE);
+ 
+ 			/* estimate iteration count */
+ 			iter_cnt = (REC_BENCH_MEMORY);
+diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c zfs-kmod-9999/cmd/raidz_test/raidz_test.c
+--- zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c	2016-09-18 18:56:36.483123923 +0200
++++ zfs-kmod-9999/cmd/raidz_test/raidz_test.c	2016-09-18 18:57:20.237459360 +0200
+@@ -287,10 +287,12 @@
+ 
+ 	VERIFY0(vdev_raidz_impl_set("original"));
+ 
+-	opts->rm_golden = vdev_raidz_map_alloc(opts->zio_golden,
+-	    opts->rto_ashift, total_ncols, parity);
+-	rm_test = vdev_raidz_map_alloc(zio_test,
+-	    opts->rto_ashift, total_ncols, parity);
++	opts->rm_golden = vdev_raidz_map_alloc(opts->zio_golden->io_data,
++	    opts->rto_dsize, opts->rto_offset,
++	    opts->rto_ashift, total_ncols, parity, B_TRUE);
++	rm_test = vdev_raidz_map_alloc(zio_test->io_data,
++	    zio_test->io_size, zio_test->io_offset,
++	    opts->rto_ashift, total_ncols, parity, B_TRUE);
+ 
+ 	VERIFY(opts->zio_golden);
+ 	VERIFY(opts->rm_golden);
+@@ -329,9 +331,8 @@
+ 	(*zio)->io_data = raidz_alloc(alloc_dsize);
+ 	init_zio_data(*zio);
+ 
+-	rm = vdev_raidz_map_alloc(*zio, opts->rto_ashift,
+-		total_ncols, parity);
+-	VERIFY(rm);
++	rm = vdev_raidz_map_alloc((*zio)->io_data, alloc_dsize, 0,
++	    opts->rto_ashift, total_ncols, parity, B_TRUE);
+ 
+ 	/* Make sure code columns are destroyed */
+ 	corrupt_colums(rm, ccols, parity);
+diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpool_main.c
+--- zfs-kmod-9999.orig/cmd/zpool/zpool_main.c	2016-09-18 18:56:36.495124015 +0200
++++ zfs-kmod-9999/cmd/zpool/zpool_main.c	2016-09-18 18:57:20.228459290 +0200
+@@ -85,6 +85,7 @@
+ static int zpool_do_split(int, char **);
+ 
+ static int zpool_do_scrub(int, char **);
++static int zpool_do_trim(int, char **);
+ 
+ static int zpool_do_import(int, char **);
+ static int zpool_do_export(int, char **);
+@@ -134,6 +135,7 @@
+ 	HELP_REPLACE,
+ 	HELP_REMOVE,
+ 	HELP_SCRUB,
++	HELP_TRIM,
+ 	HELP_STATUS,
+ 	HELP_UPGRADE,
+ 	HELP_EVENTS,
+@@ -259,6 +261,8 @@
+ 	{ NULL },
+ 	{ "scrub",	zpool_do_scrub,		HELP_SCRUB		},
+ 	{ NULL },
++	{ "trim",	zpool_do_trim,		HELP_TRIM		},
++	{ NULL },
+ 	{ "import",	zpool_do_import,	HELP_IMPORT		},
+ 	{ "export",	zpool_do_export,	HELP_EXPORT		},
+ 	{ "upgrade",	zpool_do_upgrade,	HELP_UPGRADE		},
+@@ -334,6 +338,8 @@
+ 		return (gettext("\treopen <pool>\n"));
+ 	case HELP_SCRUB:
+ 		return (gettext("\tscrub [-s] <pool> ...\n"));
++	case HELP_TRIM:
++		return (gettext("\ttrim [-s|-r <rate>] <pool> ...\n"));
+ 	case HELP_STATUS:
+ 		return (gettext("\tstatus [-gLPvxD] [-T d|u] [pool] ... "
+ 		    "[interval [count]]\n"));
+@@ -5367,6 +5373,31 @@
+ 	return (err != 0);
+ }
+ 
++typedef struct trim_cbdata {
++	boolean_t	cb_start;
++	uint64_t	cb_rate;
++} trim_cbdata_t;
++
++int
++trim_callback(zpool_handle_t *zhp, void *data)
++{
++	trim_cbdata_t *cb = data;
++	int err;
++
++	/*
++	 * Ignore faulted pools.
++	 */
++	if (zpool_get_state(zhp) == POOL_STATE_UNAVAIL) {
++		(void) fprintf(stderr, gettext("cannot trim '%s': pool is "
++		    "currently unavailable\n"), zpool_get_name(zhp));
++		return (1);
++	}
++
++	err = zpool_trim(zhp, cb->cb_start, cb->cb_rate);
++
++	return (err != 0);
++}
++
+ /*
+  * zpool scrub [-s] <pool> ...
+  *
+@@ -5406,6 +5437,52 @@
+ 	return (for_each_pool(argc, argv, B_TRUE, NULL, scrub_callback, &cb));
+ }
+ 
++/*
++ * zpool trim [-s|-r <rate>] <pool> ...
++ *
++ *	-s		Stop. Stops any in-progress trim.
++ *	-r <rate>	Sets the TRIM rate.
++ */
++int
++zpool_do_trim(int argc, char **argv)
++{
++	int c;
++	trim_cbdata_t cb;
++
++	cb.cb_start = B_TRUE;
++	cb.cb_rate = 0;
++
++	/* check options */
++	while ((c = getopt(argc, argv, "sr:")) != -1) {
++		switch (c) {
++		case 's':
++			cb.cb_start = B_FALSE;
++			break;
++		case 'r':
++			if (zfs_nicestrtonum(NULL, optarg, &cb.cb_rate) == -1) {
++				(void) fprintf(stderr,
++				    gettext("invalid value for rate\n"));
++				usage(B_FALSE);
++			}
++			break;
++		case '?':
++			(void) fprintf(stderr, gettext("invalid option '%c'\n"),
++			    optopt);
++			usage(B_FALSE);
++		}
++	}
++
++	argc -= optind;
++	argv += optind;
++
++	if (argc < 1) {
++		(void) fprintf(stderr, gettext("missing pool name argument\n"));
++		usage(B_FALSE);
++	}
++
++	return (for_each_pool(argc, argv, B_TRUE, NULL, trim_callback, &cb));
++}
++
+ typedef struct status_cbdata {
+ 	int		cb_count;
+ 	int		cb_name_flags;
+@@ -5529,6 +5606,59 @@
+ }
+ 
+ static void
++print_trim_status(uint64_t trim_prog, uint64_t total_size, uint64_t rate,
++    uint64_t start_time_u64, uint64_t end_time_u64)
++{
++	time_t start_time = start_time_u64, end_time = end_time_u64;
++	char *buf;
++
++	assert(trim_prog <= total_size);
++	if (trim_prog != 0 && trim_prog != total_size) {
++		buf = ctime(&start_time);
++		buf[strlen(buf) - 1] = '\0';	/* strip trailing newline */
++		if (rate != 0) {
++			char rate_str[32];
++			zfs_nicenum(rate, rate_str, sizeof (rate_str));
++			(void) printf("  trim: %.02f%%\tstarted: %s\t"
++			    "(rate: %s/s)\n", (((double)trim_prog) /
++			    total_size) * 100, buf, rate_str);
++		} else {
++			(void) printf("  trim: %.02f%%\tstarted: %s\t"
++			    "(rate: max)\n", (((double)trim_prog) /
++			    total_size) * 100, buf);
++		}
++	} else {
++		if (start_time != 0) {
++			/*
++			 * Non-zero start time means we were run at some point
++			 * in the past.
++			 */
++			if (end_time != 0) {
++				/* Non-zero end time means we completed */
++				time_t diff = end_time - start_time;
++				int hrs, mins;
++
++				buf = ctime(&end_time);
++				buf[strlen(buf) - 1] = '\0';
++				hrs = diff / 3600;
++				mins = (diff % 3600) / 60;
++				(void) printf(gettext("  trim: completed on %s "
++				    "(after %dh%dm)\n"), buf, hrs, mins);
++			} else {
++				buf = ctime(&start_time);
++				buf[strlen(buf) - 1] = '\0';
++				/* Zero end time means we were interrupted */
++				(void) printf(gettext("  trim: interrupted\t"
++				    "(started %s)\n"), buf);
++			}
++		} else {
++			/* trim was never run */
++			(void) printf(gettext("  trim: none requested\n"));
++		}
++	}
++}
++
++static void
+ print_error_log(zpool_handle_t *zhp)
+ {
+ 	nvlist_t *nverrlist = NULL;
+@@ -5640,6 +5770,43 @@
+ }
+ 
+ /*
++ * Calculates the total space available on log devices on the pool.
++ * For whatever reason, this is not counted in the root vdev's space stats.
++ */
++static uint64_t
++zpool_slog_space(nvlist_t *nvroot)
++{
++	nvlist_t **newchild;
++	uint_t c, children;
++	uint64_t space = 0;
++
++	verify(nvlist_lookup_nvlist_array(nvroot, ZPOOL_CONFIG_CHILDREN,
++	    &newchild, &children) == 0);
++
++	for (c = 0; c < children; c++) {
++		uint64_t islog = B_FALSE;
++		vdev_stat_t *vs;
++		uint_t n;
++		uint_t n_subchildren = 1;
++		nvlist_t **subchild;
++
++		(void) nvlist_lookup_uint64(newchild[c], ZPOOL_CONFIG_IS_LOG,
++		    &islog);
++		if (!islog)
++			continue;
++		verify(nvlist_lookup_uint64_array(newchild[c],
++		    ZPOOL_CONFIG_VDEV_STATS, (uint64_t **)&vs, &n) == 0);
++
++		/* vdev can be non-leaf, so multiply by number of children */
++		(void) nvlist_lookup_nvlist_array(newchild[c],
++		    ZPOOL_CONFIG_CHILDREN, &subchild, &n_subchildren);
++		space += n_subchildren * vs->vs_space;
++	}
++
++	return (space);
++}
++
++/*
+  * Display a summary of pool status.  Displays a summary such as:
+  *
+  *        pool: tank
+@@ -5935,11 +6102,30 @@
+ 		nvlist_t **spares, **l2cache;
+ 		uint_t nspares, nl2cache;
+ 		pool_scan_stat_t *ps = NULL;
++		uint64_t trim_prog, trim_rate, trim_start_time, trim_stop_time;
+ 
+ 		(void) nvlist_lookup_uint64_array(nvroot,
+ 		    ZPOOL_CONFIG_SCAN_STATS, (uint64_t **)&ps, &c);
+ 		print_scan_status(ps);
+ 
++		/* Grab trim stats if the pool supports it */
++		if (nvlist_lookup_uint64(config, ZPOOL_CONFIG_TRIM_PROG,
++		    &trim_prog) == 0 &&
++		    nvlist_lookup_uint64(config, ZPOOL_CONFIG_TRIM_RATE,
++		    &trim_rate) == 0 &&
++		    nvlist_lookup_uint64(config, ZPOOL_CONFIG_TRIM_START_TIME,
++		    &trim_start_time) == 0 &&
++		    nvlist_lookup_uint64(config, ZPOOL_CONFIG_TRIM_STOP_TIME,
++		    &trim_stop_time) == 0) {
++			/*
++			 * For whatever reason, root vdev_stats_t don't
++			 * include log devices.
++			 */
++			print_trim_status(trim_prog, vs->vs_space +
++			    zpool_slog_space(nvroot), trim_rate,
++			    trim_start_time, trim_stop_time);
++		}
++
+ 		namewidth = max_width(zhp, nvroot, 0, 0, cbp->cb_name_flags);
+ 		if (namewidth < 10)
+ 			namewidth = 10;
+diff -Nuar zfs-kmod-9999.orig/include/libzfs.h zfs-kmod-9999/include/libzfs.h
+--- zfs-kmod-9999.orig/include/libzfs.h	2016-09-18 18:56:36.513124153 +0200
++++ zfs-kmod-9999/include/libzfs.h	2016-09-18 18:57:20.207459129 +0200
+@@ -255,6 +255,7 @@
+  * Functions to manipulate pool and vdev state
+  */
+ extern int zpool_scan(zpool_handle_t *, pool_scan_func_t);
++extern int zpool_trim(zpool_handle_t *, boolean_t start, uint64_t rate);
+ extern int zpool_clear(zpool_handle_t *, const char *, nvlist_t *);
+ extern int zpool_reguid(zpool_handle_t *);
+ extern int zpool_reopen(zpool_handle_t *);
+diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
+--- zfs-kmod-9999.orig/include/sys/dmu.h	2016-09-18 18:56:36.519124199 +0200
++++ zfs-kmod-9999/include/sys/dmu.h	2016-09-18 18:57:20.228459290 +0200
+@@ -21,7 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2016 by Delphix. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  * Copyright (c) 2012, Joyent, Inc. All rights reserved.
+  * Copyright 2014 HybridCluster. All rights reserved.
+  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
+@@ -318,6 +318,8 @@
+ #define	DMU_POOL_BPTREE_OBJ		"bptree_obj"
+ #define	DMU_POOL_EMPTY_BPOBJ		"empty_bpobj"
+ #define	DMU_POOL_VDEV_ZAP_MAP		"com.delphix:vdev_zap_map"
++#define	DMU_POOL_TRIM_START_TIME	"trim_start_time"
++#define	DMU_POOL_TRIM_STOP_TIME		"trim_stop_time"
+ 
+ /*
+  * Allocate an object from this objset.  The range of object numbers
+diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/zfs.h
+--- zfs-kmod-9999.orig/include/sys/fs/zfs.h	2016-09-18 18:56:36.522124222 +0200
++++ zfs-kmod-9999/include/sys/fs/zfs.h	2016-09-18 18:57:20.228459290 +0200
+@@ -22,7 +22,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2013, Joyent, Inc. All rights reserved.
+  */
+ 
+@@ -211,6 +211,8 @@
+ 	ZPOOL_PROP_MAXBLOCKSIZE,
+ 	ZPOOL_PROP_TNAME,
+ 	ZPOOL_PROP_MAXDNODESIZE,
++	ZPOOL_PROP_FORCETRIM,
++	ZPOOL_PROP_AUTOTRIM,
+ 	ZPOOL_NUM_PROPS
+ } zpool_prop_t;
+ 
+@@ -640,6 +642,10 @@
+ #define	ZPOOL_CONFIG_REMOVED		"removed"
+ #define	ZPOOL_CONFIG_FRU		"fru"
+ #define	ZPOOL_CONFIG_AUX_STATE		"aux_state"
++#define	ZPOOL_CONFIG_TRIM_PROG		"trim_prog"
++#define	ZPOOL_CONFIG_TRIM_RATE		"trim_rate"
++#define	ZPOOL_CONFIG_TRIM_START_TIME	"trim_start_time"
++#define	ZPOOL_CONFIG_TRIM_STOP_TIME	"trim_stop_time"
+ 
+ /* Rewind policy parameters */
+ #define	ZPOOL_REWIND_POLICY		"rewind-policy"
+@@ -751,6 +757,14 @@
+ } pool_scan_func_t;
+ 
+ /*
++ * TRIM command configuration info.
++ */
++typedef struct trim_cmd_info_s {
++	uint64_t	tci_start;	/* B_TRUE = start; B_FALSE = stop */
++	uint64_t	tci_rate;	/* requested TRIM rate in bytes/sec */
++} trim_cmd_info_t;
++
++/*
+  * ZIO types.  Needed to interpret vdev statistics below.
+  */
+ typedef enum zio_type {
+@@ -1011,6 +1025,7 @@
+ 	ZFS_IOC_EVENTS_NEXT,
+ 	ZFS_IOC_EVENTS_CLEAR,
+ 	ZFS_IOC_EVENTS_SEEK,
++	ZFS_IOC_POOL_TRIM,
+ 
+ 	/*
+ 	 * FreeBSD - 1/64 numbers reserved.
+diff -Nuar zfs-kmod-9999.orig/include/sys/Makefile.am zfs-kmod-9999/include/sys/Makefile.am
+--- zfs-kmod-9999.orig/include/sys/Makefile.am	2016-09-18 18:56:36.515124168 +0200
++++ zfs-kmod-9999/include/sys/Makefile.am	2016-09-18 18:57:20.207459129 +0200
+@@ -63,6 +63,7 @@
+ 	$(top_srcdir)/include/sys/trace_dnode.h \
+ 	$(top_srcdir)/include/sys/trace_multilist.h \
+ 	$(top_srcdir)/include/sys/trace_txg.h \
++	$(top_srcdir)/include/sys/trace_vdev.h \
+ 	$(top_srcdir)/include/sys/trace_zil.h \
+ 	$(top_srcdir)/include/sys/trace_zio.h \
+ 	$(top_srcdir)/include/sys/trace_zrlock.h \
+diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/metaslab.h
+--- zfs-kmod-9999.orig/include/sys/metaslab.h	2016-09-18 18:56:36.522124222 +0200
++++ zfs-kmod-9999/include/sys/metaslab.h	2016-09-18 18:57:20.228459290 +0200
+@@ -21,6 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _SYS_METASLAB_H
+@@ -54,6 +55,7 @@
+ void metaslab_sync_done(metaslab_t *, uint64_t);
+ void metaslab_sync_reassess(metaslab_group_t *);
+ uint64_t metaslab_block_maxsize(metaslab_t *);
++void metaslab_auto_trim(metaslab_t *msp, uint64_t txg);
+ 
+ #define	METASLAB_HINTBP_FAVOR	0x0
+ #define	METASLAB_HINTBP_AVOID	0x1
+@@ -67,6 +69,7 @@
+ void metaslab_free(spa_t *, const blkptr_t *, uint64_t, boolean_t);
+ int metaslab_claim(spa_t *, const blkptr_t *, uint64_t);
+ void metaslab_check_free(spa_t *, const blkptr_t *);
++zio_t *metaslab_trim_all(metaslab_t *, uint64_t *);
+ void metaslab_fastwrite_mark(spa_t *, const blkptr_t *);
+ void metaslab_fastwrite_unmark(spa_t *, const blkptr_t *);
+ 
+@@ -93,6 +96,9 @@
+ uint64_t metaslab_group_fragmentation(metaslab_group_t *);
+ void metaslab_group_histogram_remove(metaslab_group_t *, metaslab_t *);
+ 
++void metaslab_trimstats_create(spa_t *spa);
++void metaslab_trimstats_destroy(spa_t *spa);
++
+ #ifdef	__cplusplus
+ }
+ #endif
+diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/sys/metaslab_impl.h
+--- zfs-kmod-9999.orig/include/sys/metaslab_impl.h	2016-09-18 18:56:36.522124222 +0200
++++ zfs-kmod-9999/include/sys/metaslab_impl.h	2016-09-18 18:57:20.228459290 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _SYS_METASLAB_IMPL_H
+@@ -97,6 +98,11 @@
+ 	uint64_t		mg_histogram[RANGE_TREE_HISTOGRAM_SIZE];
+ };
+ 
++typedef struct {
++	uint64_t	ts_birth;	/* TXG at which this trimset starts */
++	range_tree_t	*ts_tree;	/* tree of extents in the trimset */
++} metaslab_trimset_t;
++
+ /*
+  * This value defines the number of elements in the ms_lbas array. The value
+  * of 64 was chosen as it covers all power of 2 buckets up to UINT64_MAX.
+@@ -165,10 +171,14 @@
+ 	uint64_t	ms_size;
+ 	uint64_t	ms_fragmentation;
+ 
+-	range_tree_t	*ms_alloctree[TXG_SIZE];
+-	range_tree_t	*ms_freetree[TXG_SIZE];
+-	range_tree_t	*ms_defertree[TXG_DEFER_SIZE];
+-	range_tree_t	*ms_tree;
++	range_tree_t		*ms_alloctree[TXG_SIZE];
++	range_tree_t		*ms_freetree[TXG_SIZE];
++	range_tree_t		*ms_defertree[TXG_DEFER_SIZE];
++	range_tree_t		*ms_tree;
++	metaslab_trimset_t	*ms_cur_ts; /* currently prepared trims */
++	metaslab_trimset_t	*ms_prev_ts;  /* previous (aging) trims */
++	kcondvar_t		ms_trim_cv;
++	metaslab_trimset_t	*ms_trimming_ts;
+ 
+ 	boolean_t	ms_condensing;	/* condensing? */
+ 	boolean_t	ms_condense_wanted;
+diff -Nuar zfs-kmod-9999.orig/include/sys/range_tree.h zfs-kmod-9999/include/sys/range_tree.h
+--- zfs-kmod-9999.orig/include/sys/range_tree.h	2016-09-18 18:56:36.523124230 +0200
++++ zfs-kmod-9999/include/sys/range_tree.h	2016-09-18 18:57:20.228459290 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2013, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _SYS_RANGE_TREE_H
+@@ -78,6 +79,7 @@
+ range_tree_t *range_tree_create(range_tree_ops_t *ops, void *arg, kmutex_t *lp);
+ void range_tree_destroy(range_tree_t *rt);
+ boolean_t range_tree_contains(range_tree_t *rt, uint64_t start, uint64_t size);
++uint64_t range_tree_find_gap(range_tree_t *rt, uint64_t start, uint64_t size);
+ uint64_t range_tree_space(range_tree_t *rt);
+ void range_tree_verify(range_tree_t *rt, uint64_t start, uint64_t size);
+ void range_tree_swap(range_tree_t **rtsrc, range_tree_t **rtdst);
+@@ -85,6 +87,7 @@
+ 
+ void range_tree_add(void *arg, uint64_t start, uint64_t size);
+ void range_tree_remove(void *arg, uint64_t start, uint64_t size);
++void range_tree_remove_overlap(void *arg, uint64_t start, uint64_t size);
+ void range_tree_clear(range_tree_t *rt, uint64_t start, uint64_t size);
+ 
+ void range_tree_vacate(range_tree_t *rt, range_tree_func_t *func, void *arg);
+diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
+--- zfs-kmod-9999.orig/include/sys/spa.h	2016-09-18 18:56:36.524124237 +0200
++++ zfs-kmod-9999/include/sys/spa.h	2016-09-18 18:57:20.229459298 +0200
+@@ -21,7 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
+  */
+ 
+@@ -568,6 +568,28 @@
+ 	SPA_IMPORT_ASSEMBLE
+ } spa_import_type_t;
+ 
++/*
++ * Should we force sending TRIM commands even to devices which evidently
++ * don't support it?
++ *	OFF: no, only send to devices which indicated support
++ *	ON: yes, force send to everybody
++ */
++typedef enum {
++	SPA_FORCE_TRIM_OFF = 0,	/* default */
++	SPA_FORCE_TRIM_ON
++} spa_force_trim_t;
++
++/*
++ * Should we send TRIM commands in-line during normal pool operation while
++ * deleting stuff?
++ *	OFF: no
++ *	ON: yes
++ */
++typedef enum {
++	SPA_AUTO_TRIM_OFF = 0,	/* default */
++	SPA_AUTO_TRIM_ON
++} spa_auto_trim_t;
++
+ /* state manipulation functions */
+ extern int spa_open(const char *pool, spa_t **, void *tag);
+ extern int spa_open_rewind(const char *pool, spa_t **, void *tag,
+@@ -593,14 +615,15 @@
+ extern void spa_scan_stat_init(spa_t *spa);
+ extern int spa_scan_get_stats(spa_t *spa, pool_scan_stat_t *ps);
+ 
+-#define	SPA_ASYNC_CONFIG_UPDATE	0x01
+-#define	SPA_ASYNC_REMOVE	0x02
+-#define	SPA_ASYNC_PROBE		0x04
+-#define	SPA_ASYNC_RESILVER_DONE	0x08
+-#define	SPA_ASYNC_RESILVER	0x10
+-#define	SPA_ASYNC_AUTOEXPAND	0x20
+-#define	SPA_ASYNC_REMOVE_DONE	0x40
+-#define	SPA_ASYNC_REMOVE_STOP	0x80
++#define	SPA_ASYNC_CONFIG_UPDATE			0x01
++#define	SPA_ASYNC_REMOVE			0x02
++#define	SPA_ASYNC_PROBE				0x04
++#define	SPA_ASYNC_RESILVER_DONE			0x08
++#define	SPA_ASYNC_RESILVER			0x10
++#define	SPA_ASYNC_AUTOEXPAND			0x20
++#define	SPA_ASYNC_REMOVE_DONE			0x40
++#define	SPA_ASYNC_REMOVE_STOP			0x80
++#define	SPA_ASYNC_MAN_TRIM_TASKQ_DESTROY	0x100
+ 
+ /*
+  * Controls the behavior of spa_vdev_remove().
+@@ -638,6 +661,13 @@
+ extern int spa_scan(spa_t *spa, pool_scan_func_t func);
+ extern int spa_scan_stop(spa_t *spa);
+ 
++/* trimming */
++extern void spa_man_trim(spa_t *spa, uint64_t rate);
++extern void spa_man_trim_stop(spa_t *spa);
++extern void spa_get_trim_prog(spa_t *spa, uint64_t *prog, uint64_t *rate,
++    uint64_t *start_time, uint64_t *stop_time);
++extern void spa_trim_stop_wait(spa_t *spa);
++
+ /* spa syncing */
+ extern void spa_sync(spa_t *spa, uint64_t txg); /* only for DMU use */
+ extern void spa_sync_allpools(void);
+@@ -797,6 +827,8 @@
+ extern uint64_t spa_delegation(spa_t *spa);
+ extern objset_t *spa_meta_objset(spa_t *spa);
+ extern uint64_t spa_deadman_synctime(spa_t *spa);
++extern spa_force_trim_t spa_get_force_trim(spa_t *spa);
++extern spa_auto_trim_t spa_get_auto_trim(spa_t *spa);
+ 
+ /* Miscellaneous support routines */
+ extern void spa_activate_mos_feature(spa_t *spa, const char *feature,
+@@ -880,6 +912,11 @@
+ /* asynchronous event notification */
+ extern void spa_event_notify(spa_t *spa, vdev_t *vdev, const char *name);
+ 
++/* TRIM/UNMAP kstat update */
++extern void spa_trimstats_update(spa_t *spa, uint64_t extents, uint64_t bytes,
++    uint64_t extents_skipped, uint64_t bytes_skipped);
++extern void spa_trimstats_auto_slow_incr(spa_t *spa);
++
+ #ifdef ZFS_DEBUG
+ #define	dprintf_bp(bp, fmt, ...) do {				\
+ 	if (zfs_flags & ZFS_DEBUG_DPRINTF) {			\
+diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/spa_impl.h
+--- zfs-kmod-9999.orig/include/sys/spa_impl.h	2016-09-18 18:56:36.525124245 +0200
++++ zfs-kmod-9999/include/sys/spa_impl.h	2016-09-18 18:57:20.229459298 +0200
+@@ -21,7 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
+  * Copyright (c) 2016 Actifio, Inc. All rights reserved.
+  */
+@@ -122,6 +122,8 @@
+ 	AVZ_ACTION_REBUILD	/* Populate the new AVZ, see spa_avz_rebuild */
+ } spa_avz_action_t;
+ 
++typedef struct spa_trimstats spa_trimstats_t;
++
+ struct spa {
+ 	/*
+ 	 * Fields protected by spa_namespace_lock.
+@@ -259,6 +261,31 @@
+ 	uint64_t	spa_deadman_synctime;	/* deadman expiration timer */
+ 	uint64_t	spa_all_vdev_zaps;	/* ZAP of per-vd ZAP obj #s */
+ 	spa_avz_action_t	spa_avz_action;	/* destroy/rebuild AVZ? */
++
++	/* TRIM */
++	uint64_t	spa_force_trim;		/* force sending trim? */
++	uint64_t	spa_auto_trim;		/* see spa_auto_trim_t */
++
++	kmutex_t	spa_auto_trim_lock;
++	kcondvar_t	spa_auto_trim_done_cv;	/* all autotrim thrd's exited */
++	uint64_t	spa_num_auto_trimming;	/* # of autotrim threads */
++	taskq_t		*spa_auto_trim_taskq;
++
++	kmutex_t	spa_man_trim_lock;
++	uint64_t	spa_man_trim_rate;	/* rate of trim in bytes/sec */
++	uint64_t	spa_num_man_trimming;	/* # of manual trim threads */
++	boolean_t	spa_man_trim_stop;	/* requested manual trim stop */
++	kcondvar_t	spa_man_trim_update_cv;	/* updates to TRIM settings */
++	kcondvar_t	spa_man_trim_done_cv;	/* manual trim has completed */
++	/* For details on trim start/stop times see spa_get_trim_prog. */
++	uint64_t	spa_man_trim_start_time;
++	uint64_t	spa_man_trim_stop_time;
++	taskq_t		*spa_man_trim_taskq;
++
++	/* TRIM/UNMAP kstats */
++	spa_trimstats_t	*spa_trimstats;		/* alloc'd by kstat_create */
++	kstat_t		*spa_trimstats_ks;
++
+ 	uint64_t	spa_errata;		/* errata issues detected */
+ 	spa_stats_t	spa_stats;		/* assorted spa statistics */
+ 	hrtime_t	spa_ccw_fail_time;	/* Conf cache write fail time */
+@@ -281,6 +308,10 @@
+ extern void spa_taskq_dispatch_sync(spa_t *, zio_type_t t, zio_taskq_type_t q,
+     task_func_t *func, void *arg, uint_t flags);
+ 
++extern void spa_auto_trim_taskq_create(spa_t *spa);
++extern void spa_man_trim_taskq_create(spa_t *spa);
++extern void spa_auto_trim_taskq_destroy(spa_t *spa);
++extern void spa_man_trim_taskq_destroy(spa_t *spa);
+ 
+ #ifdef	__cplusplus
+ }
+diff -Nuar zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h zfs-kmod-9999/include/sys/sysevent/eventdefs.h
+--- zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h	2016-09-18 18:56:36.525124245 +0200
++++ zfs-kmod-9999/include/sys/sysevent/eventdefs.h	2016-09-18 18:57:20.208459137 +0200
+@@ -112,6 +112,8 @@
+ #define	ESC_ZFS_VDEV_AUTOEXPAND		"vdev_autoexpand"
+ #define	ESC_ZFS_BOOTFS_VDEV_ATTACH	"bootfs_vdev_attach"
+ #define	ESC_ZFS_POOL_REGUID		"pool_reguid"
++#define	ESC_ZFS_TRIM_START		"trim_start"
++#define	ESC_ZFS_TRIM_FINISH		"trim_finish"
+ 
+ /*
+  * datalink subclass definitions.
+diff -Nuar zfs-kmod-9999.orig/include/sys/trace_vdev.h zfs-kmod-9999/include/sys/trace_vdev.h
+--- zfs-kmod-9999.orig/include/sys/trace_vdev.h	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/include/sys/trace_vdev.h	2016-09-18 18:57:20.208459137 +0200
+@@ -0,0 +1,79 @@
++/*
++ * CDDL HEADER START
++ *
++ * The contents of this file are subject to the terms of the
++ * Common Development and Distribution License (the "License").
++ * You may not use this file except in compliance with the License.
++ *
++ * You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
++ * or http://www.opensolaris.org/os/licensing.
++ * See the License for the specific language governing permissions
++ * and limitations under the License.
++ *
++ * When distributing Covered Code, include this CDDL HEADER in each
++ * file and include the License file at usr/src/OPENSOLARIS.LICENSE.
++ * If applicable, add the following below this CDDL HEADER, with the
++ * fields enclosed by brackets "[]" replaced with your own identifying
++ * information: Portions Copyright [yyyy] [name of copyright owner]
++ *
++ * CDDL HEADER END
++ */
++
++#if defined(_KERNEL) && defined(HAVE_DECLARE_EVENT_CLASS)
++
++#undef TRACE_SYSTEM
++#define	TRACE_SYSTEM zfs
++
++#undef TRACE_SYSTEM_VAR
++#define	TRACE_SYSTEM_VAR zfs_vdev
++
++#if !defined(_TRACE_VDEV_H) || defined(TRACE_HEADER_MULTI_READ)
++#define	_TRACE_VDEV_H
++
++#include <linux/tracepoint.h>
++#include <sys/types.h>
++
++/*
++ * Generic support for tracepoints of the form:
++ *
++ * DTRACE_PROBE2(...,
++ *      vdev_t *, ...,
++ *      metaslab_group_t *, ...);
++ */
++
++DECLARE_EVENT_CLASS(zfs_vdev_mg_class,
++	TP_PROTO(vdev_t *vd, metaslab_group_t *mg),
++	TP_ARGS(vd, mg),
++	TP_STRUCT__entry(
++	    __field(uint64_t,	vdev_id)
++	    __field(uint64_t,	vdev_guid)
++	    __field(boolean_t,	mg_allocatable)
++	    __field(uint64_t,	mg_free_capacity)
++	),
++	TP_fast_assign(
++	    __entry->vdev_id		= vd->vdev_id;
++	    __entry->vdev_guid		= vd->vdev_guid;
++	    __entry->mg_allocatable	= mg->mg_allocatable;
++	    __entry->mg_free_capacity	= mg->mg_free_capacity;
++	),
++	TP_printk("vd { vdev_id %llu vdev_guid %llu }"
++	    "mg { mg_allocatable %d mg_free_capacity %llu }",
++	    __entry->vdev_id, __entry->vdev_guid,
++	    __entry->mg_allocatable, __entry->mg_free_capacity)
++);
++
++#define	DEFINE_VDEV_MG_EVENT(name) \
++DEFINE_EVENT(zfs_vdev_mg_class, name, \
++	TP_PROTO(vdev_t *vd, metaslab_group_t *mg), \
++	TP_ARGS(vd, mg))
++DEFINE_VDEV_MG_EVENT(zfs_vdev_trim_all_restart);
++
++#endif /* _TRACE_VDEV_H */
++
++#undef TRACE_INCLUDE_PATH
++#undef TRACE_INCLUDE_FILE
++#define	TRACE_INCLUDE_PATH sys
++#define	TRACE_INCLUDE_FILE trace_vdev
++#include <trace/define_trace.h>
++
++#endif /* _KERNEL && HAVE_DECLARE_EVENT_CLASS */
+diff -Nuar zfs-kmod-9999.orig/include/sys/vdev.h zfs-kmod-9999/include/sys/vdev.h
+--- zfs-kmod-9999.orig/include/sys/vdev.h	2016-09-18 18:56:36.533124306 +0200
++++ zfs-kmod-9999/include/sys/vdev.h	2016-09-18 18:57:20.229459298 +0200
+@@ -22,6 +22,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2013 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _SYS_VDEV_H
+@@ -45,6 +46,13 @@
+ 	DTL_TYPES
+ } vdev_dtl_type_t;
+ 
++typedef struct vdev_trim_info {
++	vdev_t *vti_vdev;
++	uint64_t vti_txg;	/* ignored for manual trim */
++	void (*vti_done_cb)(void *);
++	void *vti_done_arg;
++} vdev_trim_info_t;
++
+ extern int zfs_nocacheflush;
+ 
+ extern int vdev_open(vdev_t *);
+@@ -145,6 +153,9 @@
+ extern nvlist_t *vdev_config_generate(spa_t *spa, vdev_t *vd,
+     boolean_t getstats, vdev_config_flag_t flags);
+ 
++extern void vdev_man_trim(vdev_trim_info_t *vti);
++extern void vdev_auto_trim(vdev_trim_info_t *vti);
++
+ /*
+  * Label routines
+  */
+diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/vdev_impl.h
+--- zfs-kmod-9999.orig/include/sys/vdev_impl.h	2016-09-18 18:56:36.533124306 +0200
++++ zfs-kmod-9999/include/sys/vdev_impl.h	2016-09-18 18:57:20.229459298 +0200
+@@ -21,6 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _SYS_VDEV_IMPL_H
+@@ -65,6 +66,7 @@
+ typedef void	vdev_state_change_func_t(vdev_t *vd, int, int);
+ typedef void	vdev_hold_func_t(vdev_t *vd);
+ typedef void	vdev_rele_func_t(vdev_t *vd);
++typedef void	vdev_trim_func_t(vdev_t *vd, zio_t *pio, void *trim_exts);
+ 
+ typedef const struct vdev_ops {
+ 	vdev_open_func_t		*vdev_op_open;
+@@ -75,6 +77,7 @@
+ 	vdev_state_change_func_t	*vdev_op_state_change;
+ 	vdev_hold_func_t		*vdev_op_hold;
+ 	vdev_rele_func_t		*vdev_op_rele;
++	vdev_trim_func_t		*vdev_op_trim;
+ 	char				vdev_op_type[16];
+ 	boolean_t			vdev_op_leaf;
+ } vdev_ops_t;
+@@ -180,6 +183,8 @@
+ 	boolean_t	vdev_ishole;	/* is a hole in the namespace 	*/
+ 	uint64_t	vdev_top_zap;
+ 
++	uint64_t	vdev_trim_prog;	/* trim progress in bytes	*/
++
+ 	/*
+ 	 * Leaf vdev state.
+ 	 */
+@@ -202,6 +207,7 @@
+ 	uint64_t	vdev_not_present; /* not present during import	*/
+ 	uint64_t	vdev_unspare;	/* unspare when resilvering done */
+ 	boolean_t	vdev_nowritecache; /* true if flushwritecache failed */
++	boolean_t	vdev_notrim;	/* true if Unmap/TRIM is unsupported */
+ 	boolean_t	vdev_checkremove; /* temporary online test	*/
+ 	boolean_t	vdev_forcefault; /* force online fault		*/
+ 	boolean_t	vdev_splitting;	/* split or repair in progress  */
+diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_raidz.h zfs-kmod-9999/include/sys/vdev_raidz.h
+--- zfs-kmod-9999.orig/include/sys/vdev_raidz.h	2016-09-18 18:56:36.533124306 +0200
++++ zfs-kmod-9999/include/sys/vdev_raidz.h	2016-09-18 18:57:20.208459137 +0200
+@@ -40,8 +40,8 @@
+ /*
+  * vdev_raidz interface
+  */
+-struct raidz_map * vdev_raidz_map_alloc(struct zio *, uint64_t, uint64_t,
+-    uint64_t);
++struct raidz_map * vdev_raidz_map_alloc(caddr_t, uint64_t, uint64_t,
++    uint64_t, uint64_t, uint64_t, boolean_t);
+ void		vdev_raidz_map_free(struct raidz_map *);
+ void 		vdev_raidz_generate_parity(struct raidz_map *);
+ int 		vdev_raidz_reconstruct(struct raidz_map *, const int *, int);
+diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sys/zfs_context.h
+--- zfs-kmod-9999.orig/include/sys/zfs_context.h	2016-09-18 18:56:36.534124314 +0200
++++ zfs-kmod-9999/include/sys/zfs_context.h	2016-09-18 18:57:20.229459298 +0200
+@@ -23,7 +23,7 @@
+  * Use is subject to license terms.
+  */
+ /*
+- * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2012, Joyent, Inc. All rights reserved.
+  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
+  */
+@@ -598,6 +598,8 @@
+ 
+ #define	CRCREAT		0
+ 
++#define	F_FREESP	11
++
+ extern int fop_getattr(vnode_t *vp, vattr_t *vap);
+ 
+ #define	VOP_CLOSE(vp, f, c, o, cr, ct)	vn_close(vp)
+@@ -606,6 +608,16 @@
+ 
+ #define	VOP_FSYNC(vp, f, cr, ct)	fsync((vp)->v_fd)
+ 
++#if defined(HAVE_FILE_FALLOCATE) && \
++	defined(FALLOC_FL_PUNCH_HOLE) && \
++	defined(FALLOC_FL_KEEP_SIZE)
++#define	VOP_SPACE(vp, cmd, flck, fl, off, cr, ct) \
++	fallocate((vp)->v_fd, FALLOC_FL_PUNCH_HOLE | FALLOC_FL_KEEP_SIZE, \
++	    (flck)->l_start, (flck)->l_len)
++#else
++#define	VOP_SPACE(vp, cmd, flck, fl, off, cr, ct) (0)
++#endif
++
+ #define	VN_RELE(vp)	vn_close(vp)
+ 
+ extern int vn_open(char *path, int x1, int oflags, int mode, vnode_t **vpp,
+diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
+--- zfs-kmod-9999.orig/include/sys/zio.h	2016-09-18 18:56:36.537124337 +0200
++++ zfs-kmod-9999/include/sys/zio.h	2016-09-18 18:57:20.230459306 +0200
+@@ -21,8 +21,8 @@
+ 
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
+  * Copyright (c) 2012, 2016 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2013 by Saso Kiselkov. All rights reserved.
+  */
+ 
+@@ -223,6 +223,8 @@
+ 
+ extern const char *zio_type_name[ZIO_TYPES];
+ 
++struct range_tree;
++
+ /*
+  * A bookmark is a four-tuple <objset, object, level, blkid> that uniquely
+  * identifies any block in the pool.  By convention, the meta-objset (MOS)
+@@ -472,6 +474,10 @@
+ extern zio_t *zio_ioctl(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
+     zio_done_func_t *done, void *private, enum zio_flag flags);
+ 
++extern zio_t *zio_trim(spa_t *spa, vdev_t *vd, struct range_tree *tree,
++    zio_done_func_t *done, void *private, enum zio_flag flags,
++    int dkiocfree_flags, metaslab_t *msp);
++
+ extern zio_t *zio_read_phys(zio_t *pio, vdev_t *vd, uint64_t offset,
+     uint64_t size, void *data, int checksum,
+     zio_done_func_t *done, void *private, zio_priority_t priority,
+diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/zio_impl.h
+--- zfs-kmod-9999.orig/include/sys/zio_impl.h	2016-09-18 18:56:36.537124337 +0200
++++ zfs-kmod-9999/include/sys/zio_impl.h	2016-09-18 18:57:20.230459306 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2013 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #ifndef _ZIO_IMPL_H
+@@ -230,6 +231,12 @@
+ 	ZIO_STAGE_VDEV_IO_START |		\
+ 	ZIO_STAGE_VDEV_IO_ASSESS)
+ 
++#define	ZIO_TRIM_PIPELINE			\
++	(ZIO_INTERLOCK_STAGES |			\
++	ZIO_STAGE_ISSUE_ASYNC |			\
++	ZIO_STAGE_VDEV_IO_START |		\
++	ZIO_STAGE_VDEV_IO_ASSESS)
++
+ #define	ZIO_BLOCKING_STAGES			\
+ 	(ZIO_STAGE_DVA_ALLOCATE |		\
+ 	ZIO_STAGE_DVA_CLAIM |			\
+diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h	2016-09-18 18:57:20.235459344 +0200
+@@ -0,0 +1,38 @@
++/*
++ * This file and its contents are supplied under the terms of the
++ * Common Development and Distribution License ("CDDL"), version 1.0.
++ * You may only use this file in accordance with the terms of version
++ * 1.0 of the CDDL.
++ *
++ * A full copy of the text of the CDDL should have accompanied this
++ * source.  A copy of the CDDL is also available via the Internet at
++ * http://www.illumos.org/license/CDDL.
++ */
++
++/*
++ * Copyright 2016 Nexenta Inc.  All rights reserved.
++ */
++
++#ifndef _SYS_DKIOC_FREE_UTIL_H
++#define	_SYS_DKIOC_FREE_UTIL_H
++
++#include <sys/dkio.h>
++
++#ifdef	__cplusplus
++extern "C" {
++#endif
++
++static inline void dfl_free(dkioc_free_list_t *dfl) {
++	vmem_free(dfl, DFL_SZ(dfl->dfl_num_exts));
++}
++
++static inline dkioc_free_list_t *dfl_alloc(uint64_t dfl_num_exts, int flags) {
++	return (vmem_zalloc(DFL_SZ(dfl_num_exts), flags));
++}
++
++
++#ifdef	__cplusplus
++}
++#endif
++
++#endif /* _SYS_DKIOC_FREE_UTIL_H */
+diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h zfs-kmod-9999/lib/libspl/include/sys/dkio.h
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h	2016-09-18 18:56:36.548124421 +0200
++++ zfs-kmod-9999/lib/libspl/include/sys/dkio.h	2016-09-18 18:57:20.230459306 +0200
+@@ -18,17 +18,19 @@
+  *
+  * CDDL HEADER END
+  */
++
+ /*
+- * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
+- * Use is subject to license terms.
++ * Copyright (c) 1982, 2010, Oracle and/or its affiliates. All rights reserved.
++ *
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2012 DEY Storage Systems, Inc.  All rights reserved.
+  */
+ 
+ #ifndef _SYS_DKIO_H
+ #define	_SYS_DKIO_H
+ 
+-
+-
+ #include <sys/dklabel.h>	/* Needed for NDKMAP define */
++#include <sys/int_limits.h>	/* Needed for UINT16_MAX */
+ 
+ #ifdef	__cplusplus
+ extern "C" {
+@@ -83,9 +85,10 @@
+ #define	DKC_MD		16	/* meta-disk (virtual-disk) driver */
+ #define	DKC_INTEL82077	19	/* 82077 floppy disk controller */
+ #define	DKC_DIRECT	20	/* Intel direct attached device i.e. IDE */
+-#define	DKC_PCMCIA_MEM	21	/* PCMCIA memory disk-like type */
++#define	DKC_PCMCIA_MEM	21	/* PCMCIA memory disk-like type (Obsolete) */
+ #define	DKC_PCMCIA_ATA	22	/* PCMCIA AT Attached type */
+ #define	DKC_VBD		23	/* virtual block device */
++#define	DKC_BLKDEV	24	/* generic block device (see blkdev(7d)) */
+ 
+ /*
+  * Sun reserves up through 1023
+@@ -166,6 +169,9 @@
+ #define	DKIOCGVTOC	(DKIOC|11)		/* Get VTOC */
+ #define	DKIOCSVTOC	(DKIOC|12)		/* Set VTOC & Write to Disk */
+ 
++#define	DKIOCGEXTVTOC	(DKIOC|23)	/* Get extended VTOC */
++#define	DKIOCSEXTVTOC	(DKIOC|24)	/* Set extended VTOC, Write to Disk */
++
+ /*
+  * Disk Cache Controls.  These ioctls should be supported by
+  * all disk drivers.
+@@ -228,6 +234,14 @@
+  */
+ #define	DKIOCHOTPLUGGABLE	(DKIOC|35)	/* is hotpluggable */
+ 
++#if defined(__i386) || defined(__amd64)
++/* ioctl to write extended partition structure into the disk */
++#define	DKIOCSETEXTPART	(DKIOC|46)
++#endif
++
++/* ioctl to report whether the disk is solid state or not - used for ZFS */
++#define	DKIOCSOLIDSTATE		(DKIOC|38)
++
+ /*
+  * Ioctl to force driver to re-read the alternate partition and rebuild
+  * the internal defect map.
+@@ -252,6 +266,9 @@
+ };
+ 
+ #define	DKIOCPARTINFO	(DKIOC|22)	/* Get partition or slice parameters */
++#define	DKIOCEXTPARTINFO (DKIOC|19)	/* Get extended partition or slice */
++					/* parameters */
++
+ 
+ /*
+  * Used by applications to get partition or slice information
+@@ -268,6 +285,11 @@
+ 	int		p_length;
+ };
+ 
++struct extpart_info {
++	diskaddr_t	p_start;
++	diskaddr_t	p_length;
++};
++
+ /* The following ioctls are for Optical Memory Device */
+ #define	DKIOC_EBP_ENABLE  (DKIOC|40)	/* enable by pass erase on write */
+ #define	DKIOC_EBP_DISABLE (DKIOC|41)	/* disable by pass erase on write */
+@@ -291,6 +313,16 @@
+ #define	DKIOCGTEMPERATURE	(DKIOC|45)	/* get temperature */
+ 
+ /*
++ * ioctl to get the media info including physical block size
++ */
++#define	DKIOCGMEDIAINFOEXT	(DKIOC|48)
++
++/*
++ * ioctl to determine whether media is write-protected
++ */
++#define	DKIOCREADONLY	(DKIOC|49)
++
++/*
+  * Used for providing the temperature.
+  */
+ 
+@@ -314,6 +346,17 @@
+ };
+ 
+ /*
++ * Used for Media info or the current profile info
++ * including physical block size if supported.
++ */
++struct dk_minfo_ext {
++	uint_t		dki_media_type;	/* Media type or profile info */
++	uint_t		dki_lbsize;	/* Logical blocksize of media */
++	diskaddr_t	dki_capacity;	/* Capacity as # of dki_lbsize blks */
++	uint_t		dki_pbsize;	/* Physical blocksize of media */
++};
++
++/*
+  * Media types or profiles known
+  */
+ #define	DK_UNKNOWN		0x00	/* Media inserted - type unknown */
+@@ -358,6 +401,9 @@
+ #define	DKIOCSETVOLCAP	(DKIOC | 26)	/* Set volume capabilities */
+ #define	DKIOCDMR	(DKIOC | 27)	/* Issue a directed read */
+ 
++#define	DKIOCDUMPINIT	(DKIOC | 28)	/* Dumpify a zvol */
++#define	DKIOCDUMPFINI	(DKIOC | 29)	/* Un-Dumpify a zvol */
++
+ typedef uint_t volcapinfo_t;
+ 
+ typedef uint_t volcapset_t;
+@@ -476,6 +522,34 @@
+ #define	FW_TYPE_TEMP	0x0		/* temporary use */
+ #define	FW_TYPE_PERM	0x1		/* permanent use */
+ 
++/*
++ * ioctl to free space (e.g. SCSI UNMAP) off a disk.
++ * Pass a dkioc_free_list_t containing a list of extents to be freed.
++ */
++#define	DKIOCFREE	(DKIOC|50)
++
++#define	DF_WAIT_SYNC	0x00000001	/* Wait for full write-out of free. */
++typedef struct dkioc_free_list_ext_s {
++	uint64_t		dfle_start;
++	uint64_t		dfle_length;
++} dkioc_free_list_ext_t;
++
++typedef struct dkioc_free_list_s {
++	uint64_t		dfl_flags;
++	uint64_t		dfl_num_exts;
++	int64_t			dfl_offset;
++
++	/*
++	 * N.B. this is only an internal debugging API! This is only called
++	 * from debug builds of sd for pre-release checking. Remove before GA!
++	 */
++	void			(*dfl_ck_func)(uint64_t, uint64_t, void *);
++	void			*dfl_ck_arg;
++
++	dkioc_free_list_ext_t	dfl_exts[1];
++} dkioc_free_list_t;
++#define	DFL_SZ(num_exts) \
++	(sizeof (dkioc_free_list_t) + (num_exts - 1) * 16)
+ 
+ #ifdef	__cplusplus
+ }
+diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am zfs-kmod-9999/lib/libspl/include/sys/Makefile.am
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am	2016-09-18 18:56:36.547124413 +0200
++++ zfs-kmod-9999/lib/libspl/include/sys/Makefile.am	2016-09-18 18:57:20.205459114 +0200
+@@ -12,6 +12,7 @@
+ 	$(top_srcdir)/lib/libspl/include/sys/cred.h \
+ 	$(top_srcdir)/lib/libspl/include/sys/debug.h \
+ 	$(top_srcdir)/lib/libspl/include/sys/dkio.h \
++	$(top_srcdir)/lib/libspl/include/sys/dkioc_free_util.h \
+ 	$(top_srcdir)/lib/libspl/include/sys/dklabel.h \
+ 	$(top_srcdir)/lib/libspl/include/sys/feature_tests.h \
+ 	$(top_srcdir)/lib/libspl/include/sys/file.h \
+diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c zfs-kmod-9999/lib/libzfs/libzfs_pool.c
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c	2016-09-18 18:56:36.559124506 +0200
++++ zfs-kmod-9999/lib/libzfs/libzfs_pool.c	2016-09-18 18:57:20.209459145 +0200
+@@ -1993,6 +1993,26 @@
+ }
+ 
+ /*
++ * Trim the pool.
++ */
++int
++zpool_trim(zpool_handle_t *zhp, boolean_t start, uint64_t rate)
++{
++	zfs_cmd_t zc = {"\0"};
++	char msg[1024];
++	libzfs_handle_t *hdl = zhp->zpool_hdl;
++	trim_cmd_info_t tci = { .tci_start = start, .tci_rate = rate };
++
++	(void) strlcpy(zc.zc_name, zhp->zpool_name, sizeof (zc.zc_name));
++	zc.zc_cookie = (uintptr_t)&tci;
++
++	if (zfs_ioctl(hdl, ZFS_IOC_POOL_TRIM, &zc) == 0)
++		return (0);
++
++	return (zpool_standard_error(hdl, errno, msg));
++}
++
++/*
+  * Find a vdev that matches the search criteria specified. We use the
+  * the nvpair name to determine how we should look for the device.
+  * 'avail_spare' is set to TRUE if the provided guid refers to an AVAIL
+diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c zfs-kmod-9999/lib/libzfs/libzfs_util.c
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c	2016-09-18 18:56:36.561124521 +0200
++++ zfs-kmod-9999/lib/libzfs/libzfs_util.c	2016-09-18 18:57:20.230459306 +0200
+@@ -23,6 +23,7 @@
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2013, Joyent, Inc. All rights reserved.
+  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ /*
+diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man/man5/zfs-module-parameters.5
+--- zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5	2016-09-18 18:56:36.564124544 +0200
++++ zfs-kmod-9999/man/man5/zfs-module-parameters.5	2016-09-18 18:57:20.209459145 +0200
+@@ -1567,6 +1567,33 @@
+ .sp
+ .ne 2
+ .na
++\fBzfs_trim\fR (int)
++.ad
++.RS 12n
++Controls whether the underlying vdevs of the pool are notified when
++space is freed using the device-type-specific command set (TRIM here
++being a general placeholder term rather than referring to just the SATA
++TRIM command). This is frequently used on backing storage devices which
++support thin provisioning or pre-erasure of blocks on flash media.
++.sp
++Default value: \fB0\fR.
++.RE
++
++.sp
++.ne 2
++.na
++\fBzfs_trim_min_ext_sz\fR (int)
++.ad
++.RS 12n
++Minimum size region in bytes over which a device-specific TRIM command
++will be sent to the underlying vdevs when \fBzfs_trim\fR is set.
++.sp
++Default value: \fB1048576\fR.
++.RE
++
++.sp
++.ne 2
++.na
+ \fBzfs_txg_history\fR (int)
+ .ad
+ .RS 12n
+@@ -1588,6 +1615,18 @@
+ .RE
+ 
+ .sp
++.ne 2
++.na
++\fBzfs_txgs_per_trim\fR (int)
++.ad
++.RS 12n
++Number of transaction groups over which device-specific TRIM commands
++are batched when \fBzfs_trim\fR is set.
++.sp
++Default value: \fB32\fR.
++.RE
++
++.sp
+ .ne 2
+ .na
+ \fBzfs_vdev_aggregation_limit\fR (int)
+diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
+--- zfs-kmod-9999.orig/man/man8/zpool.8	2016-09-18 18:56:36.566124559 +0200
++++ zfs-kmod-9999/man/man8/zpool.8	2016-09-18 18:57:20.234459337 +0200
+@@ -148,6 +148,11 @@
+ 
+ .LP
+ .nf
++\fBzpool trim\fR [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...
++.fi
++
++.LP
++.nf
+ \fBzpool set\fR \fIproperty\fR=\fIvalue\fR \fIpool\fR
+ .fi
+ 
+@@ -715,7 +720,6 @@
+ .RS 12n
+ Prints out a message to the console and generates a system crash dump.
+ .RE
+-
+ .RE
+ 
+ .sp
+@@ -733,6 +737,49 @@
+ .sp
+ .ne 2
+ .na
++\fB\fBautotrim\fR=\fBon\fR | \fBoff\fR\fR
++.ad
++.sp .6
++.RS 4n
++When set to \fBon\fR, while deleting data, ZFS will inform the underlying
++vdevs of any blocks that have been marked as freed. This allows thinly
++provisioned vdevs to reclaim unused blocks. This feature is supported on
++file vdevs via hole punching if it is supported by their underlying file system
++and on block device vdevs if their underlying driver supports BLKDISCARD.
++The default setting for this property is \fBoff\fR.
++.sp
++Please note that automatic trimming of data blocks can put significant
++stress on the underlying storage devices if they do not handle these
++commands in a background, low-priority manner. In that case, it may be
++possible to achieve most of the benefits of trimming free space on the
++pool by running an on-demand (manual) trim every once in a while during
++a maintenance window using the \fBzpool trim\fR command.
++.sp
++Automatic trim does not reclaim blocks after a delete immediately.
++Instead, it waits approximately 32-64 TXGs (or as defined by the
++\fBzfs_txgs_per_trim\fR tunable) to allow for more efficient aggregation
++of smaller portions of free space into fewer larger regions, as well as
++to allow for longer pool corruption recovery via \fBzpool import -F\fR.
++.RE
++
++.sp
++.ne 2
++.na
++\fB\fBforcetrim\fR=\fBon\fR | \fBoff\fR\fR
++.ad
++.sp .6
++.RS 4n
++Controls whether device support is taken into consideration when issuing
++TRIM commands to the underlying vdevs of the pool. Normally, both
++automatic trim and on-demand (manual) trim only issue TRIM commands if a
++vdev indicates support for it. Setting the \fBforcetrim\fR property to
++\fBon\fR will force ZFS to issue TRIMs even if it thinks a device does
++not support it. The default is \fBoff\fR.
++.RE
++
++.sp
++.ne 2
++.na
+ \fB\fBlistsnapshots\fR=on | off\fR
+ .ad
+ .sp .6
+@@ -1982,6 +2029,76 @@
+ .RE
+ 
+ .RE
++
++.sp
++.ne 2
++.na
++\fB\fBzpool trim\fR [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...\fR
++.ad
++.sp .6
++.RS 4n
++Initiates a on-demand TRIM operation on all of the free space of a pool.
++This informs the underlying storage devices of all of the blocks that
++the pool no longer considers allocated, thus allowing thinly provisioned
++storage devices to reclaim them. Please note that this collects all
++space marked as "freed" in the pool immediately and doesn't wait the
++\fBzfs_txgs_per_trim\fR delay as automatic TRIM does. Hence, this can
++limit pool corruption recovery options during and immediately following
++the on-demand TRIM to 1-2 TXGs into the past (instead of the standard
++32-64 of automatic TRIM). This approach, however, allows you to recover
++the maximum amount of free space from the pool immediately without
++having to wait.
++.sp
++Also note that an on-demand TRIM operation can be initiated irrespective of
++the \fBautotrim\fR zpool property setting. It does, however, respect the
++\fBforcetrim\fR zpool property.
++.sp
++An on-demand TRIM operation does not conflict with an ongoing scrub, but
++it can put significant I/O stress on the underlying vdevs. A resilver,
++however, automatically stops an on-demand TRIM operation. You can
++manually reinitiate the TRIM operation after the resilver has started,
++by simply reissuing the \fBzpool trim\fR command.
++.sp
++Adding a vdev during TRIM is supported, although the progression display
++in \fBzpool status\fR might not be entirely accurate in that case (TRIM
++will complete before reaching 100%). Removing or detaching a vdev will
++prematurely terminate an on-demand TRIM operation.
++.sp
++See the documentation for the \fBautotrim\fR property above for a description
++of the vdevs on which \fBzpool trim\fR is supported.
++.sp
++.ne 2
++.na
++\fB\fB-r\fR \fIrate\fR
++.ad
++.RS 6n
++Controls the speed at which the TRIM operation progresses. Without this
++option, TRIM is executed in parallel on all top-level vdevs as quickly
++as possible. This option allows you to control how fast (in bytes per
++second) the TRIM is executed. This rate is applied on a per-vdev basis,
++i.e. every top-level vdev in the pool tries to match this speed.
++.sp
++Due to limitations in how the algorithm is designed, TRIMs are executed
++in whole-metaslab increments. Each top-level vdev contains approximately
++200 metaslabs, so a rate-limited TRIM progresses in steps, i.e. it TRIMs
++one metaslab completely and then waits for a while so that over the
++whole device, the speed averages out.
++.sp
++When an on-demand TRIM operation is already in progress, this option
++changes its rate. To change a rate-limited TRIM to an unlimited one,
++simply execute the \fBzpool trim\fR command without a \fB-r\fR option.
++.RE
++.sp
++.ne 2
++.na
++\fB\fB-s\fR\fR
++.ad
++.RS 6n
++Stop trimming. If an on-demand TRIM operation is not ongoing at the
++moment, this does nothing and the command returns success.
++.RE
++
++.RE
+ 
+ .sp
+ .ne 2
+diff -Nuar zfs-kmod-9999.orig/module/zcommon/zpool_prop.c zfs-kmod-9999/module/zcommon/zpool_prop.c
+--- zfs-kmod-9999.orig/module/zcommon/zpool_prop.c	2016-09-18 18:56:36.583124689 +0200
++++ zfs-kmod-9999/module/zcommon/zpool_prop.c	2016-09-18 18:57:20.230459306 +0200
+@@ -20,7 +20,7 @@
+  */
+ /*
+  * Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
+  */
+ 
+@@ -127,6 +127,12 @@
+ 	zprop_register_index(ZPOOL_PROP_FAILUREMODE, "failmode",
+ 	    ZIO_FAILURE_MODE_WAIT, PROP_DEFAULT, ZFS_TYPE_POOL,
+ 	    "wait | continue | panic", "FAILMODE", failuremode_table);
++	zprop_register_index(ZPOOL_PROP_FORCETRIM, "forcetrim",
++	    SPA_FORCE_TRIM_OFF, PROP_DEFAULT, ZFS_TYPE_POOL,
++	    "on | off", "FORCETRIM", boolean_table);
++	zprop_register_index(ZPOOL_PROP_AUTOTRIM, "autotrim",
++	    SPA_AUTO_TRIM_OFF, PROP_DEFAULT, ZFS_TYPE_POOL,
++	    "on | off", "AUTOTRIM", boolean_table);
+ 
+ 	/* hidden properties */
+ 	zprop_register_hidden(ZPOOL_PROP_NAME, "name", PROP_TYPE_STRING,
+diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_scan.c zfs-kmod-9999/module/zfs/dsl_scan.c
+--- zfs-kmod-9999.orig/module/zfs/dsl_scan.c	2016-09-18 18:56:36.593124766 +0200
++++ zfs-kmod-9999/module/zfs/dsl_scan.c	2016-09-18 18:57:20.230459306 +0200
+@@ -22,6 +22,7 @@
+  * Copyright (c) 2008, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+  * Copyright 2016 Gary Mills
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/dsl_scan.h>
+@@ -1740,6 +1741,9 @@
+ void
+ dsl_resilver_restart(dsl_pool_t *dp, uint64_t txg)
+ {
++	/* Stop any ongoing TRIMs */
++	spa_man_trim_stop(dp->dp_spa);
++
+ 	if (txg == 0) {
+ 		dmu_tx_t *tx;
+ 		tx = dmu_tx_create_dd(dp->dp_mos_dir);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_synctask.c zfs-kmod-9999/module/zfs/dsl_synctask.c
+--- zfs-kmod-9999.orig/module/zfs/dsl_synctask.c	2016-09-18 18:56:36.594124774 +0200
++++ zfs-kmod-9999/module/zfs/dsl_synctask.c	2016-09-18 18:57:20.230459306 +0200
+@@ -21,6 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/dmu.h>
+@@ -112,7 +113,6 @@
+ 		txg_wait_synced(dp, dst.dst_txg + TXG_DEFER_SIZE);
+ 		goto top;
+ 	}
+-
+ 	spa_close(spa, FTAG);
+ 	return (dst.dst_error);
+ }
+diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/metaslab.c
+--- zfs-kmod-9999.orig/module/zfs/metaslab.c	2016-09-18 18:56:36.595124782 +0200
++++ zfs-kmod-9999/module/zfs/metaslab.c	2016-09-18 18:57:20.238459367 +0200
+@@ -22,6 +22,7 @@
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+  * Copyright (c) 2013 by Saso Kiselkov. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -184,6 +185,36 @@
+ static uint64_t metaslab_fragmentation(metaslab_t *);
+ 
+ /*
++ * How many TXG's worth of updates should be aggregated per TRIM/UNMAP
++ * issued to the underlying vdev. We keep two range trees of extents
++ * (called "trim sets") to be trimmed per metaslab, the `current' and
++ * the `previous' TS. New free's are added to the current TS. Then,
++ * once `zfs_txgs_per_trim' transactions have elapsed, the `current'
++ * TS becomes the `previous' TS and a new, blank TS is created to be
++ * the new `current', which will then start accumulating any new frees.
++ * Once another zfs_txgs_per_trim TXGs have passed, the previous TS's
++ * extents are trimmed, the TS is destroyed and the current TS again
++ * becomes the previous TS.
++ * This serves to fulfill two functions: aggregate many small frees
++ * into fewer larger trim operations (which should help with devices
++ * which do not take so kindly to them) and to allow for disaster
++ * recovery (extents won't get trimmed immediately, but instead only
++ * after passing this rather long timeout, thus preserving
++ * 'zfs import -F' functionality).
++ */
++unsigned int zfs_txgs_per_trim = 32;
++
++static void metaslab_trim_remove(void *arg, uint64_t offset, uint64_t size);
++static void metaslab_trim_add(void *arg, uint64_t offset, uint64_t size);
++
++static zio_t *metaslab_exec_trim(metaslab_t *msp);
++
++static metaslab_trimset_t *metaslab_new_trimset(uint64_t txg, kmutex_t *lock);
++static void metaslab_free_trimset(metaslab_trimset_t *ts);
++static boolean_t metaslab_check_trim_conflict(metaslab_t *msp,
++    uint64_t *offset, uint64_t size, uint64_t align, uint64_t limit);
++
++/*
+  * ==========================================================================
+  * Metaslab classes
+  * ==========================================================================
+@@ -909,6 +940,7 @@
+ 		VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
+ 		VERIFY3U(range_tree_space(rt) - size, <=, msp->ms_size);
+ 		range_tree_remove(rt, start, size);
++		metaslab_trim_remove(msp, start, size);
+ 	}
+ 	return (start);
+ }
+@@ -928,8 +960,8 @@
+  * tree looking for a block that matches the specified criteria.
+  */
+ static uint64_t
+-metaslab_block_picker(avl_tree_t *t, uint64_t *cursor, uint64_t size,
+-    uint64_t align)
++metaslab_block_picker(metaslab_t *msp, avl_tree_t *t, uint64_t *cursor,
++    uint64_t size, uint64_t align)
+ {
+ 	range_seg_t *rs, rsearch;
+ 	avl_index_t where;
+@@ -941,14 +973,15 @@
+ 	if (rs == NULL)
+ 		rs = avl_nearest(t, where, AVL_AFTER);
+ 
+-	while (rs != NULL) {
++	for (; rs != NULL; rs = AVL_NEXT(t, rs)) {
+ 		uint64_t offset = P2ROUNDUP(rs->rs_start, align);
+ 
+-		if (offset + size <= rs->rs_end) {
++		if (offset + size <= rs->rs_end &&
++		    !metaslab_check_trim_conflict(msp, &offset, size, align,
++		    rs->rs_end)) {
+ 			*cursor = offset + size;
+ 			return (offset);
+ 		}
+-		rs = AVL_NEXT(t, rs);
+ 	}
+ 
+ 	/*
+@@ -959,7 +992,7 @@
+ 		return (-1ULL);
+ 
+ 	*cursor = 0;
+-	return (metaslab_block_picker(t, cursor, size, align));
++	return (metaslab_block_picker(msp, t, cursor, size, align));
+ }
+ #endif /* WITH_FF/DF/CF_BLOCK_ALLOCATOR */
+ 
+@@ -983,7 +1016,7 @@
+ 	uint64_t *cursor = &msp->ms_lbas[highbit64(align) - 1];
+ 	avl_tree_t *t = &msp->ms_tree->rt_root;
+ 
+-	return (metaslab_block_picker(t, cursor, size, align));
++	return (metaslab_block_picker(msp, t, cursor, size, align));
+ }
+ 
+ static metaslab_ops_t metaslab_ff_ops = {
+@@ -1035,7 +1068,7 @@
+ 		*cursor = 0;
+ 	}
+ 
+-	return (metaslab_block_picker(t, cursor, size, 1ULL));
++	return (metaslab_block_picker(msp, t, cursor, size, 1ULL));
+ }
+ 
+ static metaslab_ops_t metaslab_df_ops = {
+@@ -1071,13 +1104,19 @@
+ 
+ 	if ((*cursor + size) > *cursor_end) {
+ 		range_seg_t *rs;
+-
+-		rs = avl_last(&msp->ms_size_tree);
+-		if (rs == NULL || (rs->rs_end - rs->rs_start) < size)
++		for (rs = avl_last(&msp->ms_size_tree);
++		    rs != NULL && rs->rs_end - rs->rs_start >= size;
++		    rs = AVL_PREV(&msp->ms_size_tree, rs)) {
++			*cursor = rs->rs_start;
++			*cursor_end = rs->rs_end;
++			if (!metaslab_check_trim_conflict(msp, cursor, size,
++			    1, *cursor_end)) {
++				/* segment appears to be acceptable */
++				break;
++			}
++		}
++		if (rs == NULL || rs->rs_end - rs->rs_start < size)
+ 			return (-1ULL);
+-
+-		*cursor = rs->rs_start;
+-		*cursor_end = rs->rs_end;
+ 	}
+ 
+ 	offset = *cursor;
+@@ -1118,6 +1157,8 @@
+ 	uint64_t hbit = highbit64(size);
+ 	uint64_t *cursor = &msp->ms_lbas[hbit - 1];
+ 	uint64_t max_size = metaslab_block_maxsize(msp);
++	/* mutable copy for adjustment by metaslab_check_trim_conflict */
++	uint64_t adjustable_start;
+ 
+ 	ASSERT(MUTEX_HELD(&msp->ms_lock));
+ 	ASSERT3U(avl_numnodes(t), ==, avl_numnodes(&msp->ms_size_tree));
+@@ -1129,7 +1170,12 @@
+ 	rsearch.rs_end = *cursor + size;
+ 
+ 	rs = avl_find(t, &rsearch, &where);
+-	if (rs == NULL || (rs->rs_end - rs->rs_start) < size) {
++	if (rs != NULL)
++		adjustable_start = rs->rs_start;
++	if (rs == NULL || rs->rs_end - adjustable_start < size ||
++	    metaslab_check_trim_conflict(msp, &adjustable_start, size, 1,
++	    rs->rs_end)) {
++		/* segment not usable, try the largest remaining one */
+ 		t = &msp->ms_size_tree;
+ 
+ 		rsearch.rs_start = 0;
+@@ -1139,13 +1185,17 @@
+ 		if (rs == NULL)
+ 			rs = avl_nearest(t, where, AVL_AFTER);
+ 		ASSERT(rs != NULL);
++		adjustable_start = rs->rs_start;
++		if (rs->rs_end - adjustable_start < size ||
++		    metaslab_check_trim_conflict(msp, &adjustable_start,
++		    size, 1, rs->rs_end)) {
++			/* even largest remaining segment not usable */
++			return (-1ULL);
++		}
+ 	}
+ 
+-	if ((rs->rs_end - rs->rs_start) >= size) {
+-		*cursor = rs->rs_start + size;
+-		return (rs->rs_start);
+-	}
+-	return (-1ULL);
++	*cursor = adjustable_start + size;
++	return (*cursor);
+ }
+ 
+ static metaslab_ops_t metaslab_ndf_ops = {
+@@ -1205,6 +1255,8 @@
+ 		for (t = 0; t < TXG_DEFER_SIZE; t++) {
+ 			range_tree_walk(msp->ms_defertree[t],
+ 			    range_tree_remove, msp->ms_tree);
++			range_tree_walk(msp->ms_defertree[t],
++			    metaslab_trim_remove, msp);
+ 		}
+ 	}
+ 	cv_broadcast(&msp->ms_load_cv);
+@@ -1232,6 +1284,7 @@
+ 	ms = kmem_zalloc(sizeof (metaslab_t), KM_SLEEP);
+ 	mutex_init(&ms->ms_lock, NULL, MUTEX_DEFAULT, NULL);
+ 	cv_init(&ms->ms_load_cv, NULL, CV_DEFAULT, NULL);
++	cv_init(&ms->ms_trim_cv, NULL, CV_DEFAULT, NULL);
+ 	ms->ms_id = id;
+ 	ms->ms_start = id << vd->vdev_ms_shift;
+ 	ms->ms_size = 1ULL << vd->vdev_ms_shift;
+@@ -1252,6 +1305,8 @@
+ 		ASSERT(ms->ms_sm != NULL);
+ 	}
+ 
++	ms->ms_cur_ts = metaslab_new_trimset(0, &ms->ms_lock);
++
+ 	/*
+ 	 * We create the main range tree here, but we don't create the
+ 	 * alloctree and freetree until metaslab_sync_done().  This serves
+@@ -1323,10 +1378,16 @@
+ 		range_tree_destroy(msp->ms_defertree[t]);
+ 	}
+ 
++	metaslab_free_trimset(msp->ms_cur_ts);
++	if (msp->ms_prev_ts)
++		metaslab_free_trimset(msp->ms_prev_ts);
++	ASSERT3P(msp->ms_trimming_ts, ==, NULL);
++
+ 	ASSERT0(msp->ms_deferspace);
+ 
+ 	mutex_exit(&msp->ms_lock);
+ 	cv_destroy(&msp->ms_load_cv);
++	cv_destroy(&msp->ms_trim_cv);
+ 	mutex_destroy(&msp->ms_lock);
+ 
+ 	kmem_free(msp, sizeof (metaslab_t));
+@@ -1623,8 +1684,8 @@
+ 		 * less than optimal one.
+ 		 */
+ 		mutex_exit(&mg->mg_lock);
+-		VERIFY(taskq_dispatch(mg->mg_taskq, metaslab_preload,
+-		    msp, TQ_SLEEP) != 0);
++		(void) taskq_dispatch(mg->mg_taskq, metaslab_preload,
++		    msp, TQ_SLEEP);
+ 		mutex_enter(&mg->mg_lock);
+ 		msp = msp_next;
+ 	}
+@@ -1812,11 +1873,14 @@
+ 
+ 	ASSERT(!vd->vdev_ishole);
+ 
++	mutex_enter(&msp->ms_lock);
++
+ 	/*
+ 	 * This metaslab has just been added so there's no work to do now.
+ 	 */
+ 	if (*freetree == NULL) {
+ 		ASSERT3P(alloctree, ==, NULL);
++		mutex_exit(&msp->ms_lock);
+ 		return;
+ 	}
+ 
+@@ -1831,8 +1895,10 @@
+ 	 */
+ 	if (range_tree_space(alloctree) == 0 &&
+ 	    range_tree_space(*freetree) == 0 &&
+-	    !msp->ms_condense_wanted)
++	    !msp->ms_condense_wanted) {
++		mutex_exit(&msp->ms_lock);
+ 		return;
++	}
+ 
+ 	/*
+ 	 * The only state that can actually be changing concurrently with
+@@ -1858,8 +1924,6 @@
+ 		ASSERT(msp->ms_sm != NULL);
+ 	}
+ 
+-	mutex_enter(&msp->ms_lock);
+-
+ 	/*
+ 	 * Note: metaslab_condense() clears the space_map's histogram.
+ 	 * Therefore we muse verify and remove this histogram before
+@@ -1938,6 +2002,7 @@
+ 	range_tree_t **freed_tree;
+ 	range_tree_t **defer_tree;
+ 	int64_t alloc_delta, defer_delta;
++	spa_t *spa = msp->ms_group->mg_class->mc_spa;
+ 	int t;
+ 
+ 	ASSERT(!vd->vdev_ishole);
+@@ -1994,6 +2059,8 @@
+ 	 * defer_tree -- this is safe to do because we've just emptied out
+ 	 * the defer_tree.
+ 	 */
++	if (spa_get_auto_trim(spa) == SPA_AUTO_TRIM_ON)
++		range_tree_walk(*defer_tree, metaslab_trim_add, msp);
+ 	range_tree_vacate(*defer_tree,
+ 	    msp->ms_loaded ? range_tree_add : NULL, msp->ms_tree);
+ 	range_tree_swap(freed_tree, defer_tree);
+@@ -2450,6 +2517,8 @@
+ 		VERIFY0(P2PHASE(offset, 1ULL << vd->vdev_ashift));
+ 		VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
+ 		range_tree_add(msp->ms_tree, offset, size);
++		if (spa_get_auto_trim(spa) == SPA_AUTO_TRIM_ON)
++			metaslab_trim_add(msp, offset, size);
+ 	} else {
+ 		if (range_tree_space(msp->ms_freetree[txg & TXG_MASK]) == 0)
+ 			vdev_dirty(vd, VDD_METASLAB, msp, txg);
+@@ -2505,6 +2574,7 @@
+ 	VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
+ 	VERIFY3U(range_tree_space(msp->ms_tree) - size, <=, msp->ms_size);
+ 	range_tree_remove(msp->ms_tree, offset, size);
++	metaslab_trim_remove(msp, offset, size);
+ 
+ 	if (spa_writeable(spa)) {	/* don't dirty if we're zdb(1M) */
+ 		if (range_tree_space(msp->ms_alloctree[txg & TXG_MASK]) == 0)
+@@ -2674,17 +2744,303 @@
+ 		uint64_t size = DVA_GET_ASIZE(&bp->blk_dva[i]);
+ 		metaslab_t *msp = vd->vdev_ms[offset >> vd->vdev_ms_shift];
+ 
+-		if (msp->ms_loaded)
++		mutex_enter(&msp->ms_lock);
++		if (msp->ms_loaded) {
++			VERIFY(&msp->ms_lock == msp->ms_tree->rt_lock);
+ 			range_tree_verify(msp->ms_tree, offset, size);
++#ifdef	DEBUG
++			VERIFY(&msp->ms_lock ==
++			    msp->ms_cur_ts->ts_tree->rt_lock);
++			range_tree_verify(msp->ms_cur_ts->ts_tree,
++			    offset, size);
++			if (msp->ms_prev_ts != NULL) {
++				VERIFY(&msp->ms_lock ==
++				    msp->ms_prev_ts->ts_tree->rt_lock);
++				range_tree_verify(msp->ms_prev_ts->ts_tree,
++				    offset, size);
++			}
++#endif
++		}
+ 
+-		for (j = 0; j < TXG_SIZE; j++)
++		for (j = 0; j < TXG_SIZE; j++) {
++			VERIFY(&msp->ms_lock == msp->ms_freetree[j]->rt_lock);
+ 			range_tree_verify(msp->ms_freetree[j], offset, size);
+-		for (j = 0; j < TXG_DEFER_SIZE; j++)
++		}
++		for (j = 0; j < TXG_DEFER_SIZE; j++) {
++			VERIFY(&msp->ms_lock == msp->ms_defertree[j]->rt_lock);
+ 			range_tree_verify(msp->ms_defertree[j], offset, size);
++		}
++		mutex_exit(&msp->ms_lock);
+ 	}
+ 	spa_config_exit(spa, SCL_VDEV, FTAG);
+ }
+ 
++
++/*
++ * Trims all free space in the metaslab. Returns the root TRIM zio (that the
++ * caller should zio_wait() for) and the amount of space in the metaslab that
++ * has been scheduled for trimming in the `delta' return argument.
++ */
++zio_t *
++metaslab_trim_all(metaslab_t *msp, uint64_t *delta)
++{
++	boolean_t was_loaded;
++	uint64_t trimmed_space;
++	zio_t *trim_io;
++
++	ASSERT(!MUTEX_HELD(&msp->ms_group->mg_lock));
++
++	mutex_enter(&msp->ms_lock);
++
++	while (msp->ms_loading)
++		metaslab_load_wait(msp);
++	/* If we loaded the metaslab, unload it when we're done. */
++	was_loaded = msp->ms_loaded;
++	if (!was_loaded) {
++		if (metaslab_load(msp) != 0) {
++			mutex_exit(&msp->ms_lock);
++			return (0);
++		}
++	}
++	/* Flush out any scheduled extents and add everything in ms_tree. */
++	range_tree_vacate(msp->ms_cur_ts->ts_tree, NULL, NULL);
++	range_tree_walk(msp->ms_tree, metaslab_trim_add, msp);
++
++	/* Force this trim to take place ASAP. */
++	if (msp->ms_prev_ts != NULL)
++		metaslab_free_trimset(msp->ms_prev_ts);
++	msp->ms_prev_ts = msp->ms_cur_ts;
++	msp->ms_cur_ts = metaslab_new_trimset(0, &msp->ms_lock);
++	trimmed_space = range_tree_space(msp->ms_tree);
++	if (!was_loaded)
++		metaslab_unload(msp);
++
++	trim_io = metaslab_exec_trim(msp);
++	mutex_exit(&msp->ms_lock);
++	*delta = trimmed_space;
++
++	return (trim_io);
++}
++
++/*
++ * Notifies the trimsets in a metaslab that an extent has been allocated.
++ * This removes the segment from the queues of extents awaiting to be trimmed.
++ */
++static void
++metaslab_trim_remove(void *arg, uint64_t offset, uint64_t size)
++{
++	metaslab_t *msp = arg;
++
++	range_tree_remove_overlap(msp->ms_cur_ts->ts_tree, offset, size);
++	if (msp->ms_prev_ts != NULL) {
++		range_tree_remove_overlap(msp->ms_prev_ts->ts_tree, offset,
++		    size);
++	}
++}
++
++/*
++ * Notifies the trimsets in a metaslab that an extent has been freed.
++ * This adds the segment to the currently open queue of extents awaiting
++ * to be trimmed.
++ */
++static void
++metaslab_trim_add(void *arg, uint64_t offset, uint64_t size)
++{
++	metaslab_t *msp = arg;
++	ASSERT(msp->ms_cur_ts != NULL);
++	range_tree_add(msp->ms_cur_ts->ts_tree, offset, size);
++}
++
++/*
++ * Does a metaslab's automatic trim operation processing. This must be
++ * called from metaslab_sync, with the txg number of the txg. This function
++ * issues trims in intervals as dictated by the zfs_txgs_per_trim tunable.
++ */
++void
++metaslab_auto_trim(metaslab_t *msp, uint64_t txg)
++{
++	/* for atomicity */
++	uint64_t txgs_per_trim = zfs_txgs_per_trim;
++
++	ASSERT(!MUTEX_HELD(&msp->ms_lock));
++	mutex_enter(&msp->ms_lock);
++
++	/*
++	 * Since we typically have hundreds of metaslabs per vdev, but we only
++	 * trim them once every zfs_txgs_per_trim txgs, it'd be best if we
++	 * could sequence the TRIM commands from all metaslabs so that they
++	 * don't all always pound the device in the same txg. We do so by
++	 * artificially inflating the birth txg of the first trim set by a
++	 * sequence number derived from the metaslab's starting offset
++	 * (modulo zfs_txgs_per_trim). Thus, for the default 200 metaslabs and
++	 * 32 txgs per trim, we'll only be trimming ~6.25 metaslabs per txg.
++	 *
++	 * If we detect that the txg has advanced too far ahead of ts_birth,
++	 * it means our birth txg is out of lockstep. Recompute it by
++	 * rounding down to the nearest zfs_txgs_per_trim multiple and adding
++	 * our metaslab id modulo zfs_txgs_per_trim.
++	 */
++	if (txg > msp->ms_cur_ts->ts_birth + txgs_per_trim) {
++		msp->ms_cur_ts->ts_birth = (txg / txgs_per_trim) *
++		    txgs_per_trim + (msp->ms_id % txgs_per_trim);
++	}
++
++	/* Time to swap out the current and previous trimsets */
++	if (txg == msp->ms_cur_ts->ts_birth + txgs_per_trim) {
++		if (msp->ms_prev_ts != NULL) {
++			if (msp->ms_trimming_ts != NULL) {
++				spa_t *spa = msp->ms_group->mg_class->mc_spa;
++				/*
++				 * The previous trim run is still ongoing, so
++				 * the device is reacting slowly to our trim
++				 * requests. Drop this trimset, so as not to
++				 * back the device up with trim requests.
++				 */
++				spa_trimstats_auto_slow_incr(spa);
++				metaslab_free_trimset(msp->ms_prev_ts);
++			} else {
++				/*
++				 * Trim out aged extents on the vdevs - these
++				 * are safe to be destroyed now. We'll keep
++				 * the trimset around to deny allocations from
++				 * these regions while the trims are ongoing.
++				 */
++				zio_nowait(metaslab_exec_trim(msp));
++			}
++		}
++		msp->ms_prev_ts = msp->ms_cur_ts;
++		msp->ms_cur_ts = metaslab_new_trimset(txg, &msp->ms_lock);
++	}
++	mutex_exit(&msp->ms_lock);
++}
++
++static void
++metaslab_trim_done(zio_t *zio)
++{
++	metaslab_t *msp = zio->io_private;
++	boolean_t held;
++
++	ASSERT(msp != NULL);
++	ASSERT(msp->ms_trimming_ts != NULL);
++	held = MUTEX_HELD(&msp->ms_lock);
++	if (!held)
++		mutex_enter(&msp->ms_lock);
++	metaslab_free_trimset(msp->ms_trimming_ts);
++	msp->ms_trimming_ts = NULL;
++	cv_signal(&msp->ms_trim_cv);
++	if (!held)
++		mutex_exit(&msp->ms_lock);
++}
++
++/*
++ * Executes a zio_trim on a range tree holding freed extents in the metaslab.
++ */
++static zio_t *
++metaslab_exec_trim(metaslab_t *msp)
++{
++	metaslab_group_t *mg = msp->ms_group;
++	spa_t *spa = mg->mg_class->mc_spa;
++	vdev_t *vd = mg->mg_vd;
++	range_tree_t *trim_tree;
++	zio_t *zio;
++
++	ASSERT(MUTEX_HELD(&msp->ms_lock));
++
++	/* wait for a preceding trim to finish */
++	while (msp->ms_trimming_ts != NULL)
++		cv_wait(&msp->ms_trim_cv, &msp->ms_lock);
++	msp->ms_trimming_ts = msp->ms_prev_ts;
++	msp->ms_prev_ts = NULL;
++	trim_tree = msp->ms_trimming_ts->ts_tree;
++#ifdef	DEBUG
++	if (msp->ms_loaded) {
++		range_seg_t *rs;
++
++		for (rs = avl_first(&trim_tree->rt_root);
++		    rs != NULL; rs = AVL_NEXT(&trim_tree->rt_root, rs)) {
++			if (!range_tree_contains(msp->ms_tree, rs->rs_start,
++			    rs->rs_end - rs->rs_start)) {
++				panic("trimming allocated region; rs=%p",
++				    (void*)rs);
++			}
++		}
++	}
++#endif
++
++	/* Nothing to trim */
++	if (range_tree_space(trim_tree) == 0) {
++		metaslab_free_trimset(msp->ms_trimming_ts);
++		msp->ms_trimming_ts = 0;
++		return (zio_root(spa, NULL, NULL, 0));
++	}
++	zio = zio_trim(spa, vd, trim_tree, metaslab_trim_done, msp, 0,
++	    ZIO_FLAG_CANFAIL | ZIO_FLAG_DONT_PROPAGATE | ZIO_FLAG_DONT_RETRY |
++	    ZIO_FLAG_CONFIG_WRITER, msp);
++
++	return (zio);
++}
++
++/*
++ * Allocates and initializes a new trimset structure. The `txg' argument
++ * indicates when this trimset was born and `lock' indicates the lock to
++ * link to the range tree.
++ */
++static metaslab_trimset_t *
++metaslab_new_trimset(uint64_t txg, kmutex_t *lock)
++{
++	metaslab_trimset_t *ts;
++
++	ts = kmem_zalloc(sizeof (*ts), KM_SLEEP);
++	ts->ts_birth = txg;
++	ts->ts_tree = range_tree_create(NULL, NULL, lock);
++
++	return (ts);
++}
++
++/*
++ * Destroys and frees a trim set previously allocated by metaslab_new_trimset.
++ */
++static void
++metaslab_free_trimset(metaslab_trimset_t *ts)
++{
++	range_tree_vacate(ts->ts_tree, NULL, NULL);
++	range_tree_destroy(ts->ts_tree);
++	kmem_free(ts, sizeof (*ts));
++}
++
++/*
++ * Checks whether an allocation conflicts with an ongoing trim operation in
++ * the given metaslab. This function takes a segment starting at `*offset'
++ * of `size' and checks whether it hits any region in the metaslab currently
++ * being trimmed. If yes, it tries to adjust the allocation to the end of
++ * the region being trimmed (P2ROUNDUP aligned by `align'), but only up to
++ * `limit' (no part of the allocation is allowed to go past this point).
++ *
++ * Returns B_FALSE if either the original allocation wasn't in conflict, or
++ * the conflict could be resolved by adjusting the value stored in `offset'
++ * such that the whole allocation still fits below `limit'. Returns B_TRUE
++ * if the allocation conflict couldn't be resolved.
++ */
++static boolean_t metaslab_check_trim_conflict(metaslab_t *msp,
++    uint64_t *offset, uint64_t size, uint64_t align, uint64_t limit)
++{
++	uint64_t new_offset;
++
++	if (msp->ms_trimming_ts == NULL)
++		/* no trim conflict, original offset is OK */
++		return (B_FALSE);
++
++	new_offset = P2ROUNDUP(range_tree_find_gap(msp->ms_trimming_ts->ts_tree,
++	    *offset, size), align);
++	if (new_offset != *offset && new_offset + size > limit)
++		/* trim conflict and adjustment not possible */
++		return (B_TRUE);
++
++	/* trim conflict, but adjusted offset still within limit */
++	*offset = new_offset;
++	return (B_FALSE);
++}
++
+ #if defined(_KERNEL) && defined(HAVE_SPL)
+ module_param(metaslab_aliquot, ulong, 0644);
+ module_param(metaslab_debug_load, int, 0644);
+@@ -2696,6 +3052,7 @@
+ module_param(metaslab_fragmentation_factor_enabled, int, 0644);
+ module_param(metaslab_lba_weighting_enabled, int, 0644);
+ module_param(metaslab_bias_enabled, int, 0644);
++module_param(zfs_txgs_per_trim, int, 0644);
+ 
+ MODULE_PARM_DESC(metaslab_aliquot,
+ 	"allocation granularity (a.k.a. stripe size)");
+@@ -2719,4 +3076,7 @@
+ 	"prefer metaslabs with lower LBAs");
+ MODULE_PARM_DESC(metaslab_bias_enabled,
+ 	"enable metaslab group biasing");
++MODULE_PARM_DESC(zfs_txgs_per_trim,
++	"txgs per trim");
++
+ #endif /* _KERNEL && HAVE_SPL */
+diff -Nuar zfs-kmod-9999.orig/module/zfs/range_tree.c zfs-kmod-9999/module/zfs/range_tree.c
+--- zfs-kmod-9999.orig/module/zfs/range_tree.c	2016-09-18 18:56:36.595124782 +0200
++++ zfs-kmod-9999/module/zfs/range_tree.c	2016-09-18 18:57:20.238459367 +0200
+@@ -24,6 +24,7 @@
+  */
+ /*
+  * Copyright (c) 2013, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -227,8 +228,9 @@
+ 	rt->rt_space += size;
+ }
+ 
+-void
+-range_tree_remove(void *arg, uint64_t start, uint64_t size)
++static void
++range_tree_remove_impl(void *arg, uint64_t start, uint64_t size,
++    boolean_t partial_overlap)
+ {
+ 	range_tree_t *rt = arg;
+ 	avl_index_t where;
+@@ -238,59 +240,96 @@
+ 
+ 	ASSERT(MUTEX_HELD(rt->rt_lock));
+ 	VERIFY3U(size, !=, 0);
+-	VERIFY3U(size, <=, rt->rt_space);
++	if (!partial_overlap) {
++		VERIFY3U(size, <=, rt->rt_space);
++	}
+ 
+ 	rsearch.rs_start = start;
+ 	rsearch.rs_end = end;
+-	rs = avl_find(&rt->rt_root, &rsearch, &where);
+-
+-	/* Make sure we completely overlap with someone */
+-	if (rs == NULL) {
+-		zfs_panic_recover("zfs: freeing free segment "
+-		    "(offset=%llu size=%llu)",
+-		    (longlong_t)start, (longlong_t)size);
+-		return;
+-	}
+-	VERIFY3U(rs->rs_start, <=, start);
+-	VERIFY3U(rs->rs_end, >=, end);
+ 
+-	left_over = (rs->rs_start != start);
+-	right_over = (rs->rs_end != end);
++	while ((rs = avl_find(&rt->rt_root, &rsearch, &where)) != NULL ||
++	    !partial_overlap) {
++		uint64_t overlap_sz;
++
++		if (partial_overlap) {
++			if (rs->rs_start <= start && rs->rs_end >= end)
++				overlap_sz = size;
++			else if (rs->rs_start > start && rs->rs_end < end)
++				overlap_sz = rs->rs_end - rs->rs_start;
++			else if (rs->rs_end < end)
++				overlap_sz = rs->rs_end - start;
++			else	/* rs->rs_start > start */
++				overlap_sz = end - rs->rs_start;
++		} else {
++			/* Make sure we completely overlapped with someone */
++			if (rs == NULL) {
++				zfs_panic_recover("zfs: freeing free segment "
++				    "(offset=%llu size=%llu)",
++				    (longlong_t)start, (longlong_t)size);
++				return;
++			}
++			VERIFY3U(rs->rs_start, <=, start);
++			VERIFY3U(rs->rs_end, >=, end);
++			overlap_sz = size;
++		}
+ 
+-	range_tree_stat_decr(rt, rs);
++		left_over = (rs->rs_start < start);
++		right_over = (rs->rs_end > end);
+ 
+-	if (rt->rt_ops != NULL)
+-		rt->rt_ops->rtop_remove(rt, rs, rt->rt_arg);
++		range_tree_stat_decr(rt, rs);
+ 
+-	if (left_over && right_over) {
+-		newseg = kmem_cache_alloc(range_seg_cache, KM_SLEEP);
+-		newseg->rs_start = end;
+-		newseg->rs_end = rs->rs_end;
+-		range_tree_stat_incr(rt, newseg);
++		if (rt->rt_ops != NULL)
++			rt->rt_ops->rtop_remove(rt, rs, rt->rt_arg);
+ 
+-		rs->rs_end = start;
++		if (left_over && right_over) {
++			newseg = kmem_cache_alloc(range_seg_cache, KM_SLEEP);
++			newseg->rs_start = end;
++			newseg->rs_end = rs->rs_end;
++			range_tree_stat_incr(rt, newseg);
++
++			rs->rs_end = start;
++
++			avl_insert_here(&rt->rt_root, newseg, rs, AVL_AFTER);
++			if (rt->rt_ops != NULL)
++				rt->rt_ops->rtop_add(rt, newseg, rt->rt_arg);
++		} else if (left_over) {
++			rs->rs_end = start;
++		} else if (right_over) {
++			rs->rs_start = end;
++		} else {
++			avl_remove(&rt->rt_root, rs);
++			kmem_cache_free(range_seg_cache, rs);
++			rs = NULL;
++		}
+ 
+-		avl_insert_here(&rt->rt_root, newseg, rs, AVL_AFTER);
+-		if (rt->rt_ops != NULL)
+-			rt->rt_ops->rtop_add(rt, newseg, rt->rt_arg);
+-	} else if (left_over) {
+-		rs->rs_end = start;
+-	} else if (right_over) {
+-		rs->rs_start = end;
+-	} else {
+-		avl_remove(&rt->rt_root, rs);
+-		kmem_cache_free(range_seg_cache, rs);
+-		rs = NULL;
+-	}
++		if (rs != NULL) {
++			range_tree_stat_incr(rt, rs);
+ 
+-	if (rs != NULL) {
+-		range_tree_stat_incr(rt, rs);
++			if (rt->rt_ops != NULL)
++				rt->rt_ops->rtop_add(rt, rs, rt->rt_arg);
++		}
+ 
+-		if (rt->rt_ops != NULL)
+-			rt->rt_ops->rtop_add(rt, rs, rt->rt_arg);
++		rt->rt_space -= overlap_sz;
++		if (!partial_overlap) {
++			/*
++			 * There can't be any more segments overlapping with
++			 * us, so no sense in performing an extra search.
++			 */
++			break;
++		}
+ 	}
++}
++
++void
++range_tree_remove(void *arg, uint64_t start, uint64_t size)
++{
++	range_tree_remove_impl(arg, start, size, B_FALSE);
++}
+ 
+-	rt->rt_space -= size;
++void
++range_tree_remove_overlap(void *arg, uint64_t start, uint64_t size)
++{
++	range_tree_remove_impl(arg, start, size, B_TRUE);
+ }
+ 
+ static range_seg_t *
+@@ -317,16 +356,29 @@
+ 	return (NULL);
+ }
+ 
++/*
++ * Given an extent start offset and size, will look through the provided
++ * range tree and find a suitable start offset (starting at `start') such
++ * that the requested extent _doesn't_ overlap with any range segment in
++ * the range tree.
++ */
++uint64_t
++range_tree_find_gap(range_tree_t *rt, uint64_t start, uint64_t size)
++{
++	range_seg_t *rs;
++	while ((rs = range_tree_find_impl(rt, start, size)) != NULL)
++		start = rs->rs_end;
++	return (start);
++}
++
+ void
+ range_tree_verify(range_tree_t *rt, uint64_t off, uint64_t size)
+ {
+ 	range_seg_t *rs;
+ 
+-	mutex_enter(rt->rt_lock);
+ 	rs = range_tree_find(rt, off, size);
+ 	if (rs != NULL)
+ 		panic("freeing free block; rs=%p", (void *)rs);
+-	mutex_exit(rt->rt_lock);
+ }
+ 
+ boolean_t
+diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
+--- zfs-kmod-9999.orig/module/zfs/spa.c	2016-09-18 18:56:36.598124804 +0200
++++ zfs-kmod-9999/module/zfs/spa.c	2016-09-18 18:57:20.237459360 +0200
+@@ -22,8 +22,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2013 by Delphix. All rights reserved.
+- * Copyright (c) 2015, Nexenta Systems, Inc.  All rights reserved.
+- * Copyright (c) 2013, 2014, Nexenta Systems, Inc.  All rights reserved.
++ * Copyright (c) 2016, Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
+  * Copyright (c) 2016 Actifio, Inc. All rights reserved.
+  */
+@@ -149,6 +148,10 @@
+     spa_load_state_t state, spa_import_type_t type, boolean_t mosconfig,
+     char **ereport);
+ static void spa_vdev_resilver_done(spa_t *spa);
++static void spa_auto_trim(spa_t *spa, uint64_t txg);
++static void spa_vdev_man_trim_done(spa_t *spa);
++static void spa_vdev_auto_trim_done(spa_t *spa);
++static uint64_t spa_min_trim_rate(spa_t *spa);
+ 
+ uint_t		zio_taskq_batch_pct = 75;	/* 1 thread per cpu in pset */
+ id_t		zio_taskq_psrset_bind = PS_NONE;
+@@ -476,6 +479,8 @@
+ 		case ZPOOL_PROP_AUTOREPLACE:
+ 		case ZPOOL_PROP_LISTSNAPS:
+ 		case ZPOOL_PROP_AUTOEXPAND:
++		case ZPOOL_PROP_FORCETRIM:
++		case ZPOOL_PROP_AUTOTRIM:
+ 			error = nvpair_value_uint64(elem, &intval);
+ 			if (!error && intval > 1)
+ 				error = SET_ERROR(EINVAL);
+@@ -1305,6 +1310,16 @@
+ 	ASSERT(MUTEX_HELD(&spa_namespace_lock));
+ 
+ 	/*
++	 * Stop manual trim before stopping spa sync, because manual trim
++	 * needs to execute a synctask (trim timestamp sync) at the end.
++	 */
++	mutex_enter(&spa->spa_auto_trim_lock);
++	mutex_enter(&spa->spa_man_trim_lock);
++	spa_trim_stop_wait(spa);
++	mutex_exit(&spa->spa_man_trim_lock);
++	mutex_exit(&spa->spa_auto_trim_lock);
++
++	/*
+ 	 * Stop async tasks.
+ 	 */
+ 	spa_async_suspend(spa);
+@@ -1318,6 +1333,14 @@
+ 	}
+ 
+ 	/*
++	 * Stop autotrim tasks.
++	 */
++	mutex_enter(&spa->spa_auto_trim_lock);
++	if (spa->spa_auto_trim_taskq)
++		spa_auto_trim_taskq_destroy(spa);
++	mutex_exit(&spa->spa_auto_trim_lock);
++
++	/*
+ 	 * Wait for any outstanding async I/O to complete.
+ 	 */
+ 	if (spa->spa_async_zio_root != NULL) {
+@@ -2809,10 +2832,22 @@
+ 		spa_prop_find(spa, ZPOOL_PROP_AUTOEXPAND, &spa->spa_autoexpand);
+ 		spa_prop_find(spa, ZPOOL_PROP_DEDUPDITTO,
+ 		    &spa->spa_dedup_ditto);
++		spa_prop_find(spa, ZPOOL_PROP_FORCETRIM, &spa->spa_force_trim);
++
++		mutex_enter(&spa->spa_auto_trim_lock);
++		spa_prop_find(spa, ZPOOL_PROP_AUTOTRIM, &spa->spa_auto_trim);
++		if (spa->spa_auto_trim == SPA_AUTO_TRIM_ON)
++			spa_auto_trim_taskq_create(spa);
++		mutex_exit(&spa->spa_auto_trim_lock);
+ 
+ 		spa->spa_autoreplace = (autoreplace != 0);
+ 	}
+ 
++	(void) spa_dir_prop(spa, DMU_POOL_TRIM_START_TIME,
++	    &spa->spa_man_trim_start_time);
++	(void) spa_dir_prop(spa, DMU_POOL_TRIM_STOP_TIME,
++	    &spa->spa_man_trim_stop_time);
++
+ 	/*
+ 	 * If the 'autoreplace' property is set, then post a resource notifying
+ 	 * the ZFS DE that it should not issue any faults for unopenable
+@@ -3936,6 +3971,13 @@
+ 	spa->spa_delegation = zpool_prop_default_numeric(ZPOOL_PROP_DELEGATION);
+ 	spa->spa_failmode = zpool_prop_default_numeric(ZPOOL_PROP_FAILUREMODE);
+ 	spa->spa_autoexpand = zpool_prop_default_numeric(ZPOOL_PROP_AUTOEXPAND);
++	spa->spa_force_trim = zpool_prop_default_numeric(ZPOOL_PROP_FORCETRIM);
++
++	mutex_enter(&spa->spa_auto_trim_lock);
++	spa->spa_auto_trim = zpool_prop_default_numeric(ZPOOL_PROP_AUTOTRIM);
++	if (spa->spa_auto_trim == SPA_AUTO_TRIM_ON)
++		spa_auto_trim_taskq_create(spa);
++	mutex_exit(&spa->spa_auto_trim_lock);
+ 
+ 	if (props != NULL) {
+ 		spa_configfile_set(spa, props, B_FALSE);
+@@ -5852,6 +5894,12 @@
+ 	if (tasks & SPA_ASYNC_RESILVER)
+ 		dsl_resilver_restart(spa->spa_dsl_pool, 0);
+ 
++	if (tasks & SPA_ASYNC_MAN_TRIM_TASKQ_DESTROY) {
++		mutex_enter(&spa->spa_man_trim_lock);
++		spa_man_trim_taskq_destroy(spa);
++		mutex_exit(&spa->spa_man_trim_lock);
++	}
++
+ 	/*
+ 	 * Let the world know that we're done.
+ 	 */
+@@ -5923,6 +5971,15 @@
+ 	mutex_exit(&spa->spa_async_lock);
+ }
+ 
++void
++spa_async_unrequest(spa_t *spa, int task)
++{
++	zfs_dbgmsg("spa=%s async unrequest task=%u", spa->spa_name, task);
++	mutex_enter(&spa->spa_async_lock);
++	spa->spa_async_tasks &= ~task;
++	mutex_exit(&spa->spa_async_lock);
++}
++
+ /*
+  * ==========================================================================
+  * SPA syncing routines
+@@ -6330,6 +6387,21 @@
+ 			case ZPOOL_PROP_FAILUREMODE:
+ 				spa->spa_failmode = intval;
+ 				break;
++			case ZPOOL_PROP_FORCETRIM:
++				spa->spa_force_trim = intval;
++				break;
++			case ZPOOL_PROP_AUTOTRIM:
++				mutex_enter(&spa->spa_auto_trim_lock);
++				if (intval != spa->spa_auto_trim) {
++					spa->spa_auto_trim = intval;
++					if (intval != 0)
++						spa_auto_trim_taskq_create(spa);
++					else
++						spa_auto_trim_taskq_destroy(
++						    spa);
++				}
++				mutex_exit(&spa->spa_auto_trim_lock);
++				break;
+ 			case ZPOOL_PROP_AUTOEXPAND:
+ 				spa->spa_autoexpand = intval;
+ 				if (tx->tx_txg != TXG_INITIAL)
+@@ -6436,6 +6508,17 @@
+ 	spa->spa_sync_pass = 0;
+ 
+ 	/*
++	 * Another pool management task might be currently preventing
++	 * from starting and the current txg sync was invoked on its behalf,
++	 * so be prepared to postpone autotrim processing.
++	 */
++	if (mutex_tryenter(&spa->spa_auto_trim_lock)) {
++		if (spa->spa_auto_trim == SPA_AUTO_TRIM_ON)
++			spa_auto_trim(spa, txg);
++		mutex_exit(&spa->spa_auto_trim_lock);
++	}
++
++	/*
+ 	 * If there are any pending vdev state changes, convert them
+ 	 * into config changes that go out with this transaction group.
+ 	 */
+@@ -6836,6 +6919,271 @@
+ 	zfs_post_sysevent(spa, vd, name);
+ }
+ 
++
++/*
++ * Dispatches all auto-trim processing to all top-level vdevs. This is
++ * called from spa_sync once every txg.
++ */
++static void
++spa_auto_trim(spa_t *spa, uint64_t txg)
++{
++	int i;
++
++	ASSERT(spa_config_held(spa, SCL_CONFIG, RW_READER) == SCL_CONFIG);
++	ASSERT(MUTEX_HELD(&spa->spa_auto_trim_lock));
++	ASSERT(spa->spa_auto_trim_taskq != NULL);
++
++	for (i = 0; i < spa->spa_root_vdev->vdev_children; i++) {
++		vdev_trim_info_t *vti = kmem_zalloc(sizeof (*vti), KM_SLEEP);
++		vti->vti_vdev = spa->spa_root_vdev->vdev_child[i];
++		vti->vti_txg = txg;
++		vti->vti_done_cb = (void (*)(void *))spa_vdev_auto_trim_done;
++		vti->vti_done_arg = spa;
++		(void) taskq_dispatch(spa->spa_auto_trim_taskq,
++		    (void (*)(void *))vdev_auto_trim, vti, TQ_SLEEP);
++		spa->spa_num_auto_trimming++;
++	}
++}
++
++/*
++ * Performs the sync update of the MOS pool directory's trim start/stop values.
++ */
++static void
++spa_trim_update_time_sync(void *arg, dmu_tx_t *tx)
++{
++	spa_t *spa = arg;
++	VERIFY0(zap_update(spa->spa_meta_objset, DMU_POOL_DIRECTORY_OBJECT,
++	    DMU_POOL_TRIM_START_TIME, sizeof (uint64_t), 1,
++	    &spa->spa_man_trim_start_time, tx));
++	VERIFY0(zap_update(spa->spa_meta_objset, DMU_POOL_DIRECTORY_OBJECT,
++	    DMU_POOL_TRIM_STOP_TIME, sizeof (uint64_t), 1,
++	    &spa->spa_man_trim_stop_time, tx));
++}
++
++/*
++ * Updates the in-core and on-disk manual TRIM operation start/stop time.
++ * Passing UINT64_MAX for either start_time or stop_time means that no
++ * update to that value should be recorded.
++ */
++static dmu_tx_t *
++spa_trim_update_time(spa_t *spa, uint64_t start_time, uint64_t stop_time)
++{
++	int err;
++	dmu_tx_t *tx;
++
++	ASSERT(MUTEX_HELD(&spa->spa_man_trim_lock));
++	if (start_time != UINT64_MAX)
++		spa->spa_man_trim_start_time = start_time;
++	if (stop_time != UINT64_MAX)
++		spa->spa_man_trim_stop_time = stop_time;
++	tx = dmu_tx_create_dd(spa_get_dsl(spa)->dp_mos_dir);
++	err = dmu_tx_assign(tx, TXG_WAIT);
++	if (err) {
++		dmu_tx_abort(tx);
++		return (NULL);
++	}
++	dsl_sync_task_nowait(spa_get_dsl(spa), spa_trim_update_time_sync,
++	    spa, 1, ZFS_SPACE_CHECK_RESERVED, tx);
++
++	return (tx);
++}
++
++/*
++ * Initiates an manual TRIM of the whole pool. This kicks off individual
++ * TRIM tasks for each top-level vdev, which then pass over all of the free
++ * space in all of the vdev's metaslabs and issues TRIM commands for that
++ * space to the underlying vdevs.
++ */
++extern void
++spa_man_trim(spa_t *spa, uint64_t rate)
++{
++	dmu_tx_t *time_update_tx;
++	uint64_t i;
++
++	mutex_enter(&spa->spa_man_trim_lock);
++
++	if (rate != 0)
++		spa->spa_man_trim_rate = MAX(rate, spa_min_trim_rate(spa));
++	else
++		spa->spa_man_trim_rate = 0;
++
++	if (spa->spa_num_man_trimming) {
++		/*
++		 * TRIM is already ongoing. Wake up all sleeping vdev trim
++		 * threads because the trim rate might have changed above.
++		 */
++		cv_broadcast(&spa->spa_man_trim_update_cv);
++		mutex_exit(&spa->spa_man_trim_lock);
++		return;
++	}
++	spa_man_trim_taskq_create(spa);
++	spa->spa_man_trim_stop = B_FALSE;
++
++	spa_event_notify(spa, NULL, ESC_ZFS_TRIM_START);
++	spa_config_enter(spa, SCL_CONFIG, FTAG, RW_READER);
++	for (i = 0; i < spa->spa_root_vdev->vdev_children; i++) {
++		vdev_t *vd = spa->spa_root_vdev->vdev_child[i];
++		vdev_trim_info_t *vti = kmem_zalloc(sizeof (*vti), KM_SLEEP);
++		vti->vti_vdev = vd;
++		vti->vti_done_cb = (void (*)(void *))spa_vdev_man_trim_done;
++		vti->vti_done_arg = spa;
++		spa->spa_num_man_trimming++;
++
++		vd->vdev_trim_prog = 0;
++		(void) taskq_dispatch(spa->spa_man_trim_taskq,
++		    (void (*)(void *))vdev_man_trim, vti, TQ_SLEEP);
++	}
++	spa_config_exit(spa, SCL_CONFIG, FTAG);
++	time_update_tx = spa_trim_update_time(spa, gethrestime_sec(), 0);
++	mutex_exit(&spa->spa_man_trim_lock);
++	/* mustn't hold spa_man_trim_lock to prevent deadlock /w syncing ctx */
++	if (time_update_tx != NULL)
++		dmu_tx_commit(time_update_tx);
++}
++
++/*
++ * Orders a manual TRIM operation to stop and returns immediately.
++ */
++extern void
++spa_man_trim_stop(spa_t *spa)
++{
++	boolean_t held = MUTEX_HELD(&spa->spa_man_trim_lock);
++	if (!held)
++		mutex_enter(&spa->spa_man_trim_lock);
++	spa->spa_man_trim_stop = B_TRUE;
++	cv_broadcast(&spa->spa_man_trim_update_cv);
++	if (!held)
++		mutex_exit(&spa->spa_man_trim_lock);
++}
++
++/*
++ * Orders a manual TRIM operation to stop and waits for both manual and
++ * automatic TRIM to complete. By holding both the spa_man_trim_lock and
++ * the spa_auto_trim_lock, the caller can guarantee that after this
++ * function returns, no new TRIM operations can be initiated in parallel.
++ */
++void
++spa_trim_stop_wait(spa_t *spa)
++{
++	ASSERT(MUTEX_HELD(&spa->spa_man_trim_lock));
++	ASSERT(MUTEX_HELD(&spa->spa_auto_trim_lock));
++	spa->spa_man_trim_stop = B_TRUE;
++	cv_broadcast(&spa->spa_man_trim_update_cv);
++	while (spa->spa_num_man_trimming > 0)
++		cv_wait(&spa->spa_man_trim_done_cv, &spa->spa_man_trim_lock);
++	while (spa->spa_num_auto_trimming > 0)
++		cv_wait(&spa->spa_auto_trim_done_cv, &spa->spa_auto_trim_lock);
++}
++
++/*
++ * Returns manual TRIM progress. Progress is indicated by four return values:
++ * 1) prog: the number of bytes of space on the pool in total that manual
++ *	TRIM has already passed (regardless if the space is allocated or not).
++ *	Completion of the operation is indicated when either the returned value
++ *	is zero, or when the returned value is equal to the sum of the sizes of
++ *	all top-level vdevs.
++ * 2) rate: the trim rate in bytes per second. A value of zero indicates that
++ *	trim progresses as fast as possible.
++ * 3) start_time: the UNIXTIME of when the last manual TRIM operation was
++ *	started. If no manual trim was ever initiated on the pool, this is
++ *	zero.
++ * 4) stop_time: the UNIXTIME of when the last manual TRIM operation has
++ *	stopped on the pool. If a trim was started (start_time != 0), but has
++ *	not yet completed, stop_time will be zero. If a trim is NOT currently
++ *	ongoing and start_time is non-zero, this indicates that the previously
++ *	initiated TRIM operation was interrupted.
++ */
++extern void
++spa_get_trim_prog(spa_t *spa, uint64_t *prog, uint64_t *rate,
++    uint64_t *start_time, uint64_t *stop_time)
++{
++	uint64_t total = 0;
++	vdev_t *root_vd = spa->spa_root_vdev;
++	uint64_t i;
++
++	ASSERT(spa_config_held(spa, SCL_CONFIG, RW_READER));
++	mutex_enter(&spa->spa_man_trim_lock);
++	if (spa->spa_num_man_trimming > 0) {
++		for (i = 0; i < root_vd->vdev_children; i++) {
++			total += root_vd->vdev_child[i]->vdev_trim_prog;
++		}
++	}
++	*prog = total;
++	*rate = spa->spa_man_trim_rate;
++	*start_time = spa->spa_man_trim_start_time;
++	*stop_time = spa->spa_man_trim_stop_time;
++	mutex_exit(&spa->spa_man_trim_lock);
++}
++
++/*
++ * Callback when a vdev_man_trim has finished on a single top-level vdev.
++ */
++static void
++spa_vdev_man_trim_done(spa_t *spa)
++{
++	dmu_tx_t *time_update_tx = NULL;
++
++	mutex_enter(&spa->spa_man_trim_lock);
++	ASSERT(spa->spa_num_man_trimming > 0);
++	spa->spa_num_man_trimming--;
++	if (spa->spa_num_man_trimming == 0) {
++		/* if we were interrupted, leave stop_time at zero */
++		if (!spa->spa_man_trim_stop)
++			time_update_tx = spa_trim_update_time(spa, UINT64_MAX,
++			    gethrestime_sec());
++		spa_event_notify(spa, NULL, ESC_ZFS_TRIM_FINISH);
++		spa_async_request(spa, SPA_ASYNC_MAN_TRIM_TASKQ_DESTROY);
++		cv_broadcast(&spa->spa_man_trim_done_cv);
++	}
++	mutex_exit(&spa->spa_man_trim_lock);
++
++	if (time_update_tx != NULL)
++		dmu_tx_commit(time_update_tx);
++}
++
++/*
++ * Called from vdev_auto_trim when a vdev has completed its auto-trim
++ * processing.
++ */
++static void
++spa_vdev_auto_trim_done(spa_t *spa)
++{
++	mutex_enter(&spa->spa_auto_trim_lock);
++	ASSERT(spa->spa_num_auto_trimming > 0);
++	spa->spa_num_auto_trimming--;
++	if (spa->spa_num_auto_trimming == 0)
++		cv_broadcast(&spa->spa_auto_trim_done_cv);
++	mutex_exit(&spa->spa_auto_trim_lock);
++}
++
++/*
++ * Determines the minimum sensible rate at which a manual TRIM can be
++ * performed on a given spa and returns it. Since we perform TRIM in
++ * metaslab-sized increments, we'll just let the longest step between
++ * metaslab TRIMs be 100s (random number, really). Thus, on a typical
++ * 200-metaslab vdev, the longest TRIM should take is about 5.5 hours.
++ * It *can* take longer if the device is really slow respond to
++ * zio_trim() commands or it contains more than 200 metaslabs, or
++ * metaslab sizes vary widely between top-level vdevs.
++ */
++static uint64_t
++spa_min_trim_rate(spa_t *spa)
++{
++	uint64_t i, smallest_ms_sz = UINT64_MAX;
++
++	/* find the smallest metaslab */
++	spa_config_enter(spa, SCL_CONFIG, FTAG, RW_READER);
++	for (i = 0; i < spa->spa_root_vdev->vdev_children; i++) {
++		smallest_ms_sz = MIN(smallest_ms_sz,
++		    spa->spa_root_vdev->vdev_child[i]->vdev_ms[0]->ms_size);
++	}
++	spa_config_exit(spa, SCL_CONFIG, FTAG);
++	VERIFY(smallest_ms_sz != 0);
++
++	/* minimum TRIM rate is 1/100th of the smallest metaslab size */
++	return (smallest_ms_sz / 100);
++}
++
+ #if defined(_KERNEL) && defined(HAVE_SPL)
+ /* state manipulation functions */
+ EXPORT_SYMBOL(spa_open);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/spa_config.c
+--- zfs-kmod-9999.orig/module/zfs/spa_config.c	2016-09-18 18:56:36.598124804 +0200
++++ zfs-kmod-9999/module/zfs/spa_config.c	2016-09-18 18:57:20.232459321 +0200
+@@ -21,8 +21,8 @@
+ 
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/spa.h>
+@@ -492,6 +492,19 @@
+ 	fnvlist_add_nvlist(config, ZPOOL_CONFIG_VDEV_TREE, nvroot);
+ 	nvlist_free(nvroot);
+ 
++	/* If we're getting stats, calculate trim progress from leaf vdevs. */
++	if (getstats) {
++		uint64_t prog, rate, start_time, stop_time;
++
++		spa_get_trim_prog(spa, &prog, &rate, &start_time, &stop_time);
++		fnvlist_add_uint64(config, ZPOOL_CONFIG_TRIM_PROG, prog);
++		fnvlist_add_uint64(config, ZPOOL_CONFIG_TRIM_RATE, rate);
++		fnvlist_add_uint64(config, ZPOOL_CONFIG_TRIM_START_TIME,
++		    start_time);
++		fnvlist_add_uint64(config, ZPOOL_CONFIG_TRIM_STOP_TIME,
++		    stop_time);
++	}
++
+ 	/*
+ 	 * Store what's necessary for reading the MOS in the label.
+ 	 */
+diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa_misc.c
+--- zfs-kmod-9999.orig/module/zfs/spa_misc.c	2016-09-18 18:56:36.599124812 +0200
++++ zfs-kmod-9999/module/zfs/spa_misc.c	2016-09-18 18:57:20.238459367 +0200
+@@ -21,7 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+- * Copyright 2015 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
+  */
+ 
+@@ -226,6 +226,22 @@
+  * manipulation of the namespace.
+  */
+ 
++struct spa_trimstats {
++	kstat_named_t	st_extents;		/* # of extents issued to zio */
++	kstat_named_t	st_bytes;		/* # of bytes issued to zio */
++	kstat_named_t	st_extents_skipped;	/* # of extents too small */
++	kstat_named_t	st_bytes_skipped;	/* bytes in extents_skipped */
++	kstat_named_t	st_auto_slow;		/* trim slow, exts dropped */
++};
++
++static spa_trimstats_t spa_trimstats_template = {
++	{ "extents",		KSTAT_DATA_UINT64 },
++	{ "bytes",		KSTAT_DATA_UINT64 },
++	{ "extents_skipped",	KSTAT_DATA_UINT64 },
++	{ "bytes_skipped",	KSTAT_DATA_UINT64 },
++	{ "auto_slow",		KSTAT_DATA_UINT64 },
++};
++
+ static avl_tree_t spa_namespace_avl;
+ kmutex_t spa_namespace_lock;
+ static kcondvar_t spa_namespace_cv;
+@@ -338,6 +354,9 @@
+  */
+ int spa_slop_shift = 5;
+ 
++static void spa_trimstats_create(spa_t *spa);
++static void spa_trimstats_destroy(spa_t *spa);
++
+ /*
+  * ==========================================================================
+  * SPA config locking
+@@ -562,12 +581,17 @@
+ 	mutex_init(&spa->spa_suspend_lock, NULL, MUTEX_DEFAULT, NULL);
+ 	mutex_init(&spa->spa_vdev_top_lock, NULL, MUTEX_DEFAULT, NULL);
+ 	mutex_init(&spa->spa_feat_stats_lock, NULL, MUTEX_DEFAULT, NULL);
++	mutex_init(&spa->spa_auto_trim_lock, NULL, MUTEX_DEFAULT, NULL);
++	mutex_init(&spa->spa_man_trim_lock, NULL, MUTEX_DEFAULT, NULL);
+ 
+ 	cv_init(&spa->spa_async_cv, NULL, CV_DEFAULT, NULL);
+ 	cv_init(&spa->spa_evicting_os_cv, NULL, CV_DEFAULT, NULL);
+ 	cv_init(&spa->spa_proc_cv, NULL, CV_DEFAULT, NULL);
+ 	cv_init(&spa->spa_scrub_io_cv, NULL, CV_DEFAULT, NULL);
+ 	cv_init(&spa->spa_suspend_cv, NULL, CV_DEFAULT, NULL);
++	cv_init(&spa->spa_auto_trim_done_cv, NULL, CV_DEFAULT, NULL);
++	cv_init(&spa->spa_man_trim_update_cv, NULL, CV_DEFAULT, NULL);
++	cv_init(&spa->spa_man_trim_done_cv, NULL, CV_DEFAULT, NULL);
+ 
+ 	for (t = 0; t < TXG_SIZE; t++)
+ 		bplist_create(&spa->spa_free_bplist[t]);
+@@ -624,6 +648,8 @@
+ 		    KM_SLEEP) == 0);
+ 	}
+ 
++	spa_trimstats_create(spa);
++
+ 	spa->spa_debug = ((zfs_flags & ZFS_DEBUG_SPA) != 0);
+ 
+ 	spa->spa_min_ashift = INT_MAX;
+@@ -683,6 +709,8 @@
+ 	spa_stats_destroy(spa);
+ 	spa_config_lock_destroy(spa);
+ 
++	spa_trimstats_destroy(spa);
++
+ 	for (t = 0; t < TXG_SIZE; t++)
+ 		bplist_destroy(&spa->spa_free_bplist[t]);
+ 
+@@ -691,6 +719,9 @@
+ 	cv_destroy(&spa->spa_proc_cv);
+ 	cv_destroy(&spa->spa_scrub_io_cv);
+ 	cv_destroy(&spa->spa_suspend_cv);
++	cv_destroy(&spa->spa_auto_trim_done_cv);
++	cv_destroy(&spa->spa_man_trim_update_cv);
++	cv_destroy(&spa->spa_man_trim_done_cv);
+ 
+ 	mutex_destroy(&spa->spa_async_lock);
+ 	mutex_destroy(&spa->spa_errlist_lock);
+@@ -703,6 +734,8 @@
+ 	mutex_destroy(&spa->spa_suspend_lock);
+ 	mutex_destroy(&spa->spa_vdev_top_lock);
+ 	mutex_destroy(&spa->spa_feat_stats_lock);
++	mutex_destroy(&spa->spa_auto_trim_lock);
++	mutex_destroy(&spa->spa_man_trim_lock);
+ 
+ 	kmem_free(spa, sizeof (spa_t));
+ }
+@@ -1021,6 +1054,9 @@
+ {
+ 	mutex_enter(&spa->spa_vdev_top_lock);
+ 	mutex_enter(&spa_namespace_lock);
++	mutex_enter(&spa->spa_auto_trim_lock);
++	mutex_enter(&spa->spa_man_trim_lock);
++	spa_trim_stop_wait(spa);
+ 	return (spa_vdev_config_enter(spa));
+ }
+ 
+@@ -1111,6 +1147,8 @@
+ spa_vdev_exit(spa_t *spa, vdev_t *vd, uint64_t txg, int error)
+ {
+ 	spa_vdev_config_exit(spa, vd, txg, error, FTAG);
++	mutex_exit(&spa->spa_man_trim_lock);
++	mutex_exit(&spa->spa_auto_trim_lock);
+ 	mutex_exit(&spa_namespace_lock);
+ 	mutex_exit(&spa->spa_vdev_top_lock);
+ 
+@@ -1709,6 +1747,18 @@
+ 	return (spa->spa_deadman_synctime);
+ }
+ 
++spa_force_trim_t
++spa_get_force_trim(spa_t *spa)
++{
++	return (spa->spa_force_trim);
++}
++
++spa_auto_trim_t
++spa_get_auto_trim(spa_t *spa)
++{
++	return (spa->spa_auto_trim);
++}
++
+ uint64_t
+ dva_get_dsize_sync(spa_t *spa, const dva_t *dva)
+ {
+@@ -2001,6 +2051,182 @@
+ 		return (DNODE_MIN_SIZE);
+ }
+ 
++int
++spa_trimstats_kstat_update(kstat_t *ksp, int rw)
++{
++	spa_t *spa;
++	spa_trimstats_t *trimstats;
++	int i;
++
++	ASSERT(ksp != NULL);
++
++	if (rw == KSTAT_WRITE) {
++		spa = ksp->ks_private;
++		trimstats = spa->spa_trimstats;
++		for (i = 0; i < sizeof (spa_trimstats_t) /
++		    sizeof (kstat_named_t); ++i)
++			((kstat_named_t *)trimstats)[i].value.ui64 = 0;
++	}
++	return (0);
++}
++
++/*
++ * Creates the trim kstats structure for a spa.
++ */
++static void
++spa_trimstats_create(spa_t *spa)
++{
++	char name[KSTAT_STRLEN];
++	kstat_t *ksp;
++
++	if (spa->spa_name[0] == '$')
++		return;
++
++	ASSERT3P(spa->spa_trimstats, ==, NULL);
++	ASSERT3P(spa->spa_trimstats_ks, ==, NULL);
++
++	(void) snprintf(name, KSTAT_STRLEN, "zfs/%s", spa_name(spa));
++	ksp = kstat_create(name, 0, "trimstats", "misc",
++	    KSTAT_TYPE_NAMED, sizeof (spa_trimstats_template) /
++	    sizeof (kstat_named_t), KSTAT_FLAG_VIRTUAL);
++	if (ksp != NULL) {
++		ksp->ks_private = spa;
++		ksp->ks_update = spa_trimstats_kstat_update;
++		spa->spa_trimstats_ks = ksp;
++		spa->spa_trimstats =
++		    kmem_alloc(sizeof (spa_trimstats_t), KM_SLEEP);
++		*spa->spa_trimstats = spa_trimstats_template;
++		spa->spa_trimstats_ks->ks_data = spa->spa_trimstats;
++		kstat_install(spa->spa_trimstats_ks);
++	} else {
++		cmn_err(CE_NOTE, "!Cannot create trim kstats for pool %s",
++		    spa->spa_name);
++	}
++}
++
++/*
++ * Destroys the trim kstats for a spa.
++ */
++static void
++spa_trimstats_destroy(spa_t *spa)
++{
++	if (spa->spa_trimstats_ks) {
++		kstat_delete(spa->spa_trimstats_ks);
++		kmem_free(spa->spa_trimstats, sizeof (spa_trimstats_t));
++		spa->spa_trimstats_ks = NULL;
++	}
++}
++
++/*
++ * Updates the numerical trim kstats for a spa.
++ */
++void
++spa_trimstats_update(spa_t *spa, uint64_t extents, uint64_t bytes,
++    uint64_t extents_skipped, uint64_t bytes_skipped)
++{
++	spa_trimstats_t *st = spa->spa_trimstats;
++	if (st) {
++		atomic_add_64(&st->st_extents.value.ui64, extents);
++		atomic_add_64(&st->st_bytes.value.ui64, bytes);
++		atomic_add_64(&st->st_extents_skipped.value.ui64,
++		    extents_skipped);
++		atomic_add_64(&st->st_bytes_skipped.value.ui64,
++		    bytes_skipped);
++	}
++}
++
++/*
++ * Increments the slow-trim kstat for a spa.
++ */
++void
++spa_trimstats_auto_slow_incr(spa_t *spa)
++{
++	spa_trimstats_t *st = spa->spa_trimstats;
++	if (st)
++		atomic_inc_64(&st->st_auto_slow.value.ui64);
++}
++
++/*
++ * Creates the taskq used for dispatching auto-trim. This is called only when
++ * the property is set to `on' or when the pool is loaded (and the autotrim
++ * property is `on').
++ */
++void
++spa_auto_trim_taskq_create(spa_t *spa)
++{
++	char *name = kmem_alloc(MAXPATHLEN, KM_SLEEP);
++
++	ASSERT(MUTEX_HELD(&spa->spa_auto_trim_lock));
++	ASSERT(spa->spa_auto_trim_taskq == NULL);
++	(void) snprintf(name, MAXPATHLEN, "%s_auto_trim", spa->spa_name);
++	spa->spa_auto_trim_taskq = taskq_create(name, 1, minclsyspri, 1,
++	    spa->spa_root_vdev->vdev_children, TASKQ_DYNAMIC);
++	VERIFY(spa->spa_auto_trim_taskq != NULL);
++	kmem_free(name, MAXPATHLEN);
++}
++
++/*
++ * Creates the taskq for dispatching manual trim. This taskq is recreated
++ * each time `zpool trim <poolname>' is issued and destroyed after the run
++ * completes in an async spa request.
++ */
++void
++spa_man_trim_taskq_create(spa_t *spa)
++{
++	char *name = kmem_alloc(MAXPATHLEN, KM_SLEEP);
++
++	ASSERT(MUTEX_HELD(&spa->spa_man_trim_lock));
++	spa_async_unrequest(spa, SPA_ASYNC_MAN_TRIM_TASKQ_DESTROY);
++	if (spa->spa_man_trim_taskq != NULL) {
++		/*
++		 * The async taskq destroy has been pre-empted, so just
++		 * return, the taskq is still good to use.
++		 */
++		return;
++	}
++	(void) snprintf(name, MAXPATHLEN, "%s_man_trim", spa->spa_name);
++	spa->spa_man_trim_taskq = taskq_create(name, 1, minclsyspri, 1,
++	    spa->spa_root_vdev->vdev_children, TASKQ_DYNAMIC);
++	VERIFY(spa->spa_man_trim_taskq != NULL);
++	kmem_free(name, MAXPATHLEN);
++}
++
++/*
++ * Destroys the taskq created in spa_auto_trim_taskq_create. The taskq
++ * is only destroyed when the autotrim property is set to `off'.
++ */
++void
++spa_auto_trim_taskq_destroy(spa_t *spa)
++{
++	ASSERT(MUTEX_HELD(&spa->spa_auto_trim_lock));
++	ASSERT(spa->spa_auto_trim_taskq != NULL);
++	while (spa->spa_num_auto_trimming != 0)
++		cv_wait(&spa->spa_auto_trim_done_cv, &spa->spa_auto_trim_lock);
++	taskq_destroy(spa->spa_auto_trim_taskq);
++	spa->spa_auto_trim_taskq = NULL;
++}
++
++/*
++ * Destroys the taskq created in spa_man_trim_taskq_create. The taskq is
++ * destroyed after a manual trim run completes from an async spa request.
++ * There is a bit of lag between an async request being issued at the
++ * completion of a trim run and it finally being acted on, hence why this
++ * function checks if new manual trimming threads haven't been re-spawned.
++ * If they have, we assume the async spa request been preempted by another
++ * manual trim request and we back off.
++ */
++void
++spa_man_trim_taskq_destroy(spa_t *spa)
++{
++	ASSERT(MUTEX_HELD(&spa->spa_man_trim_lock));
++	ASSERT(spa->spa_man_trim_taskq != NULL);
++	if (spa->spa_num_man_trimming != 0)
++		/* another trim got started before we got here, back off */
++		return;
++	taskq_destroy(spa->spa_man_trim_taskq);
++	spa->spa_man_trim_taskq = NULL;
++}
++
+ #if defined(_KERNEL) && defined(HAVE_SPL)
+ /* Namespace manipulation */
+ EXPORT_SYMBOL(spa_lookup);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/trace.c zfs-kmod-9999/module/zfs/trace.c
+--- zfs-kmod-9999.orig/module/zfs/trace.c	2016-09-18 18:56:36.600124820 +0200
++++ zfs-kmod-9999/module/zfs/trace.c	2016-09-18 18:57:20.213459175 +0200
+@@ -26,6 +26,7 @@
+ #include <sys/multilist.h>
+ #include <sys/arc_impl.h>
+ #include <sys/vdev_impl.h>
++#include <sys/metaslab_impl.h>
+ #include <sys/zio.h>
+ #include <sys/dbuf.h>
+ #include <sys/dmu_objset.h>
+@@ -46,6 +47,7 @@
+ #include <sys/trace_dnode.h>
+ #include <sys/trace_multilist.h>
+ #include <sys/trace_txg.h>
++#include <sys/trace_vdev.h>
+ #include <sys/trace_zil.h>
+ #include <sys/trace_zio.h>
+ #include <sys/trace_zrlock.h>
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
+--- zfs-kmod-9999.orig/module/zfs/vdev.c	2016-09-18 18:56:36.601124827 +0200
++++ zfs-kmod-9999/module/zfs/vdev.c	2016-09-18 18:57:20.232459321 +0200
+@@ -21,7 +21,7 @@
+ 
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+- * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+  */
+ 
+@@ -44,6 +44,7 @@
+ #include <sys/zil.h>
+ #include <sys/dsl_scan.h>
+ #include <sys/zvol.h>
++#include <sys/trace_vdev.h>
+ 
+ /*
+  * When a vdev is added, it will be divided into approximately (but no
+@@ -3633,6 +3634,98 @@
+ 	}
+ }
+ 
++/*
++ * Implements the per-vdev portion of manual TRIM. The function passes over
++ * all metaslabs on this vdev and performs a metaslab_trim_all on them. It's
++ * also responsible for rate-control if spa_man_trim_rate is non-zero.
++ */
++void
++vdev_man_trim(vdev_trim_info_t *vti)
++{
++	clock_t t = ddi_get_lbolt();
++	spa_t *spa = vti->vti_vdev->vdev_spa;
++	vdev_t *vd = vti->vti_vdev;
++	uint64_t i;
++
++	vd->vdev_trim_prog = 0;
++
++	spa_config_enter(spa, SCL_STATE_ALL, FTAG, RW_READER);
++	for (i = 0; i < vti->vti_vdev->vdev_ms_count &&
++	    !spa->spa_man_trim_stop; i++) {
++		uint64_t delta;
++		metaslab_t *msp = vd->vdev_ms[i];
++		zio_t *trim_io = metaslab_trim_all(msp, &delta);
++
++		atomic_add_64(&vd->vdev_trim_prog, msp->ms_size);
++		spa_config_exit(spa, SCL_STATE_ALL, FTAG);
++
++		(void) zio_wait(trim_io);
++
++		/* delay loop to handle fixed-rate trimming */
++		for (;;) {
++			uint64_t rate = spa->spa_man_trim_rate;
++			uint64_t sleep_delay;
++
++			if (rate == 0) {
++				/* No delay, just update 't' and move on. */
++				t = ddi_get_lbolt();
++				break;
++			}
++
++			sleep_delay = (delta * hz) / rate;
++			mutex_enter(&spa->spa_man_trim_lock);
++			(void) cv_timedwait(&spa->spa_man_trim_update_cv,
++			    &spa->spa_man_trim_lock, t);
++			mutex_exit(&spa->spa_man_trim_lock);
++
++			/* If interrupted, don't try to relock, get out */
++			if (spa->spa_man_trim_stop)
++				goto out;
++
++			/* Timeout passed, move on to the next metaslab. */
++			if (ddi_get_lbolt() >= t + sleep_delay) {
++				t += sleep_delay;
++				break;
++			}
++		}
++		spa_config_enter(spa, SCL_STATE_ALL, FTAG, RW_READER);
++	}
++	spa_config_exit(spa, SCL_STATE_ALL, FTAG);
++out:
++	/*
++	 * Ensure we're marked as "completed" even if we've had to stop
++	 * before processing all metaslabs.
++	 */
++	vd->vdev_trim_prog = vd->vdev_asize;
++
++	ASSERT(vti->vti_done_cb != NULL);
++	vti->vti_done_cb(vti->vti_done_arg);
++
++	kmem_free(vti, sizeof (*vti));
++}
++
++/*
++ * Runs through all metaslabs on the vdev and does their autotrim processing.
++ */
++void
++vdev_auto_trim(vdev_trim_info_t *vti)
++{
++	vdev_t *vd = vti->vti_vdev;
++	spa_t *spa = vd->vdev_spa;
++	uint64_t txg = vti->vti_txg;
++	uint64_t i;
++
++	spa_config_enter(spa, SCL_STATE_ALL, FTAG, RW_READER);
++	for (i = 0; i < vd->vdev_ms_count; i++)
++		metaslab_auto_trim(vd->vdev_ms[i], txg);
++	spa_config_exit(spa, SCL_STATE_ALL, FTAG);
++
++	ASSERT(vti->vti_done_cb != NULL);
++	vti->vti_done_cb(vti->vti_done_arg);
++
++	kmem_free(vti, sizeof (*vti));
++}
++
+ #if defined(_KERNEL) && defined(HAVE_SPL)
+ EXPORT_SYMBOL(vdev_fault);
+ EXPORT_SYMBOL(vdev_degrade);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vdev_disk.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_disk.c	2016-09-18 18:56:36.601124827 +0200
++++ zfs-kmod-9999/module/zfs/vdev_disk.c	2016-09-18 18:57:20.233459329 +0200
+@@ -24,6 +24,7 @@
+  * Rewritten for Linux by Brian Behlendorf <behlendorf1@llnl.gov>.
+  * LLNL-CODE-403049.
+  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -33,6 +34,7 @@
+ #include <sys/fs/zfs.h>
+ #include <sys/zio.h>
+ #include <sys/sunldi.h>
++#include <sys/dkioc_free_util.h>
+ 
+ char *zfs_vdev_scheduler = VDEV_SCHEDULER;
+ static void *zfs_vdev_holder = VDEV_HOLDER;
+@@ -311,6 +313,9 @@
+ 	v->vdev_tsd = vd;
+ 	vd->vd_bdev = bdev;
+ 
++	/* Reset TRIM flag, as underlying device support may have changed */
++	v->vdev_notrim = B_FALSE;
++
+ skip_open:
+ 	/*  Determine the physical block size */
+ 	block_size = vdev_bdev_block_size(vd->vd_bdev);
+@@ -682,6 +687,53 @@
+ 
+ 			break;
+ 
++		case DKIOCFREE:
++		{
++			int i;
++			dkioc_free_list_t *dfl;
++
++			/*
++			 * We perform device support checks here instead of
++			 * in zio_trim(), as zio_trim() might be invoked on
++			 * top of a top-level vdev, whereas vdev_disk_io_start
++			 * is guaranteed to be operating a leaf vdev.
++			 */
++			if (v->vdev_notrim &&
++			    spa_get_force_trim(v->vdev_spa) !=
++			    SPA_FORCE_TRIM_ON) {
++				zio->io_error = SET_ERROR(ENOTSUP);
++				break;
++			}
++
++			/*
++			 * zio->io_private contains a dkioc_free_list_t
++			 * specifying which offsets are to be freed
++			 */
++			dfl = zio->io_private;
++			ASSERT(dfl != NULL);
++
++			for (i = 0; i < dfl->dfl_num_exts; i++) {
++				int error;
++
++				if (dfl->dfl_exts[i].dfle_length == 0)
++					continue;
++
++				error = -blkdev_issue_discard(vd->vd_bdev,
++				    (dfl->dfl_exts[i].dfle_start +
++				    dfl->dfl_offset) >> 9,
++				    dfl->dfl_exts[i].dfle_length >> 9,
++				    GFP_NOFS, 0);
++
++				if (error != 0) {
++					if (error == EOPNOTSUPP ||
++					    error == ENXIO)
++						v->vdev_notrim = B_TRUE;
++					zio->io_error = SET_ERROR(error);
++					break;
++				}
++			}
++			break;
++		}
+ 		default:
+ 			zio->io_error = SET_ERROR(ENOTSUP);
+ 		}
+@@ -784,6 +836,7 @@
+ 	NULL,
+ 	vdev_disk_hold,
+ 	vdev_disk_rele,
++	NULL,
+ 	VDEV_TYPE_DISK,		/* name of this vdev type */
+ 	B_TRUE			/* leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vdev_file.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_file.c	2016-09-18 18:56:36.601124827 +0200
++++ zfs-kmod-9999/module/zfs/vdev_file.c	2016-09-18 18:57:20.233459329 +0200
+@@ -21,6 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -31,6 +32,9 @@
+ #include <sys/zio.h>
+ #include <sys/fs/zfs.h>
+ #include <sys/fm/fs/zfs.h>
++#include <sys/fcntl.h>
++#include <sys/vnode.h>
++#include <sys/dkioc_free_util.h>
+ 
+ /*
+  * Virtual device vector for files.
+@@ -209,6 +213,36 @@
+ 			zio->io_error = VOP_FSYNC(vf->vf_vnode, FSYNC | FDSYNC,
+ 			    kcred, NULL);
+ 			break;
++
++		case DKIOCFREE:
++		{
++			int i;
++			dkioc_free_list_t *dfl = zio->io_private;
++
++			ASSERT(dfl != NULL);
++			for (i = 0; i < dfl->dfl_num_exts; i++) {
++				struct flock flck;
++				int error;
++
++				if (dfl->dfl_exts[i].dfle_length == 0)
++					continue;
++
++				bzero(&flck, sizeof (flck));
++				flck.l_type = F_FREESP;
++				flck.l_start = dfl->dfl_exts[i].dfle_start +
++				    dfl->dfl_offset;
++				flck.l_len = dfl->dfl_exts[i].dfle_length;
++				flck.l_whence = 0;
++
++				error = VOP_SPACE(vf->vf_vnode,
++				    F_FREESP, &flck, 0, 0, kcred, NULL);
++				if (error != 0) {
++					zio->io_error = SET_ERROR(error);
++					break;
++				}
++			}
++			break;
++		}
+ 		default:
+ 			zio->io_error = SET_ERROR(ENOTSUP);
+ 		}
+@@ -238,6 +272,7 @@
+ 	NULL,
+ 	vdev_file_hold,
+ 	vdev_file_rele,
++	NULL,
+ 	VDEV_TYPE_FILE,		/* name of this vdev type */
+ 	B_TRUE			/* leaf vdev */
+ };
+@@ -256,6 +291,7 @@
+ 	NULL,
+ 	vdev_file_hold,
+ 	vdev_file_rele,
++	NULL,
+ 	VDEV_TYPE_DISK,		/* name of this vdev type */
+ 	B_TRUE			/* leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/vdev_label.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_label.c	2016-09-18 18:56:36.602124835 +0200
++++ zfs-kmod-9999/module/zfs/vdev_label.c	2016-09-18 18:57:20.233459329 +0200
+@@ -22,6 +22,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2013 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ /*
+@@ -531,6 +532,12 @@
+ 			fnvlist_add_uint64(nv, ZPOOL_CONFIG_ORIG_GUID,
+ 			    vd->vdev_orig_guid);
+ 		}
++
++		/* grab per-leaf-vdev trim stats */
++		if (getstats) {
++			fnvlist_add_uint64(nv, ZPOOL_CONFIG_TRIM_PROG,
++			    vd->vdev_trim_prog);
++		}
+ 	}
+ 
+ 	return (nv);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/vdev_mirror.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_mirror.c	2016-09-18 18:56:36.602124835 +0200
++++ zfs-kmod-9999/module/zfs/vdev_mirror.c	2016-09-18 18:57:20.233459329 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -612,6 +613,7 @@
+ 	vdev_mirror_state_change,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_MIRROR,	/* name of this vdev type */
+ 	B_FALSE			/* not a leaf vdev */
+ };
+@@ -625,6 +627,7 @@
+ 	vdev_mirror_state_change,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_REPLACING,	/* name of this vdev type */
+ 	B_FALSE			/* not a leaf vdev */
+ };
+@@ -638,6 +641,7 @@
+ 	vdev_mirror_state_change,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_SPARE,	/* name of this vdev type */
+ 	B_FALSE			/* not a leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_missing.c zfs-kmod-9999/module/zfs/vdev_missing.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_missing.c	2016-09-18 18:56:36.602124835 +0200
++++ zfs-kmod-9999/module/zfs/vdev_missing.c	2016-09-18 18:57:20.233459329 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ /*
+@@ -88,6 +89,7 @@
+ 	NULL,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_MISSING,	/* name of this vdev type */
+ 	B_TRUE			/* leaf vdev */
+ };
+@@ -101,6 +103,7 @@
+ 	NULL,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_HOLE,		/* name of this vdev type */
+ 	B_TRUE			/* leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/vdev_raidz.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_raidz.c	2016-09-18 18:56:36.602124835 +0200
++++ zfs-kmod-9999/module/zfs/vdev_raidz.c	2016-09-18 18:57:20.237459360 +0200
+@@ -23,6 +23,7 @@
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
+  * Copyright (c) 2016 Gvozden Nešković. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -34,6 +35,7 @@
+ #include <sys/fm/fs/zfs.h>
+ #include <sys/vdev_raidz.h>
+ #include <sys/vdev_raidz_impl.h>
++#include <sys/dkioc_free_util.h>
+ 
+ /*
+  * Virtual device vector for RAID-Z.
+@@ -129,6 +131,8 @@
+ 	VDEV_RAIDZ_64MUL_2((x), mask); \
+ }
+ 
++static void vdev_raidz_trim_done(zio_t *zio);
++
+ void
+ vdev_raidz_map_free(raidz_map_t *rm)
+ {
+@@ -136,7 +140,9 @@
+ 	size_t size;
+ 
+ 	for (c = 0; c < rm->rm_firstdatacol; c++) {
+-		zio_buf_free(rm->rm_col[c].rc_data, rm->rm_col[c].rc_size);
++		if (rm->rm_col[c].rc_data != NULL)
++			zio_buf_free(rm->rm_col[c].rc_data,
++			    rm->rm_col[c].rc_size);
+ 
+ 		if (rm->rm_col[c].rc_gdata != NULL)
+ 			zio_buf_free(rm->rm_col[c].rc_gdata,
+@@ -309,21 +315,37 @@
+ };
+ 
+ /*
+- * Divides the IO evenly across all child vdevs; usually, dcols is
+- * the number of children in the target vdev.
++ * Allocates and computes a raidz column map, which directs the raidz column
++ * handling algorithms where to locate and store data and parity columns for
++ * a particular DVA. Usually, dcols is the number of children in the target
++ * vdev.
++ *
++ * The `io_offset', `io_size' and `io_data' hold the offset, size and data
++ * of the zio for which this map is to be computed.
++ * The `unit_shift' parameter contains the minimum allocation bitshift of
++ * the storage pool. The `dcols' parameter contains the number of drives in
++ * this raidz vdev (including parity drives), with `nparity' denoting how
++ * many those contain the parity (one, two or three).
++ *
++ * The `alloc_io_bufs' flag denotes whether you want the constructed raidz
++ * map to contain allocated buffers to hold column IO data or not (if
++ * you're using this function simply to determine raidz geometry, you'll
++ * want to pass B_FALSE here).
+  *
+  * Avoid inlining the function to keep vdev_raidz_io_start(), which
+  * is this functions only caller, as small as possible on the stack.
+  */
+ noinline raidz_map_t *
+-vdev_raidz_map_alloc(zio_t *zio, uint64_t unit_shift, uint64_t dcols,
+-    uint64_t nparity)
++vdev_raidz_map_alloc(caddr_t data, uint64_t size, uint64_t offset,
++    uint64_t unit_shift, uint64_t dcols, uint64_t nparity,
++    boolean_t alloc_data)
+ {
+ 	raidz_map_t *rm;
++
+ 	/* The starting RAIDZ (parent) vdev sector of the block. */
+-	uint64_t b = zio->io_offset >> unit_shift;
++	uint64_t b = offset >> unit_shift;
+ 	/* The zio's size in units of the vdev's minimum sector size. */
+-	uint64_t s = zio->io_size >> unit_shift;
++	uint64_t s = size >> unit_shift;
+ 	/* The first column for this stripe. */
+ 	uint64_t f = b % dcols;
+ 	/* The starting byte offset on each child vdev. */
+@@ -411,14 +433,17 @@
+ 	ASSERT3U(rm->rm_asize - asize, ==, rm->rm_nskip << unit_shift);
+ 	ASSERT3U(rm->rm_nskip, <=, nparity);
+ 
+-	for (c = 0; c < rm->rm_firstdatacol; c++)
+-		rm->rm_col[c].rc_data = zio_buf_alloc(rm->rm_col[c].rc_size);
+-
+-	rm->rm_col[c].rc_data = zio->io_data;
+-
+-	for (c = c + 1; c < acols; c++)
+-		rm->rm_col[c].rc_data = (char *)rm->rm_col[c - 1].rc_data +
+-		    rm->rm_col[c - 1].rc_size;
++	if (alloc_data) {
++		for (c = 0; c < rm->rm_firstdatacol; c++)
++			rm->rm_col[c].rc_data =
++			    zio_buf_alloc(rm->rm_col[c].rc_size);
++		if (data != NULL)
++			rm->rm_col[c].rc_data = data;
++		for (c = c + 1; c < acols; c++)
++			rm->rm_col[c].rc_data =
++			    (char *)rm->rm_col[c - 1].rc_data +
++			    rm->rm_col[c - 1].rc_size;
++	}
+ 
+ 	/*
+ 	 * If all data stored spans all columns, there's a danger that parity
+@@ -443,7 +468,7 @@
+ 	ASSERT(rm->rm_cols >= 2);
+ 	ASSERT(rm->rm_col[0].rc_size == rm->rm_col[1].rc_size);
+ 
+-	if (rm->rm_firstdatacol == 1 && (zio->io_offset & (1ULL << 20))) {
++	if (rm->rm_firstdatacol == 1 && (offset & (1ULL << 20))) {
+ 		devidx = rm->rm_col[0].rc_devidx;
+ 		o = rm->rm_col[0].rc_offset;
+ 		rm->rm_col[0].rc_devidx = rm->rm_col[1].rc_devidx;
+@@ -455,9 +480,6 @@
+ 			rm->rm_skipstart = 1;
+ 	}
+ 
+-	zio->io_vsd = rm;
+-	zio->io_vsd_ops = &vdev_raidz_vsd_ops;
+-
+ 	/* init RAIDZ parity ops */
+ 	rm->rm_ops = vdev_raidz_math_get_ops();
+ 
+@@ -1430,6 +1452,38 @@
+ 	return (asize);
+ }
+ 
++/*
++ * Converts an allocated size on a raidz vdev back to a logical block
++ * size. This is used in trimming to figure out the appropriate logical
++ * size to pass to vdev_raidz_map_alloc when splitting up extents of free
++ * space obtained from metaslabs. However, a range of free space on a
++ * raidz vdev might have originally consisted of multiple blocks and
++ * those, taken together with their skip blocks, might not always align
++ * neatly to a new vdev_raidz_map_alloc covering the entire unified
++ * range. So to ensure that the newly allocated raidz map *always* fits
++ * within the asize passed to this function and never exceeds it (since
++ * that might trim allocated data past it), we round it down to the
++ * nearest suitable multiple of the vdev ashift (hence the "_floor" in
++ * this function's name).
++ */
++static uint64_t
++vdev_raidz_psize_floor(vdev_t *vd, uint64_t asize)
++{
++	uint64_t psize;
++	uint64_t ashift = vd->vdev_top->vdev_ashift;
++	uint64_t cols = vd->vdev_children;
++	uint64_t nparity = vd->vdev_nparity;
++
++	psize = (asize - (nparity << ashift));
++	psize /= cols;
++	psize *= cols - nparity;
++	psize += (1 << ashift) - 1;
++
++	psize = P2ALIGN(psize, 1 << ashift);
++
++	return (psize);
++}
++
+ static void
+ vdev_raidz_child_done(zio_t *zio)
+ {
+@@ -1467,8 +1521,11 @@
+ 	raidz_col_t *rc;
+ 	int c, i;
+ 
+-	rm = vdev_raidz_map_alloc(zio, tvd->vdev_ashift, vd->vdev_children,
+-	    vd->vdev_nparity);
++	rm = vdev_raidz_map_alloc(zio->io_data, zio->io_size, zio->io_offset,
++	    tvd->vdev_ashift, vd->vdev_children, vd->vdev_nparity, B_TRUE);
++
++	zio->io_vsd = rm;
++	zio->io_vsd_ops = &vdev_raidz_vsd_ops;
+ 
+ 	ASSERT3U(rm->rm_asize, ==, vdev_psize_to_asize(vd, zio->io_size));
+ 
+@@ -2090,6 +2147,103 @@
+ 		vdev_set_state(vd, B_FALSE, VDEV_STATE_HEALTHY, VDEV_AUX_NONE);
+ }
+ 
++static inline void
++vdev_raidz_trim_append_rc(dkioc_free_list_t *dfl, uint64_t *num_extsp,
++    const raidz_col_t *rc)
++{
++	uint64_t num_exts = *num_extsp;
++	ASSERT(rc->rc_size != 0);
++
++	if (dfl->dfl_num_exts > 0 &&
++	    dfl->dfl_exts[num_exts - 1].dfle_start +
++	    dfl->dfl_exts[num_exts - 1].dfle_length == rc->rc_offset) {
++		dfl->dfl_exts[num_exts - 1].dfle_length += rc->rc_size;
++	} else {
++		dfl->dfl_exts[num_exts].dfle_start = rc->rc_offset;
++		dfl->dfl_exts[num_exts].dfle_length = rc->rc_size;
++		(*num_extsp)++;
++	}
++}
++
++/*
++ * Processes a trim for a raidz vdev.
++ */
++static void
++vdev_raidz_trim(vdev_t *vd, zio_t *pio, void *trim_exts)
++{
++	dkioc_free_list_t *dfl = trim_exts;
++	dkioc_free_list_t **sub_dfls;
++	uint64_t *sub_dfls_num_exts;
++	int i;
++
++	sub_dfls = kmem_zalloc(sizeof (*sub_dfls) * vd->vdev_children,
++	    KM_SLEEP);
++	sub_dfls_num_exts = kmem_zalloc(sizeof (uint64_t) * vd->vdev_children,
++	    KM_SLEEP);
++	for (i = 0; i < vd->vdev_children; i++) {
++		/*
++		 * We might over-allocate here, because the sub-lists can never
++		 * be longer than the parent list, but they can be shorter.
++		 * The underlying driver will discard zero-length extents.
++		 */
++		sub_dfls[i] = dfl_alloc(dfl->dfl_num_exts, KM_SLEEP);
++		sub_dfls[i]->dfl_num_exts = dfl->dfl_num_exts;
++		sub_dfls[i]->dfl_flags = dfl->dfl_flags;
++		sub_dfls[i]->dfl_offset = dfl->dfl_offset;
++		/* don't copy the check func, because it isn't raidz-aware */
++	}
++
++	/*
++	 * Process all extents and redistribute them to the component vdevs
++	 * according to a computed raidz map geometry.
++	 */
++	for (i = 0; i < dfl->dfl_num_exts; i++) {
++		uint64_t start = dfl->dfl_exts[i].dfle_start;
++		uint64_t length = dfl->dfl_exts[i].dfle_length;
++		uint64_t j;
++
++		raidz_map_t *rm = vdev_raidz_map_alloc(NULL,
++		    vdev_raidz_psize_floor(vd, length), start,
++		    vd->vdev_top->vdev_ashift, vd->vdev_children,
++		    vd->vdev_nparity, B_FALSE);
++
++		for (j = 0; j < rm->rm_cols; j++) {
++			uint64_t devidx = rm->rm_col[j].rc_devidx;
++			vdev_raidz_trim_append_rc(sub_dfls[devidx],
++			    &sub_dfls_num_exts[devidx], &rm->rm_col[j]);
++		}
++		vdev_raidz_map_free(rm);
++	}
++
++	/*
++	 * Issue the component ioctls as children of the parent zio.
++	 */
++	for (i = 0; i < vd->vdev_children; i++) {
++		if (sub_dfls_num_exts[i] != 0) {
++			zio_nowait(zio_ioctl(pio, vd->vdev_child[i]->vdev_spa,
++			    vd->vdev_child[i], DKIOCFREE,
++			    vdev_raidz_trim_done, sub_dfls[i],
++			    ZIO_FLAG_CANFAIL | ZIO_FLAG_DONT_PROPAGATE |
++			    ZIO_FLAG_DONT_RETRY));
++		} else {
++			dfl_free(sub_dfls[i]);
++		}
++	}
++	kmem_free(sub_dfls, sizeof (*sub_dfls) * vd->vdev_children);
++	kmem_free(sub_dfls_num_exts, sizeof (uint64_t) * vd->vdev_children);
++}
++
++/*
++ * Releases a dkioc_free_list_t from ioctls issued to component devices in
++ * vdev_raidz_dkioc_free.
++ */
++static void
++vdev_raidz_trim_done(zio_t *zio)
++{
++	ASSERT(zio->io_private != NULL);
++	dfl_free(zio->io_private);
++}
++
+ vdev_ops_t vdev_raidz_ops = {
+ 	vdev_raidz_open,
+ 	vdev_raidz_close,
+@@ -2099,6 +2253,7 @@
+ 	vdev_raidz_state_change,
+ 	NULL,
+ 	NULL,
++	vdev_raidz_trim,
+ 	VDEV_TYPE_RAIDZ,	/* name of this vdev type */
+ 	B_FALSE			/* not a leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c zfs-kmod-9999/module/zfs/vdev_raidz_math.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c	2016-09-18 18:56:36.603124843 +0200
++++ zfs-kmod-9999/module/zfs/vdev_raidz_math.c	2016-09-18 18:57:20.238459367 +0200
+@@ -473,8 +473,9 @@
+ 	for (fn = 0; fn < RAIDZ_GEN_NUM; fn++) {
+ 		bench_parity = fn + 1;
+ 		/* New raidz_map is needed for each generate_p/q/r */
+-		bench_rm = vdev_raidz_map_alloc(bench_zio, SPA_MINBLOCKSHIFT,
+-		    BENCH_D_COLS + bench_parity, bench_parity);
++		bench_rm = vdev_raidz_map_alloc(bench_zio->io_data,
++		    BENCH_ZIO_SIZE, 0, SPA_MINBLOCKSHIFT,
++		    BENCH_D_COLS + bench_parity, bench_parity, B_TRUE);
+ 
+ 		benchmark_raidz_impl(bench_rm, fn, benchmark_gen_impl);
+ 
+@@ -482,8 +483,8 @@
+ 	}
+ 
+ 	/* Benchmark data reconstruction methods */
+-	bench_rm = vdev_raidz_map_alloc(bench_zio, SPA_MINBLOCKSHIFT,
+-	    BENCH_COLS, PARITY_PQR);
++	bench_rm = vdev_raidz_map_alloc(bench_zio->io_data, BENCH_ZIO_SIZE,
++	    0, SPA_MINBLOCKSHIFT, BENCH_COLS, PARITY_PQR, B_TRUE);
+ 
+ 	for (fn = 0; fn < RAIDZ_REC_NUM; fn++)
+ 		benchmark_raidz_impl(bench_rm, fn, benchmark_rec_impl);
+diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_root.c zfs-kmod-9999/module/zfs/vdev_root.c
+--- zfs-kmod-9999.orig/module/zfs/vdev_root.c	2016-09-18 18:56:36.604124850 +0200
++++ zfs-kmod-9999/module/zfs/vdev_root.c	2016-09-18 18:57:20.233459329 +0200
+@@ -25,6 +25,7 @@
+ 
+ /*
+  * Copyright (c) 2013 by Delphix. All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/zfs_context.h>
+@@ -120,6 +121,7 @@
+ 	vdev_root_state_change,
+ 	NULL,
+ 	NULL,
++	NULL,
+ 	VDEV_TYPE_ROOT,		/* name of this vdev type */
+ 	B_FALSE			/* not a leaf vdev */
+ };
+diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zfs_ioctl.c
+--- zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c	2016-09-18 18:56:36.607124873 +0200
++++ zfs-kmod-9999/module/zfs/zfs_ioctl.c	2016-09-18 18:57:20.227459283 +0200
+@@ -1672,6 +1672,36 @@
+ 	return (error);
+ }
+ 
++/*
++ * inputs:
++ * zc_name              name of the pool
++ * zc_cookie            trim_cmd_info_t
++ */
++static int
++zfs_ioc_pool_trim(zfs_cmd_t *zc)
++{
++	spa_t *spa;
++	int error;
++	trim_cmd_info_t	tci;
++
++	if (ddi_copyin((void *)(uintptr_t)zc->zc_cookie, &tci,
++	    sizeof (tci), 0) == -1)
++		return (EFAULT);
++
++	if ((error = spa_open(zc->zc_name, &spa, FTAG)) != 0)
++		return (error);
++
++	if (tci.tci_start) {
++		spa_man_trim(spa, tci.tci_rate);
++	} else {
++		spa_man_trim_stop(spa);
++	}
++
++	spa_close(spa, FTAG);
++
++	return (error);
++}
++
+ static int
+ zfs_ioc_pool_freeze(zfs_cmd_t *zc)
+ {
+@@ -5744,6 +5774,8 @@
+ 	    zfs_secpolicy_config, B_TRUE, POOL_CHECK_NONE);
+ 	zfs_ioctl_register_pool_modify(ZFS_IOC_POOL_SCAN,
+ 	    zfs_ioc_pool_scan);
++	zfs_ioctl_register_pool_modify(ZFS_IOC_POOL_TRIM,
++	    zfs_ioc_pool_trim);
+ 	zfs_ioctl_register_pool_modify(ZFS_IOC_POOL_UPGRADE,
+ 	    zfs_ioc_pool_upgrade);
+ 	zfs_ioctl_register_pool_modify(ZFS_IOC_VDEV_ADD,
+diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
+--- zfs-kmod-9999.orig/module/zfs/zio.c	2016-09-18 18:56:36.611124904 +0200
++++ zfs-kmod-9999/module/zfs/zio.c	2016-09-18 18:57:20.236459352 +0200
+@@ -21,7 +21,7 @@
+ /*
+  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
+  * Copyright (c) 2011, 2016 by Delphix. All rights reserved.
+- * Copyright (c) 2011 Nexenta Systems, Inc. All rights reserved.
++ * Copyright (c) 2016 Nexenta Systems, Inc. All rights reserved.
+  */
+ 
+ #include <sys/sysmacros.h>
+@@ -41,6 +41,9 @@
+ #include <sys/zfeature.h>
+ #include <sys/time.h>
+ #include <sys/trace_zio.h>
++#include <sys/dkioc_free_util.h>
++
++#include <sys/metaslab_impl.h>
+ 
+ /*
+  * ==========================================================================
+@@ -100,6 +103,14 @@
+ 
+ static inline void __zio_execute(zio_t *zio);
+ 
++/*
++ * Tunable to allow for debugging SCSI UNMAP/SATA TRIM calls. Disabling
++ * it will prevent ZFS from attempting to issue DKIOCFREE ioctls to the
++ * underlying storage.
++ */
++int zfs_trim = B_TRUE;
++int zfs_trim_min_ext_sz = 1 << 20;	/* 1 MB */
++
+ void
+ zio_init(void)
+ {
+@@ -916,9 +927,10 @@
+ 	return (zio);
+ }
+ 
+-zio_t *
+-zio_ioctl(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
+-    zio_done_func_t *done, void *private, enum zio_flag flags)
++static zio_t *
++zio_ioctl_with_pipeline(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
++    zio_done_func_t *done, void *private, enum zio_flag flags,
++    enum zio_stage pipeline)
+ {
+ 	zio_t *zio;
+ 	int c;
+@@ -926,21 +938,144 @@
+ 	if (vd->vdev_children == 0) {
+ 		zio = zio_create(pio, spa, 0, NULL, NULL, 0, 0, done, private,
+ 		    ZIO_TYPE_IOCTL, ZIO_PRIORITY_NOW, flags, vd, 0, NULL,
+-		    ZIO_STAGE_OPEN, ZIO_IOCTL_PIPELINE);
++		    ZIO_STAGE_OPEN, pipeline);
+ 
+ 		zio->io_cmd = cmd;
+ 	} else {
+-		zio = zio_null(pio, spa, NULL, NULL, NULL, flags);
+-
+-		for (c = 0; c < vd->vdev_children; c++)
+-			zio_nowait(zio_ioctl(zio, spa, vd->vdev_child[c], cmd,
+-			    done, private, flags));
++		zio = zio_null(pio, spa, vd, done, private, flags);
++		/*
++		 * DKIOCFREE ioctl's need some special handling on interior
++		 * vdevs. If the device provides an ops function to handle
++		 * recomputing dkioc_free extents, then we call it.
++		 * Otherwise the default behavior applies, which simply fans
++		 * out the ioctl to all component vdevs.
++		 */
++		if (cmd == DKIOCFREE && vd->vdev_ops->vdev_op_trim != NULL) {
++			vd->vdev_ops->vdev_op_trim(vd, zio, private);
++		} else {
++			for (c = 0; c < vd->vdev_children; c++)
++				zio_nowait(zio_ioctl_with_pipeline(zio,
++				    spa, vd->vdev_child[c], cmd, NULL,
++				    private, flags, pipeline));
++		}
+ 	}
+ 
+ 	return (zio);
+ }
+ 
+ zio_t *
++zio_ioctl(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
++    zio_done_func_t *done, void *private, enum zio_flag flags)
++{
++	return (zio_ioctl_with_pipeline(pio, spa, vd, cmd, done,
++	    private, flags, ZIO_IOCTL_PIPELINE));
++}
++
++/*
++ * Callback for when a trim zio has completed. This simply frees the
++ * dkioc_free_list_t extent list of the DKIOCFREE ioctl.
++ */
++static void
++zio_trim_done(zio_t *zio)
++{
++	VERIFY(zio->io_private != NULL);
++	dfl_free(zio->io_private);
++}
++
++static void
++zio_trim_check(uint64_t start, uint64_t len, void *msp)
++{
++	metaslab_t *ms = msp;
++	boolean_t held = MUTEX_HELD(&ms->ms_lock);
++	if (!held)
++		mutex_enter(&ms->ms_lock);
++	ASSERT(ms->ms_trimming_ts != NULL);
++	ASSERT(range_tree_contains(ms->ms_trimming_ts->ts_tree,
++	    start - VDEV_LABEL_START_SIZE, len));
++	if (!held)
++		mutex_exit(&ms->ms_lock);
++}
++
++/*
++ * Takes a bunch of freed extents and tells the underlying vdevs that the
++ * space associated with these extents can be released.
++ * This is used by flash storage to pre-erase blocks for rapid reuse later
++ * and thin-provisioned block storage to reclaim unused blocks.
++ */
++zio_t *
++zio_trim(spa_t *spa, vdev_t *vd, struct range_tree *tree,
++    zio_done_func_t *done, void *private, enum zio_flag flags,
++    int trim_flags, metaslab_t *msp)
++{
++	dkioc_free_list_t *dfl = NULL;
++	range_seg_t *rs;
++	uint64_t rs_idx;
++	uint64_t num_exts;
++	uint64_t bytes_issued = 0, bytes_skipped = 0, exts_skipped = 0;
++	/*
++	 * We need this to invoke the caller's `done' callback with the
++	 * correct io_private (not the dkioc_free_list_t, which is needed
++	 * by the underlying DKIOCFREE ioctl).
++	 */
++	zio_t *sub_pio = zio_root(spa, done, private, flags);
++
++	ASSERT(range_tree_space(tree) != 0);
++
++	if (!zfs_trim)
++		return (sub_pio);
++
++	num_exts = avl_numnodes(&tree->rt_root);
++	dfl = dfl_alloc(num_exts, KM_SLEEP);
++	dfl->dfl_flags = trim_flags;
++	dfl->dfl_num_exts = num_exts;
++	dfl->dfl_offset = VDEV_LABEL_START_SIZE;
++	if (msp) {
++		dfl->dfl_ck_func = zio_trim_check;
++		dfl->dfl_ck_arg = msp;
++	}
++
++	for (rs = avl_first(&tree->rt_root), rs_idx = 0; rs != NULL;
++	    rs = AVL_NEXT(&tree->rt_root, rs)) {
++		uint64_t len = rs->rs_end - rs->rs_start;
++
++		if (len < zfs_trim_min_ext_sz) {
++			bytes_skipped += len;
++			exts_skipped++;
++			continue;
++		}
++
++		dfl->dfl_exts[rs_idx].dfle_start = rs->rs_start;
++		dfl->dfl_exts[rs_idx].dfle_length = len;
++
++		// check we're a multiple of the vdev ashift
++		ASSERT0(dfl->dfl_exts[rs_idx].dfle_start &
++		    ((1 << vd->vdev_ashift) - 1));
++		ASSERT0(dfl->dfl_exts[rs_idx].dfle_length &
++		    ((1 << vd->vdev_ashift) - 1));
++
++		rs_idx++;
++		bytes_issued += len;
++	}
++
++	spa_trimstats_update(spa, rs_idx, bytes_issued, exts_skipped,
++	    bytes_skipped);
++
++	/* the zfs_trim_min_ext_sz filter may have shortened the list */
++	if (dfl->dfl_num_exts != rs_idx) {
++		dkioc_free_list_t *dfl2 = dfl_alloc(rs_idx, KM_SLEEP);
++		bcopy(dfl, dfl2, DFL_SZ(rs_idx));
++		dfl2->dfl_num_exts = rs_idx;
++		dfl_free(dfl);
++		dfl = dfl2;
++	}
++
++	zio_nowait(zio_ioctl_with_pipeline(sub_pio, spa, vd, DKIOCFREE,
++	    zio_trim_done, dfl, ZIO_FLAG_CANFAIL | ZIO_FLAG_DONT_PROPAGATE |
++	    ZIO_FLAG_DONT_RETRY, ZIO_TRIM_PIPELINE));
++	return (sub_pio);
++}
++
++zio_t *
+ zio_read_phys(zio_t *pio, vdev_t *vd, uint64_t offset, uint64_t size,
+     void *data, int checksum, zio_done_func_t *done, void *private,
+     zio_priority_t priority, enum zio_flag flags, boolean_t labels)
+@@ -3765,4 +3900,12 @@
+ module_param(zfs_sync_pass_rewrite, int, 0644);
+ MODULE_PARM_DESC(zfs_sync_pass_rewrite,
+ 	"Rewrite new bps starting in this pass");
++
++module_param(zfs_trim, int, 0644);
++MODULE_PARM_DESC(zfs_trim,
++	"Enable TRIM");
++
++module_param(zfs_trim_min_ext_sz, int, 0644);
++MODULE_PARM_DESC(zfs_trim_min_ext_sz,
++	"Minimum size to TRIM");
+ #endif
+diff -Nuar zfs-kmod-9999.orig/module/zfs/zvol.c zfs-kmod-9999/module/zfs/zvol.c
+--- zfs-kmod-9999.orig/module/zfs/zvol.c	2016-09-18 18:56:36.613124919 +0200
++++ zfs-kmod-9999/module/zfs/zvol.c	2016-09-18 18:57:20.234459337 +0200
+@@ -34,7 +34,7 @@
+  * Volumes are persistent through reboot and module load.  No user command
+  * needs to be run before opening and using a device.
+  *
+- * Copyright 2014 Nexenta Systems, Inc.  All rights reserved.
++ * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
+  * Copyright (c) 2016 Actifio, Inc. All rights reserved.
+  */
+ 
+diff: zfs-kmod-9999.orig/tests/zfs-tests/include/zfs_commands.cfg: File o directory non esistente
+diff: zfs-kmod-9999/tests/zfs-tests/include/zfs_commands.cfg: File o directory non esistente
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-09-18 18:56:36.703125610 +0200
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-09-18 18:57:20.236459352 +0200
+@@ -33,11 +33,12 @@
+ typeset -a properties=("size" "capacity" "altroot" "health" "guid" "version"
+     "bootfs" "delegation" "autoreplace" "cachefile" "dedupditto" "dedupratio"
+     "free" "allocated" "readonly" "comment" "expandsize" "freeing" "failmode"
+-    "listsnapshots" "autoexpand" "fragmentation" "leaked" "ashift"
+-    "feature@async_destroy" "feature@empty_bpobj" "feature@lz4_compress"
+-    "feature@large_blocks" "feature@large_dnode" "feature@filesystem_limits"
+-    "feature@spacemap_histogram" "feature@enabled_txg" "feature@hole_birth"
+-    "feature@extensible_dataset" "feature@bookmarks" "feature@embedded_data")
++    "listsnapshots" "autoexpand" "fragmentation" "leaked" "ashift" "forcetrim"
++    "autotrim" "feature@async_destroy" "feature@empty_bpobj"
++    "feature@lz4_compress" "feature@large_blocks" "feature@large_dnode"
++    "feature@filesystem_limits" "feature@spacemap_histogram" "feature@enabled_txg"
++    "feature@hole_birth" "feature@extensible_dataset" "feature@bookmarks"
++    "feature@embedded_data")
+ else
+ typeset -a properties=("size" "capacity" "altroot" "health" "guid" "version"
+     "bootfs" ""leaked" delegation" "autoreplace" "cachefile" "dedupditto" "dedupratio"

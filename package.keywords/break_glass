@@ -12,9 +12,9 @@
 <dev-java/bcprov-1.55
 <dev-java/icedtea-7.3
 <dev-lang/python-2.7.13
-<dev-lang/python-3.4.4
+<dev-lang/python-3.4.6
 <dev-lang/python-exec-2.2
-<dev-lang/rust-1.12.0
+<dev-lang/rust-1.13.0
 <dev-libs/hiredis-0.14
 <dev-libs/libixion-0.10
 <dev-libs/re2-0.2016.06.01
@@ -22,12 +22,11 @@
 <dev-libs/wayland-protocols-1.4
 <dev-libs/weston-1.11
 <dev-python/hiredis-0.3
-<dev-util/cargo-0.12
+<dev-util/cargo-0.13
 <dev-util/cmake-3.7
 <dev-util/perf-4.5
 <dev-util/valgrind-3.12
 <dev-util/vmtouch-1.1
-<kde-frameworks/kwayland-5.26
 <media-gfx/phototonic-1.7
 <media-libs/avidemux-core-2.7
 <media-libs/avidemux-plugins-2.7

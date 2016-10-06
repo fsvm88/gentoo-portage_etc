@@ -209,3 +209,4 @@ x11-proto/xf86driproto abi_x86_32
 x11-proto/xf86vidmodeproto abi_x86_32
 x11-proto/xineramaproto abi_x86_32
 x11-proto/xproto abi_x86_32
+dev-libs/libpcre abi_x86_32

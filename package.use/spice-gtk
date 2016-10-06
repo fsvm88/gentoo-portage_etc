@@ -1,2 +1,1 @@
-net-misc/spice-gtk -gstreamer python
-net-misc/spice-gtk usbredir
+net-misc/spice-gtk -gstreamer python usbredir python_single_target_python2_7 -python_single_target_python3_4

@@ -54,6 +54,5 @@
 <sys-process/criu-2.6
 <www-client/chromium-56
 <x11-drivers/xf86-input-evdev-2.11
-=x11-libs/libva-vdpau-driver-0.7.4-r4
 <x11-libs/libvdpau-va-gl-0.4
 <x11-terms/qterminal-0.7

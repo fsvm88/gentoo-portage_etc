@@ -1,3 +1,5 @@
 media-sound/teamspeak-client-bin
 media-video/avidemux
 media-video/smplayer
+net-print/hplip
+net-print/hplip-plugin

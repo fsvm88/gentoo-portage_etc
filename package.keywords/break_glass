@@ -17,8 +17,6 @@
 <dev-lang/rust-1.13.0
 <dev-libs/hiredis-0.14
 <dev-libs/libixion-0.10
-<dev-libs/wayland-1.11
-<dev-libs/wayland-protocols-1.4
 <dev-libs/weston-1.11
 <dev-python/hiredis-0.3
 <dev-util/cargo-0.13

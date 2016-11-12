@@ -1,9 +1,11 @@
-# mandatory!
+
 dev-libs/glib:2
 dev-libs/libgcrypt
 dev-libs/nspr
 dev-libs/nss
+games-util/steam-meta
 gnome-base/gconf
+# mandatory!
 media-libs/alsa-lib
 media-libs/fontconfig
 media-libs/freetype:2
@@ -12,11 +14,14 @@ media-libs/libogg
 media-libs/libpng:1.2
 media-libs/libsdl
 media-libs/libtheora
-media-libs/libvorbis
 media-libs/libtxc_dxtn
+media-libs/libvorbis
 media-libs/openal
+media-sound/pulseaudio
 net-misc/curl
+net-misc/networkmanager
 net-print/cups
+# optional
 sys-apps/dbus
 >=sys-devel/gcc-4.6.0
 >=sys-libs/glibc-2.15
@@ -26,6 +31,7 @@ virtual/opengl
 x11-libs/cairo
 x11-libs/gdk-pixbuf
 x11-libs/gtk+:2
+x11-libs/gtkglarea
 x11-libs/libX11
 x11-libs/libXext
 x11-libs/libXfixes
@@ -34,10 +40,4 @@ x11-libs/libXrandr
 x11-libs/libXrender
 x11-libs/pango
 x11-libs/pixman
-
-# optional
-media-sound/pulseaudio
-net-misc/networkmanager
 x11-misc/xdg-user-dirs
-x11-libs/gtkglarea
-games-util/steam-meta

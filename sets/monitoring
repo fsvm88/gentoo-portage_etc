@@ -1,6 +1,7 @@
 dev-util/vmtouch
 net-analyzer/iftop
 net-dns/bind-tools
+sys-apps/dstat
 sys-apps/lm_sensors
 sys-apps/smartmontools
 sys-process/htop

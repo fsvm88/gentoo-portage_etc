@@ -17,7 +17,6 @@
 <dev-lang/rust-1.13.0
 <dev-libs/hiredis-0.14
 <dev-libs/libixion-0.10
-<dev-libs/weston-1.11
 <dev-python/hiredis-0.3
 <dev-util/cargo-0.13
 <dev-util/cmake-3.7

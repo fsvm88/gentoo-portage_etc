@@ -23,6 +23,7 @@ dev-libs/libgcrypt abi_x86_32
 dev-libs/libgpg-error abi_x86_32
 dev-libs/libgudev abi_x86_32
 dev-libs/libltdl abi_x86_32
+dev-libs/libpcre abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libusb abi_x86_32
@@ -209,4 +210,3 @@ x11-proto/xf86driproto abi_x86_32
 x11-proto/xf86vidmodeproto abi_x86_32
 x11-proto/xineramaproto abi_x86_32
 x11-proto/xproto abi_x86_32
-dev-libs/libpcre abi_x86_32

@@ -15,4 +15,5 @@ net-wireless/iw
 net-wireless/rfkill
 sys-apps/ethtool
 www-client/chromium
+www-plugins/adobe-flash
 www-plugins/chrome-binary-plugins

@@ -1,5 +1,4 @@
 dev-libs/libsecp256k1
 <dev-libs/univalue-1.1
-dev-python/psycopg
 net-p2p/bitcoin-cli
 net-p2p/bitcoind

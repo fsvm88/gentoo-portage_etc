@@ -53,7 +53,6 @@
 <sys-power/thermald-1.5
 <sys-process/criu-2.6
 <www-client/chromium-56
-<x11-base/xorg-drivers-1.19
 <x11-base/xorg-server-1.19
 <x11-drivers/xf86-input-evdev-2.11
 <x11-libs/libdrm-2.4.69

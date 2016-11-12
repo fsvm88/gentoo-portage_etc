@@ -1,6 +1,6 @@
 diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c zfs-kmod-9999/cmd/raidz_test/raidz_bench.c
---- zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c	2016-10-06 22:34:50.512219257 +0200
-+++ zfs-kmod-9999/cmd/raidz_test/raidz_bench.c	2016-10-06 22:35:27.882536961 +0200
+--- zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c	2016-11-12 09:18:08.228985677 +0100
++++ zfs-kmod-9999/cmd/raidz_test/raidz_bench.c	2016-11-12 09:19:16.931525566 +0100
 @@ -83,8 +83,9 @@
  			/* create suitable raidz_map */
  			ncols = rto_opts.rto_dcols + fn + 1;
@@ -26,8 +26,8 @@ diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c zfs-kmod-9999/cmd/rai
  			/* estimate iteration count */
  			iter_cnt = (REC_BENCH_MEMORY);
 diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c zfs-kmod-9999/cmd/raidz_test/raidz_test.c
---- zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c	2016-10-06 22:34:50.513219266 +0200
-+++ zfs-kmod-9999/cmd/raidz_test/raidz_test.c	2016-10-06 22:35:27.882536961 +0200
+--- zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c	2016-11-12 09:18:08.228985677 +0100
++++ zfs-kmod-9999/cmd/raidz_test/raidz_test.c	2016-11-12 09:19:16.932525573 +0100
 @@ -287,10 +287,12 @@
  
  	VERIFY0(vdev_raidz_impl_set("original"));
@@ -58,8 +58,8 @@ diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c zfs-kmod-9999/cmd/raid
  	/* Make sure code columns are destroyed */
  	corrupt_colums(rm, ccols, parity);
 diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpool_main.c
---- zfs-kmod-9999.orig/cmd/zpool/zpool_main.c	2016-10-06 22:34:50.523219351 +0200
-+++ zfs-kmod-9999/cmd/zpool/zpool_main.c	2016-10-06 22:35:27.883536969 +0200
+--- zfs-kmod-9999.orig/cmd/zpool/zpool_main.c	2016-11-12 09:18:08.254985882 +0100
++++ zfs-kmod-9999/cmd/zpool/zpool_main.c	2016-11-12 09:19:17.036526391 +0100
 @@ -85,6 +85,7 @@
  static int zpool_do_split(int, char **);
  
@@ -94,13 +94,14 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  	case HELP_STATUS:
  		return (gettext("\tstatus [-gLPvxD] [-T d|u] [pool] ... "
  		    "[interval [count]]\n"));
-@@ -5372,6 +5378,31 @@
+@@ -5386,6 +5392,32 @@
  	return (err != 0);
  }
  
 +typedef struct trim_cbdata {
 +	boolean_t	cb_start;
 +	uint64_t	cb_rate;
++	boolean_t	cb_fulltrim;
 +} trim_cbdata_t;
 +
 +int
@@ -118,7 +119,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
 +		return (1);
 +	}
 +
-+	err = zpool_trim(zhp, cb->cb_start, cb->cb_rate);
++	err = zpool_trim(zhp, cb->cb_start, cb->cb_rate, cb->cb_fulltrim);
 +
 +	return (err != 0);
 +}
@@ -126,13 +127,13 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  /*
   * zpool scrub [-s] <pool> ...
   *
-@@ -5411,6 +5442,52 @@
- 	return (for_each_pool(argc, argv, B_TRUE, NULL, scrub_callback, &cb));
+@@ -5426,6 +5458,57 @@
  }
  
-+/*
+ /*
 + * zpool trim [-s|-r <rate>] <pool> ...
 + *
++ *	-f		Full trim.  Trims never-allocated space.
 + *	-s		Stop. Stops any in-progress trim.
 + *	-r <rate>	Sets the TRIM rate.
 + */
@@ -144,10 +145,14 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
 +
 +	cb.cb_start = B_TRUE;
 +	cb.cb_rate = 0;
++	cb.cb_fulltrim = B_FALSE;
 +
 +	/* check options */
-+	while ((c = getopt(argc, argv, "sr:")) != -1) {
++	while ((c = getopt(argc, argv, "fsr:")) != -1) {
 +		switch (c) {
++		case 'f':
++			cb.cb_fulltrim = B_TRUE;
++			break;
 +		case 's':
 +			cb.cb_start = B_FALSE;
 +			break;
@@ -176,10 +181,11 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
 +	return (for_each_pool(argc, argv, B_TRUE, NULL, trim_callback, &cb));
 +}
 +
- typedef struct status_cbdata {
- 	int		cb_count;
- 	int		cb_name_flags;
-@@ -5534,6 +5611,59 @@
++/*
+  * Print out detailed scrub status.
+  */
+ void
+@@ -5538,6 +5621,59 @@
  }
  
  static void
@@ -239,7 +245,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  print_error_log(zpool_handle_t *zhp)
  {
  	nvlist_t *nverrlist = NULL;
-@@ -5645,6 +5775,43 @@
+@@ -5649,6 +5785,43 @@
  }
  
  /*
@@ -283,7 +289,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
   * Display a summary of pool status.  Displays a summary such as:
   *
   *        pool: tank
-@@ -5940,11 +6107,30 @@
+@@ -5943,6 +6116,7 @@
  		nvlist_t **spares, **l2cache;
  		uint_t nspares, nl2cache;
  		pool_scan_stat_t *ps = NULL;
@@ -291,7 +297,9 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  
  		(void) nvlist_lookup_uint64_array(nvroot,
  		    ZPOOL_CONFIG_SCAN_STATS, (uint64_t **)&ps, &c);
- 		print_scan_status(ps);
+@@ -5953,6 +6127,24 @@
+ 		if (cbp->cb_namewidth < 10)
+ 			cbp->cb_namewidth = 10;
  
 +		/* Grab trim stats if the pool supports it */
 +		if (nvlist_lookup_uint64(config, ZPOOL_CONFIG_TRIM_PROG,
@@ -311,23 +319,24 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
 +			    trim_start_time, trim_stop_time);
 +		}
 +
- 		namewidth = max_width(zhp, nvroot, 0, 0, cbp->cb_name_flags);
- 		if (namewidth < 10)
- 			namewidth = 10;
+ 		(void) printf(gettext("config:\n\n"));
+ 		(void) printf(gettext("\t%-*s  %-8s %5s %5s %5s\n"),
+ 		    cbp->cb_namewidth, "NAME", "STATE", "READ", "WRITE",
 diff -Nuar zfs-kmod-9999.orig/include/libzfs.h zfs-kmod-9999/include/libzfs.h
---- zfs-kmod-9999.orig/include/libzfs.h	2016-10-06 22:34:50.540219496 +0200
-+++ zfs-kmod-9999/include/libzfs.h	2016-10-06 22:35:27.883536969 +0200
-@@ -255,6 +255,7 @@
+--- zfs-kmod-9999.orig/include/libzfs.h	2016-11-12 09:18:08.293986188 +0100
++++ zfs-kmod-9999/include/libzfs.h	2016-11-12 09:19:17.037526399 +0100
+@@ -259,6 +259,8 @@
   * Functions to manipulate pool and vdev state
   */
  extern int zpool_scan(zpool_handle_t *, pool_scan_func_t);
-+extern int zpool_trim(zpool_handle_t *, boolean_t start, uint64_t rate);
++extern int zpool_trim(zpool_handle_t *, boolean_t start, uint64_t rate,
++    boolean_t fulltrim);
  extern int zpool_clear(zpool_handle_t *, const char *, nvlist_t *);
  extern int zpool_reguid(zpool_handle_t *);
  extern int zpool_reopen(zpool_handle_t *);
 diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
---- zfs-kmod-9999.orig/include/sys/dmu.h	2016-10-06 22:34:50.545219538 +0200
-+++ zfs-kmod-9999/include/sys/dmu.h	2016-10-06 22:35:27.884536978 +0200
+--- zfs-kmod-9999.orig/include/sys/dmu.h	2016-11-12 09:18:08.303986267 +0100
++++ zfs-kmod-9999/include/sys/dmu.h	2016-11-12 09:19:17.009526179 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -337,7 +346,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
   * Copyright (c) 2012, Joyent, Inc. All rights reserved.
   * Copyright 2014 HybridCluster. All rights reserved.
   * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
-@@ -320,6 +320,8 @@
+@@ -326,6 +326,8 @@
  #define	DMU_POOL_EMPTY_BPOBJ		"empty_bpobj"
  #define	DMU_POOL_CHECKSUM_SALT		"org.illumos:checksum_salt"
  #define	DMU_POOL_VDEV_ZAP_MAP		"com.delphix:vdev_zap_map"
@@ -347,8 +356,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
  /*
   * Allocate an object from this objset.  The range of object numbers
 diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/zfs.h
---- zfs-kmod-9999.orig/include/sys/fs/zfs.h	2016-10-06 22:34:50.548219563 +0200
-+++ zfs-kmod-9999/include/sys/fs/zfs.h	2016-10-06 22:35:27.884536978 +0200
+--- zfs-kmod-9999.orig/include/sys/fs/zfs.h	2016-11-12 09:18:08.311986330 +0100
++++ zfs-kmod-9999/include/sys/fs/zfs.h	2016-11-12 09:19:17.037526399 +0100
 @@ -22,7 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -358,7 +367,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
   * Copyright (c) 2013, Joyent, Inc. All rights reserved.
   */
  
-@@ -211,6 +211,8 @@
+@@ -215,6 +215,8 @@
  	ZPOOL_PROP_MAXBLOCKSIZE,
  	ZPOOL_PROP_TNAME,
  	ZPOOL_PROP_MAXDNODESIZE,
@@ -367,7 +376,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
  	ZPOOL_NUM_PROPS
  } zpool_prop_t;
  
-@@ -640,6 +642,10 @@
+@@ -647,6 +649,10 @@
  #define	ZPOOL_CONFIG_REMOVED		"removed"
  #define	ZPOOL_CONFIG_FRU		"fru"
  #define	ZPOOL_CONFIG_AUX_STATE		"aux_state"
@@ -378,7 +387,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
  
  /* Rewind policy parameters */
  #define	ZPOOL_REWIND_POLICY		"rewind-policy"
-@@ -751,6 +757,14 @@
+@@ -758,6 +764,15 @@
  } pool_scan_func_t;
  
  /*
@@ -387,13 +396,14 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
 +typedef struct trim_cmd_info_s {
 +	uint64_t	tci_start;	/* B_TRUE = start; B_FALSE = stop */
 +	uint64_t	tci_rate;	/* requested TRIM rate in bytes/sec */
++	uint64_t	tci_fulltrim;	/* B_TRUE=trim never allocated space */
 +} trim_cmd_info_t;
 +
 +/*
   * ZIO types.  Needed to interpret vdev statistics below.
   */
  typedef enum zio_type {
-@@ -1011,6 +1025,7 @@
+@@ -1019,6 +1034,7 @@
  	ZFS_IOC_EVENTS_NEXT,
  	ZFS_IOC_EVENTS_CLEAR,
  	ZFS_IOC_EVENTS_SEEK,
@@ -402,8 +412,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
  	/*
  	 * FreeBSD - 1/64 numbers reserved.
 diff -Nuar zfs-kmod-9999.orig/include/sys/Makefile.am zfs-kmod-9999/include/sys/Makefile.am
---- zfs-kmod-9999.orig/include/sys/Makefile.am	2016-10-06 22:34:50.542219513 +0200
-+++ zfs-kmod-9999/include/sys/Makefile.am	2016-10-06 22:35:27.884536978 +0200
+--- zfs-kmod-9999.orig/include/sys/Makefile.am	2016-11-12 09:18:08.297986220 +0100
++++ zfs-kmod-9999/include/sys/Makefile.am	2016-11-12 09:19:16.934525589 +0100
 @@ -66,6 +66,7 @@
  	$(top_srcdir)/include/sys/trace_dnode.h \
  	$(top_srcdir)/include/sys/trace_multilist.h \
@@ -413,12 +423,12 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/Makefile.am zfs-kmod-9999/include/sys/
  	$(top_srcdir)/include/sys/trace_zio.h \
  	$(top_srcdir)/include/sys/trace_zrlock.h \
 diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/metaslab.h
---- zfs-kmod-9999.orig/include/sys/metaslab.h	2016-10-06 22:34:50.548219563 +0200
-+++ zfs-kmod-9999/include/sys/metaslab.h	2016-10-06 22:35:27.884536978 +0200
+--- zfs-kmod-9999.orig/include/sys/metaslab.h	2016-11-12 09:18:08.311986330 +0100
++++ zfs-kmod-9999/include/sys/metaslab.h	2016-11-12 09:19:17.010526186 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
-  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
 + * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
   */
  
@@ -429,9 +439,9 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/m
  uint64_t metaslab_block_maxsize(metaslab_t *);
 +void metaslab_auto_trim(metaslab_t *msp, uint64_t txg);
  
- #define	METASLAB_HINTBP_FAVOR	0x0
- #define	METASLAB_HINTBP_AVOID	0x1
-@@ -67,6 +69,7 @@
+ #define	METASLAB_HINTBP_FAVOR		0x0
+ #define	METASLAB_HINTBP_AVOID		0x1
+@@ -68,6 +70,7 @@
  void metaslab_free(spa_t *, const blkptr_t *, uint64_t, boolean_t);
  int metaslab_claim(spa_t *, const blkptr_t *, uint64_t);
  void metaslab_check_free(spa_t *, const blkptr_t *);
@@ -439,9 +449,9 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/m
  void metaslab_fastwrite_mark(spa_t *, const blkptr_t *);
  void metaslab_fastwrite_unmark(spa_t *, const blkptr_t *);
  
-@@ -93,6 +96,9 @@
- uint64_t metaslab_group_fragmentation(metaslab_group_t *);
- void metaslab_group_histogram_remove(metaslab_group_t *, metaslab_t *);
+@@ -100,6 +103,9 @@
+ void metaslab_group_alloc_decrement(spa_t *, uint64_t, void *, int);
+ void metaslab_group_alloc_verify(spa_t *, const blkptr_t *, void *);
  
 +void metaslab_trimstats_create(spa_t *spa);
 +void metaslab_trimstats_destroy(spa_t *spa);
@@ -450,17 +460,17 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/m
  }
  #endif
 diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/sys/metaslab_impl.h
---- zfs-kmod-9999.orig/include/sys/metaslab_impl.h	2016-10-06 22:34:50.548219563 +0200
-+++ zfs-kmod-9999/include/sys/metaslab_impl.h	2016-10-06 22:35:27.885536986 +0200
+--- zfs-kmod-9999.orig/include/sys/metaslab_impl.h	2016-11-12 09:18:08.312986337 +0100
++++ zfs-kmod-9999/include/sys/metaslab_impl.h	2016-11-12 09:19:17.010526186 +0100
 @@ -25,6 +25,7 @@
  
  /*
-  * Copyright (c) 2011, 2014 by Delphix. All rights reserved.
+  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
 + * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
   */
  
  #ifndef _SYS_METASLAB_IMPL_H
-@@ -97,6 +98,11 @@
+@@ -158,6 +159,11 @@
  	uint64_t		mg_histogram[RANGE_TREE_HISTOGRAM_SIZE];
  };
  
@@ -472,7 +482,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/
  /*
   * This value defines the number of elements in the ms_lbas array. The value
   * of 64 was chosen as it covers all power of 2 buckets up to UINT64_MAX.
-@@ -165,10 +171,14 @@
+@@ -226,10 +232,14 @@
  	uint64_t	ms_size;
  	uint64_t	ms_fragmentation;
  
@@ -492,8 +502,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/
  	boolean_t	ms_condensing;	/* condensing? */
  	boolean_t	ms_condense_wanted;
 diff -Nuar zfs-kmod-9999.orig/include/sys/range_tree.h zfs-kmod-9999/include/sys/range_tree.h
---- zfs-kmod-9999.orig/include/sys/range_tree.h	2016-10-06 22:34:50.549219572 +0200
-+++ zfs-kmod-9999/include/sys/range_tree.h	2016-10-06 22:35:27.885536986 +0200
+--- zfs-kmod-9999.orig/include/sys/range_tree.h	2016-11-12 09:18:08.314986353 +0100
++++ zfs-kmod-9999/include/sys/range_tree.h	2016-11-12 09:19:17.010526186 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -519,8 +529,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/range_tree.h zfs-kmod-9999/include/sys
  
  void range_tree_vacate(range_tree_t *rt, range_tree_func_t *func, void *arg);
 diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
---- zfs-kmod-9999.orig/include/sys/spa.h	2016-10-06 22:34:50.550219581 +0200
-+++ zfs-kmod-9999/include/sys/spa.h	2016-10-06 22:35:27.885536986 +0200
+--- zfs-kmod-9999.orig/include/sys/spa.h	2016-11-12 09:18:08.316986369 +0100
++++ zfs-kmod-9999/include/sys/spa.h	2016-11-12 09:19:17.037526399 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -588,7 +598,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
  extern int spa_scan_stop(spa_t *spa);
  
 +/* trimming */
-+extern void spa_man_trim(spa_t *spa, uint64_t rate);
++extern void spa_man_trim(spa_t *spa, uint64_t rate, boolean_t fulltrim);
 +extern void spa_man_trim_stop(spa_t *spa);
 +extern void spa_get_trim_prog(spa_t *spa, uint64_t *prog, uint64_t *rate,
 +    uint64_t *start_time, uint64_t *stop_time);
@@ -619,8 +629,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
  #define	dprintf_bp(bp, fmt, ...) do {				\
  	if (zfs_flags & ZFS_DEBUG_DPRINTF) {			\
 diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/spa_impl.h
---- zfs-kmod-9999.orig/include/sys/spa_impl.h	2016-10-06 22:34:50.550219581 +0200
-+++ zfs-kmod-9999/include/sys/spa_impl.h	2016-10-06 22:35:27.885536986 +0200
+--- zfs-kmod-9999.orig/include/sys/spa_impl.h	2016-11-12 09:18:08.317986377 +0100
++++ zfs-kmod-9999/include/sys/spa_impl.h	2016-11-12 09:19:17.013526210 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -639,7 +649,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  struct spa {
  	/*
  	 * Fields protected by spa_namespace_lock.
-@@ -264,6 +266,31 @@
+@@ -266,6 +268,31 @@
  	uint64_t	spa_deadman_synctime;	/* deadman expiration timer */
  	uint64_t	spa_all_vdev_zaps;	/* ZAP of per-vd ZAP obj #s */
  	spa_avz_action_t	spa_avz_action;	/* destroy/rebuild AVZ? */
@@ -671,7 +681,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  	uint64_t	spa_errata;		/* errata issues detected */
  	spa_stats_t	spa_stats;		/* assorted spa statistics */
  	hrtime_t	spa_ccw_fail_time;	/* Conf cache write fail time */
-@@ -286,6 +313,10 @@
+@@ -290,6 +317,10 @@
  extern void spa_taskq_dispatch_sync(spa_t *, zio_type_t t, zio_taskq_type_t q,
      task_func_t *func, void *arg, uint_t flags);
  
@@ -683,8 +693,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  #ifdef	__cplusplus
  }
 diff -Nuar zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h zfs-kmod-9999/include/sys/sysevent/eventdefs.h
---- zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h	2016-10-06 22:34:50.551219589 +0200
-+++ zfs-kmod-9999/include/sys/sysevent/eventdefs.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h	2016-11-12 09:18:08.319986393 +0100
++++ zfs-kmod-9999/include/sys/sysevent/eventdefs.h	2016-11-12 09:19:16.936525605 +0100
 @@ -112,6 +112,8 @@
  #define	ESC_ZFS_VDEV_AUTOEXPAND		"vdev_autoexpand"
  #define	ESC_ZFS_BOOTFS_VDEV_ATTACH	"bootfs_vdev_attach"
@@ -696,7 +706,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h zfs-kmod-9999/inc
   * datalink subclass definitions.
 diff -Nuar zfs-kmod-9999.orig/include/sys/trace_vdev.h zfs-kmod-9999/include/sys/trace_vdev.h
 --- zfs-kmod-9999.orig/include/sys/trace_vdev.h	1970-01-01 01:00:00.000000000 +0100
-+++ zfs-kmod-9999/include/sys/trace_vdev.h	2016-10-06 22:35:27.886536995 +0200
++++ zfs-kmod-9999/include/sys/trace_vdev.h	2016-11-12 09:19:16.937525613 +0100
 @@ -0,0 +1,79 @@
 +/*
 + * CDDL HEADER START
@@ -778,8 +788,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/trace_vdev.h zfs-kmod-9999/include/sys
 +
 +#endif /* _KERNEL && HAVE_DECLARE_EVENT_CLASS */
 diff -Nuar zfs-kmod-9999.orig/include/sys/vdev.h zfs-kmod-9999/include/sys/vdev.h
---- zfs-kmod-9999.orig/include/sys/vdev.h	2016-10-06 22:34:50.558219649 +0200
-+++ zfs-kmod-9999/include/sys/vdev.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/vdev.h	2016-11-12 09:18:08.335986518 +0100
++++ zfs-kmod-9999/include/sys/vdev.h	2016-11-12 09:19:17.038526406 +0100
 @@ -22,6 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -802,19 +812,20 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev.h zfs-kmod-9999/include/sys/vdev.
  extern int zfs_nocacheflush;
  
  extern int vdev_open(vdev_t *);
-@@ -145,6 +153,9 @@
+@@ -145,6 +153,10 @@
  extern nvlist_t *vdev_config_generate(spa_t *spa, vdev_t *vd,
      boolean_t getstats, vdev_config_flag_t flags);
  
 +extern void vdev_man_trim(vdev_trim_info_t *vti);
++extern void vdev_man_trim_full(vdev_trim_info_t *vti);
 +extern void vdev_auto_trim(vdev_trim_info_t *vti);
 +
  /*
   * Label routines
   */
 diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/vdev_impl.h
---- zfs-kmod-9999.orig/include/sys/vdev_impl.h	2016-10-06 22:34:50.559219657 +0200
-+++ zfs-kmod-9999/include/sys/vdev_impl.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/vdev_impl.h	2016-11-12 09:18:08.336986526 +0100
++++ zfs-kmod-9999/include/sys/vdev_impl.h	2016-11-12 09:19:17.013526210 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -823,7 +834,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
   */
  
  #ifndef _SYS_VDEV_IMPL_H
-@@ -65,6 +66,7 @@
+@@ -69,6 +70,7 @@
  typedef void	vdev_state_change_func_t(vdev_t *vd, int, int);
  typedef void	vdev_hold_func_t(vdev_t *vd);
  typedef void	vdev_rele_func_t(vdev_t *vd);
@@ -831,7 +842,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  
  typedef const struct vdev_ops {
  	vdev_open_func_t		*vdev_op_open;
-@@ -75,6 +77,7 @@
+@@ -79,6 +81,7 @@
  	vdev_state_change_func_t	*vdev_op_state_change;
  	vdev_hold_func_t		*vdev_op_hold;
  	vdev_rele_func_t		*vdev_op_rele;
@@ -839,16 +850,16 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  	char				vdev_op_type[16];
  	boolean_t			vdev_op_leaf;
  } vdev_ops_t;
-@@ -180,6 +183,8 @@
- 	boolean_t	vdev_ishole;	/* is a hole in the namespace 	*/
+@@ -185,6 +188,8 @@
+ 	kmutex_t	vdev_queue_lock; /* protects vdev_queue_depth	*/
  	uint64_t	vdev_top_zap;
  
 +	uint64_t	vdev_trim_prog;	/* trim progress in bytes	*/
 +
  	/*
- 	 * Leaf vdev state.
- 	 */
-@@ -202,6 +207,7 @@
+ 	 * The queue depth parameters determine how many async writes are
+ 	 * still pending (i.e. allocated by net yet issued to disk) per
+@@ -218,6 +223,7 @@
  	uint64_t	vdev_not_present; /* not present during import	*/
  	uint64_t	vdev_unspare;	/* unspare when resilvering done */
  	boolean_t	vdev_nowritecache; /* true if flushwritecache failed */
@@ -857,8 +868,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  	boolean_t	vdev_forcefault; /* force online fault		*/
  	boolean_t	vdev_splitting;	/* split or repair in progress  */
 diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_raidz.h zfs-kmod-9999/include/sys/vdev_raidz.h
---- zfs-kmod-9999.orig/include/sys/vdev_raidz.h	2016-10-06 22:34:50.559219657 +0200
-+++ zfs-kmod-9999/include/sys/vdev_raidz.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/vdev_raidz.h	2016-11-12 09:18:08.336986526 +0100
++++ zfs-kmod-9999/include/sys/vdev_raidz.h	2016-11-12 09:19:16.937525613 +0100
 @@ -40,8 +40,8 @@
  /*
   * vdev_raidz interface
@@ -871,8 +882,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_raidz.h zfs-kmod-9999/include/sys
  void 		vdev_raidz_generate_parity(struct raidz_map *);
  int 		vdev_raidz_reconstruct(struct raidz_map *, const int *, int);
 diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sys/zfs_context.h
---- zfs-kmod-9999.orig/include/sys/zfs_context.h	2016-10-06 22:34:50.560219665 +0200
-+++ zfs-kmod-9999/include/sys/zfs_context.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/zfs_context.h	2016-11-12 09:18:08.338986542 +0100
++++ zfs-kmod-9999/include/sys/zfs_context.h	2016-11-12 09:19:17.013526210 +0100
 @@ -23,7 +23,7 @@
   * Use is subject to license terms.
   */
@@ -882,7 +893,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sy
   * Copyright (c) 2012, Joyent, Inc. All rights reserved.
   * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
   */
-@@ -598,6 +598,8 @@
+@@ -600,6 +600,8 @@
  
  #define	CRCREAT		0
  
@@ -891,7 +902,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sy
  extern int fop_getattr(vnode_t *vp, vattr_t *vap);
  
  #define	VOP_CLOSE(vp, f, c, o, cr, ct)	vn_close(vp)
-@@ -606,6 +608,16 @@
+@@ -608,6 +610,16 @@
  
  #define	VOP_FSYNC(vp, f, cr, ct)	fsync((vp)->v_fd)
  
@@ -909,8 +920,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sy
  
  extern int vn_open(char *path, int x1, int oflags, int mode, vnode_t **vpp,
 diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
---- zfs-kmod-9999.orig/include/sys/zio.h	2016-10-06 22:34:50.562219682 +0200
-+++ zfs-kmod-9999/include/sys/zio.h	2016-10-06 22:35:27.886536995 +0200
+--- zfs-kmod-9999.orig/include/sys/zio.h	2016-11-12 09:18:08.344986589 +0100
++++ zfs-kmod-9999/include/sys/zio.h	2016-11-12 09:19:17.014526218 +0100
 @@ -21,8 +21,8 @@
  
  /*
@@ -921,8 +932,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
   * Copyright (c) 2013 by Saso Kiselkov. All rights reserved.
   */
  
-@@ -227,6 +227,8 @@
- 
+@@ -229,6 +229,8 @@
+ extern int zio_dva_throttle_enabled;
  extern const char *zio_type_name[ZIO_TYPES];
  
 +struct range_tree;
@@ -930,7 +941,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
  /*
   * A bookmark is a four-tuple <objset, object, level, blkid> that uniquely
   * identifies any block in the pool.  By convention, the meta-objset (MOS)
-@@ -476,6 +478,10 @@
+@@ -482,6 +484,10 @@
  extern zio_t *zio_ioctl(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
      zio_done_func_t *done, void *private, enum zio_flag flags);
  
@@ -942,17 +953,17 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
      uint64_t size, void *data, int checksum,
      zio_done_func_t *done, void *private, zio_priority_t priority,
 diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/zio_impl.h
---- zfs-kmod-9999.orig/include/sys/zio_impl.h	2016-10-06 22:34:50.562219682 +0200
-+++ zfs-kmod-9999/include/sys/zio_impl.h	2016-10-06 22:35:27.887537003 +0200
+--- zfs-kmod-9999.orig/include/sys/zio_impl.h	2016-11-12 09:18:08.344986589 +0100
++++ zfs-kmod-9999/include/sys/zio_impl.h	2016-11-12 09:19:17.014526218 +0100
 @@ -25,6 +25,7 @@
  
  /*
-  * Copyright (c) 2013 by Delphix. All rights reserved.
+  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
 + * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
   */
  
  #ifndef _ZIO_IMPL_H
-@@ -230,6 +231,12 @@
+@@ -237,6 +238,12 @@
  	ZIO_STAGE_VDEV_IO_START |		\
  	ZIO_STAGE_VDEV_IO_ASSESS)
  
@@ -967,7 +978,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/z
  	ZIO_STAGE_DVA_CLAIM |			\
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h
 --- zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h	1970-01-01 01:00:00.000000000 +0100
-+++ zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h	2016-10-06 22:35:27.887537003 +0200
++++ zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h	2016-11-12 09:19:17.026526312 +0100
 @@ -0,0 +1,38 @@
 +/*
 + * This file and its contents are supplied under the terms of the
@@ -1008,8 +1019,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h zfs-kmod-
 +
 +#endif /* _SYS_DKIOC_FREE_UTIL_H */
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h zfs-kmod-9999/lib/libspl/include/sys/dkio.h
---- zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h	2016-10-06 22:34:50.571219759 +0200
-+++ zfs-kmod-9999/lib/libspl/include/sys/dkio.h	2016-10-06 22:35:27.887537003 +0200
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h	2016-11-12 09:18:08.365986754 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/dkio.h	2016-11-12 09:19:17.014526218 +0100
 @@ -18,17 +18,19 @@
   *
   * CDDL HEADER END
@@ -1174,8 +1185,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h zfs-kmod-9999/lib/li
  #ifdef	__cplusplus
  }
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am zfs-kmod-9999/lib/libspl/include/sys/Makefile.am
---- zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am	2016-10-06 22:34:50.570219750 +0200
-+++ zfs-kmod-9999/lib/libspl/include/sys/Makefile.am	2016-10-06 22:35:27.887537003 +0200
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am	2016-11-12 09:18:08.362986730 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/Makefile.am	2016-11-12 09:19:16.930525558 +0100
 @@ -12,6 +12,7 @@
  	$(top_srcdir)/lib/libspl/include/sys/cred.h \
  	$(top_srcdir)/lib/libspl/include/sys/debug.h \
@@ -1185,21 +1196,23 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am zfs-kmod-9999/l
  	$(top_srcdir)/lib/libspl/include/sys/feature_tests.h \
  	$(top_srcdir)/lib/libspl/include/sys/file.h \
 diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c zfs-kmod-9999/lib/libzfs/libzfs_pool.c
---- zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c	2016-10-06 22:34:50.582219853 +0200
-+++ zfs-kmod-9999/lib/libzfs/libzfs_pool.c	2016-10-06 22:35:27.888537012 +0200
-@@ -1993,6 +1993,26 @@
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c	2016-11-12 09:18:08.389986943 +0100
++++ zfs-kmod-9999/lib/libzfs/libzfs_pool.c	2016-11-12 09:19:17.038526406 +0100
+@@ -1997,6 +1997,28 @@
  }
  
  /*
 + * Trim the pool.
 + */
 +int
-+zpool_trim(zpool_handle_t *zhp, boolean_t start, uint64_t rate)
++zpool_trim(zpool_handle_t *zhp, boolean_t start, uint64_t rate,
++    boolean_t fulltrim)
 +{
 +	zfs_cmd_t zc = {"\0"};
 +	char msg[1024];
 +	libzfs_handle_t *hdl = zhp->zpool_hdl;
-+	trim_cmd_info_t tci = { .tci_start = start, .tci_rate = rate };
++	trim_cmd_info_t tci = { .tci_start = start, .tci_rate = rate,
++	    .tci_fulltrim = fulltrim };
 +
 +	(void) strlcpy(zc.zc_name, zhp->zpool_name, sizeof (zc.zc_name));
 +	zc.zc_cookie = (uintptr_t)&tci;
@@ -1215,8 +1228,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c zfs-kmod-9999/lib/libzfs/
   * the nvpair name to determine how we should look for the device.
   * 'avail_spare' is set to TRUE if the provided guid refers to an AVAIL
 diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c zfs-kmod-9999/lib/libzfs/libzfs_util.c
---- zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c	2016-10-06 22:34:50.583219861 +0200
-+++ zfs-kmod-9999/lib/libzfs/libzfs_util.c	2016-10-06 22:35:27.888537012 +0200
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c	2016-11-12 09:18:08.390986950 +0100
++++ zfs-kmod-9999/lib/libzfs/libzfs_util.c	2016-11-12 09:19:17.015526226 +0100
 @@ -23,6 +23,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2013, Joyent, Inc. All rights reserved.
@@ -1226,9 +1239,9 @@ diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c zfs-kmod-9999/lib/libzfs/
  
  /*
 diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man/man5/zfs-module-parameters.5
---- zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5	2016-10-06 22:34:50.586219886 +0200
-+++ zfs-kmod-9999/man/man5/zfs-module-parameters.5	2016-10-06 22:35:27.888537012 +0200
-@@ -1567,6 +1567,33 @@
+--- zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5	2016-11-12 09:18:08.396986997 +0100
++++ zfs-kmod-9999/man/man5/zfs-module-parameters.5	2016-11-12 09:19:16.940525636 +0100
+@@ -1579,6 +1579,33 @@
  .sp
  .ne 2
  .na
@@ -1262,7 +1275,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man
  \fBzfs_txg_history\fR (int)
  .ad
  .RS 12n
-@@ -1588,6 +1615,18 @@
+@@ -1600,6 +1627,18 @@
  .RE
  
  .sp
@@ -1282,13 +1295,13 @@ diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man
  .na
  \fBzfs_vdev_aggregation_limit\fR (int)
 diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
---- zfs-kmod-9999.orig/man/man8/zpool.8	2016-10-06 22:34:50.588219903 +0200
-+++ zfs-kmod-9999/man/man8/zpool.8	2016-10-06 22:35:27.888537012 +0200
-@@ -148,6 +148,11 @@
+--- zfs-kmod-9999.orig/man/man8/zpool.8	2016-11-12 09:18:08.401987037 +0100
++++ zfs-kmod-9999/man/man8/zpool.8	2016-11-12 09:19:17.040526422 +0100
+@@ -149,6 +149,11 @@
  
  .LP
  .nf
-+\fBzpool trim\fR [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...
++\fBzpool trim\fR [\fB-f\fR] [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...
 +.fi
 +
 +.LP
@@ -1296,7 +1309,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  \fBzpool set\fR \fIproperty\fR=\fIvalue\fR \fIpool\fR
  .fi
  
-@@ -715,7 +720,6 @@
+@@ -716,7 +721,6 @@
  .RS 12n
  Prints out a message to the console and generates a system crash dump.
  .RE
@@ -1304,7 +1317,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  .RE
  
  .sp
-@@ -733,6 +737,49 @@
+@@ -734,6 +738,49 @@
  .sp
  .ne 2
  .na
@@ -1354,7 +1367,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  \fB\fBlistsnapshots\fR=on | off\fR
  .ad
  .sp .6
-@@ -1982,6 +2029,76 @@
+@@ -1995,6 +2042,89 @@
  .RE
  
  .RE
@@ -1362,7 +1375,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
 +.sp
 +.ne 2
 +.na
-+\fB\fBzpool trim\fR [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...\fR
++\fB\fBzpool trim\fR [\fB-f\fR] [\fB-r \fIrate\fR|\fB-s\fR] \fIpool\fR ...\fR
 +.ad
 +.sp .6
 +.RS 4n
@@ -1395,6 +1408,19 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
 +.sp
 +See the documentation for the \fBautotrim\fR property above for a description
 +of the vdevs on which \fBzpool trim\fR is supported.
++.sp
++.ne 2
++.na
++\fB\fB-f\fR
++.ad
++.RS 6n
++Causes space which has never been allocated by ZFS to be trimmed.
++This option is useful when disks in the pool contain data not written
++by ZFS or written by ZFS when the disk contained a previously-created pool.
++.sp
++By default, only blocks which were previously used in the current pool
++are trimmed.
++.RE
 +.sp
 +.ne 2
 +.na
@@ -1432,8 +1458,8 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  .sp
  .ne 2
 diff -Nuar zfs-kmod-9999.orig/module/zcommon/zpool_prop.c zfs-kmod-9999/module/zcommon/zpool_prop.c
---- zfs-kmod-9999.orig/module/zcommon/zpool_prop.c	2016-10-06 22:34:50.606220056 +0200
-+++ zfs-kmod-9999/module/zcommon/zpool_prop.c	2016-10-06 22:35:27.889537020 +0200
+--- zfs-kmod-9999.orig/module/zcommon/zpool_prop.c	2016-11-12 09:18:08.441987351 +0100
++++ zfs-kmod-9999/module/zcommon/zpool_prop.c	2016-11-12 09:19:17.015526226 +0100
 @@ -20,7 +20,7 @@
   */
  /*
@@ -1457,8 +1483,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zcommon/zpool_prop.c zfs-kmod-9999/module/z
  	/* hidden properties */
  	zprop_register_hidden(ZPOOL_PROP_NAME, "name", PROP_TYPE_STRING,
 diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_scan.c zfs-kmod-9999/module/zfs/dsl_scan.c
---- zfs-kmod-9999.orig/module/zfs/dsl_scan.c	2016-10-06 22:34:50.615220133 +0200
-+++ zfs-kmod-9999/module/zfs/dsl_scan.c	2016-10-06 22:35:27.889537020 +0200
+--- zfs-kmod-9999.orig/module/zfs/dsl_scan.c	2016-11-12 09:18:08.460987501 +0100
++++ zfs-kmod-9999/module/zfs/dsl_scan.c	2016-11-12 09:19:17.015526226 +0100
 @@ -22,6 +22,7 @@
   * Copyright (c) 2008, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
@@ -1478,8 +1504,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_scan.c zfs-kmod-9999/module/zfs/dsl
  		dmu_tx_t *tx;
  		tx = dmu_tx_create_dd(dp->dp_mos_dir);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_synctask.c zfs-kmod-9999/module/zfs/dsl_synctask.c
---- zfs-kmod-9999.orig/module/zfs/dsl_synctask.c	2016-10-06 22:34:50.615220133 +0200
-+++ zfs-kmod-9999/module/zfs/dsl_synctask.c	2016-10-06 22:35:27.889537020 +0200
+--- zfs-kmod-9999.orig/module/zfs/dsl_synctask.c	2016-11-12 09:18:08.460987501 +0100
++++ zfs-kmod-9999/module/zfs/dsl_synctask.c	2016-11-12 09:19:17.016526233 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -1497,8 +1523,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_synctask.c zfs-kmod-9999/module/zfs
  	return (dst.dst_error);
  }
 diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/metaslab.c
---- zfs-kmod-9999.orig/module/zfs/metaslab.c	2016-10-06 22:34:50.617220150 +0200
-+++ zfs-kmod-9999/module/zfs/metaslab.c	2016-10-06 22:35:27.890537029 +0200
+--- zfs-kmod-9999.orig/module/zfs/metaslab.c	2016-11-12 09:18:08.463987524 +0100
++++ zfs-kmod-9999/module/zfs/metaslab.c	2016-11-12 09:19:17.032526359 +0100
 @@ -22,6 +22,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
@@ -1507,7 +1533,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
   */
  
  #include <sys/zfs_context.h>
-@@ -184,6 +185,36 @@
+@@ -175,6 +176,36 @@
  static uint64_t metaslab_fragmentation(metaslab_t *);
  
  /*
@@ -1544,7 +1570,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
   * ==========================================================================
   * Metaslab classes
   * ==========================================================================
-@@ -909,6 +940,7 @@
+@@ -1009,6 +1040,7 @@
  		VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
  		VERIFY3U(range_tree_space(rt) - size, <=, msp->ms_size);
  		range_tree_remove(rt, start, size);
@@ -1552,7 +1578,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	}
  	return (start);
  }
-@@ -928,8 +960,8 @@
+@@ -1028,8 +1060,8 @@
   * tree looking for a block that matches the specified criteria.
   */
  static uint64_t
@@ -1563,7 +1589,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  {
  	range_seg_t *rs, rsearch;
  	avl_index_t where;
-@@ -941,14 +973,15 @@
+@@ -1041,14 +1073,15 @@
  	if (rs == NULL)
  		rs = avl_nearest(t, where, AVL_AFTER);
  
@@ -1582,7 +1608,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	}
  
  	/*
-@@ -959,7 +992,7 @@
+@@ -1059,7 +1092,7 @@
  		return (-1ULL);
  
  	*cursor = 0;
@@ -1591,7 +1617,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  }
  #endif /* WITH_FF/DF/CF_BLOCK_ALLOCATOR */
  
-@@ -983,7 +1016,7 @@
+@@ -1083,7 +1116,7 @@
  	uint64_t *cursor = &msp->ms_lbas[highbit64(align) - 1];
  	avl_tree_t *t = &msp->ms_tree->rt_root;
  
@@ -1600,7 +1626,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  }
  
  static metaslab_ops_t metaslab_ff_ops = {
-@@ -1035,7 +1068,7 @@
+@@ -1135,7 +1168,7 @@
  		*cursor = 0;
  	}
  
@@ -1609,7 +1635,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  }
  
  static metaslab_ops_t metaslab_df_ops = {
-@@ -1071,13 +1104,19 @@
+@@ -1171,13 +1204,19 @@
  
  	if ((*cursor + size) > *cursor_end) {
  		range_seg_t *rs;
@@ -1635,7 +1661,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	}
  
  	offset = *cursor;
-@@ -1118,6 +1157,8 @@
+@@ -1218,6 +1257,8 @@
  	uint64_t hbit = highbit64(size);
  	uint64_t *cursor = &msp->ms_lbas[hbit - 1];
  	uint64_t max_size = metaslab_block_maxsize(msp);
@@ -1644,7 +1670,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  
  	ASSERT(MUTEX_HELD(&msp->ms_lock));
  	ASSERT3U(avl_numnodes(t), ==, avl_numnodes(&msp->ms_size_tree));
-@@ -1129,7 +1170,12 @@
+@@ -1229,7 +1270,12 @@
  	rsearch.rs_end = *cursor + size;
  
  	rs = avl_find(t, &rsearch, &where);
@@ -1658,7 +1684,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  		t = &msp->ms_size_tree;
  
  		rsearch.rs_start = 0;
-@@ -1139,13 +1185,17 @@
+@@ -1239,13 +1285,17 @@
  		if (rs == NULL)
  			rs = avl_nearest(t, where, AVL_AFTER);
  		ASSERT(rs != NULL);
@@ -1681,7 +1707,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  }
  
  static metaslab_ops_t metaslab_ndf_ops = {
-@@ -1205,6 +1255,8 @@
+@@ -1305,6 +1355,8 @@
  		for (t = 0; t < TXG_DEFER_SIZE; t++) {
  			range_tree_walk(msp->ms_defertree[t],
  			    range_tree_remove, msp->ms_tree);
@@ -1690,7 +1716,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  		}
  	}
  	cv_broadcast(&msp->ms_load_cv);
-@@ -1232,6 +1284,7 @@
+@@ -1332,6 +1384,7 @@
  	ms = kmem_zalloc(sizeof (metaslab_t), KM_SLEEP);
  	mutex_init(&ms->ms_lock, NULL, MUTEX_DEFAULT, NULL);
  	cv_init(&ms->ms_load_cv, NULL, CV_DEFAULT, NULL);
@@ -1698,7 +1724,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	ms->ms_id = id;
  	ms->ms_start = id << vd->vdev_ms_shift;
  	ms->ms_size = 1ULL << vd->vdev_ms_shift;
-@@ -1252,6 +1305,8 @@
+@@ -1352,6 +1405,8 @@
  		ASSERT(ms->ms_sm != NULL);
  	}
  
@@ -1707,7 +1733,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	/*
  	 * We create the main range tree here, but we don't create the
  	 * alloctree and freetree until metaslab_sync_done().  This serves
-@@ -1323,10 +1378,16 @@
+@@ -1423,10 +1478,16 @@
  		range_tree_destroy(msp->ms_defertree[t]);
  	}
  
@@ -1724,18 +1750,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	mutex_destroy(&msp->ms_lock);
  
  	kmem_free(msp, sizeof (metaslab_t));
-@@ -1623,8 +1684,8 @@
- 		 * less than optimal one.
- 		 */
- 		mutex_exit(&mg->mg_lock);
--		VERIFY(taskq_dispatch(mg->mg_taskq, metaslab_preload,
--		    msp, TQ_SLEEP) != 0);
-+		(void) taskq_dispatch(mg->mg_taskq, metaslab_preload,
-+		    msp, TQ_SLEEP);
- 		mutex_enter(&mg->mg_lock);
- 		msp = msp_next;
- 	}
-@@ -1812,11 +1873,14 @@
+@@ -1912,11 +1973,14 @@
  
  	ASSERT(!vd->vdev_ishole);
  
@@ -1750,7 +1765,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  		return;
  	}
  
-@@ -1831,8 +1895,10 @@
+@@ -1931,8 +1995,10 @@
  	 */
  	if (range_tree_space(alloctree) == 0 &&
  	    range_tree_space(*freetree) == 0 &&
@@ -1762,7 +1777,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  
  	/*
  	 * The only state that can actually be changing concurrently with
-@@ -1858,8 +1924,6 @@
+@@ -1958,8 +2024,6 @@
  		ASSERT(msp->ms_sm != NULL);
  	}
  
@@ -1771,7 +1786,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	/*
  	 * Note: metaslab_condense() clears the space_map's histogram.
  	 * Therefore we muse verify and remove this histogram before
-@@ -1938,6 +2002,7 @@
+@@ -2038,6 +2102,7 @@
  	range_tree_t **freed_tree;
  	range_tree_t **defer_tree;
  	int64_t alloc_delta, defer_delta;
@@ -1779,7 +1794,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	int t;
  
  	ASSERT(!vd->vdev_ishole);
-@@ -1994,6 +2059,8 @@
+@@ -2094,6 +2159,8 @@
  	 * defer_tree -- this is safe to do because we've just emptied out
  	 * the defer_tree.
  	 */
@@ -1788,7 +1803,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	range_tree_vacate(*defer_tree,
  	    msp->ms_loaded ? range_tree_add : NULL, msp->ms_tree);
  	range_tree_swap(freed_tree, defer_tree);
-@@ -2450,6 +2517,8 @@
+@@ -2625,6 +2692,8 @@
  		VERIFY0(P2PHASE(offset, 1ULL << vd->vdev_ashift));
  		VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
  		range_tree_add(msp->ms_tree, offset, size);
@@ -1797,7 +1812,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  	} else {
  		if (range_tree_space(msp->ms_freetree[txg & TXG_MASK]) == 0)
  			vdev_dirty(vd, VDD_METASLAB, msp, txg);
-@@ -2505,6 +2574,7 @@
+@@ -2680,6 +2749,7 @@
  	VERIFY0(P2PHASE(size, 1ULL << vd->vdev_ashift));
  	VERIFY3U(range_tree_space(msp->ms_tree) - size, <=, msp->ms_size);
  	range_tree_remove(msp->ms_tree, offset, size);
@@ -1805,7 +1820,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  
  	if (spa_writeable(spa)) {	/* don't dirty if we're zdb(1M) */
  		if (range_tree_space(msp->ms_alloctree[txg & TXG_MASK]) == 0)
-@@ -2674,17 +2744,303 @@
+@@ -2912,17 +2982,303 @@
  		uint64_t size = DVA_GET_ASIZE(&bp->blk_dva[i]);
  		metaslab_t *msp = vd->vdev_ms[offset >> vd->vdev_ms_shift];
  
@@ -2112,7 +2127,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  #if defined(_KERNEL) && defined(HAVE_SPL)
  module_param(metaslab_aliquot, ulong, 0644);
  module_param(metaslab_debug_load, int, 0644);
-@@ -2696,6 +3052,7 @@
+@@ -2934,6 +3290,7 @@
  module_param(metaslab_fragmentation_factor_enabled, int, 0644);
  module_param(metaslab_lba_weighting_enabled, int, 0644);
  module_param(metaslab_bias_enabled, int, 0644);
@@ -2120,7 +2135,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
  
  MODULE_PARM_DESC(metaslab_aliquot,
  	"allocation granularity (a.k.a. stripe size)");
-@@ -2719,4 +3076,7 @@
+@@ -2957,4 +3314,7 @@
  	"prefer metaslabs with lower LBAs");
  MODULE_PARM_DESC(metaslab_bias_enabled,
  	"enable metaslab group biasing");
@@ -2129,8 +2144,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
 +
  #endif /* _KERNEL && HAVE_SPL */
 diff -Nuar zfs-kmod-9999.orig/module/zfs/range_tree.c zfs-kmod-9999/module/zfs/range_tree.c
---- zfs-kmod-9999.orig/module/zfs/range_tree.c	2016-10-06 22:34:50.617220150 +0200
-+++ zfs-kmod-9999/module/zfs/range_tree.c	2016-10-06 22:35:27.890537029 +0200
+--- zfs-kmod-9999.orig/module/zfs/range_tree.c	2016-11-12 09:18:08.464987532 +0100
++++ zfs-kmod-9999/module/zfs/range_tree.c	2016-11-12 09:19:17.034526375 +0100
 @@ -24,6 +24,7 @@
   */
  /*
@@ -2321,8 +2336,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/range_tree.c zfs-kmod-9999/module/zfs/r
  
  boolean_t
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
---- zfs-kmod-9999.orig/module/zfs/spa.c	2016-10-06 22:34:50.619220167 +0200
-+++ zfs-kmod-9999/module/zfs/spa.c	2016-10-06 22:35:27.892537046 +0200
+--- zfs-kmod-9999.orig/module/zfs/spa.c	2016-11-12 09:18:08.468987563 +0100
++++ zfs-kmod-9999/module/zfs/spa.c	2016-11-12 09:19:17.042526438 +0100
 @@ -22,8 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -2353,7 +2368,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  			error = nvpair_value_uint64(elem, &intval);
  			if (!error && intval > 1)
  				error = SET_ERROR(EINVAL);
-@@ -1306,6 +1311,16 @@
+@@ -1318,6 +1323,16 @@
  	ASSERT(MUTEX_HELD(&spa_namespace_lock));
  
  	/*
@@ -2370,8 +2385,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	 * Stop async tasks.
  	 */
  	spa_async_suspend(spa);
-@@ -1319,6 +1334,14 @@
- 	}
+@@ -1345,6 +1360,14 @@
+ 	spa_config_enter(spa, SCL_ALL, FTAG, RW_WRITER);
  
  	/*
 +	 * Stop autotrim tasks.
@@ -2382,10 +2397,10 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
 +	mutex_exit(&spa->spa_auto_trim_lock);
 +
 +	/*
- 	 * Wait for any outstanding async I/O to complete.
+ 	 * Close all vdevs.
  	 */
- 	if (spa->spa_async_zio_root != NULL) {
-@@ -2823,10 +2846,22 @@
+ 	if (spa->spa_root_vdev)
+@@ -2834,10 +2857,22 @@
  		spa_prop_find(spa, ZPOOL_PROP_AUTOEXPAND, &spa->spa_autoexpand);
  		spa_prop_find(spa, ZPOOL_PROP_DEDUPDITTO,
  		    &spa->spa_dedup_ditto);
@@ -2408,7 +2423,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	/*
  	 * If the 'autoreplace' property is set, then post a resource notifying
  	 * the ZFS DE that it should not issue any faults for unopenable
-@@ -3956,6 +3991,13 @@
+@@ -3968,6 +4003,13 @@
  	spa->spa_delegation = zpool_prop_default_numeric(ZPOOL_PROP_DELEGATION);
  	spa->spa_failmode = zpool_prop_default_numeric(ZPOOL_PROP_FAILUREMODE);
  	spa->spa_autoexpand = zpool_prop_default_numeric(ZPOOL_PROP_AUTOEXPAND);
@@ -2422,7 +2437,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  
  	if (props != NULL) {
  		spa_configfile_set(spa, props, B_FALSE);
-@@ -5872,6 +5914,12 @@
+@@ -5885,6 +5927,12 @@
  	if (tasks & SPA_ASYNC_RESILVER)
  		dsl_resilver_restart(spa->spa_dsl_pool, 0);
  
@@ -2435,7 +2450,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	/*
  	 * Let the world know that we're done.
  	 */
-@@ -5943,6 +5991,15 @@
+@@ -5956,6 +6004,15 @@
  	mutex_exit(&spa->spa_async_lock);
  }
  
@@ -2451,7 +2466,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  /*
   * ==========================================================================
   * SPA syncing routines
-@@ -6350,6 +6407,21 @@
+@@ -6363,6 +6420,21 @@
  			case ZPOOL_PROP_FAILUREMODE:
  				spa->spa_failmode = intval;
  				break;
@@ -2473,8 +2488,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  			case ZPOOL_PROP_AUTOEXPAND:
  				spa->spa_autoexpand = intval;
  				if (tx->tx_txg != TXG_INITIAL)
-@@ -6470,6 +6542,17 @@
- 	spa->spa_sync_pass = 0;
+@@ -6491,6 +6563,17 @@
+ 	mutex_exit(&spa->spa_alloc_lock);
  
  	/*
 +	 * Another pool management task might be currently preventing
@@ -2491,7 +2506,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	 * If there are any pending vdev state changes, convert them
  	 * into config changes that go out with this transaction group.
  	 */
-@@ -6870,6 +6953,271 @@
+@@ -6927,6 +7010,276 @@
  	zfs_post_sysevent(spa, vd, name);
  }
  
@@ -2571,12 +2586,17 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
 + * space to the underlying vdevs.
 + */
 +extern void
-+spa_man_trim(spa_t *spa, uint64_t rate)
++spa_man_trim(spa_t *spa, uint64_t rate, boolean_t fulltrim)
 +{
 +	dmu_tx_t *time_update_tx;
 +	uint64_t i;
++	void (*trimfunc)(void *);
 +
 +	mutex_enter(&spa->spa_man_trim_lock);
++	if (fulltrim)
++		trimfunc = (void (*)(void *))vdev_man_trim_full;
++	else
++		trimfunc = (void (*)(void *))vdev_man_trim;
 +
 +	if (rate != 0)
 +		spa->spa_man_trim_rate = MAX(rate, spa_min_trim_rate(spa));
@@ -2607,7 +2627,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
 +
 +		vd->vdev_trim_prog = 0;
 +		(void) taskq_dispatch(spa->spa_man_trim_taskq,
-+		    (void (*)(void *))vdev_man_trim, vti, TQ_SLEEP);
++		    trimfunc, vti, TQ_SLEEP);
 +	}
 +	spa_config_exit(spa, SCL_CONFIG, FTAG);
 +	time_update_tx = spa_trim_update_time(spa, gethrestime_sec(), 0);
@@ -2764,8 +2784,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  /* state manipulation functions */
  EXPORT_SYMBOL(spa_open);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/spa_config.c
---- zfs-kmod-9999.orig/module/zfs/spa_config.c	2016-10-06 22:34:50.620220175 +0200
-+++ zfs-kmod-9999/module/zfs/spa_config.c	2016-10-06 22:35:27.892537046 +0200
+--- zfs-kmod-9999.orig/module/zfs/spa_config.c	2016-11-12 09:18:08.469987571 +0100
++++ zfs-kmod-9999/module/zfs/spa_config.c	2016-11-12 09:19:17.018526249 +0100
 @@ -21,8 +21,8 @@
  
  /*
@@ -2776,7 +2796,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/s
   */
  
  #include <sys/spa.h>
-@@ -492,6 +492,19 @@
+@@ -493,6 +493,19 @@
  	fnvlist_add_nvlist(config, ZPOOL_CONFIG_VDEV_TREE, nvroot);
  	nvlist_free(nvroot);
  
@@ -2797,8 +2817,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/s
  	 * Store what's necessary for reading the MOS in the label.
  	 */
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa_misc.c
---- zfs-kmod-9999.orig/module/zfs/spa_misc.c	2016-10-06 22:34:50.620220175 +0200
-+++ zfs-kmod-9999/module/zfs/spa_misc.c	2016-10-06 22:35:27.893537054 +0200
+--- zfs-kmod-9999.orig/module/zfs/spa_misc.c	2016-11-12 09:18:08.470987579 +0100
++++ zfs-kmod-9999/module/zfs/spa_misc.c	2016-11-12 09:19:17.029526336 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -2841,10 +2861,10 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  /*
   * ==========================================================================
   * SPA config locking
-@@ -564,12 +583,17 @@
- 	mutex_init(&spa->spa_suspend_lock, NULL, MUTEX_DEFAULT, NULL);
+@@ -565,12 +584,17 @@
  	mutex_init(&spa->spa_vdev_top_lock, NULL, MUTEX_DEFAULT, NULL);
  	mutex_init(&spa->spa_feat_stats_lock, NULL, MUTEX_DEFAULT, NULL);
+ 	mutex_init(&spa->spa_alloc_lock, NULL, MUTEX_DEFAULT, NULL);
 +	mutex_init(&spa->spa_auto_trim_lock, NULL, MUTEX_DEFAULT, NULL);
 +	mutex_init(&spa->spa_man_trim_lock, NULL, MUTEX_DEFAULT, NULL);
  
@@ -2859,7 +2879,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  
  	for (t = 0; t < TXG_SIZE; t++)
  		bplist_create(&spa->spa_free_bplist[t]);
-@@ -626,6 +650,8 @@
+@@ -630,6 +654,8 @@
  		    KM_SLEEP) == 0);
  	}
  
@@ -2868,7 +2888,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	spa->spa_debug = ((zfs_flags & ZFS_DEBUG_SPA) != 0);
  
  	spa->spa_min_ashift = INT_MAX;
-@@ -685,6 +711,8 @@
+@@ -690,6 +716,8 @@
  	spa_stats_destroy(spa);
  	spa_config_lock_destroy(spa);
  
@@ -2877,7 +2897,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	for (t = 0; t < TXG_SIZE; t++)
  		bplist_destroy(&spa->spa_free_bplist[t]);
  
-@@ -695,6 +723,9 @@
+@@ -700,6 +728,9 @@
  	cv_destroy(&spa->spa_proc_cv);
  	cv_destroy(&spa->spa_scrub_io_cv);
  	cv_destroy(&spa->spa_suspend_cv);
@@ -2885,9 +2905,9 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
 +	cv_destroy(&spa->spa_man_trim_update_cv);
 +	cv_destroy(&spa->spa_man_trim_done_cv);
  
+ 	mutex_destroy(&spa->spa_alloc_lock);
  	mutex_destroy(&spa->spa_async_lock);
- 	mutex_destroy(&spa->spa_errlist_lock);
-@@ -708,6 +739,8 @@
+@@ -714,6 +745,8 @@
  	mutex_destroy(&spa->spa_suspend_lock);
  	mutex_destroy(&spa->spa_vdev_top_lock);
  	mutex_destroy(&spa->spa_feat_stats_lock);
@@ -2896,7 +2916,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  
  	kmem_free(spa, sizeof (spa_t));
  }
-@@ -1026,6 +1059,9 @@
+@@ -1032,6 +1065,9 @@
  {
  	mutex_enter(&spa->spa_vdev_top_lock);
  	mutex_enter(&spa_namespace_lock);
@@ -2906,7 +2926,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	return (spa_vdev_config_enter(spa));
  }
  
-@@ -1116,6 +1152,8 @@
+@@ -1122,6 +1158,8 @@
  spa_vdev_exit(spa_t *spa, vdev_t *vd, uint64_t txg, int error)
  {
  	spa_vdev_config_exit(spa, vd, txg, error, FTAG);
@@ -2915,7 +2935,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	mutex_exit(&spa_namespace_lock);
  	mutex_exit(&spa->spa_vdev_top_lock);
  
-@@ -1714,6 +1752,18 @@
+@@ -1720,6 +1758,18 @@
  	return (spa->spa_deadman_synctime);
  }
  
@@ -2934,7 +2954,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  uint64_t
  dva_get_dsize_sync(spa_t *spa, const dva_t *dva)
  {
-@@ -2006,6 +2056,182 @@
+@@ -2012,6 +2062,182 @@
  		return (DNODE_MIN_SIZE);
  }
  
@@ -3118,8 +3138,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  /* Namespace manipulation */
  EXPORT_SYMBOL(spa_lookup);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/trace.c zfs-kmod-9999/module/zfs/trace.c
---- zfs-kmod-9999.orig/module/zfs/trace.c	2016-10-06 22:34:50.621220184 +0200
-+++ zfs-kmod-9999/module/zfs/trace.c	2016-10-06 22:35:27.893537054 +0200
+--- zfs-kmod-9999.orig/module/zfs/trace.c	2016-11-12 09:18:08.471987587 +0100
++++ zfs-kmod-9999/module/zfs/trace.c	2016-11-12 09:19:16.951525723 +0100
 @@ -26,6 +26,7 @@
  #include <sys/multilist.h>
  #include <sys/arc_impl.h>
@@ -3137,8 +3157,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/trace.c zfs-kmod-9999/module/zfs/trace.
  #include <sys/trace_zio.h>
  #include <sys/trace_zrlock.h>
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
---- zfs-kmod-9999.orig/module/zfs/vdev.c	2016-10-06 22:34:50.622220192 +0200
-+++ zfs-kmod-9999/module/zfs/vdev.c	2016-10-06 22:35:27.893537054 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev.c	2016-11-12 09:18:08.473987603 +0100
++++ zfs-kmod-9999/module/zfs/vdev.c	2016-11-12 09:19:17.044526454 +0100
 @@ -21,7 +21,7 @@
  
  /*
@@ -3148,15 +3168,15 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
   * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
   */
  
-@@ -44,6 +44,7 @@
- #include <sys/zil.h>
+@@ -45,6 +45,7 @@
  #include <sys/dsl_scan.h>
  #include <sys/zvol.h>
+ #include <sys/zfs_ratelimit.h>
 +#include <sys/trace_vdev.h>
  
  /*
   * When a vdev is added, it will be divided into approximately (but no
-@@ -3633,6 +3634,98 @@
+@@ -3669,6 +3670,116 @@
  	}
  }
  
@@ -3164,9 +3184,11 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
 + * Implements the per-vdev portion of manual TRIM. The function passes over
 + * all metaslabs on this vdev and performs a metaslab_trim_all on them. It's
 + * also responsible for rate-control if spa_man_trim_rate is non-zero.
++ *
++ * If fulltrim is set, metaslabs without spacemaps are also trimmed.
 + */
-+void
-+vdev_man_trim(vdev_trim_info_t *vti)
++static void
++vdev_man_trim_impl(vdev_trim_info_t *vti, boolean_t fulltrim)
 +{
 +	clock_t t = ddi_get_lbolt();
 +	spa_t *spa = vti->vti_vdev->vdev_spa;
@@ -3180,8 +3202,12 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
 +	    !spa->spa_man_trim_stop; i++) {
 +		uint64_t delta;
 +		metaslab_t *msp = vd->vdev_ms[i];
-+		zio_t *trim_io = metaslab_trim_all(msp, &delta);
++		zio_t *trim_io;
 +
++		if (msp->ms_sm == NULL && !fulltrim)
++			continue;
++
++		trim_io = metaslab_trim_all(msp, &delta);
 +		atomic_add_64(&vd->vdev_trim_prog, msp->ms_size);
 +		spa_config_exit(spa, SCL_STATE_ALL, FTAG);
 +
@@ -3230,6 +3256,18 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
 +	kmem_free(vti, sizeof (*vti));
 +}
 +
++void
++vdev_man_trim(vdev_trim_info_t *vti)
++{
++	vdev_man_trim_impl(vti, B_FALSE);
++}
++
++void
++vdev_man_trim_full(vdev_trim_info_t *vti)
++{
++	vdev_man_trim_impl(vti, B_TRUE);
++}
++
 +/*
 + * Runs through all metaslabs on the vdev and does their autotrim processing.
 + */
@@ -3256,8 +3294,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
  EXPORT_SYMBOL(vdev_fault);
  EXPORT_SYMBOL(vdev_degrade);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vdev_disk.c
---- zfs-kmod-9999.orig/module/zfs/vdev_disk.c	2016-10-06 22:34:50.622220192 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_disk.c	2016-10-06 22:35:27.893537054 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_disk.c	2016-11-12 09:18:08.474987611 +0100
++++ zfs-kmod-9999/module/zfs/vdev_disk.c	2016-11-12 09:19:17.021526273 +0100
 @@ -24,6 +24,7 @@
   * Rewritten for Linux by Brian Behlendorf <behlendorf1@llnl.gov>.
   * LLNL-CODE-403049.
@@ -3347,8 +3385,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vdev_file.c
---- zfs-kmod-9999.orig/module/zfs/vdev_file.c	2016-10-06 22:34:50.622220192 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_file.c	2016-10-06 22:35:27.894537063 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_file.c	2016-11-12 09:18:08.474987611 +0100
++++ zfs-kmod-9999/module/zfs/vdev_file.c	2016-11-12 09:19:17.021526273 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3367,7 +3405,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  
  /*
   * Virtual device vector for files.
-@@ -209,6 +213,36 @@
+@@ -210,6 +214,36 @@
  			zio->io_error = VOP_FSYNC(vf->vf_vnode, FSYNC | FDSYNC,
  			    kcred, NULL);
  			break;
@@ -3404,7 +3442,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  		default:
  			zio->io_error = SET_ERROR(ENOTSUP);
  		}
-@@ -238,6 +272,7 @@
+@@ -239,6 +273,7 @@
  	NULL,
  	vdev_file_hold,
  	vdev_file_rele,
@@ -3412,7 +3450,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  	VDEV_TYPE_FILE,		/* name of this vdev type */
  	B_TRUE			/* leaf vdev */
  };
-@@ -256,6 +291,7 @@
+@@ -257,6 +292,7 @@
  	NULL,
  	vdev_file_hold,
  	vdev_file_rele,
@@ -3421,8 +3459,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/vdev_label.c
---- zfs-kmod-9999.orig/module/zfs/vdev_label.c	2016-10-06 22:34:50.622220192 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_label.c	2016-10-06 22:35:27.894537063 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_label.c	2016-11-12 09:18:08.474987611 +0100
++++ zfs-kmod-9999/module/zfs/vdev_label.c	2016-11-12 09:19:17.022526281 +0100
 @@ -22,6 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3431,7 +3469,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/v
   */
  
  /*
-@@ -531,6 +532,12 @@
+@@ -535,6 +536,12 @@
  			fnvlist_add_uint64(nv, ZPOOL_CONFIG_ORIG_GUID,
  			    vd->vdev_orig_guid);
  		}
@@ -3445,17 +3483,17 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/v
  
  	return (nv);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/vdev_mirror.c
---- zfs-kmod-9999.orig/module/zfs/vdev_mirror.c	2016-10-06 22:34:50.623220201 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_mirror.c	2016-10-06 22:35:27.894537063 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_mirror.c	2016-11-12 09:18:08.475987618 +0100
++++ zfs-kmod-9999/module/zfs/vdev_mirror.c	2016-11-12 09:19:17.022526281 +0100
 @@ -25,6 +25,7 @@
  
  /*
-  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
+  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
 + * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
   */
  
  #include <sys/zfs_context.h>
-@@ -612,6 +613,7 @@
+@@ -613,6 +614,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3463,7 +3501,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	VDEV_TYPE_MIRROR,	/* name of this vdev type */
  	B_FALSE			/* not a leaf vdev */
  };
-@@ -625,6 +627,7 @@
+@@ -626,6 +628,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3471,7 +3509,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	VDEV_TYPE_REPLACING,	/* name of this vdev type */
  	B_FALSE			/* not a leaf vdev */
  };
-@@ -638,6 +641,7 @@
+@@ -639,6 +642,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3480,8 +3518,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	B_FALSE			/* not a leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_missing.c zfs-kmod-9999/module/zfs/vdev_missing.c
---- zfs-kmod-9999.orig/module/zfs/vdev_missing.c	2016-10-06 22:34:50.623220201 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_missing.c	2016-10-06 22:35:27.894537063 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_missing.c	2016-11-12 09:18:08.475987618 +0100
++++ zfs-kmod-9999/module/zfs/vdev_missing.c	2016-11-12 09:19:17.022526281 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -3507,8 +3545,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_missing.c zfs-kmod-9999/module/zfs
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/vdev_raidz.c
---- zfs-kmod-9999.orig/module/zfs/vdev_raidz.c	2016-10-06 22:34:50.623220201 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_raidz.c	2016-10-06 22:35:27.894537063 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_raidz.c	2016-11-12 09:18:08.476987626 +0100
++++ zfs-kmod-9999/module/zfs/vdev_raidz.c	2016-11-12 09:19:17.032526359 +0100
 @@ -23,6 +23,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
@@ -3800,21 +3838,21 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  	B_FALSE			/* not a leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c zfs-kmod-9999/module/zfs/vdev_raidz_math.c
---- zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c	2016-10-06 22:34:50.623220201 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_raidz_math.c	2016-10-06 22:35:27.895537071 +0200
-@@ -477,8 +477,9 @@
+--- zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c	2016-11-12 09:18:08.476987626 +0100
++++ zfs-kmod-9999/module/zfs/vdev_raidz_math.c	2016-11-12 09:19:16.955525754 +0100
+@@ -483,8 +483,9 @@
  	for (fn = 0; fn < RAIDZ_GEN_NUM; fn++) {
  		bench_parity = fn + 1;
  		/* New raidz_map is needed for each generate_p/q/r */
 -		bench_rm = vdev_raidz_map_alloc(bench_zio, SPA_MINBLOCKSHIFT,
 -		    BENCH_D_COLS + bench_parity, bench_parity);
 +		bench_rm = vdev_raidz_map_alloc(bench_zio->io_data,
-+		    BENCH_ZIO_SIZE, 0, SPA_MINBLOCKSHIFT,
-+		    BENCH_D_COLS + bench_parity, bench_parity, B_TRUE);
++		    BENCH_ZIO_SIZE, 0, SPA_MINBLOCKSHIFT, BENCH_D_COLS +
++		    bench_parity, bench_parity, B_TRUE);
  
  		benchmark_raidz_impl(bench_rm, fn, benchmark_gen_impl);
  
-@@ -486,8 +487,8 @@
+@@ -492,8 +493,8 @@
  	}
  
  	/* Benchmark data reconstruction methods */
@@ -3826,8 +3864,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c zfs-kmod-9999/module/
  	for (fn = 0; fn < RAIDZ_REC_NUM; fn++)
  		benchmark_raidz_impl(bench_rm, fn, benchmark_rec_impl);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_root.c zfs-kmod-9999/module/zfs/vdev_root.c
---- zfs-kmod-9999.orig/module/zfs/vdev_root.c	2016-10-06 22:34:50.625220218 +0200
-+++ zfs-kmod-9999/module/zfs/vdev_root.c	2016-10-06 22:35:27.895537071 +0200
+--- zfs-kmod-9999.orig/module/zfs/vdev_root.c	2016-11-12 09:18:08.481987666 +0100
++++ zfs-kmod-9999/module/zfs/vdev_root.c	2016-11-12 09:19:17.023526289 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -3845,9 +3883,9 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_root.c zfs-kmod-9999/module/zfs/vd
  	B_FALSE			/* not a leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zfs_ioctl.c
---- zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c	2016-10-06 22:34:50.629220252 +0200
-+++ zfs-kmod-9999/module/zfs/zfs_ioctl.c	2016-10-06 22:35:27.896537080 +0200
-@@ -1673,6 +1673,36 @@
+--- zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c	2016-11-12 09:18:08.487987713 +0100
++++ zfs-kmod-9999/module/zfs/zfs_ioctl.c	2016-11-12 09:19:17.045526461 +0100
+@@ -1680,6 +1680,36 @@
  	return (error);
  }
  
@@ -3871,7 +3909,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zf
 +		return (error);
 +
 +	if (tci.tci_start) {
-+		spa_man_trim(spa, tci.tci_rate);
++		spa_man_trim(spa, tci.tci_rate, tci.tci_fulltrim);
 +	} else {
 +		spa_man_trim_stop(spa);
 +	}
@@ -3884,7 +3922,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zf
  static int
  zfs_ioc_pool_freeze(zfs_cmd_t *zc)
  {
-@@ -5783,6 +5813,8 @@
+@@ -5849,6 +5879,8 @@
  	    zfs_secpolicy_config, B_TRUE, POOL_CHECK_NONE);
  	zfs_ioctl_register_pool_modify(ZFS_IOC_POOL_SCAN,
  	    zfs_ioc_pool_scan);
@@ -3894,8 +3932,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zf
  	    zfs_ioc_pool_upgrade);
  	zfs_ioctl_register_pool_modify(ZFS_IOC_VDEV_ADD,
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
---- zfs-kmod-9999.orig/module/zfs/zio.c	2016-10-06 22:34:50.633220286 +0200
-+++ zfs-kmod-9999/module/zfs/zio.c	2016-10-06 22:35:27.896537080 +0200
+--- zfs-kmod-9999.orig/module/zfs/zio.c	2016-11-12 09:18:08.493987760 +0100
++++ zfs-kmod-9999/module/zfs/zio.c	2016-11-12 09:19:17.028526328 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3905,8 +3943,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
   */
  
  #include <sys/sysmacros.h>
-@@ -41,6 +41,9 @@
- #include <sys/zfeature.h>
+@@ -42,6 +42,9 @@
+ #include <sys/metaslab_impl.h>
  #include <sys/time.h>
  #include <sys/trace_zio.h>
 +#include <sys/dkioc_free_util.h>
@@ -3915,9 +3953,9 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  
  /*
   * ==========================================================================
-@@ -100,6 +103,14 @@
+@@ -109,6 +112,14 @@
  
- static inline void __zio_execute(zio_t *zio);
+ static void zio_taskq_dispatch(zio_t *, zio_taskq_type_t, boolean_t);
  
 +/*
 + * Tunable to allow for debugging SCSI UNMAP/SATA TRIM calls. Disabling
@@ -3930,7 +3968,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  void
  zio_init(void)
  {
-@@ -916,9 +927,10 @@
+@@ -941,9 +952,10 @@
  	return (zio);
  }
  
@@ -3944,7 +3982,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  {
  	zio_t *zio;
  	int c;
-@@ -926,21 +938,144 @@
+@@ -951,21 +963,144 @@
  	if (vd->vdev_children == 0) {
  		zio = zio_create(pio, spa, 0, NULL, NULL, 0, 0, done, private,
  		    ZIO_TYPE_IOCTL, ZIO_PRIORITY_NOW, flags, vd, 0, NULL,
@@ -4095,10 +4133,10 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  zio_read_phys(zio_t *pio, vdev_t *vd, uint64_t offset, uint64_t size,
      void *data, int checksum, zio_done_func_t *done, void *private,
      zio_priority_t priority, enum zio_flag flags, boolean_t labels)
-@@ -3778,4 +3913,12 @@
- module_param(zfs_sync_pass_rewrite, int, 0644);
- MODULE_PARM_DESC(zfs_sync_pass_rewrite,
- 	"Rewrite new bps starting in this pass");
+@@ -4123,4 +4258,12 @@
+ module_param(zio_dva_throttle_enabled, int, 0644);
+ MODULE_PARM_DESC(zio_dva_throttle_enabled,
+ 	"Throttle block allocations in the ZIO pipeline");
 +
 +module_param(zfs_trim, int, 0644);
 +MODULE_PARM_DESC(zfs_trim,
@@ -4109,8 +4147,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
 +	"Minimum size to TRIM");
  #endif
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zvol.c zfs-kmod-9999/module/zfs/zvol.c
---- zfs-kmod-9999.orig/module/zfs/zvol.c	2016-10-06 22:34:50.635220303 +0200
-+++ zfs-kmod-9999/module/zfs/zvol.c	2016-10-06 22:35:27.897537088 +0200
+--- zfs-kmod-9999.orig/module/zfs/zvol.c	2016-11-12 09:18:08.497987791 +0100
++++ zfs-kmod-9999/module/zfs/zvol.c	2016-11-12 09:19:17.024526296 +0100
 @@ -34,7 +34,7 @@
   * Volumes are persistent through reboot and module load.  No user command
   * needs to be run before opening and using a device.
@@ -4121,24 +4159,15 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zvol.c zfs-kmod-9999/module/zfs/zvol.c
   */
  
 diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg
---- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-10-06 22:34:50.717221000 +0200
-+++ zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-10-06 22:38:52.818279220 +0200
-@@ -33,12 +33,12 @@
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-11-12 09:18:08.694989339 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-11-12 09:19:17.029526336 +0100
+@@ -33,7 +33,8 @@
  typeset -a properties=("size" "capacity" "altroot" "health" "guid" "version"
      "bootfs" "delegation" "autoreplace" "cachefile" "dedupditto" "dedupratio"
      "free" "allocated" "readonly" "comment" "expandsize" "freeing" "failmode"
 -    "listsnapshots" "autoexpand" "fragmentation" "leaked" "ashift"
--    "feature@async_destroy" "feature@empty_bpobj" "feature@lz4_compress"
--    "feature@large_blocks" "feature@large_dnode" "feature@filesystem_limits"
--    "feature@spacemap_histogram" "feature@enabled_txg" "feature@hole_birth"
--    "feature@extensible_dataset" "feature@bookmarks" "feature@embedded_data"
--    "feature@sha512" "feature@skein" "feature@edonr")
 +    "listsnapshots" "autoexpand" "fragmentation" "leaked" "ashift" "forcetrim"
-+    "autotrim" "feature@async_destroy" "feature@empty_bpobj"
-+    "feature@lz4_compress" "feature@large_blocks" "feature@large_dnode"
-+    "feature@filesystem_limits" "feature@spacemap_histogram" "feature@enabled_txg"
-+    "feature@hole_birth" "feature@extensible_dataset" "feature@bookmarks"
-+    "feature@embedded_data" "feature@sha512" "feature@skein" "feature@edonr")
- else
- typeset -a properties=("size" "capacity" "altroot" "health" "guid" "version"
-     "bootfs" ""leaked" delegation" "autoreplace" "cachefile" "dedupditto" "dedupratio"
++    "autotrim"
+     "feature@async_destroy" "feature@empty_bpobj" "feature@lz4_compress"
+     "feature@large_blocks" "feature@large_dnode" "feature@filesystem_limits"
+     "feature@spacemap_histogram" "feature@enabled_txg" "feature@hole_birth"

@@ -9,4 +9,3 @@ sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-kernel/linux-headers
 sys-libs/glibc
-x11-wm/lumina

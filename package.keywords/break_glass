@@ -5,6 +5,7 @@
 <app-emulation/winetricks-99999999
 <app-eselect/eselect-python-20151231
 <app-eselect/eselect-rust-0.4
+<app-laptop/laptop-mode-tools-1.80
 <app-misc/scrub-2.7
 <app-portage/gentoolkit-0.4
 <app-portage/layman-2.4
@@ -34,6 +35,8 @@
 <media-video/avidemux-2.7
 <net-libs/libupnp-1.6.20
 <net-libs/NativeThread-0_pre20081231
+<net-print/hplip-3.16.11
+<net-print/hplip-plugin-3.16.11
 <net-proxy/dante-1.5
 <net-proxy/torsocks-2.2
 <net-wireless/reaver-1.5
@@ -54,7 +57,7 @@
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
 <sys-process/criu-2.6
-<www-client/chromium-55
+<www-client/chromium-56
 <www-plugins/chrome-binary-plugins-55
 <x11-base/xorg-drivers-1.19
 <x11-base/xorg-server-1.19

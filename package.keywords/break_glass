@@ -48,12 +48,13 @@
 <sys-boot/grub-2.1
 <sys-devel/binutils-2.27
 <sys-devel/boost-m4-0.5
-<sys-devel/clang-3.9
+<sys-devel/clang-3.10
+<sys-devel/clang-runtime-3.10
 <sys-devel/gcc-6
-<sys-devel/llvm-3.9
-<sys-devel/llvm-3.9 **
+<sys-devel/llvm-3.10
 <sys-firmware/intel-microcode-20151231
 <sys-fs/cryptsetup-1.8
+<sys-libs/libomp-3.10
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
 <sys-process/criu-2.6

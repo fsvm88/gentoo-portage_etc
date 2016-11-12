@@ -1,0 +1,24 @@
+diff -Nuar envytools-9999.orig/hwtest/nv01_pgraph.cc envytools-9999/hwtest/nv01_pgraph.cc
+--- envytools-9999.orig/hwtest/nv01_pgraph.cc	2016-10-09 18:23:00.605809174 +0200
++++ envytools-9999/hwtest/nv01_pgraph.cc	2016-10-09 18:27:27.762553515 +0200
+@@ -223,8 +223,6 @@
+ 	state->pfb_boot = nva_rd32(ctx->cnum, 0x600000);
+ }
+ 
+-static_assert(sizeof (nv01_pgraph_state) == sizeof nv01_pgraph_state_regs);
+-static_assert(ARRAY_SIZE(nv01_pgraph_state_regs) == ARRAY_SIZE(nv01_pgraph_state_reg_names));
+ 
+ static void nv01_pgraph_load_state(struct hwtest_ctx *ctx, struct nv01_pgraph_state *state) {
+ 	unsigned i;
+diff -Nuar envytools-9999.orig/hwtest/nv03_pgraph.cc envytools-9999/hwtest/nv03_pgraph.cc
+--- envytools-9999.orig/hwtest/nv03_pgraph.cc	2016-10-09 18:23:00.606809181 +0200
++++ envytools-9999/hwtest/nv03_pgraph.cc	2016-10-09 18:27:40.978639807 +0200
+@@ -175,8 +175,6 @@
+ 	"STATUS",
+ };
+ 
+-static_assert(sizeof (nv03_pgraph_state) == sizeof nv03_pgraph_state_regs);
+-static_assert(ARRAY_SIZE(nv03_pgraph_state_regs) == ARRAY_SIZE(nv03_pgraph_state_reg_names));
+ 
+ static void nv03_pgraph_gen_state(struct hwtest_ctx *ctx, struct nv03_pgraph_state *state) {
+ 	unsigned i;

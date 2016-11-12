@@ -5,7 +5,6 @@
 <app-emulation/winetricks-99999999
 <app-eselect/eselect-python-20151231
 <app-eselect/eselect-rust-0.4
-<app-laptop/laptop-mode-tools-1.80
 <app-misc/scrub-2.7
 <app-portage/gentoolkit-0.4
 <app-portage/layman-2.4

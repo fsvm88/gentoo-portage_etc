@@ -18,7 +18,7 @@
 <dev-libs/hiredis-0.14
 <dev-libs/libixion-0.10
 <dev-python/hiredis-0.3
-<dev-util/cargo-0.13
+<dev-util/cargo-0.15
 <dev-util/cmake-3.7
 <dev-util/perf-4.5
 <dev-util/valgrind-3.12
@@ -28,6 +28,7 @@
 <media-libs/avidemux-plugins-2.7
 <media-libs/libpng-1.7
 <media-video/avidemux-2.7
+<net-dialup/ppp-2.4.7-r99
 <net-libs/libupnp-1.6.20
 <net-libs/NativeThread-0_pre20081231
 <net-print/hplip-3.16.11
@@ -38,6 +39,7 @@
 <sys-apps/dtc-1.5
 <sys-apps/ethtool-4.3
 <sys-apps/microcode-ctl-1.29
+<sys-apps/net-tools-1.60_p20161201235959
 <sys-apps/util-linux-2.28
 <sys-block/thin-provisioning-tools-0.6
 <sys-devel/binutils-2.27
@@ -54,5 +56,6 @@
 <sys-process/criu-2.6
 <www-client/chromium-56
 <x11-drivers/xf86-input-evdev-2.11
+<x11-libs/libdrm-2.4.74
 <x11-libs/libvdpau-va-gl-0.4
 <x11-terms/qterminal-0.7

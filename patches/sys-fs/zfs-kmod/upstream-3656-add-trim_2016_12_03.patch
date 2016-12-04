@@ -1,65 +1,6 @@
-diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c zfs-kmod-9999/cmd/raidz_test/raidz_bench.c
---- zfs-kmod-9999.orig/cmd/raidz_test/raidz_bench.c	2016-11-12 09:18:08.228985677 +0100
-+++ zfs-kmod-9999/cmd/raidz_test/raidz_bench.c	2016-11-12 09:19:16.931525566 +0100
-@@ -83,8 +83,9 @@
- 			/* create suitable raidz_map */
- 			ncols = rto_opts.rto_dcols + fn + 1;
- 			zio_bench.io_size = 1ULL << ds;
--			rm_bench = vdev_raidz_map_alloc(&zio_bench,
--			    BENCH_ASHIFT, ncols, fn+1);
-+			rm_bench = vdev_raidz_map_alloc(zio_bench.io_data,
-+			    zio_bench.io_size, zio_bench.io_offset,
-+			    BENCH_ASHIFT, ncols, fn+1, B_TRUE);
- 
- 			/* estimate iteration count */
- 			iter_cnt = GEN_BENCH_MEMORY;
-@@ -163,8 +164,9 @@
- 			    (1ULL << BENCH_ASHIFT))
- 				continue;
- 
--			rm_bench = vdev_raidz_map_alloc(&zio_bench,
--				BENCH_ASHIFT, ncols, PARITY_PQR);
-+			rm_bench = vdev_raidz_map_alloc(zio_bench.io_data,
-+			    zio_bench.io_size, zio_bench.io_offset,
-+			    BENCH_ASHIFT, ncols, PARITY_PQR, B_TRUE);
- 
- 			/* estimate iteration count */
- 			iter_cnt = (REC_BENCH_MEMORY);
-diff -Nuar zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c zfs-kmod-9999/cmd/raidz_test/raidz_test.c
---- zfs-kmod-9999.orig/cmd/raidz_test/raidz_test.c	2016-11-12 09:18:08.228985677 +0100
-+++ zfs-kmod-9999/cmd/raidz_test/raidz_test.c	2016-11-12 09:19:16.932525573 +0100
-@@ -287,10 +287,12 @@
- 
- 	VERIFY0(vdev_raidz_impl_set("original"));
- 
--	opts->rm_golden = vdev_raidz_map_alloc(opts->zio_golden,
--	    opts->rto_ashift, total_ncols, parity);
--	rm_test = vdev_raidz_map_alloc(zio_test,
--	    opts->rto_ashift, total_ncols, parity);
-+	opts->rm_golden = vdev_raidz_map_alloc(opts->zio_golden->io_data,
-+	    opts->rto_dsize, opts->rto_offset,
-+	    opts->rto_ashift, total_ncols, parity, B_TRUE);
-+	rm_test = vdev_raidz_map_alloc(zio_test->io_data,
-+	    zio_test->io_size, zio_test->io_offset,
-+	    opts->rto_ashift, total_ncols, parity, B_TRUE);
- 
- 	VERIFY(opts->zio_golden);
- 	VERIFY(opts->rm_golden);
-@@ -329,9 +331,8 @@
- 	(*zio)->io_data = raidz_alloc(alloc_dsize);
- 	init_zio_data(*zio);
- 
--	rm = vdev_raidz_map_alloc(*zio, opts->rto_ashift,
--		total_ncols, parity);
--	VERIFY(rm);
-+	rm = vdev_raidz_map_alloc((*zio)->io_data, alloc_dsize, 0,
-+	    opts->rto_ashift, total_ncols, parity, B_TRUE);
- 
- 	/* Make sure code columns are destroyed */
- 	corrupt_colums(rm, ccols, parity);
 diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpool_main.c
---- zfs-kmod-9999.orig/cmd/zpool/zpool_main.c	2016-11-12 09:18:08.254985882 +0100
-+++ zfs-kmod-9999/cmd/zpool/zpool_main.c	2016-11-12 09:19:17.036526391 +0100
+--- zfs-kmod-9999.orig/cmd/zpool/zpool_main.c	2016-12-03 20:10:01.625417201 +0100
++++ zfs-kmod-9999/cmd/zpool/zpool_main.c	2016-12-03 20:12:33.309921970 +0100
 @@ -85,6 +85,7 @@
  static int zpool_do_split(int, char **);
  
@@ -94,7 +35,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  	case HELP_STATUS:
  		return (gettext("\tstatus [-gLPvxD] [-T d|u] [pool] ... "
  		    "[interval [count]]\n"));
-@@ -5386,6 +5392,32 @@
+@@ -5432,6 +5438,32 @@
  	return (err != 0);
  }
  
@@ -127,7 +68,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  /*
   * zpool scrub [-s] <pool> ...
   *
-@@ -5426,6 +5458,57 @@
+@@ -5472,6 +5504,57 @@
  }
  
  /*
@@ -185,7 +126,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
   * Print out detailed scrub status.
   */
  void
-@@ -5538,6 +5621,59 @@
+@@ -5584,6 +5667,59 @@
  }
  
  static void
@@ -245,7 +186,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  print_error_log(zpool_handle_t *zhp)
  {
  	nvlist_t *nverrlist = NULL;
-@@ -5649,6 +5785,43 @@
+@@ -5695,6 +5831,43 @@
  }
  
  /*
@@ -289,7 +230,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
   * Display a summary of pool status.  Displays a summary such as:
   *
   *        pool: tank
-@@ -5943,6 +6116,7 @@
+@@ -5989,6 +6162,7 @@
  		nvlist_t **spares, **l2cache;
  		uint_t nspares, nl2cache;
  		pool_scan_stat_t *ps = NULL;
@@ -297,7 +238,7 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  
  		(void) nvlist_lookup_uint64_array(nvroot,
  		    ZPOOL_CONFIG_SCAN_STATS, (uint64_t **)&ps, &c);
-@@ -5953,6 +6127,24 @@
+@@ -5999,6 +6173,24 @@
  		if (cbp->cb_namewidth < 10)
  			cbp->cb_namewidth = 10;
  
@@ -322,9 +263,20 @@ diff -Nuar zfs-kmod-9999.orig/cmd/zpool/zpool_main.c zfs-kmod-9999/cmd/zpool/zpo
  		(void) printf(gettext("config:\n\n"));
  		(void) printf(gettext("\t%-*s  %-8s %5s %5s %5s\n"),
  		    cbp->cb_namewidth, "NAME", "STATE", "READ", "WRITE",
+diff -Nuar zfs-kmod-9999.orig/configure.ac zfs-kmod-9999/configure.ac
+--- zfs-kmod-9999.orig/configure.ac	2016-12-03 20:10:01.638417158 +0100
++++ zfs-kmod-9999/configure.ac	2016-12-03 20:12:33.312921960 +0100
+@@ -273,6 +273,7 @@
+ 	tests/zfs-tests/tests/functional/sparse/Makefile
+ 	tests/zfs-tests/tests/functional/threadsappend/Makefile
+ 	tests/zfs-tests/tests/functional/tmpfile/Makefile
++	tests/zfs-tests/tests/functional/trim/Makefile
+ 	tests/zfs-tests/tests/functional/truncate/Makefile
+ 	tests/zfs-tests/tests/functional/userquota/Makefile
+ 	tests/zfs-tests/tests/functional/upgrade/Makefile
 diff -Nuar zfs-kmod-9999.orig/include/libzfs.h zfs-kmod-9999/include/libzfs.h
---- zfs-kmod-9999.orig/include/libzfs.h	2016-11-12 09:18:08.293986188 +0100
-+++ zfs-kmod-9999/include/libzfs.h	2016-11-12 09:19:17.037526399 +0100
+--- zfs-kmod-9999.orig/include/libzfs.h	2016-12-03 20:10:01.647417129 +0100
++++ zfs-kmod-9999/include/libzfs.h	2016-12-03 20:12:33.309921970 +0100
 @@ -259,6 +259,8 @@
   * Functions to manipulate pool and vdev state
   */
@@ -335,8 +287,8 @@ diff -Nuar zfs-kmod-9999.orig/include/libzfs.h zfs-kmod-9999/include/libzfs.h
  extern int zpool_reguid(zpool_handle_t *);
  extern int zpool_reopen(zpool_handle_t *);
 diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
---- zfs-kmod-9999.orig/include/sys/dmu.h	2016-11-12 09:18:08.303986267 +0100
-+++ zfs-kmod-9999/include/sys/dmu.h	2016-11-12 09:19:17.009526179 +0100
+--- zfs-kmod-9999.orig/include/sys/dmu.h	2016-12-03 20:10:01.652417113 +0100
++++ zfs-kmod-9999/include/sys/dmu.h	2016-12-03 20:12:33.298922006 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -356,8 +308,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/dmu.h zfs-kmod-9999/include/sys/dmu.h
  /*
   * Allocate an object from this objset.  The range of object numbers
 diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/zfs.h
---- zfs-kmod-9999.orig/include/sys/fs/zfs.h	2016-11-12 09:18:08.311986330 +0100
-+++ zfs-kmod-9999/include/sys/fs/zfs.h	2016-11-12 09:19:17.037526399 +0100
+--- zfs-kmod-9999.orig/include/sys/fs/zfs.h	2016-12-03 20:10:01.657417096 +0100
++++ zfs-kmod-9999/include/sys/fs/zfs.h	2016-12-03 20:12:33.309921970 +0100
 @@ -22,7 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -412,9 +364,9 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/fs/zfs.h zfs-kmod-9999/include/sys/fs/
  	/*
  	 * FreeBSD - 1/64 numbers reserved.
 diff -Nuar zfs-kmod-9999.orig/include/sys/Makefile.am zfs-kmod-9999/include/sys/Makefile.am
---- zfs-kmod-9999.orig/include/sys/Makefile.am	2016-11-12 09:18:08.297986220 +0100
-+++ zfs-kmod-9999/include/sys/Makefile.am	2016-11-12 09:19:16.934525589 +0100
-@@ -66,6 +66,7 @@
+--- zfs-kmod-9999.orig/include/sys/Makefile.am	2016-12-03 20:10:01.649417122 +0100
++++ zfs-kmod-9999/include/sys/Makefile.am	2016-12-03 20:12:33.280922065 +0100
+@@ -67,6 +67,7 @@
  	$(top_srcdir)/include/sys/trace_dnode.h \
  	$(top_srcdir)/include/sys/trace_multilist.h \
  	$(top_srcdir)/include/sys/trace_txg.h \
@@ -423,8 +375,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/Makefile.am zfs-kmod-9999/include/sys/
  	$(top_srcdir)/include/sys/trace_zio.h \
  	$(top_srcdir)/include/sys/trace_zrlock.h \
 diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/metaslab.h
---- zfs-kmod-9999.orig/include/sys/metaslab.h	2016-11-12 09:18:08.311986330 +0100
-+++ zfs-kmod-9999/include/sys/metaslab.h	2016-11-12 09:19:17.010526186 +0100
+--- zfs-kmod-9999.orig/include/sys/metaslab.h	2016-12-03 20:10:01.657417096 +0100
++++ zfs-kmod-9999/include/sys/metaslab.h	2016-12-03 20:12:33.299922003 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -460,8 +412,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab.h zfs-kmod-9999/include/sys/m
  }
  #endif
 diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/sys/metaslab_impl.h
---- zfs-kmod-9999.orig/include/sys/metaslab_impl.h	2016-11-12 09:18:08.312986337 +0100
-+++ zfs-kmod-9999/include/sys/metaslab_impl.h	2016-11-12 09:19:17.010526186 +0100
+--- zfs-kmod-9999.orig/include/sys/metaslab_impl.h	2016-12-03 20:10:01.657417096 +0100
++++ zfs-kmod-9999/include/sys/metaslab_impl.h	2016-12-03 20:12:33.299922003 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -502,8 +454,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/metaslab_impl.h zfs-kmod-9999/include/
  	boolean_t	ms_condensing;	/* condensing? */
  	boolean_t	ms_condense_wanted;
 diff -Nuar zfs-kmod-9999.orig/include/sys/range_tree.h zfs-kmod-9999/include/sys/range_tree.h
---- zfs-kmod-9999.orig/include/sys/range_tree.h	2016-11-12 09:18:08.314986353 +0100
-+++ zfs-kmod-9999/include/sys/range_tree.h	2016-11-12 09:19:17.010526186 +0100
+--- zfs-kmod-9999.orig/include/sys/range_tree.h	2016-12-03 20:10:01.658417093 +0100
++++ zfs-kmod-9999/include/sys/range_tree.h	2016-12-03 20:12:33.299922003 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -529,8 +481,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/range_tree.h zfs-kmod-9999/include/sys
  
  void range_tree_vacate(range_tree_t *rt, range_tree_func_t *func, void *arg);
 diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
---- zfs-kmod-9999.orig/include/sys/spa.h	2016-11-12 09:18:08.316986369 +0100
-+++ zfs-kmod-9999/include/sys/spa.h	2016-11-12 09:19:17.037526399 +0100
+--- zfs-kmod-9999.orig/include/sys/spa.h	2016-12-03 20:10:01.659417090 +0100
++++ zfs-kmod-9999/include/sys/spa.h	2016-12-03 20:12:33.310921967 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -540,7 +492,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
   * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
   * Copyright 2013 Saso Kiselkov. All rights reserved.
   */
-@@ -577,6 +577,28 @@
+@@ -578,6 +578,28 @@
  	SPA_IMPORT_ASSEMBLE
  } spa_import_type_t;
  
@@ -607,7 +559,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
  /* spa syncing */
  extern void spa_sync(spa_t *spa, uint64_t txg); /* only for DMU use */
  extern void spa_sync_allpools(void);
-@@ -806,6 +836,8 @@
+@@ -814,6 +844,8 @@
  extern uint64_t spa_delegation(spa_t *spa);
  extern objset_t *spa_meta_objset(spa_t *spa);
  extern uint64_t spa_deadman_synctime(spa_t *spa);
@@ -616,7 +568,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
  
  /* Miscellaneous support routines */
  extern void spa_activate_mos_feature(spa_t *spa, const char *feature,
-@@ -889,6 +921,11 @@
+@@ -897,6 +929,11 @@
  /* asynchronous event notification */
  extern void spa_event_notify(spa_t *spa, vdev_t *vdev, const char *name);
  
@@ -629,8 +581,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa.h zfs-kmod-9999/include/sys/spa.h
  #define	dprintf_bp(bp, fmt, ...) do {				\
  	if (zfs_flags & ZFS_DEBUG_DPRINTF) {			\
 diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/spa_impl.h
---- zfs-kmod-9999.orig/include/sys/spa_impl.h	2016-11-12 09:18:08.317986377 +0100
-+++ zfs-kmod-9999/include/sys/spa_impl.h	2016-11-12 09:19:17.013526210 +0100
+--- zfs-kmod-9999.orig/include/sys/spa_impl.h	2016-12-03 20:10:01.660417086 +0100
++++ zfs-kmod-9999/include/sys/spa_impl.h	2016-12-03 20:12:33.299922003 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -649,7 +601,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  struct spa {
  	/*
  	 * Fields protected by spa_namespace_lock.
-@@ -266,6 +268,31 @@
+@@ -267,6 +269,31 @@
  	uint64_t	spa_deadman_synctime;	/* deadman expiration timer */
  	uint64_t	spa_all_vdev_zaps;	/* ZAP of per-vd ZAP obj #s */
  	spa_avz_action_t	spa_avz_action;	/* destroy/rebuild AVZ? */
@@ -681,7 +633,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  	uint64_t	spa_errata;		/* errata issues detected */
  	spa_stats_t	spa_stats;		/* assorted spa statistics */
  	hrtime_t	spa_ccw_fail_time;	/* Conf cache write fail time */
-@@ -290,6 +317,10 @@
+@@ -291,6 +318,10 @@
  extern void spa_taskq_dispatch_sync(spa_t *, zio_type_t t, zio_taskq_type_t q,
      task_func_t *func, void *arg, uint_t flags);
  
@@ -693,8 +645,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/spa_impl.h zfs-kmod-9999/include/sys/s
  #ifdef	__cplusplus
  }
 diff -Nuar zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h zfs-kmod-9999/include/sys/sysevent/eventdefs.h
---- zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h	2016-11-12 09:18:08.319986393 +0100
-+++ zfs-kmod-9999/include/sys/sysevent/eventdefs.h	2016-11-12 09:19:16.936525605 +0100
+--- zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h	2016-12-03 20:10:01.661417083 +0100
++++ zfs-kmod-9999/include/sys/sysevent/eventdefs.h	2016-12-03 20:12:33.281922062 +0100
 @@ -112,6 +112,8 @@
  #define	ESC_ZFS_VDEV_AUTOEXPAND		"vdev_autoexpand"
  #define	ESC_ZFS_BOOTFS_VDEV_ATTACH	"bootfs_vdev_attach"
@@ -706,7 +658,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/sysevent/eventdefs.h zfs-kmod-9999/inc
   * datalink subclass definitions.
 diff -Nuar zfs-kmod-9999.orig/include/sys/trace_vdev.h zfs-kmod-9999/include/sys/trace_vdev.h
 --- zfs-kmod-9999.orig/include/sys/trace_vdev.h	1970-01-01 01:00:00.000000000 +0100
-+++ zfs-kmod-9999/include/sys/trace_vdev.h	2016-11-12 09:19:16.937525613 +0100
++++ zfs-kmod-9999/include/sys/trace_vdev.h	2016-12-03 20:12:33.281922062 +0100
 @@ -0,0 +1,79 @@
 +/*
 + * CDDL HEADER START
@@ -788,8 +740,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/trace_vdev.h zfs-kmod-9999/include/sys
 +
 +#endif /* _KERNEL && HAVE_DECLARE_EVENT_CLASS */
 diff -Nuar zfs-kmod-9999.orig/include/sys/vdev.h zfs-kmod-9999/include/sys/vdev.h
---- zfs-kmod-9999.orig/include/sys/vdev.h	2016-11-12 09:18:08.335986518 +0100
-+++ zfs-kmod-9999/include/sys/vdev.h	2016-11-12 09:19:17.038526406 +0100
+--- zfs-kmod-9999.orig/include/sys/vdev.h	2016-12-03 20:10:01.669417057 +0100
++++ zfs-kmod-9999/include/sys/vdev.h	2016-12-03 20:12:33.310921967 +0100
 @@ -22,6 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -824,8 +776,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev.h zfs-kmod-9999/include/sys/vdev.
   * Label routines
   */
 diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/vdev_impl.h
---- zfs-kmod-9999.orig/include/sys/vdev_impl.h	2016-11-12 09:18:08.336986526 +0100
-+++ zfs-kmod-9999/include/sys/vdev_impl.h	2016-11-12 09:19:17.013526210 +0100
+--- zfs-kmod-9999.orig/include/sys/vdev_impl.h	2016-12-03 20:10:01.669417057 +0100
++++ zfs-kmod-9999/include/sys/vdev_impl.h	2016-12-03 20:12:33.300921999 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -834,7 +786,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
   */
  
  #ifndef _SYS_VDEV_IMPL_H
-@@ -69,6 +70,7 @@
+@@ -70,6 +71,7 @@
  typedef void	vdev_state_change_func_t(vdev_t *vd, int, int);
  typedef void	vdev_hold_func_t(vdev_t *vd);
  typedef void	vdev_rele_func_t(vdev_t *vd);
@@ -842,7 +794,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  
  typedef const struct vdev_ops {
  	vdev_open_func_t		*vdev_op_open;
-@@ -79,6 +81,7 @@
+@@ -80,6 +82,7 @@
  	vdev_state_change_func_t	*vdev_op_state_change;
  	vdev_hold_func_t		*vdev_op_hold;
  	vdev_rele_func_t		*vdev_op_rele;
@@ -850,7 +802,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  	char				vdev_op_type[16];
  	boolean_t			vdev_op_leaf;
  } vdev_ops_t;
-@@ -185,6 +188,8 @@
+@@ -186,6 +189,8 @@
  	kmutex_t	vdev_queue_lock; /* protects vdev_queue_depth	*/
  	uint64_t	vdev_top_zap;
  
@@ -859,7 +811,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  	/*
  	 * The queue depth parameters determine how many async writes are
  	 * still pending (i.e. allocated by net yet issued to disk) per
-@@ -218,6 +223,7 @@
+@@ -219,6 +224,7 @@
  	uint64_t	vdev_not_present; /* not present during import	*/
  	uint64_t	vdev_unspare;	/* unspare when resilvering done */
  	boolean_t	vdev_nowritecache; /* true if flushwritecache failed */
@@ -867,23 +819,9 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_impl.h zfs-kmod-9999/include/sys/
  	boolean_t	vdev_checkremove; /* temporary online test	*/
  	boolean_t	vdev_forcefault; /* force online fault		*/
  	boolean_t	vdev_splitting;	/* split or repair in progress  */
-diff -Nuar zfs-kmod-9999.orig/include/sys/vdev_raidz.h zfs-kmod-9999/include/sys/vdev_raidz.h
---- zfs-kmod-9999.orig/include/sys/vdev_raidz.h	2016-11-12 09:18:08.336986526 +0100
-+++ zfs-kmod-9999/include/sys/vdev_raidz.h	2016-11-12 09:19:16.937525613 +0100
-@@ -40,8 +40,8 @@
- /*
-  * vdev_raidz interface
-  */
--struct raidz_map * vdev_raidz_map_alloc(struct zio *, uint64_t, uint64_t,
--    uint64_t);
-+struct raidz_map * vdev_raidz_map_alloc(caddr_t, uint64_t, uint64_t,
-+    uint64_t, uint64_t, uint64_t, boolean_t);
- void		vdev_raidz_map_free(struct raidz_map *);
- void 		vdev_raidz_generate_parity(struct raidz_map *);
- int 		vdev_raidz_reconstruct(struct raidz_map *, const int *, int);
 diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sys/zfs_context.h
---- zfs-kmod-9999.orig/include/sys/zfs_context.h	2016-11-12 09:18:08.338986542 +0100
-+++ zfs-kmod-9999/include/sys/zfs_context.h	2016-11-12 09:19:17.013526210 +0100
+--- zfs-kmod-9999.orig/include/sys/zfs_context.h	2016-12-03 20:10:01.671417050 +0100
++++ zfs-kmod-9999/include/sys/zfs_context.h	2016-12-03 20:12:33.300921999 +0100
 @@ -23,7 +23,7 @@
   * Use is subject to license terms.
   */
@@ -920,8 +858,8 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zfs_context.h zfs-kmod-9999/include/sy
  
  extern int vn_open(char *path, int x1, int oflags, int mode, vnode_t **vpp,
 diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
---- zfs-kmod-9999.orig/include/sys/zio.h	2016-11-12 09:18:08.344986589 +0100
-+++ zfs-kmod-9999/include/sys/zio.h	2016-11-12 09:19:17.014526218 +0100
+--- zfs-kmod-9999.orig/include/sys/zio.h	2016-12-03 20:10:01.673417044 +0100
++++ zfs-kmod-9999/include/sys/zio.h	2016-12-03 20:12:33.300921999 +0100
 @@ -21,8 +21,8 @@
  
  /*
@@ -941,7 +879,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
  /*
   * A bookmark is a four-tuple <objset, object, level, blkid> that uniquely
   * identifies any block in the pool.  By convention, the meta-objset (MOS)
-@@ -482,6 +484,10 @@
+@@ -483,6 +485,10 @@
  extern zio_t *zio_ioctl(zio_t *pio, spa_t *spa, vdev_t *vd, int cmd,
      zio_done_func_t *done, void *private, enum zio_flag flags);
  
@@ -950,11 +888,11 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio.h zfs-kmod-9999/include/sys/zio.h
 +    int dkiocfree_flags, metaslab_t *msp);
 +
  extern zio_t *zio_read_phys(zio_t *pio, vdev_t *vd, uint64_t offset,
-     uint64_t size, void *data, int checksum,
+     uint64_t size, struct abd *data, int checksum,
      zio_done_func_t *done, void *private, zio_priority_t priority,
 diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/zio_impl.h
---- zfs-kmod-9999.orig/include/sys/zio_impl.h	2016-11-12 09:18:08.344986589 +0100
-+++ zfs-kmod-9999/include/sys/zio_impl.h	2016-11-12 09:19:17.014526218 +0100
+--- zfs-kmod-9999.orig/include/sys/zio_impl.h	2016-12-03 20:10:01.674417041 +0100
++++ zfs-kmod-9999/include/sys/zio_impl.h	2016-12-03 20:12:33.300921999 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -963,7 +901,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/z
   */
  
  #ifndef _ZIO_IMPL_H
-@@ -237,6 +238,12 @@
+@@ -234,6 +235,12 @@
  	ZIO_STAGE_VDEV_IO_START |		\
  	ZIO_STAGE_VDEV_IO_ASSESS)
  
@@ -978,7 +916,7 @@ diff -Nuar zfs-kmod-9999.orig/include/sys/zio_impl.h zfs-kmod-9999/include/sys/z
  	ZIO_STAGE_DVA_CLAIM |			\
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h
 --- zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h	1970-01-01 01:00:00.000000000 +0100
-+++ zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h	2016-11-12 09:19:17.026526312 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/dkioc_free_util.h	2016-12-03 20:12:33.306921980 +0100
 @@ -0,0 +1,38 @@
 +/*
 + * This file and its contents are supplied under the terms of the
@@ -1019,8 +957,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkioc_free_util.h zfs-kmod-
 +
 +#endif /* _SYS_DKIOC_FREE_UTIL_H */
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h zfs-kmod-9999/lib/libspl/include/sys/dkio.h
---- zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h	2016-11-12 09:18:08.365986754 +0100
-+++ zfs-kmod-9999/lib/libspl/include/sys/dkio.h	2016-11-12 09:19:17.014526218 +0100
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h	2016-12-03 20:10:01.684417008 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/dkio.h	2016-12-03 20:12:33.300921999 +0100
 @@ -18,17 +18,19 @@
   *
   * CDDL HEADER END
@@ -1185,8 +1123,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/dkio.h zfs-kmod-9999/lib/li
  #ifdef	__cplusplus
  }
 diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am zfs-kmod-9999/lib/libspl/include/sys/Makefile.am
---- zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am	2016-11-12 09:18:08.362986730 +0100
-+++ zfs-kmod-9999/lib/libspl/include/sys/Makefile.am	2016-11-12 09:19:16.930525558 +0100
+--- zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am	2016-12-03 20:10:01.683417011 +0100
++++ zfs-kmod-9999/lib/libspl/include/sys/Makefile.am	2016-12-03 20:12:33.278922071 +0100
 @@ -12,6 +12,7 @@
  	$(top_srcdir)/lib/libspl/include/sys/cred.h \
  	$(top_srcdir)/lib/libspl/include/sys/debug.h \
@@ -1196,9 +1134,9 @@ diff -Nuar zfs-kmod-9999.orig/lib/libspl/include/sys/Makefile.am zfs-kmod-9999/l
  	$(top_srcdir)/lib/libspl/include/sys/feature_tests.h \
  	$(top_srcdir)/lib/libspl/include/sys/file.h \
 diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c zfs-kmod-9999/lib/libzfs/libzfs_pool.c
---- zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c	2016-11-12 09:18:08.389986943 +0100
-+++ zfs-kmod-9999/lib/libzfs/libzfs_pool.c	2016-11-12 09:19:17.038526406 +0100
-@@ -1997,6 +1997,28 @@
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c	2016-12-03 20:10:01.696416969 +0100
++++ zfs-kmod-9999/lib/libzfs/libzfs_pool.c	2016-12-03 20:12:33.310921967 +0100
+@@ -1994,6 +1994,28 @@
  }
  
  /*
@@ -1228,8 +1166,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_pool.c zfs-kmod-9999/lib/libzfs/
   * the nvpair name to determine how we should look for the device.
   * 'avail_spare' is set to TRUE if the provided guid refers to an AVAIL
 diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c zfs-kmod-9999/lib/libzfs/libzfs_util.c
---- zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c	2016-11-12 09:18:08.390986950 +0100
-+++ zfs-kmod-9999/lib/libzfs/libzfs_util.c	2016-11-12 09:19:17.015526226 +0100
+--- zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c	2016-12-03 20:10:01.697416965 +0100
++++ zfs-kmod-9999/lib/libzfs/libzfs_util.c	2016-12-03 20:12:33.300921999 +0100
 @@ -23,6 +23,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2013, Joyent, Inc. All rights reserved.
@@ -1239,8 +1177,8 @@ diff -Nuar zfs-kmod-9999.orig/lib/libzfs/libzfs_util.c zfs-kmod-9999/lib/libzfs/
  
  /*
 diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man/man5/zfs-module-parameters.5
---- zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5	2016-11-12 09:18:08.396986997 +0100
-+++ zfs-kmod-9999/man/man5/zfs-module-parameters.5	2016-11-12 09:19:16.940525636 +0100
+--- zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5	2016-12-03 20:10:01.700416956 +0100
++++ zfs-kmod-9999/man/man5/zfs-module-parameters.5	2016-12-03 20:12:33.282922058 +0100
 @@ -1579,6 +1579,33 @@
  .sp
  .ne 2
@@ -1295,8 +1233,8 @@ diff -Nuar zfs-kmod-9999.orig/man/man5/zfs-module-parameters.5 zfs-kmod-9999/man
  .na
  \fBzfs_vdev_aggregation_limit\fR (int)
 diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
---- zfs-kmod-9999.orig/man/man8/zpool.8	2016-11-12 09:18:08.401987037 +0100
-+++ zfs-kmod-9999/man/man8/zpool.8	2016-11-12 09:19:17.040526422 +0100
+--- zfs-kmod-9999.orig/man/man8/zpool.8	2016-12-03 20:10:01.702416949 +0100
++++ zfs-kmod-9999/man/man8/zpool.8	2016-12-03 20:12:33.311921963 +0100
 @@ -149,6 +149,11 @@
  
  .LP
@@ -1367,7 +1305,7 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  \fB\fBlistsnapshots\fR=on | off\fR
  .ad
  .sp .6
-@@ -1995,6 +2042,89 @@
+@@ -2015,6 +2062,89 @@
  .RE
  
  .RE
@@ -1458,8 +1396,8 @@ diff -Nuar zfs-kmod-9999.orig/man/man8/zpool.8 zfs-kmod-9999/man/man8/zpool.8
  .sp
  .ne 2
 diff -Nuar zfs-kmod-9999.orig/module/zcommon/zpool_prop.c zfs-kmod-9999/module/zcommon/zpool_prop.c
---- zfs-kmod-9999.orig/module/zcommon/zpool_prop.c	2016-11-12 09:18:08.441987351 +0100
-+++ zfs-kmod-9999/module/zcommon/zpool_prop.c	2016-11-12 09:19:17.015526226 +0100
+--- zfs-kmod-9999.orig/module/zcommon/zpool_prop.c	2016-12-03 20:10:01.720416890 +0100
++++ zfs-kmod-9999/module/zcommon/zpool_prop.c	2016-12-03 20:12:33.300921999 +0100
 @@ -20,7 +20,7 @@
   */
  /*
@@ -1483,17 +1421,17 @@ diff -Nuar zfs-kmod-9999.orig/module/zcommon/zpool_prop.c zfs-kmod-9999/module/z
  	/* hidden properties */
  	zprop_register_hidden(ZPOOL_PROP_NAME, "name", PROP_TYPE_STRING,
 diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_scan.c zfs-kmod-9999/module/zfs/dsl_scan.c
---- zfs-kmod-9999.orig/module/zfs/dsl_scan.c	2016-11-12 09:18:08.460987501 +0100
-+++ zfs-kmod-9999/module/zfs/dsl_scan.c	2016-11-12 09:19:17.015526226 +0100
+--- zfs-kmod-9999.orig/module/zfs/dsl_scan.c	2016-12-03 20:10:01.731416854 +0100
++++ zfs-kmod-9999/module/zfs/dsl_scan.c	2016-12-03 20:12:33.301921996 +0100
 @@ -22,6 +22,7 @@
   * Copyright (c) 2008, 2010, Oracle and/or its affiliates. All rights reserved.
-  * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
+  * Copyright (c) 2011, 2016 by Delphix. All rights reserved.
   * Copyright 2016 Gary Mills
 + * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
   */
  
  #include <sys/dsl_scan.h>
-@@ -1740,6 +1741,9 @@
+@@ -1741,6 +1742,9 @@
  void
  dsl_resilver_restart(dsl_pool_t *dp, uint64_t txg)
  {
@@ -1504,8 +1442,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_scan.c zfs-kmod-9999/module/zfs/dsl
  		dmu_tx_t *tx;
  		tx = dmu_tx_create_dd(dp->dp_mos_dir);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_synctask.c zfs-kmod-9999/module/zfs/dsl_synctask.c
---- zfs-kmod-9999.orig/module/zfs/dsl_synctask.c	2016-11-12 09:18:08.460987501 +0100
-+++ zfs-kmod-9999/module/zfs/dsl_synctask.c	2016-11-12 09:19:17.016526233 +0100
+--- zfs-kmod-9999.orig/module/zfs/dsl_synctask.c	2016-12-03 20:10:01.731416854 +0100
++++ zfs-kmod-9999/module/zfs/dsl_synctask.c	2016-12-03 20:12:33.301921996 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -1523,8 +1461,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/dsl_synctask.c zfs-kmod-9999/module/zfs
  	return (dst.dst_error);
  }
 diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/metaslab.c
---- zfs-kmod-9999.orig/module/zfs/metaslab.c	2016-11-12 09:18:08.463987524 +0100
-+++ zfs-kmod-9999/module/zfs/metaslab.c	2016-11-12 09:19:17.032526359 +0100
+--- zfs-kmod-9999.orig/module/zfs/metaslab.c	2016-12-03 20:10:01.732416851 +0100
++++ zfs-kmod-9999/module/zfs/metaslab.c	2016-12-03 20:12:33.308921973 +0100
 @@ -22,6 +22,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
@@ -2144,8 +2082,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/metaslab.c zfs-kmod-9999/module/zfs/met
 +
  #endif /* _KERNEL && HAVE_SPL */
 diff -Nuar zfs-kmod-9999.orig/module/zfs/range_tree.c zfs-kmod-9999/module/zfs/range_tree.c
---- zfs-kmod-9999.orig/module/zfs/range_tree.c	2016-11-12 09:18:08.464987532 +0100
-+++ zfs-kmod-9999/module/zfs/range_tree.c	2016-11-12 09:19:17.034526375 +0100
+--- zfs-kmod-9999.orig/module/zfs/range_tree.c	2016-12-03 20:10:01.733416848 +0100
++++ zfs-kmod-9999/module/zfs/range_tree.c	2016-12-03 20:12:33.308921973 +0100
 @@ -24,6 +24,7 @@
   */
  /*
@@ -2336,8 +2274,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/range_tree.c zfs-kmod-9999/module/zfs/r
  
  boolean_t
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
---- zfs-kmod-9999.orig/module/zfs/spa.c	2016-11-12 09:18:08.468987563 +0100
-+++ zfs-kmod-9999/module/zfs/spa.c	2016-11-12 09:19:17.042526438 +0100
+--- zfs-kmod-9999.orig/module/zfs/spa.c	2016-12-03 20:10:01.735416841 +0100
++++ zfs-kmod-9999/module/zfs/spa.c	2016-12-03 20:12:33.311921963 +0100
 @@ -22,8 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -2385,8 +2323,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	 * Stop async tasks.
  	 */
  	spa_async_suspend(spa);
-@@ -1345,6 +1360,14 @@
- 	spa_config_enter(spa, SCL_ALL, FTAG, RW_WRITER);
+@@ -1331,6 +1346,14 @@
+ 	}
  
  	/*
 +	 * Stop autotrim tasks.
@@ -2397,10 +2335,10 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
 +	mutex_exit(&spa->spa_auto_trim_lock);
 +
 +	/*
- 	 * Close all vdevs.
+ 	 * Wait for any outstanding async I/O to complete.
  	 */
- 	if (spa->spa_root_vdev)
-@@ -2834,10 +2857,22 @@
+ 	if (spa->spa_async_zio_root != NULL) {
+@@ -2832,10 +2855,22 @@
  		spa_prop_find(spa, ZPOOL_PROP_AUTOEXPAND, &spa->spa_autoexpand);
  		spa_prop_find(spa, ZPOOL_PROP_DEDUPDITTO,
  		    &spa->spa_dedup_ditto);
@@ -2423,7 +2361,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	/*
  	 * If the 'autoreplace' property is set, then post a resource notifying
  	 * the ZFS DE that it should not issue any faults for unopenable
-@@ -3968,6 +4003,13 @@
+@@ -3966,6 +4001,13 @@
  	spa->spa_delegation = zpool_prop_default_numeric(ZPOOL_PROP_DELEGATION);
  	spa->spa_failmode = zpool_prop_default_numeric(ZPOOL_PROP_FAILUREMODE);
  	spa->spa_autoexpand = zpool_prop_default_numeric(ZPOOL_PROP_AUTOEXPAND);
@@ -2437,7 +2375,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  
  	if (props != NULL) {
  		spa_configfile_set(spa, props, B_FALSE);
-@@ -5885,6 +5927,12 @@
+@@ -5883,6 +5925,12 @@
  	if (tasks & SPA_ASYNC_RESILVER)
  		dsl_resilver_restart(spa->spa_dsl_pool, 0);
  
@@ -2450,7 +2388,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	/*
  	 * Let the world know that we're done.
  	 */
-@@ -5956,6 +6004,15 @@
+@@ -5954,6 +6002,15 @@
  	mutex_exit(&spa->spa_async_lock);
  }
  
@@ -2466,7 +2404,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  /*
   * ==========================================================================
   * SPA syncing routines
-@@ -6363,6 +6420,21 @@
+@@ -6361,6 +6418,21 @@
  			case ZPOOL_PROP_FAILUREMODE:
  				spa->spa_failmode = intval;
  				break;
@@ -2488,7 +2426,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  			case ZPOOL_PROP_AUTOEXPAND:
  				spa->spa_autoexpand = intval;
  				if (tx->tx_txg != TXG_INITIAL)
-@@ -6491,6 +6563,17 @@
+@@ -6489,6 +6561,17 @@
  	mutex_exit(&spa->spa_alloc_lock);
  
  	/*
@@ -2506,7 +2444,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  	 * If there are any pending vdev state changes, convert them
  	 * into config changes that go out with this transaction group.
  	 */
-@@ -6927,6 +7010,276 @@
+@@ -6925,6 +7008,276 @@
  	zfs_post_sysevent(spa, vd, name);
  }
  
@@ -2784,8 +2722,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa.c zfs-kmod-9999/module/zfs/spa.c
  /* state manipulation functions */
  EXPORT_SYMBOL(spa_open);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/spa_config.c
---- zfs-kmod-9999.orig/module/zfs/spa_config.c	2016-11-12 09:18:08.469987571 +0100
-+++ zfs-kmod-9999/module/zfs/spa_config.c	2016-11-12 09:19:17.018526249 +0100
+--- zfs-kmod-9999.orig/module/zfs/spa_config.c	2016-12-03 20:10:01.735416841 +0100
++++ zfs-kmod-9999/module/zfs/spa_config.c	2016-12-03 20:12:33.302921993 +0100
 @@ -21,8 +21,8 @@
  
  /*
@@ -2817,8 +2755,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_config.c zfs-kmod-9999/module/zfs/s
  	 * Store what's necessary for reading the MOS in the label.
  	 */
 diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa_misc.c
---- zfs-kmod-9999.orig/module/zfs/spa_misc.c	2016-11-12 09:18:08.470987579 +0100
-+++ zfs-kmod-9999/module/zfs/spa_misc.c	2016-11-12 09:19:17.029526336 +0100
+--- zfs-kmod-9999.orig/module/zfs/spa_misc.c	2016-12-03 20:10:01.736416838 +0100
++++ zfs-kmod-9999/module/zfs/spa_misc.c	2016-12-03 20:12:33.307921977 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -2888,7 +2826,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	spa->spa_debug = ((zfs_flags & ZFS_DEBUG_SPA) != 0);
  
  	spa->spa_min_ashift = INT_MAX;
-@@ -690,6 +716,8 @@
+@@ -693,6 +719,8 @@
  	spa_stats_destroy(spa);
  	spa_config_lock_destroy(spa);
  
@@ -2897,7 +2835,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	for (t = 0; t < TXG_SIZE; t++)
  		bplist_destroy(&spa->spa_free_bplist[t]);
  
-@@ -700,6 +728,9 @@
+@@ -703,6 +731,9 @@
  	cv_destroy(&spa->spa_proc_cv);
  	cv_destroy(&spa->spa_scrub_io_cv);
  	cv_destroy(&spa->spa_suspend_cv);
@@ -2907,7 +2845,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  
  	mutex_destroy(&spa->spa_alloc_lock);
  	mutex_destroy(&spa->spa_async_lock);
-@@ -714,6 +745,8 @@
+@@ -717,6 +748,8 @@
  	mutex_destroy(&spa->spa_suspend_lock);
  	mutex_destroy(&spa->spa_vdev_top_lock);
  	mutex_destroy(&spa->spa_feat_stats_lock);
@@ -2916,7 +2854,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  
  	kmem_free(spa, sizeof (spa_t));
  }
-@@ -1032,6 +1065,9 @@
+@@ -1035,6 +1068,9 @@
  {
  	mutex_enter(&spa->spa_vdev_top_lock);
  	mutex_enter(&spa_namespace_lock);
@@ -2926,7 +2864,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	return (spa_vdev_config_enter(spa));
  }
  
-@@ -1122,6 +1158,8 @@
+@@ -1125,6 +1161,8 @@
  spa_vdev_exit(spa_t *spa, vdev_t *vd, uint64_t txg, int error)
  {
  	spa_vdev_config_exit(spa, vd, txg, error, FTAG);
@@ -2935,7 +2873,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  	mutex_exit(&spa_namespace_lock);
  	mutex_exit(&spa->spa_vdev_top_lock);
  
-@@ -1720,6 +1758,18 @@
+@@ -1723,6 +1761,18 @@
  	return (spa->spa_deadman_synctime);
  }
  
@@ -2954,7 +2892,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  uint64_t
  dva_get_dsize_sync(spa_t *spa, const dva_t *dva)
  {
-@@ -2012,6 +2062,182 @@
+@@ -2015,6 +2065,182 @@
  		return (DNODE_MIN_SIZE);
  }
  
@@ -3138,8 +3076,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/spa_misc.c zfs-kmod-9999/module/zfs/spa
  /* Namespace manipulation */
  EXPORT_SYMBOL(spa_lookup);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/trace.c zfs-kmod-9999/module/zfs/trace.c
---- zfs-kmod-9999.orig/module/zfs/trace.c	2016-11-12 09:18:08.471987587 +0100
-+++ zfs-kmod-9999/module/zfs/trace.c	2016-11-12 09:19:16.951525723 +0100
+--- zfs-kmod-9999.orig/module/zfs/trace.c	2016-12-03 20:10:01.736416838 +0100
++++ zfs-kmod-9999/module/zfs/trace.c	2016-12-03 20:12:33.285922049 +0100
 @@ -26,6 +26,7 @@
  #include <sys/multilist.h>
  #include <sys/arc_impl.h>
@@ -3157,8 +3095,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/trace.c zfs-kmod-9999/module/zfs/trace.
  #include <sys/trace_zio.h>
  #include <sys/trace_zrlock.h>
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
---- zfs-kmod-9999.orig/module/zfs/vdev.c	2016-11-12 09:18:08.473987603 +0100
-+++ zfs-kmod-9999/module/zfs/vdev.c	2016-11-12 09:19:17.044526454 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev.c	2016-12-03 20:10:01.737416835 +0100
++++ zfs-kmod-9999/module/zfs/vdev.c	2016-12-03 20:12:33.312921960 +0100
 @@ -21,7 +21,7 @@
  
  /*
@@ -3168,15 +3106,15 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
   * Copyright (c) 2011, 2015 by Delphix. All rights reserved.
   */
  
-@@ -45,6 +45,7 @@
- #include <sys/dsl_scan.h>
+@@ -46,6 +46,7 @@
+ #include <sys/abd.h>
  #include <sys/zvol.h>
  #include <sys/zfs_ratelimit.h>
 +#include <sys/trace_vdev.h>
  
  /*
   * When a vdev is added, it will be divided into approximately (but no
-@@ -3669,6 +3670,116 @@
+@@ -3670,6 +3671,116 @@
  	}
  }
  
@@ -3294,8 +3232,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev.c zfs-kmod-9999/module/zfs/vdev.c
  EXPORT_SYMBOL(vdev_fault);
  EXPORT_SYMBOL(vdev_degrade);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vdev_disk.c
---- zfs-kmod-9999.orig/module/zfs/vdev_disk.c	2016-11-12 09:18:08.474987611 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_disk.c	2016-11-12 09:19:17.021526273 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_disk.c	2016-12-03 20:10:01.738416832 +0100
++++ zfs-kmod-9999/module/zfs/vdev_disk.c	2016-12-03 20:12:33.303921990 +0100
 @@ -24,6 +24,7 @@
   * Rewritten for Linux by Brian Behlendorf <behlendorf1@llnl.gov>.
   * LLNL-CODE-403049.
@@ -3304,7 +3242,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
   */
  
  #include <sys/zfs_context.h>
-@@ -33,6 +34,7 @@
+@@ -34,6 +35,7 @@
  #include <sys/fs/zfs.h>
  #include <sys/zio.h>
  #include <sys/sunldi.h>
@@ -3312,7 +3250,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
  
  char *zfs_vdev_scheduler = VDEV_SCHEDULER;
  static void *zfs_vdev_holder = VDEV_HOLDER;
-@@ -311,6 +313,9 @@
+@@ -312,6 +314,9 @@
  	v->vdev_tsd = vd;
  	vd->vd_bdev = bdev;
  
@@ -3322,7 +3260,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
  skip_open:
  	/*  Determine the physical block size */
  	block_size = vdev_bdev_block_size(vd->vd_bdev);
-@@ -695,6 +700,53 @@
+@@ -703,6 +708,53 @@
  
  			break;
  
@@ -3376,7 +3314,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
  		default:
  			zio->io_error = SET_ERROR(ENOTSUP);
  		}
-@@ -797,6 +849,7 @@
+@@ -805,6 +857,7 @@
  	NULL,
  	vdev_disk_hold,
  	vdev_disk_rele,
@@ -3385,8 +3323,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_disk.c zfs-kmod-9999/module/zfs/vd
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vdev_file.c
---- zfs-kmod-9999.orig/module/zfs/vdev_file.c	2016-11-12 09:18:08.474987611 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_file.c	2016-11-12 09:19:17.021526273 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_file.c	2016-12-03 20:10:01.738416832 +0100
++++ zfs-kmod-9999/module/zfs/vdev_file.c	2016-12-03 20:12:33.303921990 +0100
 @@ -21,6 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3395,17 +3333,17 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
   */
  
  #include <sys/zfs_context.h>
-@@ -31,6 +32,9 @@
- #include <sys/zio.h>
+@@ -32,6 +33,9 @@
  #include <sys/fs/zfs.h>
  #include <sys/fm/fs/zfs.h>
+ #include <sys/abd.h>
 +#include <sys/fcntl.h>
 +#include <sys/vnode.h>
 +#include <sys/dkioc_free_util.h>
  
  /*
   * Virtual device vector for files.
-@@ -210,6 +214,36 @@
+@@ -221,6 +225,36 @@
  			zio->io_error = VOP_FSYNC(vf->vf_vnode, FSYNC | FDSYNC,
  			    kcred, NULL);
  			break;
@@ -3442,7 +3380,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  		default:
  			zio->io_error = SET_ERROR(ENOTSUP);
  		}
-@@ -239,6 +273,7 @@
+@@ -250,6 +284,7 @@
  	NULL,
  	vdev_file_hold,
  	vdev_file_rele,
@@ -3450,7 +3388,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  	VDEV_TYPE_FILE,		/* name of this vdev type */
  	B_TRUE			/* leaf vdev */
  };
-@@ -257,6 +292,7 @@
+@@ -268,6 +303,7 @@
  	NULL,
  	vdev_file_hold,
  	vdev_file_rele,
@@ -3459,8 +3397,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_file.c zfs-kmod-9999/module/zfs/vd
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/vdev_label.c
---- zfs-kmod-9999.orig/module/zfs/vdev_label.c	2016-11-12 09:18:08.474987611 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_label.c	2016-11-12 09:19:17.022526281 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_label.c	2016-12-03 20:10:01.738416832 +0100
++++ zfs-kmod-9999/module/zfs/vdev_label.c	2016-12-03 20:12:33.303921990 +0100
 @@ -22,6 +22,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3469,7 +3407,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/v
   */
  
  /*
-@@ -535,6 +536,12 @@
+@@ -536,6 +537,12 @@
  			fnvlist_add_uint64(nv, ZPOOL_CONFIG_ORIG_GUID,
  			    vd->vdev_orig_guid);
  		}
@@ -3483,8 +3421,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_label.c zfs-kmod-9999/module/zfs/v
  
  	return (nv);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/vdev_mirror.c
---- zfs-kmod-9999.orig/module/zfs/vdev_mirror.c	2016-11-12 09:18:08.475987618 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_mirror.c	2016-11-12 09:19:17.022526281 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_mirror.c	2016-12-03 20:10:01.738416832 +0100
++++ zfs-kmod-9999/module/zfs/vdev_mirror.c	2016-12-03 20:12:33.304921986 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -3493,7 +3431,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
   */
  
  #include <sys/zfs_context.h>
-@@ -613,6 +614,7 @@
+@@ -615,6 +616,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3501,7 +3439,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	VDEV_TYPE_MIRROR,	/* name of this vdev type */
  	B_FALSE			/* not a leaf vdev */
  };
-@@ -626,6 +628,7 @@
+@@ -628,6 +630,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3509,7 +3447,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	VDEV_TYPE_REPLACING,	/* name of this vdev type */
  	B_FALSE			/* not a leaf vdev */
  };
-@@ -639,6 +642,7 @@
+@@ -641,6 +644,7 @@
  	vdev_mirror_state_change,
  	NULL,
  	NULL,
@@ -3518,8 +3456,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_mirror.c zfs-kmod-9999/module/zfs/
  	B_FALSE			/* not a leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_missing.c zfs-kmod-9999/module/zfs/vdev_missing.c
---- zfs-kmod-9999.orig/module/zfs/vdev_missing.c	2016-11-12 09:18:08.475987618 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_missing.c	2016-11-12 09:19:17.022526281 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_missing.c	2016-12-03 20:10:01.738416832 +0100
++++ zfs-kmod-9999/module/zfs/vdev_missing.c	2016-12-03 20:12:33.304921986 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -3545,8 +3483,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_missing.c zfs-kmod-9999/module/zfs
  	B_TRUE			/* leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/vdev_raidz.c
---- zfs-kmod-9999.orig/module/zfs/vdev_raidz.c	2016-11-12 09:18:08.476987626 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_raidz.c	2016-11-12 09:19:17.032526359 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_raidz.c	2016-12-03 20:10:01.739416828 +0100
++++ zfs-kmod-9999/module/zfs/vdev_raidz.c	2016-12-03 20:12:33.308921973 +0100
 @@ -23,6 +23,7 @@
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
   * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
@@ -3555,7 +3493,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
   */
  
  #include <sys/zfs_context.h>
-@@ -34,6 +35,7 @@
+@@ -35,6 +36,7 @@
  #include <sys/fm/fs/zfs.h>
  #include <sys/vdev_raidz.h>
  #include <sys/vdev_raidz_impl.h>
@@ -3563,7 +3501,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  
  /*
   * Virtual device vector for RAID-Z.
-@@ -129,6 +131,8 @@
+@@ -130,6 +132,8 @@
  	VDEV_RAIDZ_64MUL_2((x), mask); \
  }
  
@@ -3572,107 +3510,38 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  void
  vdev_raidz_map_free(raidz_map_t *rm)
  {
-@@ -136,7 +140,9 @@
- 	size_t size;
- 
- 	for (c = 0; c < rm->rm_firstdatacol; c++) {
--		zio_buf_free(rm->rm_col[c].rc_data, rm->rm_col[c].rc_size);
-+		if (rm->rm_col[c].rc_data != NULL)
-+			zio_buf_free(rm->rm_col[c].rc_data,
-+			    rm->rm_col[c].rc_size);
- 
- 		if (rm->rm_col[c].rc_gdata != NULL)
- 			zio_buf_free(rm->rm_col[c].rc_gdata,
-@@ -309,21 +315,37 @@
- };
- 
- /*
-- * Divides the IO evenly across all child vdevs; usually, dcols is
-- * the number of children in the target vdev.
-+ * Allocates and computes a raidz column map, which directs the raidz column
-+ * handling algorithms where to locate and store data and parity columns for
-+ * a particular DVA. Usually, dcols is the number of children in the target
-+ * vdev.
-+ *
-+ * The `io_offset', `io_size' and `io_data' hold the offset, size and data
-+ * of the zio for which this map is to be computed.
-+ * The `unit_shift' parameter contains the minimum allocation bitshift of
-+ * the storage pool. The `dcols' parameter contains the number of drives in
-+ * this raidz vdev (including parity drives), with `nparity' denoting how
-+ * many those contain the parity (one, two or three).
-+ *
-+ * The `alloc_io_bufs' flag denotes whether you want the constructed raidz
-+ * map to contain allocated buffers to hold column IO data or not (if
-+ * you're using this function simply to determine raidz geometry, you'll
-+ * want to pass B_FALSE here).
-  *
-  * Avoid inlining the function to keep vdev_raidz_io_start(), which
-  * is this functions only caller, as small as possible on the stack.
-  */
- noinline raidz_map_t *
--vdev_raidz_map_alloc(zio_t *zio, uint64_t unit_shift, uint64_t dcols,
--    uint64_t nparity)
-+vdev_raidz_map_alloc(caddr_t data, uint64_t size, uint64_t offset,
-+    uint64_t unit_shift, uint64_t dcols, uint64_t nparity,
-+    boolean_t alloc_data)
- {
- 	raidz_map_t *rm;
-+
- 	/* The starting RAIDZ (parent) vdev sector of the block. */
--	uint64_t b = zio->io_offset >> unit_shift;
-+	uint64_t b = offset >> unit_shift;
- 	/* The zio's size in units of the vdev's minimum sector size. */
--	uint64_t s = zio->io_size >> unit_shift;
-+	uint64_t s = size >> unit_shift;
- 	/* The first column for this stripe. */
- 	uint64_t f = b % dcols;
- 	/* The starting byte offset on each child vdev. */
-@@ -411,14 +433,17 @@
+@@ -432,18 +436,20 @@
  	ASSERT3U(rm->rm_asize - asize, ==, rm->rm_nskip << unit_shift);
  	ASSERT3U(rm->rm_nskip, <=, nparity);
  
 -	for (c = 0; c < rm->rm_firstdatacol; c++)
--		rm->rm_col[c].rc_data = zio_buf_alloc(rm->rm_col[c].rc_size);
+-		rm->rm_col[c].rc_abd =
+-		    abd_alloc_linear(rm->rm_col[c].rc_size, B_FALSE);
 -
--	rm->rm_col[c].rc_data = zio->io_data;
--
--	for (c = c + 1; c < acols; c++)
--		rm->rm_col[c].rc_data = (char *)rm->rm_col[c - 1].rc_data +
--		    rm->rm_col[c - 1].rc_size;
-+	if (alloc_data) {
+-	rm->rm_col[c].rc_abd = abd_get_offset_size(zio->io_abd, 0,
+-	    rm->rm_col[c].rc_size);
+-	off = rm->rm_col[c].rc_size;
++	if (zio->io_abd != NULL) {
 +		for (c = 0; c < rm->rm_firstdatacol; c++)
-+			rm->rm_col[c].rc_data =
-+			    zio_buf_alloc(rm->rm_col[c].rc_size);
-+		if (data != NULL)
-+			rm->rm_col[c].rc_data = data;
-+		for (c = c + 1; c < acols; c++)
-+			rm->rm_col[c].rc_data =
-+			    (char *)rm->rm_col[c - 1].rc_data +
-+			    rm->rm_col[c - 1].rc_size;
-+	}
++			rm->rm_col[c].rc_abd =
++			    abd_alloc_linear(rm->rm_col[c].rc_size, B_FALSE);
  
- 	/*
- 	 * If all data stored spans all columns, there's a danger that parity
-@@ -443,7 +468,7 @@
- 	ASSERT(rm->rm_cols >= 2);
- 	ASSERT(rm->rm_col[0].rc_size == rm->rm_col[1].rc_size);
- 
--	if (rm->rm_firstdatacol == 1 && (zio->io_offset & (1ULL << 20))) {
-+	if (rm->rm_firstdatacol == 1 && (offset & (1ULL << 20))) {
- 		devidx = rm->rm_col[0].rc_devidx;
- 		o = rm->rm_col[0].rc_offset;
- 		rm->rm_col[0].rc_devidx = rm->rm_col[1].rc_devidx;
-@@ -455,9 +480,6 @@
- 			rm->rm_skipstart = 1;
+-	for (c = c + 1; c < acols; c++) {
+-		rm->rm_col[c].rc_abd = abd_get_offset_size(zio->io_abd, off,
++		rm->rm_col[c].rc_abd = abd_get_offset_size(zio->io_abd, 0,
+ 		    rm->rm_col[c].rc_size);
+-		off += rm->rm_col[c].rc_size;
++		off = rm->rm_col[c].rc_size;
++
++		for (c = c + 1; c < acols; c++) {
++			rm->rm_col[c].rc_abd = abd_get_offset_size(zio->io_abd, off,
++			    rm->rm_col[c].rc_size);
++			off += rm->rm_col[c].rc_size;
++		}
  	}
  
--	zio->io_vsd = rm;
--	zio->io_vsd_ops = &vdev_raidz_vsd_ops;
--
- 	/* init RAIDZ parity ops */
- 	rm->rm_ops = vdev_raidz_math_get_ops();
- 
-@@ -1430,6 +1452,38 @@
+ 	/*
+@@ -1636,6 +1642,38 @@
  	return (asize);
  }
  
@@ -3711,21 +3580,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  static void
  vdev_raidz_child_done(zio_t *zio)
  {
-@@ -1467,8 +1521,11 @@
- 	raidz_col_t *rc;
- 	int c, i;
- 
--	rm = vdev_raidz_map_alloc(zio, tvd->vdev_ashift, vd->vdev_children,
--	    vd->vdev_nparity);
-+	rm = vdev_raidz_map_alloc(zio->io_data, zio->io_size, zio->io_offset,
-+	    tvd->vdev_ashift, vd->vdev_children, vd->vdev_nparity, B_TRUE);
-+
-+	zio->io_vsd = rm;
-+	zio->io_vsd_ops = &vdev_raidz_vsd_ops;
- 
- 	ASSERT3U(rm->rm_asize, ==, vdev_psize_to_asize(vd, zio->io_size));
- 
-@@ -2097,6 +2154,103 @@
+@@ -2308,6 +2346,109 @@
  		vdev_set_state(vd, B_FALSE, VDEV_STATE_HEALTHY, VDEV_AUX_NONE);
  }
  
@@ -3757,11 +3612,13 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
 +	dkioc_free_list_t **sub_dfls;
 +	uint64_t *sub_dfls_num_exts;
 +	int i;
++	zio_t *zio;
 +
 +	sub_dfls = kmem_zalloc(sizeof (*sub_dfls) * vd->vdev_children,
 +	    KM_SLEEP);
 +	sub_dfls_num_exts = kmem_zalloc(sizeof (uint64_t) * vd->vdev_children,
 +	    KM_SLEEP);
++	zio = kmem_zalloc(sizeof (*zio), KM_SLEEP);
 +	for (i = 0; i < vd->vdev_children; i++) {
 +		/*
 +		 * We might over-allocate here, because the sub-lists can never
@@ -3783,11 +3640,14 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
 +		uint64_t start = dfl->dfl_exts[i].dfle_start;
 +		uint64_t length = dfl->dfl_exts[i].dfle_length;
 +		uint64_t j;
++		raidz_map_t *rm;
 +
-+		raidz_map_t *rm = vdev_raidz_map_alloc(NULL,
-+		    vdev_raidz_psize_floor(vd, length), start,
-+		    vd->vdev_top->vdev_ashift, vd->vdev_children,
-+		    vd->vdev_nparity, B_FALSE);
++		zio->io_offset = start;
++		zio->io_size = vdev_raidz_psize_floor(vd, length);
++		zio->io_abd = NULL;
++
++		rm = vdev_raidz_map_alloc(zio, vd->vdev_top->vdev_ashift,
++		    vd->vdev_children, vd->vdev_nparity);
 +
 +		for (j = 0; j < rm->rm_cols; j++) {
 +			uint64_t devidx = rm->rm_col[j].rc_devidx;
@@ -3813,6 +3673,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
 +	}
 +	kmem_free(sub_dfls, sizeof (*sub_dfls) * vd->vdev_children);
 +	kmem_free(sub_dfls_num_exts, sizeof (uint64_t) * vd->vdev_children);
++	kmem_free(zio, sizeof (*zio));
 +}
 +
 +/*
@@ -3829,7 +3690,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  vdev_ops_t vdev_raidz_ops = {
  	vdev_raidz_open,
  	vdev_raidz_close,
-@@ -2106,6 +2260,7 @@
+@@ -2317,6 +2458,7 @@
  	vdev_raidz_state_change,
  	NULL,
  	NULL,
@@ -3837,35 +3698,9 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz.c zfs-kmod-9999/module/zfs/v
  	VDEV_TYPE_RAIDZ,	/* name of this vdev type */
  	B_FALSE			/* not a leaf vdev */
  };
-diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c zfs-kmod-9999/module/zfs/vdev_raidz_math.c
---- zfs-kmod-9999.orig/module/zfs/vdev_raidz_math.c	2016-11-12 09:18:08.476987626 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_raidz_math.c	2016-11-12 09:19:16.955525754 +0100
-@@ -483,8 +483,9 @@
- 	for (fn = 0; fn < RAIDZ_GEN_NUM; fn++) {
- 		bench_parity = fn + 1;
- 		/* New raidz_map is needed for each generate_p/q/r */
--		bench_rm = vdev_raidz_map_alloc(bench_zio, SPA_MINBLOCKSHIFT,
--		    BENCH_D_COLS + bench_parity, bench_parity);
-+		bench_rm = vdev_raidz_map_alloc(bench_zio->io_data,
-+		    BENCH_ZIO_SIZE, 0, SPA_MINBLOCKSHIFT, BENCH_D_COLS +
-+		    bench_parity, bench_parity, B_TRUE);
- 
- 		benchmark_raidz_impl(bench_rm, fn, benchmark_gen_impl);
- 
-@@ -492,8 +493,8 @@
- 	}
- 
- 	/* Benchmark data reconstruction methods */
--	bench_rm = vdev_raidz_map_alloc(bench_zio, SPA_MINBLOCKSHIFT,
--	    BENCH_COLS, PARITY_PQR);
-+	bench_rm = vdev_raidz_map_alloc(bench_zio->io_data, BENCH_ZIO_SIZE,
-+	    0, SPA_MINBLOCKSHIFT, BENCH_COLS, PARITY_PQR, B_TRUE);
- 
- 	for (fn = 0; fn < RAIDZ_REC_NUM; fn++)
- 		benchmark_raidz_impl(bench_rm, fn, benchmark_rec_impl);
 diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_root.c zfs-kmod-9999/module/zfs/vdev_root.c
---- zfs-kmod-9999.orig/module/zfs/vdev_root.c	2016-11-12 09:18:08.481987666 +0100
-+++ zfs-kmod-9999/module/zfs/vdev_root.c	2016-11-12 09:19:17.023526289 +0100
+--- zfs-kmod-9999.orig/module/zfs/vdev_root.c	2016-12-03 20:10:01.741416822 +0100
++++ zfs-kmod-9999/module/zfs/vdev_root.c	2016-12-03 20:12:33.304921986 +0100
 @@ -25,6 +25,7 @@
  
  /*
@@ -3883,8 +3718,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/vdev_root.c zfs-kmod-9999/module/zfs/vd
  	B_FALSE			/* not a leaf vdev */
  };
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zfs_ioctl.c
---- zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c	2016-11-12 09:18:08.487987713 +0100
-+++ zfs-kmod-9999/module/zfs/zfs_ioctl.c	2016-11-12 09:19:17.045526461 +0100
+--- zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c	2016-12-03 20:10:01.745416809 +0100
++++ zfs-kmod-9999/module/zfs/zfs_ioctl.c	2016-12-03 20:12:33.312921960 +0100
 @@ -1680,6 +1680,36 @@
  	return (error);
  }
@@ -3932,8 +3767,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zfs_ioctl.c zfs-kmod-9999/module/zfs/zf
  	    zfs_ioc_pool_upgrade);
  	zfs_ioctl_register_pool_modify(ZFS_IOC_VDEV_ADD,
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
---- zfs-kmod-9999.orig/module/zfs/zio.c	2016-11-12 09:18:08.493987760 +0100
-+++ zfs-kmod-9999/module/zfs/zio.c	2016-11-12 09:19:17.028526328 +0100
+--- zfs-kmod-9999.orig/module/zfs/zio.c	2016-12-03 20:10:01.748416799 +0100
++++ zfs-kmod-9999/module/zfs/zio.c	2016-12-03 20:12:33.306921980 +0100
 @@ -21,7 +21,7 @@
  /*
   * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
@@ -3943,17 +3778,17 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
   */
  
  #include <sys/sysmacros.h>
-@@ -42,6 +42,9 @@
- #include <sys/metaslab_impl.h>
+@@ -43,6 +43,9 @@
  #include <sys/time.h>
  #include <sys/trace_zio.h>
+ #include <sys/abd.h>
 +#include <sys/dkioc_free_util.h>
 +
 +#include <sys/metaslab_impl.h>
  
  /*
   * ==========================================================================
-@@ -109,6 +112,14 @@
+@@ -115,6 +118,14 @@
  
  static void zio_taskq_dispatch(zio_t *, zio_taskq_type_t, boolean_t);
  
@@ -3968,7 +3803,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  void
  zio_init(void)
  {
-@@ -941,9 +952,10 @@
+@@ -957,9 +968,10 @@
  	return (zio);
  }
  
@@ -3982,7 +3817,7 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
  {
  	zio_t *zio;
  	int c;
-@@ -951,21 +963,144 @@
+@@ -967,21 +979,144 @@
  	if (vd->vdev_children == 0) {
  		zio = zio_create(pio, spa, 0, NULL, NULL, 0, 0, done, private,
  		    ZIO_TYPE_IOCTL, ZIO_PRIORITY_NOW, flags, vd, 0, NULL,
@@ -4131,9 +3966,9 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
 +
 +zio_t *
  zio_read_phys(zio_t *pio, vdev_t *vd, uint64_t offset, uint64_t size,
-     void *data, int checksum, zio_done_func_t *done, void *private,
+     abd_t *data, int checksum, zio_done_func_t *done, void *private,
      zio_priority_t priority, enum zio_flag flags, boolean_t labels)
-@@ -4123,4 +4258,12 @@
+@@ -4186,4 +4321,12 @@
  module_param(zio_dva_throttle_enabled, int, 0644);
  MODULE_PARM_DESC(zio_dva_throttle_enabled,
  	"Throttle block allocations in the ZIO pipeline");
@@ -4147,8 +3982,8 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zio.c zfs-kmod-9999/module/zfs/zio.c
 +	"Minimum size to TRIM");
  #endif
 diff -Nuar zfs-kmod-9999.orig/module/zfs/zvol.c zfs-kmod-9999/module/zfs/zvol.c
---- zfs-kmod-9999.orig/module/zfs/zvol.c	2016-11-12 09:18:08.497987791 +0100
-+++ zfs-kmod-9999/module/zfs/zvol.c	2016-11-12 09:19:17.024526296 +0100
+--- zfs-kmod-9999.orig/module/zfs/zvol.c	2016-12-03 20:10:01.750416793 +0100
++++ zfs-kmod-9999/module/zfs/zvol.c	2016-12-03 20:12:33.305921983 +0100
 @@ -34,7 +34,7 @@
   * Volumes are persistent through reboot and module load.  No user command
   * needs to be run before opening and using a device.
@@ -4158,9 +3993,22 @@ diff -Nuar zfs-kmod-9999.orig/module/zfs/zvol.c zfs-kmod-9999/module/zfs/zvol.c
   * Copyright (c) 2016 Actifio, Inc. All rights reserved.
   */
  
+diff -Nuar zfs-kmod-9999.orig/tests/runfiles/linux.run zfs-kmod-9999/tests/runfiles/linux.run
+--- zfs-kmod-9999.orig/tests/runfiles/linux.run	2016-12-03 20:10:01.760416760 +0100
++++ zfs-kmod-9999/tests/runfiles/linux.run	2016-12-03 20:12:33.313921957 +0100
+@@ -589,6 +589,9 @@
+ [tests/functional/tmpfile]
+ tests = ['tmpfile_001_pos', 'tmpfile_002_pos', 'tmpfile_003_pos']
+ 
++[tests/functional/trim]
++tests = ['autotrim_001_pos']
++
+ [tests/functional/truncate]
+ tests = ['truncate_001_pos', 'truncate_002_pos']
+ 
 diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg
---- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-11-12 09:18:08.694989339 +0100
-+++ zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-11-12 09:19:17.029526336 +0100
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-12-03 20:10:01.833416522 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/cli_root/zpool_get/zpool_get.cfg	2016-12-03 20:12:33.306921980 +0100
 @@ -33,7 +33,8 @@
  typeset -a properties=("size" "capacity" "altroot" "health" "guid" "version"
      "bootfs" "delegation" "autoreplace" "cachefile" "dedupditto" "dedupratio"
@@ -4171,3 +4019,313 @@ diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/cli_root/zpool_ge
      "feature@async_destroy" "feature@empty_bpobj" "feature@lz4_compress"
      "feature@large_blocks" "feature@large_dnode" "feature@filesystem_limits"
      "feature@spacemap_histogram" "feature@enabled_txg" "feature@hole_birth"
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/Makefile.am zfs-kmod-9999/tests/zfs-tests/tests/functional/Makefile.am
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/Makefile.am	2016-12-03 20:10:01.770416727 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/Makefile.am	2016-12-03 20:12:33.313921957 +0100
+@@ -51,6 +51,7 @@
+ 	sparse \
+ 	threadsappend \
+ 	tmpfile \
++	trim \
+ 	truncate \
+ 	upgrade \
+ 	userquota \
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/autotrim_001_pos.ksh zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/autotrim_001_pos.ksh
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/autotrim_001_pos.ksh	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/autotrim_001_pos.ksh	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,111 @@
++#!/bin/ksh -p
++#
++# CDDL HEADER START
++#
++# The contents of this file are subject to the terms of the
++# Common Development and Distribution License (the "License").
++# You may not use this file except in compliance with the License.
++#
++# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
++# or http://www.opensolaris.org/os/licensing.
++# See the License for the specific language governing permissions
++# and limitations under the License.
++#
++# When distributing Covered Code, include this CDDL HEADER in each
++# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
++# If applicable, add the following below this CDDL HEADER, with the
++# fields enclosed by brackets "[]" replaced with your own identifying
++# information: Portions Copyright [yyyy] [name of copyright owner]
++#
++# CDDL HEADER END
++#
++
++#
++# Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
++# Use is subject to license terms.
++#
++#
++# Copyright (c) 2013, 2014 by Delphix. All rights reserved.
++#
++
++. $STF_SUITE/include/libtest.shlib
++. $STF_SUITE/tests/functional/trim/trim.cfg
++. $STF_SUITE/tests/functional/trim/trim.kshlib
++
++set_tunable zfs_trim_min_ext_sz 4096
++set_tunable zfs_txgs_per_trim 2
++
++function getsizemb
++{
++	typeset rval
++
++	rval=$(du --block-size 1048576 -s "$1" | sed -e 's;[ 	].*;;')
++	echo -n "$rval"
++}
++
++function checkvdevs
++{
++	typeset vd sz
++
++	for vd in $VDEVS; do
++		sz=$(getsizemb $vd)
++		log_note Size of $vd is $sz MB
++		log_must test $sz -le $SHRUNK_SIZE_MB
++	done
++}
++
++function txgs
++{
++	typeset x
++
++	# Run some txgs in order to let autotrim do its work.
++	#
++	for x in 1 2 3; do
++		log_must touch "/$TRIMPOOL/file1"
++		log_must sleep 6
++		log_must rm "/$TRIMPOOL/file1"
++		log_must sleep 6
++	done
++}
++
++#
++# Check various pool geometries:  Create the pool, fill it, remove the test file,
++# run some txgs, export the pool and verify that the vdevs shrunk.
++#
++
++#
++# raidz
++#
++for z in 1 2 3; do
++	log_must $ZPOOL create -f $TRIMPOOL raidz$z $VDEVS
++	log_must $ZPOOL set autotrim=on $TRIMPOOL
++	log_must $FILE_WRITE -o create -f "/$TRIMPOOL/$TESTFILE" -b $BLOCKSIZE -c $NUM_WRITES -d R -w
++	log_must rm "/$TRIMPOOL/$TESTFILE"
++	txgs
++	log_must $ZPOOL export $TRIMPOOL
++	checkvdevs
++done
++
++#
++# mirror
++#
++log_must $ZPOOL create -f $TRIMPOOL mirror $MIRROR_VDEVS_1 mirror $MIRROR_VDEVS_2
++log_must $ZPOOL set autotrim=on $TRIMPOOL
++log_must $FILE_WRITE -o create -f "/$TRIMPOOL/$TESTFILE" -b $BLOCKSIZE -c $NUM_WRITES -d R -w
++log_must rm "/$TRIMPOOL/$TESTFILE"
++txgs
++log_must $ZPOOL export $TRIMPOOL
++checkvdevs
++
++#
++# stripe
++#
++log_must $ZPOOL create -f $TRIMPOOL $STRIPE_VDEVS
++log_must $ZPOOL set autotrim=on $TRIMPOOL
++log_must $FILE_WRITE -o create -f "/$TRIMPOOL/$TESTFILE" -b $BLOCKSIZE -c $NUM_WRITES -d R -w
++log_must rm "/$TRIMPOOL/$TESTFILE"
++txgs
++log_must $ZPOOL export $TRIMPOOL
++checkvdevs
++
++log_pass TRIM successfully shrunk vdevs
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/cleanup.ksh zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/cleanup.ksh
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/cleanup.ksh	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/cleanup.ksh	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,31 @@
++#!/bin/ksh -p
++#
++# CDDL HEADER START
++#
++# The contents of this file are subject to the terms of the
++# Common Development and Distribution License (the "License").
++# You may not use this file except in compliance with the License.
++#
++# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
++# or http://www.opensolaris.org/os/licensing.
++# See the License for the specific language governing permissions
++# and limitations under the License.
++#
++# When distributing Covered Code, include this CDDL HEADER in each
++# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
++# If applicable, add the following below this CDDL HEADER, with the
++# fields enclosed by brackets "[]" replaced with your own identifying
++# information: Portions Copyright [yyyy] [name of copyright owner]
++#
++# CDDL HEADER END
++#
++
++#
++# Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
++# Use is subject to license terms.
++#
++
++. $STF_SUITE/include/libtest.shlib
++. $STF_SUITE/tests/functional/trim/trim.cfg
++
++rm -f $VDEVS
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/Makefile.am zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/Makefile.am
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/Makefile.am	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/Makefile.am	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,7 @@
++pkgdatadir = $(datadir)/@PACKAGE@/zfs-tests/tests/functional/trim
++dist_pkgdata_SCRIPTS = \
++	setup.ksh \
++	trim.cfg \
++	trim.kshlib \
++	cleanup.ksh \
++	autotrim_001_pos.ksh
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/setup.ksh zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/setup.ksh
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/setup.ksh	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/setup.ksh	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,38 @@
++#!/bin/ksh -p
++#
++# CDDL HEADER START
++#
++# The contents of this file are subject to the terms of the
++# Common Development and Distribution License (the "License").
++# You may not use this file except in compliance with the License.
++#
++# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
++# or http://www.opensolaris.org/os/licensing.
++# See the License for the specific language governing permissions
++# and limitations under the License.
++#
++# When distributing Covered Code, include this CDDL HEADER in each
++# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
++# If applicable, add the following below this CDDL HEADER, with the
++# fields enclosed by brackets "[]" replaced with your own identifying
++# information: Portions Copyright [yyyy] [name of copyright owner]
++#
++# CDDL HEADER END
++#
++
++#
++# Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
++# Use is subject to license terms.
++#
++
++#
++# Copyright (c) 2013 by Delphix. All rights reserved.
++#
++
++. $STF_SUITE/include/libtest.shlib
++. $STF_SUITE/tests/functional/trim/trim.cfg
++. $STF_SUITE/tests/functional/trim/trim.kshlib
++
++rm -f $VDEVS
++log_must truncate -s 128m $VDEVS
++log_pass TRIM setup succeeded
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/trim.cfg zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/trim.cfg
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/trim.cfg	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/trim.cfg	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,59 @@
++#
++# CDDL HEADER START
++#
++# The contents of this file are subject to the terms of the
++# Common Development and Distribution License (the "License").
++# You may not use this file except in compliance with the License.
++#
++# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
++# or http://www.opensolaris.org/os/licensing.
++# See the License for the specific language governing permissions
++# and limitations under the License.
++#
++# When distributing Covered Code, include this CDDL HEADER in each
++# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
++# If applicable, add the following below this CDDL HEADER, with the
++# fields enclosed by brackets "[]" replaced with your own identifying
++# information: Portions Copyright [yyyy] [name of copyright owner]
++#
++# CDDL HEADER END
++#
++
++#
++# Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
++# Use is subject to license terms.
++#
++
++#
++# Copyright (c) 2013 by Delphix. All rights reserved.
++#
++
++#
++# Parameters
++#
++TRIMPOOL=trimpool
++VDEVS="/tmp/trim1.dev /tmp/trim2.dev /tmp/trim3.dev /tmp/trim4.dev /tmp/trim5.dev"
++VDEV_SIZE=128m
++TESTFILE=testfile
++SHRUNK_SIZE_MB=10
++
++NUM_WRITES=2048
++BLOCKSIZE=65536
++
++#
++# Computed values and parameters
++#
++function get_mirror_vdevs
++{
++	set -- $VDEVS
++	MIRROR_VDEVS_1="$1 $2"
++	MIRROR_VDEVS_2="$3 $4"
++}
++get_mirror_vdevs
++	
++function get_stripe_vdevs
++{
++	set -- $VDEVS
++	STRIPE_VDEVS="$1 $2 $3 $4"
++}
++get_stripe_vdevs
+diff -Nuar zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/trim.kshlib zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/trim.kshlib
+--- zfs-kmod-9999.orig/tests/zfs-tests/tests/functional/trim/trim.kshlib	1970-01-01 01:00:00.000000000 +0100
++++ zfs-kmod-9999/tests/zfs-tests/tests/functional/trim/trim.kshlib	2016-12-03 20:12:33.313921957 +0100
+@@ -0,0 +1,29 @@
++#
++# This file and its contents are supplied under the terms of the
++# Common Development and Distribution License ("CDDL"), version 1.0.
++# You may only use this file in accordance with the terms of version
++# 1.0 of the CDDL.
++#
++# A full copy of the text of the CDDL should have accompanied this
++# source.  A copy of the CDDL is also available via the Internet at
++# http://www.illumos.org/license/CDDL.
++#
++
++function set_tunable
++{
++	typeset tunable="$1"
++	typeset value="$2"
++	typeset zfs_tunables="/sys/module/zfs/parameters"
++
++	[[ -z "$tunable" ]] && return 1
++	[[ -z "$value" ]] && return 1
++	[[ -f "$zfs_tunables/$tunable" ]] || return 1
++
++	echo -n "$value" > "$zfs_tunables/$tunable"
++	return "$?"
++}
++
++function find_scsi_debug
++{
++	grep -H scsi_debug /sys/block/*/device/model | $AWK -F/ '{print $4}' | tr '\n' ' '
++}

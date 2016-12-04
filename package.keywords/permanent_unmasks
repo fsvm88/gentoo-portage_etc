@@ -4,7 +4,6 @@ media-libs/mesa **
 media-sound/teamspeak-client-bin
 net-p2p/freenet
 sci-misc/boinc
-sys-auth/elogind
 sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-kernel/linux-headers

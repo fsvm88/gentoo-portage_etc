@@ -1,4 +1,5 @@
 app-doc/doxygen
+dev-python/pycallgraph
 dev-python/virtualenv
 dev-util/cgdb
 dev-util/meld

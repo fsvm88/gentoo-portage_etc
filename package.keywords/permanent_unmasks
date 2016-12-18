@@ -6,6 +6,7 @@ net-p2p/freenet
 sci-misc/boinc
 sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
+sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
-sys-kernel/linux-firmware
+x11-apps/piglit **

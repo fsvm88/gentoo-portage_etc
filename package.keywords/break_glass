@@ -1,4 +1,5 @@
 <app-benchmarks/siege-3.2
+<app-crypt/gpgme-1.9
 <app-editors/scite-3.7
 <app-emulation/lxc-2.1
 <app-eselect/eselect-python-20151231
@@ -12,6 +13,7 @@
 <dev-lang/rust-1.13.0
 <dev-libs/hiredis-0.14
 <dev-python/hiredis-0.3
+<dev-python/pycallgraph-1.1
 <dev-util/cargo-0.15
 <dev-util/cmake-3.7
 <dev-util/perf-4.5
@@ -24,8 +26,8 @@
 <net-dialup/ppp-2.4.7-r99
 <net-libs/libupnp-1.6.20
 <net-libs/NativeThread-0_pre20081231
-<net-print/hplip-3.16.11
-<net-print/hplip-plugin-3.16.11
+<net-print/hplip-3.16.12
+<net-print/hplip-plugin-3.16.12
 <net-proxy/dante-1.5
 <net-wireless/reaver-1.5
 <sys-apps/dtc-1.5

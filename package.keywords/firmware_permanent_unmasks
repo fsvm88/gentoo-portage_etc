@@ -1,0 +1,3 @@
+sys-firmware/intel-microcode
+sys-firmware/nvidia-firmware
+sys-kernel/linux-firmware

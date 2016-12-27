@@ -2,10 +2,9 @@
 <app-crypt/gpgme-1.9
 <app-editors/scite-3.7
 <app-emulation/lxc-2.1
+<app-emulation/winetricks-99999999 **
 <app-eselect/eselect-python-20151231
-<app-eselect/eselect-rust-0.4
 <app-misc/scrub-2.7
-<app-portage/gentoolkit-0.4
 <app-portage/layman-2.4
 <dev-java/bcprov-1.55
 <dev-java/icedtea-3.3
@@ -13,9 +12,13 @@
 <dev-lang/rust-1.13.0
 <dev-libs/hiredis-0.14
 <dev-python/hiredis-0.3
+<dev-python/line_profiler-1.1
 <dev-python/pycallgraph-1.1
+<dev-python/pyprof2calltree-1.4
+<dev-python/runsnakerun-2.1
+<dev-python/squaremap-1.1
 <dev-util/cargo-0.15
-<dev-util/cmake-3.7
+<dev-util/gprof2dot-0_p20161231
 <dev-util/perf-4.5
 <dev-util/valgrind-3.12
 <dev-util/vmtouch-1.1
@@ -23,12 +26,10 @@
 <media-libs/avidemux-plugins-2.7
 <media-libs/libpng-1.7
 <media-video/avidemux-2.7
-<net-dialup/ppp-2.4.7-r99
 <net-libs/libupnp-1.6.20
 <net-libs/NativeThread-0_pre20081231
 <net-print/hplip-3.16.12
 <net-print/hplip-plugin-3.16.12
-<net-proxy/dante-1.5
 <net-wireless/reaver-1.5
 <sys-apps/dtc-1.5
 <sys-apps/ethtool-4.3
@@ -37,17 +38,14 @@
 <sys-apps/util-linux-2.28
 <sys-block/thin-provisioning-tools-0.6
 <sys-devel/binutils-2.27
-<sys-devel/boost-m4-0.5
 <sys-devel/clang-3.10
 <sys-devel/clang-runtime-3.10
 <sys-devel/gcc-6
 <sys-devel/llvm-3.10
-<sys-firmware/intel-microcode-20151231
 <sys-fs/cryptsetup-1.8
 <sys-libs/libomp-3.10
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
-<sys-process/criu-2.6
 <www-client/chromium-56
 <x11-drivers/xf86-input-evdev-2.11
 <x11-libs/libdrm-2.4.74

@@ -1,0 +1,5 @@
+dev-libs/dbus-glib abi_x86_32
+gnome-base/gconf abi_x86_32
+net-misc/networkmanager abi_x86_32
+x11-libs/libXScrnSaver abi_x86_32
+x11-proto/scrnsaverproto abi_x86_32

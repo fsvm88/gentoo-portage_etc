@@ -1,7 +1,11 @@
 app-doc/doxygen
+dev-python/line_profiler
 dev-python/pycallgraph
+dev-python/pyprof2calltree
+dev-python/runsnakerun
 dev-python/virtualenv
 dev-util/cgdb
+dev-util/gprof2dot
 dev-util/meld
 dev-util/ninja
 dev-util/patchutils

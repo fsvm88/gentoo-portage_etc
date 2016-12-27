@@ -1,4 +1,4 @@
 app-emulation/docker
 app-emulation/lxc
 app-emulation/wine
-#app-emulation/winetricks
+app-emulation/winetricks

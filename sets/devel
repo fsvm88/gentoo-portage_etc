@@ -14,3 +14,5 @@ dev-util/strace
 dev-util/valgrind
 dev-vcs/git
 sys-devel/gdb
+dev-python/ipython
+sci-libs/scipy

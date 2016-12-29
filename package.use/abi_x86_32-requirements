@@ -2,6 +2,7 @@ app-accessibility/at-spi2-atk abi_x86_32
 app-accessibility/at-spi2-core abi_x86_32
 app-arch/bzip2 abi_x86_32
 app-arch/libarchive abi_x86_32
+app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
 app-crypt/mit-krb5 abi_x86_32
 app-emulation/wine abi_x86_32
@@ -126,12 +127,16 @@ sys-apps/acl abi_x86_32
 sys-apps/attr abi_x86_32
 sys-apps/dbus abi_x86_32
 sys-apps/keyutils abi_x86_32
+sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
+sys-devel/flex abi_x86_32
 sys-devel/gettext abi_x86_32
 sys-devel/llvm abi_x86_32
 sys-fs/udev abi_x86_32
 sys-libs/binutils-libs abi_x86_32
+sys-libs/cracklib abi_x86_32
+sys-libs/db abi_x86_32
 sys-libs/e2fsprogs-libs abi_x86_32
 sys-libs/gdbm abi_x86_32
 sys-libs/gpm abi_x86_32
@@ -140,6 +145,7 @@ sys-libs/libcap abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/nss_wrapper abi_x86_32
 sys-libs/ntdb abi_x86_32
+sys-libs/pam abi_x86_32
 sys-libs/talloc abi_x86_32
 sys-libs/tdb abi_x86_32
 sys-libs/tevent abi_x86_32
@@ -156,6 +162,7 @@ virtual/libintl abi_x86_32
 virtual/libudev abi_x86_32
 virtual/libusb abi_x86_32
 virtual/opengl abi_x86_32
+virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
 x11-libs/cairo abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32

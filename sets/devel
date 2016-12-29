@@ -1,4 +1,5 @@
 app-doc/doxygen
+dev-python/ipython
 dev-python/line_profiler
 dev-python/pycallgraph
 dev-python/pyprof2calltree
@@ -13,6 +14,5 @@ dev-util/perf
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
-sys-devel/gdb
-dev-python/ipython
 sci-libs/scipy
+sys-devel/gdb

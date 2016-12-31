@@ -14,5 +14,6 @@ dev-util/perf
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
+sci-libs/scikits_learn
 sci-libs/scipy
 sys-devel/gdb

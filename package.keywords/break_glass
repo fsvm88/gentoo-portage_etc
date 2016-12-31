@@ -47,6 +47,8 @@
 <net-print/hplip-3.16.12
 <net-print/hplip-plugin-3.16.12
 <net-wireless/reaver-1.5
+<sci-libs/scikits-0.2
+<sci-libs/scikits_learn-0.18
 <sci-libs/scipy-0.19
 <sys-apps/dtc-1.5
 <sys-apps/ethtool-4.3

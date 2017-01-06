@@ -15,4 +15,5 @@ sys-apps/hdparm
 sys-apps/mlocate
 sys-fs/ncdu
 sys-process/fcron
+sys-process/lsof
 #sys-process/vixie-cron

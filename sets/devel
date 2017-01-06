@@ -1,10 +1,12 @@
 app-doc/doxygen
 dev-python/ipython
 dev-python/line_profiler
+dev-python/protobuf-python
 dev-python/pycallgraph
 dev-python/pyprof2calltree
 dev-python/runsnakerun
 dev-python/virtualenv
+dev-util/bazel
 dev-util/cgdb
 dev-util/gprof2dot
 dev-util/meld

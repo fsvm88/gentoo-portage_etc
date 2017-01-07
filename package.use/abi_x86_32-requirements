@@ -16,6 +16,7 @@ dev-libs/glib abi_x86_32
 dev-libs/gmp abi_x86_32
 dev-libs/icu abi_x86_32
 dev-libs/json-c abi_x86_32
+dev-libs/libaio abi_x86_32
 dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
 dev-libs/libev abi_x86_32

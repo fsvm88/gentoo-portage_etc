@@ -8,15 +8,16 @@ dev-python/runsnakerun
 dev-python/virtualenv
 dev-util/bazel
 dev-util/cgdb
+dev-util/cloc
 dev-util/gprof2dot
 dev-util/meld
 dev-util/ninja
 dev-util/patchutils
 dev-util/perf
+dev-util/pycharm-community
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
 sci-libs/scikits_learn
 sci-libs/scipy
 sys-devel/gdb
-dev-util/pycharm-community

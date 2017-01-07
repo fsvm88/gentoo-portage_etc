@@ -39,6 +39,7 @@
 <dev-util/bazel-0.5
 <dev-util/boost-build-1.63
 <dev-util/cargo-0.16
+<dev-util/cloc-1.71
 <dev-util/gprof2dot-0_p20161231
 <dev-util/nvidia-cuda-toolkit-9
 <dev-util/perf-4.5

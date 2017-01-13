@@ -75,6 +75,7 @@ media-libs/libmad abi_x86_32
 media-libs/libmpeg2 abi_x86_32
 media-libs/libogg abi_x86_32
 media-libs/libpng abi_x86_32
+media-libs/libsdl2 abi_x86_32
 media-libs/libsdl abi_x86_32
 media-libs/libsndfile abi_x86_32
 media-libs/libtheora abi_x86_32
@@ -143,6 +144,7 @@ sys-libs/gdbm abi_x86_32
 sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
+sys-libs/libudev-compat abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/nss_wrapper abi_x86_32
 sys-libs/ntdb abi_x86_32
@@ -192,6 +194,7 @@ x11-libs/libxkbcommon abi_x86_32
 x11-libs/libXrandr abi_x86_32
 x11-libs/libXrender abi_x86_32
 x11-libs/libxshmfence abi_x86_32
+x11-libs/libXt abi_x86_32
 x11-libs/libXtst abi_x86_32
 x11-libs/libXv abi_x86_32
 x11-libs/libXvMC abi_x86_32

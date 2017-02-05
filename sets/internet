@@ -8,7 +8,6 @@ net-ftp/ncftp
 net-misc/netkit-telnetd
 net-misc/tor
 net-misc/wakeonlan
-net-p2p/amule
 net-p2p/freenet
 net-proxy/torsocks
 net-wireless/iw

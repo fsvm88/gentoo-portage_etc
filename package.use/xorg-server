@@ -1,2 +1,0 @@
-x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
-x11-base/xorg-server glamor xnest xvfb

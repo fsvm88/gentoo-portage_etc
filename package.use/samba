@@ -1,2 +1,0 @@
-net-fs/samba addc gnutls -fam -system-mitkrb5
-sys-libs/ntdb python

@@ -1,0 +1,59 @@
+app-admin/sysstat isag lm_sensors
+app-crypt/pinentry gnome-keyring
+app-crypt/qca -qt4
+app-emulation/libvirt-glib python
+app-emulation/lxc cgmanager
+app-text/texlive-core xetex
+app-text/texlive extra
+dev-db/sqlite secure-delete
+dev-java/icedtea infinality
+dev-lang/python sqlite
+dev-libs/elfutils static-libs
+dev-libs/libdbusmenu-qt -qt4
+dev-libs/libpcre pcre16
+dev-libs/libsecp256k1 asm endomorphism
+dev-python/ipython matplotlib nbconvert notebook
+dev-python/numpy lapack
+dev-python/PyQt5 webkit
+dev-qt/designer -phonon
+dev-qt/qtgui accessibility eglfs
+dev-qt/qtmultimedia widgets
+dev-qt/qtscript scripttools
+dev-qt/qtwebkit printsupport -gstreamer010 -multimedia
+gnome-base/gvfs archive mtp
+kde-plasma/plasma-desktop legacy-systray
+media-libs/freetype infinality
+media-libs/gst-plugins-bad wayland
+media-libs/lcms python
+media-libs/libsamplerate sndfile
+media-libs/libsdl2 gles
+media-libs/libvpx svc
+media-libs/mesa dri3 gbm gles2 llvm-shared-libs vulkan xa
+media-libs/phonon-gstreamer -qt4
+media-libs/phonon -qt4
+media-sound/pulseaudio gnome
+net-analyzer/wireshark -qt4
+net-dns/avahi autoipd mdnsresponder-compat
+net-dns/dnsmasq script
+net-firewall/iptables conntrack netlink
+net-fs/samba addc gnutls winbind -fam -system-mitkrb5
+net-libs/gtk-vnc python
+net-misc/curl -adns
+net-misc/iputils arping clockdiff rarpd tracepath traceroute -caps -filecaps
+net-misc/networkmanager resolvconf
+net-misc/openvpn down-root socks
+net-misc/spice-gtk -gstreamer python usbredir
+net-wireless/bluez user-session
+net-wireless/lorcon python
+sys-apps/dbus user-session
+sys-auth/polkit-qt -qt4
+sys-devel/gcc graphite objc mpx
+sys-devel/llvm gold udis86
+sys-libs/glibc gd
+sys-libs/libseccomp static-libs
+sys-libs/ntdb python
+sys-libs/tdb python
+sys-libs/tevent python
+x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
+x11-base/xorg-server glamor xnest xvfb
+x11-libs/wxGTK:3.0 webkit

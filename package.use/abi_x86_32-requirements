@@ -42,6 +42,7 @@ dev-util/cppunit abi_x86_32
 dev-util/pkgconfig abi_x86_32
 gnome-base/librsvg abi_x86_32
 media-gfx/graphite2 abi_x86_32
+media-gfx/sane-backends abi_x86_32
 media-libs/a52dec abi_x86_32
 media-libs/alsa-lib abi_x86_32
 media-libs/audiofile abi_x86_32

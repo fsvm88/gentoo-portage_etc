@@ -1,2 +1,1 @@
-net-analyzer/wireshark -qt4
-net-analyzer/wireshark smi
+net-analyzer/wireshark smi -qt4

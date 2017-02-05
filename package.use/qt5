@@ -1,2 +1,4 @@
+dev-python/PyQt5 webkit
 dev-qt/designer -phonon
 dev-qt/qtgui eglfs
+dev-qt/qtwebkit printsupport

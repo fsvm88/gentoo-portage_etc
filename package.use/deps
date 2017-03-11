@@ -8,6 +8,7 @@ app-text/texlive-core xetex
 app-text/texlive extra
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
+dev-lang/perl ithreads
 dev-lang/python sqlite
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
@@ -21,8 +22,10 @@ dev-qt/qtgui accessibility eglfs
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
 dev-qt/qtwebkit printsupport -gstreamer010 -multimedia
+dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 kde-plasma/plasma-desktop legacy-systray
+media-gfx/imagemagick perl
 media-libs/freetype infinality
 media-libs/gst-plugins-bad wayland
 media-libs/lcms python
@@ -47,11 +50,13 @@ net-misc/spice-gtk -gstreamer python usbredir
 net-wireless/bluez user-session
 net-wireless/lorcon python
 sys-apps/dbus user-session
+sys-apps/systemd xkb
 sys-auth/polkit-qt -qt4
 sys-devel/gcc graphite objc mpx
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/libseccomp static-libs
+sys-libs/ncurses tinfo
 sys-libs/ntdb python
 sys-libs/tdb python
 sys-libs/tevent python

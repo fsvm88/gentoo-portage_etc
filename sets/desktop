@@ -3,6 +3,7 @@ app-office/libreoffice
 dev-libs/libappindicator:2
 dev-libs/libappindicator:3
 dev-libs/weston
+dev-qt/qtquickcontrols2
 dev-qt/qtwayland
 kde-plasma/plasma-meta
 media-sound/teamspeak-client-bin

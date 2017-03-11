@@ -12,4 +12,5 @@ sys-boot/grub
 sys-kernel/dummy-sources
 sys-kernel/genkernel-next
 sys-kernel/linux-firmware
+sys-process/schedtool
 www-client/links

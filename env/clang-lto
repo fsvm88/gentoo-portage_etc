@@ -1,6 +1,6 @@
 AR="llvm-ar"
 CC="clang"
-CFLAGS="${CFLAGS} -flto=thin"
+CFLAGS="-O3 -march=native -pipe -flto=full"
 CXX="clang++"
 CXXFLAGS="${CFLAGS}"
 FEATURES="test"

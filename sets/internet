@@ -6,7 +6,7 @@ net-dns/bind-tools
 net-ftp/lftp
 net-ftp/ncftp
 net-misc/netkit-telnetd
-net-misc/tor
+net-vpn/tor
 net-misc/wakeonlan
 net-p2p/freenet
 net-proxy/torsocks

@@ -17,6 +17,8 @@
 <dev-java/icedtea-3.4.0
 <dev-lang/rust-1.16.0
 <dev-lang/spidermonkey-1.8.6
+<dev-lang/python-3.6.5:3.5
+<dev-lang/python-3.6.5:3.6
 <dev-libs/libinput-1.7
 <dev-libs/mathjax-2.8
 <dev-libs/protobuf-3.2
@@ -45,6 +47,7 @@
 <dev-qt/designer-5.8
 <dev-qt/linguist-tools-5.8
 <dev-qt/qdbus-5.8
+<dev-qt/qtbluetooth-5.8
 <dev-qt/qtconcurrent-5.8
 <dev-qt/qtcore-5.8
 <dev-qt/qtdbus-5.8
@@ -126,3 +129,14 @@
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1
 <x11-terms/qterminal-0.7
+<dev-util/kdevplatform-5.1
+<dev-util/kdevelop-pg-qt-2.1
+<kde-apps/kapptemplate-17.01
+<dev-util/kdevelop-5.1
+<dev-python/sphinx-1.6
+<dev-python/pyparsing-2.2
+<dev-python/setuptools-35
+<dev-python/packaging-17
+<dev-python/appdirs-1.5
+<dev-python/imagesize-0.8
+<dev-libs/double-conversion-2.1

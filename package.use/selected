@@ -1,7 +1,7 @@
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu usbredir
-app-emulation/wine staging
+app-emulation/wine staging s3tc
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
 dev-libs/weston colord fbdev ivi rdp screen-sharing xwayland
@@ -10,7 +10,7 @@ dev-vcs/subversion -dso
 games-util/steam-games-meta s3tc
 net-analyzer/nmap ncat nping nmap-update
 net-analyzer/wireshark smi -qt4
-net-misc/tor stats tor-hardening transparent-proxy upnp
+net-vpn/tor stats tor-hardening transparent-proxy upnp
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-print/hplip snmp
 sys-apps/portage doc native-extensions

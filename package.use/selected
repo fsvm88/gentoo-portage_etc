@@ -10,9 +10,9 @@ dev-vcs/subversion -dso
 games-util/steam-games-meta s3tc
 net-analyzer/nmap ncat nping nmap-update
 net-analyzer/wireshark smi -qt4
-net-vpn/tor stats tor-hardening transparent-proxy upnp
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-print/hplip snmp
+net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/portage doc native-extensions
 sys-boot/grub libzfs
 sys-fs/cryptsetup -openssl

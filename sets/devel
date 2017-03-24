@@ -1,4 +1,5 @@
 app-doc/doxygen
+dev-cpp/gtest
 dev-python/ipython
 dev-python/line_profiler
 dev-python/protobuf-python
@@ -10,6 +11,7 @@ dev-util/bazel
 dev-util/cgdb
 dev-util/cloc
 dev-util/gprof2dot
+dev-util/kdevelop
 dev-util/meld
 dev-util/ninja
 dev-util/patchutils
@@ -21,4 +23,3 @@ dev-vcs/git
 sci-libs/scikits_learn
 sci-libs/scipy
 sys-devel/gdb
-dev-util/kdevelop

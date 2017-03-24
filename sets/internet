@@ -6,10 +6,10 @@ net-dns/bind-tools
 net-ftp/lftp
 net-ftp/ncftp
 net-misc/netkit-telnetd
-net-vpn/tor
 net-misc/wakeonlan
 net-p2p/freenet
 net-proxy/torsocks
+net-vpn/tor
 net-wireless/iw
 net-wireless/rfkill
 sys-apps/ethtool

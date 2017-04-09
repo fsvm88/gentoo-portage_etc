@@ -4,6 +4,7 @@
 <app-emulation/spice-0.14
 <app-emulation/spice-protocol-0.13
 <app-emulation/winetricks-99999999
+<app-portage/cpuid2cpuflags-5
 <app-portage/eix-0.34
 <app-shells/push-2.1
 <app-shells/quoter-3.1
@@ -12,6 +13,7 @@
 <app-text/pdfsandwich-0.2
 <app-text/tesseract-3.10
 <app-text/unpaper-6.2
+<app-vim/llvm-vim-4.1
 <dev-cpp/clucene-2.4
 <dev-java/bcprov-1.55
 <dev-java/icedtea-3.4.0
@@ -41,6 +43,7 @@
 <dev-python/nbconvert-4.3
 <dev-python/nbformat-4.2
 <dev-python/notebook-4.3
+<dev-python/notify2-0.4
 <dev-python/packaging-17
 <dev-python/priority-1.3
 <dev-python/prompt_toolkit-1.1
@@ -111,6 +114,7 @@
 <net-print/hplip-3.16.12
 <net-print/hplip-plugin-3.16.12
 <net-wireless/reaver-1.5
+<sci-astronomy/stellarium-0.16
 <sci-libs/scikits-0.2
 <sci-libs/scikits_learn-0.18
 <sci-libs/scipy-0.19
@@ -126,7 +130,9 @@
 <sys-devel/clang-runtime-3.10
 <sys-devel/gcc-6
 <sys-devel/gcc-7 **
-<sys-devel/llvm-3.10
+<sys-devel/llvm-3.10:0
+<sys-devel/llvm-4.1:4
+<sys-devel/llvmgold-5
 <sys-fs/cryptsetup-1.8
 <sys-fs/xfsprogs-4.9.0
 <sys-libs/binutils-libs-2.28
@@ -140,6 +146,7 @@
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
 <www-client/chromium-58
+<x11-libs/libdrm-2.4.80
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1

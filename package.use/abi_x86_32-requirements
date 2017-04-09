@@ -193,6 +193,7 @@ x11-libs/libXft abi_x86_32
 x11-libs/libXi abi_x86_32
 x11-libs/libXinerama abi_x86_32
 x11-libs/libxkbcommon abi_x86_32
+x11-libs/libXmu abi_x86_32
 x11-libs/libXrandr abi_x86_32
 x11-libs/libXrender abi_x86_32
 x11-libs/libxshmfence abi_x86_32

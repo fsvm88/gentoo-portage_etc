@@ -1,3 +1,4 @@
+app-admin/testdisk ntfs reiserfs
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu usbredir

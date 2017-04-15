@@ -18,7 +18,7 @@
 <dev-java/bcprov-1.55
 <dev-java/icedtea-3.4.0
 <dev-lang/python-3.5.9:3.5
-<dev-lang/rust-1.16.0
+<dev-lang/rust-1.17.0
 <dev-lang/spidermonkey-1.8.6
 <dev-libs/double-conversion-2.1
 <dev-libs/libinput-1.7
@@ -87,12 +87,12 @@
 <dev-qt/qtxml-5.8
 <dev-qt/qtxmlpatterns-5.8
 <dev-util/bazel-0.5
-<dev-util/cargo-0.17
+<dev-util/cargo-0.18.0
 <dev-util/colm-0.14
 <dev-util/gprof2dot-0_p20161231
-<dev-util/kdevelop-5.1
+<dev-util/kdevelop-5.2
 <dev-util/kdevelop-pg-qt-2.1
-<dev-util/kdevplatform-5.1
+<dev-util/kdevplatform-5.2
 <dev-util/nvidia-cuda-toolkit-9
 <dev-util/perf-4.5
 <dev-util/ragel-7.1
@@ -126,8 +126,8 @@
 <sys-apps/systemd-234
 <sys-block/thin-provisioning-tools-0.7
 <sys-devel/binutils-2.28
-<sys-devel/clang-3.10
-<sys-devel/clang-runtime-3.10
+<sys-devel/clang-4.1
+<sys-devel/clang-runtime-4.1
 <sys-devel/gcc-6
 <sys-devel/gcc-7 **
 <sys-devel/llvm-3.10:0
@@ -136,8 +136,10 @@
 <sys-fs/cryptsetup-1.8
 <sys-fs/xfsprogs-4.9.0
 <sys-libs/binutils-libs-2.28
+<sys-libs/compiler-rt-4.1
+<sys-libs/compiler-rt-sanitizers-4.1
 <sys-libs/ldb-1.1.28
-<sys-libs/libomp-3.10
+<sys-libs/libomp-4.1
 <sys-libs/libseccomp-2.4
 <sys-libs/libudev-compat-187
 <sys-libs/talloc-2.1.9

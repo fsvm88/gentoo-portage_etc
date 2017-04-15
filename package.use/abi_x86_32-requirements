@@ -134,6 +134,7 @@ sys-apps/keyutils abi_x86_32
 sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
+sys-devel/clang:4 python_targets_python2_7
 sys-devel/flex abi_x86_32
 sys-devel/gettext abi_x86_32
 sys-devel/llvm abi_x86_32

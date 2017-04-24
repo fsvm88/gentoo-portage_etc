@@ -130,6 +130,7 @@
 <sys-devel/clang-runtime-4.1
 <sys-devel/gcc-6
 <sys-devel/gcc-7 **
+<sys-devel/lld-4.1
 <sys-devel/llvm-3.10:0
 <sys-devel/llvm-4.1:4
 <sys-devel/llvmgold-5
@@ -153,4 +154,3 @@
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1
 <x11-terms/qterminal-0.8
-<sys-devel/lld-4.1

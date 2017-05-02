@@ -126,6 +126,7 @@
 <sys-apps/systemd-234
 <sys-block/thin-provisioning-tools-0.7
 <sys-devel/binutils-2.28
+sys-devel/binutils:2.28 **
 <sys-devel/clang-4.1
 <sys-devel/clang-runtime-4.1
 <sys-devel/gcc-6
@@ -136,6 +137,7 @@
 <sys-devel/llvmgold-5
 <sys-fs/cryptsetup-1.8
 <sys-fs/xfsprogs-4.9.0
+<sys-kernel/genkernel-next-67
 <sys-libs/binutils-libs-2.28
 <sys-libs/compiler-rt-4.1
 <sys-libs/compiler-rt-sanitizers-4.1

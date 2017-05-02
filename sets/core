@@ -9,9 +9,9 @@ sys-apps/hdparm
 sys-apps/irqbalance
 sys-apps/mlocate
 sys-boot/grub
+sys-devel/lld
 sys-kernel/dummy-sources
 sys-kernel/genkernel-next
 sys-kernel/linux-firmware
 sys-process/schedtool
 www-client/links
-sys-devel/lld

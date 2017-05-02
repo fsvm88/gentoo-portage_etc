@@ -18,6 +18,7 @@ dev-python/cryptography python_targets_python2_7
 dev-python/dbus-python python_targets_python2_7
 dev-python/extras python_targets_python2_7
 dev-python/idna python_targets_python2_7
+dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
 dev-python/lxml python_targets_python2_7
 dev-python/m2crypto python_targets_python2_7
@@ -62,6 +63,7 @@ media-gfx/graphviz python_targets_python2_7
 media-sound/lilypond python_targets_python2_7
 net-fs/samba python_targets_python2_7
 net-libs/gtk-vnc python_targets_python2_7
+net-libs/nodejs python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
 net-wireless/lorcon python_targets_python2_7
 sys-devel/llvm python_targets_python2_7

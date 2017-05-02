@@ -6,6 +6,7 @@ net-p2p/freenet
 sci-misc/boinc
 sys-apps/paludis
 sys-apps/portage
+sys-devel/crossdev **
 sys-fs/btrfs-progs
 sys-kernel/linux-headers
 sys-libs/glibc

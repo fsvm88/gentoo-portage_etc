@@ -50,7 +50,7 @@ net-wireless/lorcon python
 sys-apps/dbus user-session
 sys-apps/systemd xkb
 sys-auth/polkit-qt -qt4
-sys-devel/gcc graphite objc mpx
+sys-devel/gcc graphite objc mpx pie ssp
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/libseccomp static-libs

@@ -52,7 +52,7 @@
 <dev-python/pyparsing-2.2
 <dev-python/pyprof2calltree-1.4
 <dev-python/runsnakerun-2.1
-<dev-python/setuptools-35
+<dev-python/setuptools-36
 <dev-python/sphinx-1.6
 <dev-python/squaremap-1.1
 <dev-python/twisted-16.5
@@ -121,6 +121,7 @@
 <sci-misc/tensorflow-0.13
 <sys-apps/dtc-1.5
 <sys-apps/ethtool-4.3
+<sys-apps/grep-3.1
 <sys-apps/microcode-ctl-1.29
 <sys-apps/net-tools-1.60_p20161201235959
 <sys-apps/systemd-234

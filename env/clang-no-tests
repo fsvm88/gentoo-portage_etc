@@ -1,6 +1,6 @@
 AR="llvm-ar"
 CC="clang"
-CFLAGS="-O3 -march=native -pipe -ggdb"
+CFLAGS="-O3 -march=native -pipe"
 CXX="clang++"
 CXXFLAGS="${CFLAGS}"
 NM="llvm-nm"

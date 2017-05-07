@@ -34,7 +34,7 @@
 <dev-python/imagesize-0.8
 <dev-python/ipykernel-4.6
 <dev-python/ipyparallel-5.3
-<dev-python/ipython-5.2
+<dev-python/ipython-5.4
 <dev-python/ipywidgets-5.3
 <dev-python/jupyter_client-4.5
 <dev-python/jupyter_core-4.3
@@ -151,9 +151,10 @@ sys-devel/binutils:2.28 **
 <sys-libs/tevent-0.9.32
 <sys-power/powertop-2.9
 <sys-power/thermald-1.5
-<www-client/chromium-58
+<www-client/chromium-60
 <x11-libs/libdrm-2.4.80
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1
 <x11-terms/qterminal-0.8
+<dev-python/jedi-0.10.3

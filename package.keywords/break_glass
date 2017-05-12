@@ -36,6 +36,7 @@
 <dev-python/ipyparallel-5.3
 <dev-python/ipython-5.4
 <dev-python/ipywidgets-5.3
+<dev-python/jedi-0.10.3
 <dev-python/jupyter_client-4.5
 <dev-python/jupyter_core-4.3
 <dev-python/line_profiler-1.1
@@ -119,6 +120,7 @@
 <sci-libs/scikits_learn-0.18
 <sci-libs/scipy-0.19
 <sci-misc/tensorflow-0.13
+<sys-apps/busybox-1.27
 <sys-apps/dtc-1.5
 <sys-apps/ethtool-4.3
 <sys-apps/grep-3.1
@@ -157,4 +159,3 @@ sys-devel/binutils:2.28 **
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1
 <x11-terms/qterminal-0.8
-<dev-python/jedi-0.10.3

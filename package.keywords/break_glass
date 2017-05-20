@@ -159,3 +159,4 @@ sys-devel/binutils:2.28 **
 <x11-libs/libxkbcommon-0.8
 <x11-libs/wxGTK-3.1
 <x11-terms/qterminal-0.8
+<sys-libs/libunwind-1.3

@@ -15,7 +15,6 @@ net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-print/hplip snmp
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/portage doc native-extensions
-sys-boot/grub libzfs
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
 www-client/firefox custom-cflags custom-optimization pgo wifi

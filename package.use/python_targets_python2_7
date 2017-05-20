@@ -88,3 +88,6 @@ sys-libs/tevent python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
 x11-libs/xpyb python_targets_python2_7
 x11-proto/xcb-proto python_targets_python2_7
+sys-libs/libunwind abi_x86_32
+dev-libs/libunistring abi_x86_32
+net-dns/libidn2 abi_x86_32

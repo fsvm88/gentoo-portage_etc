@@ -28,6 +28,7 @@ dev-libs/libltdl abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
 dev-libs/libtasn1 abi_x86_32
+dev-libs/libunistring abi_x86_32
 dev-libs/libusb abi_x86_32
 dev-libs/libusb-compat abi_x86_32
 dev-libs/libverto abi_x86_32
@@ -121,6 +122,7 @@ media-sound/mpg123 abi_x86_32
 media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 net-dns/avahi abi_x86_32
+net-dns/libidn2 abi_x86_32
 net-fs/samba abi_x86_32
 net-libs/gnutls abi_x86_32
 net-libs/libasyncns abi_x86_32
@@ -148,6 +150,7 @@ sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
 sys-libs/libudev-compat abi_x86_32
+sys-libs/libunwind abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/nss_wrapper abi_x86_32
 sys-libs/ntdb abi_x86_32

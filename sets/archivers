@@ -3,3 +3,4 @@ app-arch/lrzip
 app-arch/p7zip
 app-arch/sharutils
 dev-util/xdelta
+app-crypt/veracrypt

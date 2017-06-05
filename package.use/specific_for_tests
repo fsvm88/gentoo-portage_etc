@@ -1,0 +1,4 @@
+dev-libs/glib utils
+dev-python/pyzmq green
+media-gfx/imagemagick corefonts
+net-misc/curl kerberos

@@ -1,2 +1,5 @@
 dev-cpp/gtest abi_x86_32
+dev-lang/tcl abi_x86_32
 dev-util/cmocka abi_x86_32
+dev-util/cunit abi_x86_32
+virtual/krb5 abi_x86_32

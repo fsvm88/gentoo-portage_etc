@@ -16,7 +16,6 @@
 <app-vim/llvm-vim-4.1
 <dev-cpp/clucene-2.4
 <dev-java/bcprov-1.55
-<dev-java/icedtea-3.4.0
 <dev-lang/python-3.5.9:3.5
 <dev-lang/rust-1.17.0
 <dev-lang/spidermonkey-1.8.6
@@ -43,6 +42,7 @@
 <dev-python/matplotlib-1.5.4
 <dev-python/nbconvert-4.3
 <dev-python/nbformat-4.2
+<dev-python/nose-1.4
 <dev-python/notebook-4.3
 <dev-python/notify2-0.4
 <dev-python/packaging-17

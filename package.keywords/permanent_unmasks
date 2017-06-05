@@ -1,5 +1,7 @@
 app-arch/hardlink
+app-crypt/veracrypt
 app-emulation/wine
+dev-java/icedtea
 media-libs/mesa **
 media-sound/teamspeak-client-bin
 net-p2p/freenet
@@ -7,9 +9,8 @@ sci-misc/boinc
 sys-apps/paludis
 sys-apps/portage
 sys-devel/crossdev **
-sys-fs/duperemove
 sys-fs/btrfs-progs
+sys-fs/duperemove
 sys-kernel/linux-headers
 sys-libs/glibc
 x11-apps/piglit **
-app-crypt/veracrypt

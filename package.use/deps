@@ -61,3 +61,4 @@ sys-libs/tevent python
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb
 x11-libs/wxGTK:3.0 webkit
+virtual/notification-daemon kde

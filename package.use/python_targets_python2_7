@@ -1,3 +1,4 @@
+app-arch/rpm python_targets_python2_7
 app-emulation/libvirt-glib python_targets_python2_7
 app-emulation/qemu python_targets_python2_7
 app-emulation/virt-manager python_targets_python2_7

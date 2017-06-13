@@ -13,5 +13,5 @@ x11-apps/xrandr
 x11-base/xorg-server
 x11-misc/sddm
 x11-misc/vdpauinfo
-x11-terms/qterminal
+#x11-terms/qterminal
 x11-themes/gtk-engines-adwaita

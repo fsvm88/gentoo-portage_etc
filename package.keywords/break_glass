@@ -10,7 +10,6 @@
 <app-shells/quoter-3.1
 <app-text/djvu-3.5.28
 <app-text/ghostscript-gpl-9.30
-<app-text/pdfsandwich-0.2
 <app-text/tesseract-3.10
 <app-text/unpaper-6.2
 <app-vim/llvm-vim-4.1
@@ -24,7 +23,6 @@
 <dev-libs/mathjax-2.8
 <dev-libs/protobuf-3.2
 <dev-python/appdirs-1.5
-<dev-python/configparser-3.6
 <dev-python/cycler-0.11
 <dev-python/entrypoints-0.3
 <dev-python/hpack-2.4

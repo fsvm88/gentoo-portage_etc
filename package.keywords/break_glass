@@ -1,9 +1,6 @@
 <app-benchmarks/siege-3.2
 <app-editors/scite-3.7
 <app-emulation/lxc-2.1
-<app-emulation/spice-0.14
-<app-emulation/spice-protocol-0.13
-<app-emulation/winetricks-99999999
 <app-portage/cpuid2cpuflags-5
 <app-portage/eix-0.34
 <app-shells/push-2.1
@@ -13,16 +10,11 @@
 <app-text/tesseract-3.10
 <app-text/unpaper-6.2
 <app-vim/llvm-vim-4.1
-<dev-cpp/clucene-2.4
 <dev-java/bcprov-1.55
-<dev-lang/python-3.5.9:3.5
 <dev-lang/rust-1.17.0
 <dev-lang/spidermonkey-1.8.6
-<dev-libs/double-conversion-2.1
-<dev-libs/libinput-1.7
 <dev-libs/mathjax-2.8
 <dev-libs/protobuf-3.2
-<dev-python/appdirs-1.5
 <dev-python/cycler-0.11
 <dev-python/entrypoints-0.3
 <dev-python/hpack-2.4
@@ -43,11 +35,9 @@
 <dev-python/nose-1.4
 <dev-python/notebook-4.3
 <dev-python/notify2-0.4
-<dev-python/packaging-17
 <dev-python/prompt_toolkit-1.1
 <dev-python/protobuf-python-3.2
 <dev-python/pycallgraph-1.1
-<dev-python/pyparsing-2.2
 <dev-python/pyprof2calltree-1.4
 <dev-python/runsnakerun-2.1
 <dev-python/setuptools-36
@@ -88,13 +78,11 @@
 <dev-util/colm-0.14
 <dev-util/gprof2dot-0_p20161231
 <dev-util/kdevelop-5.2
-<dev-util/kdevelop-pg-qt-2.1
 <dev-util/kdevplatform-5.2
 <dev-util/nvidia-cuda-toolkit-9
 <dev-util/perf-4.5
 <dev-util/ragel-7.1
 <dev-util/vmtouch-1.1
-<kde-apps/kapptemplate-17.01
 <media-gfx/gscan2pdf-1.8
 <media-gfx/sam2p-0.50
 <media-libs/libopenshot-0.2
@@ -107,7 +95,6 @@
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9
 <net-libs/NativeThread-0_pre20081231
-<net-misc/spice-gtk-0.34
 <net-print/hplip-3.16.12
 <net-print/hplip-plugin-3.16.12
 <net-wireless/reaver-1.5
@@ -123,12 +110,9 @@
 <sys-apps/net-tools-1.60_p20161201235959
 <sys-apps/systemd-234
 <sys-block/thin-provisioning-tools-0.7
-<sys-devel/binutils-2.28
-sys-devel/binutils:2.28 **
 <sys-devel/clang-4.1
 <sys-devel/clang-runtime-4.1
-<sys-devel/gcc-6
-<sys-devel/gcc-7 **
+<sys-devel/gcc-7
 <sys-devel/lld-4.1
 <sys-devel/llvm-3.10:0
 <sys-devel/llvm-4.1:4

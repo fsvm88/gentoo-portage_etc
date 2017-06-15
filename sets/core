@@ -9,6 +9,7 @@ sys-apps/hdparm
 sys-apps/irqbalance
 sys-apps/mlocate
 sys-boot/grub
+sys-boot/os-prober
 sys-devel/lld
 sys-kernel/dummy-sources
 sys-kernel/genkernel-next

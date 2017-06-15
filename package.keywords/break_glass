@@ -93,8 +93,8 @@
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9
 <net-libs/NativeThread-0_pre20081231
-<net-print/hplip-3.16.12
-<net-print/hplip-plugin-3.16.12
+<net-print/hplip-3.18
+<net-print/hplip-plugin-3.18
 <net-wireless/reaver-1.5
 <sci-astronomy/stellarium-0.16
 <sci-libs/scikits-0.2

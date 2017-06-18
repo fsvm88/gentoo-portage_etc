@@ -5,5 +5,5 @@ kde-apps/gwenview
 kde-apps/kcalc
 kde-apps/konsole
 kde-apps/spectacle
-x11-apps/xbacklight
+sys-power/acpilight
 x11-misc/xdg-user-dirs

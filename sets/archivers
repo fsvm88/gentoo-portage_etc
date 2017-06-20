@@ -1,6 +1,7 @@
 app-arch/deb2targz
 app-arch/lrzip
 app-arch/p7zip
+app-arch/pbzip2
 app-arch/sharutils
 app-crypt/veracrypt
 dev-util/xdelta

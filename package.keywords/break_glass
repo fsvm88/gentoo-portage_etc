@@ -1,3 +1,4 @@
+<app-arch/pbzip2-1.1.20
 <app-benchmarks/siege-3.2
 <app-editors/scite-3.7
 <app-emulation/lxc-2.1
@@ -19,7 +20,10 @@
 <dev-python/entrypoints-0.3
 <dev-python/hpack-2.4
 <dev-python/hyperframe-4.1
+<dev-python/hyperframe-5.2
 <dev-python/hyper-h2-2.6
+<dev-python/hyper-h2-3.1
+<dev-python/hyperlink-17.2
 <dev-python/imagesize-0.8
 <dev-python/ipykernel-4.6
 <dev-python/ipyparallel-5.3

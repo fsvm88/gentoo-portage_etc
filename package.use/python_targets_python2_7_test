@@ -33,6 +33,7 @@ dev-python/hgdistver python_targets_python2_7
 dev-python/hpack python_targets_python2_7
 dev-python/hyperframe python_targets_python2_7
 dev-python/hyper-h2 python_targets_python2_7
+dev-python/hyperlink python_targets_python2_7
 dev-python/hypothesis python_targets_python2_7
 dev-python/imagesize python_targets_python2_7
 dev-python/incremental python_targets_python2_7

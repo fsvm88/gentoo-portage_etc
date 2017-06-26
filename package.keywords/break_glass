@@ -129,6 +129,7 @@
 <sys-libs/libomp-4.1
 <sys-libs/libudev-compat-187
 <sys-libs/libunwind-1.3
+<sys-libs/llvm-libunwind-4.1
 <sys-power/thermald-1.5
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1

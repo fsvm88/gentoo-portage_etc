@@ -149,6 +149,8 @@ sys-libs/gdbm abi_x86_32
 sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
+sys-libs/libcxxabi abi_x86_32
+sys-libs/libcxx abi_x86_32
 sys-libs/libudev-compat abi_x86_32
 sys-libs/libunwind abi_x86_32
 sys-libs/ncurses abi_x86_32

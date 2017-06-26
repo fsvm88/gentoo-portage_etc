@@ -15,4 +15,5 @@ sys-fs/btrfs-progs
 sys-fs/duperemove
 sys-kernel/linux-headers
 sys-libs/glibc
+www-client/firefox
 x11-apps/piglit **

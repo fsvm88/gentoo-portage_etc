@@ -1,0 +1,28 @@
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp cfe-4.0.0.src/lib/Driver/ToolChains.cpp
+--- cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp	2017-05-09 20:11:15.729446911 +0000
++++ cfe-4.0.0.src/lib/Driver/ToolChains.cpp	2017-05-09 20:14:14.017118140 +0000
+@@ -4850,6 +4850,13 @@
+   CmdArgs.push_back("-lunwind");
+ }
+ 
++unsigned Linux::GetDefaultStackProtectorLevel(bool KernelOrKext) const {
++  StringRef VendorName = Linux::getTriple().getVendorName();
++  if (VendorName.compare("gentoo") == 0)
++    return 2;
++  return 1;
++}
++
+ /// DragonFly - DragonFly tool chain which can call as(1) and ld(1) directly.
+ 
+ DragonFly::DragonFly(const Driver &D, const llvm::Triple &Triple,
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/ToolChains.h cfe-4.0.0.src/lib/Driver/ToolChains.h
+--- cfe-4.0.0.src.orig/lib/Driver/ToolChains.h	2017-01-05 16:52:29.000000000 +0000
++++ cfe-4.0.0.src/lib/Driver/ToolChains.h	2017-05-09 20:14:14.019118137 +0000
+@@ -880,6 +880,7 @@
+   void AddIAMCUIncludeArgs(const llvm::opt::ArgList &DriverArgs,
+                            llvm::opt::ArgStringList &CC1Args) const override;
+   bool isPIEDefault() const override;
++  unsigned GetDefaultStackProtectorLevel(bool KernelOrKext) const override;
+   SanitizerMask getSupportedSanitizers() const override;
+   void addProfileRTLibs(const llvm::opt::ArgList &Args,
+                         llvm::opt::ArgStringList &CmdArgs) const override;

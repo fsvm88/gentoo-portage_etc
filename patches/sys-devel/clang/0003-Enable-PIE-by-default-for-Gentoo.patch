@@ -1,0 +1,29 @@
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp cfe-4.0.0.src/lib/Driver/ToolChains.cpp
+--- cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp	2017-05-09 20:10:29.295532537 +0000
++++ cfe-4.0.0.src/lib/Driver/ToolChains.cpp	2017-05-09 20:11:15.729446911 +0000
+@@ -4710,7 +4710,10 @@
+   }
+ }
+ 
+-bool Linux::isPIEDefault() const { return getSanitizerArgs().requiresPIE(); }
++bool Linux::isPIEDefault() const {
++  return getSanitizerArgs().requiresPIE() ||
++    Linux::getTriple().getVendorName().compare("gentoo") == 0;
++}
+ 
+ SanitizerMask Linux::getSupportedSanitizers() const {
+   const bool IsX86 = getTriple().getArch() == llvm::Triple::x86;
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/Tools.cpp cfe-4.0.0.src/lib/Driver/Tools.cpp
+--- cfe-4.0.0.src.orig/lib/Driver/Tools.cpp	2017-02-21 19:11:22.000000000 +0000
++++ cfe-4.0.0.src/lib/Driver/Tools.cpp	2017-05-09 20:11:15.786446806 +0000
+@@ -9254,7 +9254,9 @@
+   if (!D.SysRoot.empty())
+     CmdArgs.push_back(Args.MakeArgString("--sysroot=" + D.SysRoot));
+ 
+-  if (IsPIE)
++  if (Args.hasArg(options::OPT_nopie))
++    CmdArgs.push_back("-nopie");
++  else if (IsPIE)
+     CmdArgs.push_back("-pie");
+ 
+   CmdArgs.push_back("--eh-frame-hdr");

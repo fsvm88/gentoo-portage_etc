@@ -1,0 +1,35 @@
+diff -Nuar cfe-4.0.0.src.orig/include/clang/Driver/Distro.h cfe-4.0.0.src/include/clang/Driver/Distro.h
+--- cfe-4.0.0.src.orig/include/clang/Driver/Distro.h	2016-11-28 21:11:14.000000000 +0000
++++ cfe-4.0.0.src/include/clang/Driver/Distro.h	2017-05-09 20:09:32.825636670 +0000
+@@ -37,6 +37,7 @@
+     RHEL6,
+     RHEL7,
+     Fedora,
++    Gentoo,
+     OpenSUSE,
+     UbuntuHardy,
+     UbuntuIntrepid,
+@@ -97,6 +98,10 @@
+   /// @name Convenience Predicates
+   /// @{
+ 
++  bool IsGentoo() const {
++    return DistroVal == Gentoo;
++  }
++
+   bool IsRedhat() const {
+     return DistroVal == Fedora || (DistroVal >= RHEL5 && DistroVal <= RHEL7);
+   }
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/Distro.cpp cfe-4.0.0.src/lib/Driver/Distro.cpp
+--- cfe-4.0.0.src.orig/lib/Driver/Distro.cpp	2016-11-28 21:11:18.000000000 +0000
++++ cfe-4.0.0.src/lib/Driver/Distro.cpp	2017-05-09 20:09:32.826636668 +0000
+@@ -128,6 +128,9 @@
+   if (VFS.exists("/etc/arch-release"))
+     return Distro::ArchLinux;
+ 
++  if (VFS.exists("/etc/gentoo-release"))
++    return Distro::Gentoo;
++
+   return Distro::UnknownDistro;
+ }
+ 

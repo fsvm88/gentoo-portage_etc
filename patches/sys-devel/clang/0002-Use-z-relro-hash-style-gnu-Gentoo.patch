@@ -1,0 +1,21 @@
+diff -Nuar cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp cfe-4.0.0.src/lib/Driver/ToolChains.cpp
+--- cfe-4.0.0.src.orig/lib/Driver/ToolChains.cpp	2017-01-10 21:13:08.000000000 +0000
++++ cfe-4.0.0.src/lib/Driver/ToolChains.cpp	2017-05-09 20:10:29.295532537 +0000
+@@ -4112,7 +4112,7 @@
+ 
+   Distro Distro(D.getVFS());
+ 
+-  if (Distro.IsOpenSUSE() || Distro.IsUbuntu()) {
++  if (Distro.IsOpenSUSE() || Distro.IsUbuntu() || Distro.IsGentoo()) {
+     ExtraOpts.push_back("-z");
+     ExtraOpts.push_back("relro");
+   }
+@@ -4132,7 +4132,7 @@
+   // ABI requires a mapping between the GOT and the symbol table.
+   // Android loader does not support .gnu.hash.
+   if (!IsMips && !IsAndroid) {
+-    if (Distro.IsRedhat() || Distro.IsOpenSUSE() ||
++    if (Distro.IsRedhat() || Distro.IsOpenSUSE() || Distro.IsGentoo() ||
+         (Distro.IsUbuntu() && Distro >= Distro::UbuntuMaverick))
+       ExtraOpts.push_back("--hash-style=gnu");
+ 

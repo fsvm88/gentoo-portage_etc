@@ -133,3 +133,4 @@
 <sys-power/thermald-1.5
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
+<app-portage/unsandbox-3

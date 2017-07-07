@@ -96,7 +96,6 @@
 <media-libs/libpng-1.7
 <media-libs/libvpx-1.7
 <media-video/openshot-2.3
-# move app-vim/llvm-vim sys-devel/llvm-common
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9
 <net-libs/NativeThread-0_pre20081231

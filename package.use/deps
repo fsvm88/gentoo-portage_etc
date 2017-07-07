@@ -45,9 +45,7 @@ net-misc/iputils arping clockdiff rarpd tracepath traceroute -caps -filecaps
 net-misc/networkmanager resolvconf
 net-misc/spice-gtk -gstreamer python usbredir
 net-vpn/openvpn down-root socks
-net-wireless/bluez user-session
 net-wireless/lorcon python
-sys-apps/dbus user-session
 sys-apps/systemd xkb
 sys-auth/polkit-qt -qt4
 sys-devel/gcc graphite objc mpx pie ssp

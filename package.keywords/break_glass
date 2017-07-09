@@ -11,6 +11,7 @@
 <app-text/ghostscript-gpl-9.30
 <app-text/tesseract-3.10
 <app-text/unpaper-6.2
+<dev-db/sqlite-3.20
 <dev-java/bcprov-1.55
 <dev-lang/rust-1.17.0
 <dev-lang/spidermonkey-1.8.6
@@ -18,6 +19,7 @@
 <dev-libs/nspr-4.20
 <dev-libs/nss-3.35
 <dev-libs/protobuf-3.2
+<dev-libs/re2-0.2017.04.01
 <dev-python/cycler-0.11
 <dev-python/entrypoints-0.3
 <dev-python/hpack-2.4

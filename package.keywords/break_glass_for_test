@@ -1,8 +1,6 @@
 dev-python/automat
-dev-python/constantly
 dev-python/incremental
 dev-python/m2r
 dev-python/nose_warnings_filters
-dev-python/priority
 dev-python/testpath
 dev-python/twisted

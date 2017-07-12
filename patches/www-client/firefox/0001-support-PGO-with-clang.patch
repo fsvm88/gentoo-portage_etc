@@ -1,0 +1,63 @@
+diff -Nuar firefox-55.0b7.orig/js/src/old-configure.in firefox-55.0b7/js/src/old-configure.in
+--- firefox-55.0b7.orig/js/src/old-configure.in	2017-07-10 18:38:27.351883546 +0200
++++ firefox-55.0b7/js/src/old-configure.in	2017-07-10 18:51:55.889838823 +0200
+@@ -1844,9 +1844,14 @@
+ AC_MSG_RESULT([$result])
+ 
+ if test $result = "yes"; then
+-  PROFILE_GEN_LDFLAGS="-fprofile-generate"
+-  PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
+-  PROFILE_USE_LDFLAGS="-fprofile-use"
++  if test -n "${CLANG_CC}"; then
++    PROFILE_GEN_CFLAGS="-fprofile-generate"
++    PROFILE_USE_CFLAGS="-fprofile-instr-use"
++  else
++    PROFILE_GEN_LDFLAGS="-fprofile-generate"
++    PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
++    PROFILE_USE_LDFLAGS="-fprofile-use"
++  fi
+ fi
+ 
+ CFLAGS="$_SAVE_CFLAGS"
+diff -Nuar firefox-55.0b7.orig/nsprpub/configure.in firefox-55.0b7/nsprpub/configure.in
+--- firefox-55.0b7.orig/nsprpub/configure.in	2017-07-10 18:38:27.697883527 +0200
++++ firefox-55.0b7/nsprpub/configure.in	2017-07-10 18:52:54.752835567 +0200
+@@ -765,9 +765,14 @@
+ AC_MSG_RESULT([$result])
+ 
+ if test $result = "yes"; then
+-   PROFILE_GEN_LDFLAGS="-fprofile-generate"
+-   PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
+-   PROFILE_USE_LDFLAGS="-fprofile-use"
++   if test -n "${CLANG_CC}"; then
++     PROFILE_GEN_CFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-instr-use"
++   else
++     PROFILE_GEN_LDFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
++     PROFILE_USE_LDFLAGS="-fprofile-use"
++   fi
+ fi
+ 
+ CFLAGS="$_SAVE_CFLAGS"
+diff -Nuar firefox-55.0b7.orig/old-configure.in firefox-55.0b7/old-configure.in
+--- firefox-55.0b7.orig/old-configure.in	2017-07-10 18:38:27.453883540 +0200
++++ firefox-55.0b7/old-configure.in	2017-07-10 18:47:40.530852948 +0200
+@@ -4528,9 +4528,14 @@
+ AC_MSG_RESULT([$result])
+ 
+ if test $result = "yes"; then
+-  PROFILE_GEN_LDFLAGS="-fprofile-generate"
+-  PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
+-  PROFILE_USE_LDFLAGS="-fprofile-use"
++  if test -n "${CLANG_CC}"; then
++    PROFILE_GEN_CFLAGS="-fprofile-generate"
++    PROFILE_USE_CFLAGS="-fprofile-instr-use"
++  else
++    PROFILE_GEN_LDFLAGS="-fprofile-generate"
++    PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
++    PROFILE_USE_LDFLAGS="-fprofile-use"
++  fi
+ fi
+ 
+ CFLAGS="$_SAVE_CFLAGS"

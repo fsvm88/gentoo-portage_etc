@@ -23,7 +23,6 @@ sys-apps/portage doc native-extensions
 sys-firmware/intel-microcode monolithic
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
-www-client/firefox custom-cflags custom-optimization pgo wifi
-www-client/firefox system-harfbuzz
+www-client/firefox custom-cflags custom-optimization system-harfbuzz wifi
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm

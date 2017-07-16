@@ -2,6 +2,7 @@ app-doc/doxygen
 dev-cpp/gtest
 dev-python/ipython
 dev-python/line_profiler
+dev-python/neo4j-python-driver
 dev-python/protobuf-python
 dev-python/pycallgraph
 dev-python/pyprof2calltree

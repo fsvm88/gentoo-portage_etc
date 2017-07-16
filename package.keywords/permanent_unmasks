@@ -3,17 +3,37 @@ app-backup/btrbk
 app-crypt/veracrypt
 app-emulation/wine
 dev-java/icedtea
+dev-python/automat
+dev-python/incremental
+dev-python/m2r
+dev-python/nose_warnings_filters
+dev-python/snakeoil **
+dev-python/testpath
+dev-python/twisted
+games-util/steam-client-meta
+games-util/steam-games-meta
+games-util/steam-launcher
+games-util/steam-meta
 media-libs/mesa **
 media-sound/teamspeak-client-bin
+net-p2p/bitcoin-cli
+net-p2p/bitcoind
 net-p2p/freenet
 net-p2p/go-ethereum
 sci-misc/boinc
 sys-apps/paludis
+sys-apps/pkgcore **
 sys-apps/portage
 sys-devel/crossdev **
+sys-firmware/intel-microcode
+sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-fs/duperemove
+sys-kernel/dummy-sources
+sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
 www-client/firefox
 x11-apps/piglit **
+x11-drivers/nvidia-drivers
+x11-misc/envytools **

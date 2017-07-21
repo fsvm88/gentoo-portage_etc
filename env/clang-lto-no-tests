@@ -1,6 +1,6 @@
 AR="llvm-ar"
 CC="clang"
-CFLAGS="-O3 -march=native -pipe -flto=thin -fwhole-program-vtables -ggdb"
+CFLAGS="-O3 -march=native -pipe -flto=thin -ggdb"
 CXX="clang++"
 CXXFLAGS="${CFLAGS}"
 FEATURES="-test"

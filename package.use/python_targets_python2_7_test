@@ -25,6 +25,7 @@ dev-python/fixtures python_targets_python2_7
 dev-python/flake8 python_targets_python2_7
 dev-python/flaky python_targets_python2_7
 dev-python/fonttools python_targets_python2_7
+dev-python/funcsigs python_targets_python2_7
 dev-python/functools32 python_targets_python2_7
 dev-python/futures python_targets_python2_7
 dev-python/genty python_targets_python2_7
@@ -102,4 +103,3 @@ virtual/python-funcsigs python_targets_python2_7
 virtual/python-futures python_targets_python2_7
 virtual/python-singledispatch python_targets_python2_7
 www-servers/tornado python_targets_python2_7
-dev-python/funcsigs python_targets_python2_7

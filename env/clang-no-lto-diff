@@ -1,2 +1,2 @@
-CFLAGS="-O3 -march=native -pipe -ggdb -fuse-ld=lld"
+CFLAGS="-O3 -march=native -pipe -ggdb"
 CXXFLAGS="${CFLAGS}"

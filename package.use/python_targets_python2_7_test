@@ -103,3 +103,4 @@ virtual/python-funcsigs python_targets_python2_7
 virtual/python-futures python_targets_python2_7
 virtual/python-singledispatch python_targets_python2_7
 www-servers/tornado python_targets_python2_7
+dev-python/typing python_targets_python2_7

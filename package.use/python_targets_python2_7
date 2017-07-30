@@ -10,8 +10,6 @@ dev-libs/libdbusmenu python_targets_python2_7
 dev-libs/libxml2 python_targets_python2_7
 dev-libs/newt python_targets_python2_7
 dev-libs/zziplib python_targets_python2_7
-dev-python/PyQt5 python_targets_python2_7
-dev-python/PySocks python_targets_python2_7
 dev-python/appdirs python_targets_python2_7
 dev-python/backports python_targets_python2_7
 dev-python/backports-ssl-match-hostname python_targets_python2_7
@@ -29,13 +27,13 @@ dev-python/enum34 python_targets_python2_7
 dev-python/extras python_targets_python2_7
 dev-python/flask python_targets_python2_7
 dev-python/google-api-python-client python_targets_python2_7
-dev-python/google-auth python_targets_python2_7
 dev-python/google-auth-httplib2 python_targets_python2_7
+dev-python/google-auth python_targets_python2_7
 dev-python/html5lib python_targets_python2_7
 dev-python/httplib2 python_targets_python2_7
 dev-python/idna python_targets_python2_7
-dev-python/ipaddr python_targets_python2_7
 dev-python/ipaddress python_targets_python2_7
+dev-python/ipaddr python_targets_python2_7
 dev-python/itsdangerous python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
@@ -53,7 +51,6 @@ dev-python/packaging python_targets_python2_7
 dev-python/pbr python_targets_python2_7
 dev-python/pluggy python_targets_python2_7
 dev-python/ply python_targets_python2_7
-dev-python/py python_targets_python2_7
 dev-python/pyasn1 python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
@@ -63,6 +60,9 @@ dev-python/pygtksourceview python_targets_python2_7
 dev-python/pyopengl python_targets_python2_7
 dev-python/pyopenssl python_targets_python2_7
 dev-python/pyparsing python_targets_python2_7
+dev-python/py python_targets_python2_7
+dev-python/PyQt5 python_targets_python2_7
+dev-python/PySocks python_targets_python2_7
 dev-python/pytest-cache python_targets_python2_7
 dev-python/pytest-localserver python_targets_python2_7
 dev-python/pytest-xprocess python_targets_python2_7
@@ -75,8 +75,8 @@ dev-python/setuptools python_targets_python2_7
 dev-python/simplejson python_targets_python2_7
 dev-python/sip python_targets_python2_7
 dev-python/six python_targets_python2_7
-dev-python/sphinx python_targets_python2_7
 dev-python/sphinxcontrib-websupport python_targets_python2_7
+dev-python/sphinx python_targets_python2_7
 dev-python/squaremap python_targets_python2_7
 dev-python/subunit python_targets_python2_7
 dev-python/testtools python_targets_python2_7
@@ -108,5 +108,6 @@ sys-libs/talloc python_targets_python2_7
 sys-libs/tdb python_targets_python2_7
 sys-libs/tevent python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
+x11-drivers/xf86-video-qxl python_targets_python2_7
 x11-libs/xpyb python_targets_python2_7
 x11-proto/xcb-proto python_targets_python2_7

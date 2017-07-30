@@ -85,6 +85,7 @@ dev-python/testresources python_targets_python2_7
 dev-python/testscenarios python_targets_python2_7
 dev-python/twisted-core python_targets_python2_7
 dev-python/twisted python_targets_python2_7
+dev-python/typing python_targets_python2_7
 dev-python/vcversioner python_targets_python2_7
 dev-python/virtualenv python_targets_python2_7
 dev-python/webcolors python_targets_python2_7
@@ -103,4 +104,3 @@ virtual/python-funcsigs python_targets_python2_7
 virtual/python-futures python_targets_python2_7
 virtual/python-singledispatch python_targets_python2_7
 www-servers/tornado python_targets_python2_7
-dev-python/typing python_targets_python2_7

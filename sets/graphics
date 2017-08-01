@@ -1,4 +1,5 @@
 media-gfx/gimp
 media-libs/libtxc_dxtn
+x11-apps/intel-gpu-tools
 x11-apps/mesa-progs
 x11-libs/libvdpau-va-gl

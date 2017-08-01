@@ -1,6 +1,7 @@
 <app-admin/eselect-1.5
 <app-arch/pbzip2-1.1.20
 <app-benchmarks/siege-3.2
+<app-crypt/gnupg-2.2
 <app-editors/scite-3.7
 <app-portage/cpuid2cpuflags-5
 <app-portage/eix-0.34
@@ -45,12 +46,15 @@
 <dev-python/nose-1.4
 <dev-python/notebook-4.3
 <dev-python/notify2-0.4
+<dev-python/pathlib2-2.4
+<dev-python/pathlib-2.4
 <dev-python/prompt_toolkit-1.1
 <dev-python/protobuf-python-3.2
 <dev-python/pycallgraph-1.1
 <dev-python/pyprof2calltree-1.4
 <dev-python/pytest-localserver-0.4
 <dev-python/runsnakerun-2.1
+<dev-python/scandir-1.6
 <dev-python/setuptools-36
 <dev-python/sphinx-1.6
 <dev-python/squaremap-1.1
@@ -73,6 +77,7 @@
 <media-libs/libopenshot-audio-0.2
 <media-libs/libpng-1.7
 <media-libs/libvpx-1.7
+<media-libs/vulkan-loader-1.1
 <media-video/openshot-2.3
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9

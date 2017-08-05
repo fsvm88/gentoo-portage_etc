@@ -68,6 +68,7 @@
 <media-video/openshot-2.3
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9
+<net-libs/libssh-0.8
 <net-libs/NativeThread-0_pre20081231
 <net-print/hplip-3.18
 <net-print/hplip-plugin-3.18

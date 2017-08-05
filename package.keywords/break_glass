@@ -106,3 +106,4 @@
 <x11-libs/libdrm-2.4.83
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
+<dev-util/source-highlight-3.2

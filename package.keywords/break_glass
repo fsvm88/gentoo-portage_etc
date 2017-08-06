@@ -57,6 +57,8 @@
 <dev-util/nvidia-cuda-toolkit-9
 <dev-util/perf-4.5
 <dev-util/ragel-7.1
+<dev-util/source-highlight-3.2
+<dev-util/strace-4.19
 <dev-util/vmtouch-1.1
 <kde-apps/kio-extras-17.05
 <media-gfx/gscan2pdf-1.8
@@ -106,4 +108,3 @@
 <x11-libs/libdrm-2.4.83
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
-<dev-util/source-highlight-3.2

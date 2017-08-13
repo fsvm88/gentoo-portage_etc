@@ -1,2 +1,0 @@
-CFLAGS="${CFLAGS} -std=c++98 -Wno-narrowing"
-CXXFLAGS="${CXXFLAGS}"

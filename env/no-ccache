@@ -1,2 +1,0 @@
-CCACHE_DISABLE=1
-FEATURES="-ccache"

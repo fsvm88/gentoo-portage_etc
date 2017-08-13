@@ -1,6 +1,6 @@
 AR="/usr/bin/ar"
 CC="gcc"
-CFLAGS="-O3 -march=native -pipe"
+CFLAGS="-O3 -march=native -pipe -fstack-protector-all"
 CXXFLAGS="${CFLAGS}"
 CXX="g++"
 FEATURES="${FEATURES} -test"

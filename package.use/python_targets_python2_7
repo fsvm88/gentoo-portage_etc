@@ -9,6 +9,7 @@ dev-libs/gobject-introspection python_targets_python2_7
 dev-libs/libdbusmenu python_targets_python2_7
 dev-libs/libxml2 python_targets_python2_7
 dev-libs/newt python_targets_python2_7
+dev-libs/protobuf python_targets_python2_7
 dev-libs/zziplib python_targets_python2_7
 dev-python/appdirs python_targets_python2_7
 dev-python/backports python_targets_python2_7
@@ -23,6 +24,8 @@ dev-python/chardet python_targets_python2_7
 dev-python/cryptography python_targets_python2_7
 dev-python/cycler python_targets_python2_7
 dev-python/dbus-python python_targets_python2_7
+dev-python/dnspython python_targets_python2_7
+dev-python/ecdsa python_targets_python2_7
 dev-python/enum34 python_targets_python2_7
 dev-python/extras python_targets_python2_7
 dev-python/flask python_targets_python2_7
@@ -35,6 +38,7 @@ dev-python/idna python_targets_python2_7
 dev-python/ipaddress python_targets_python2_7
 dev-python/ipaddr python_targets_python2_7
 dev-python/itsdangerous python_targets_python2_7
+dev-python/jsonrpclib python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
 dev-python/lxml python_targets_python2_7
@@ -48,12 +52,17 @@ dev-python/ndg-httpsclient python_targets_python2_7
 dev-python/numpy python_targets_python2_7
 dev-python/oauth2client python_targets_python2_7
 dev-python/packaging python_targets_python2_7
+dev-python/pbkdf2 python_targets_python2_7
 dev-python/pbr python_targets_python2_7
+dev-python/pillow python_targets_python2_7
 dev-python/pluggy python_targets_python2_7
 dev-python/ply python_targets_python2_7
+dev-python/protobuf-python python_targets_python2_7
+dev-python/pyaes python_targets_python2_7
 dev-python/pyasn1 python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
+dev-python/pycrypto python_targets_python2_7
 dev-python/pygobject python_targets_python2_7
 dev-python/pygtk python_targets_python2_7
 dev-python/pygtksourceview python_targets_python2_7
@@ -68,6 +77,7 @@ dev-python/pytest-localserver python_targets_python2_7
 dev-python/pytest-xprocess python_targets_python2_7
 dev-python/python-dateutil python_targets_python2_7
 dev-python/pytz python_targets_python2_7
+dev-python/qrcode python_targets_python2_7
 dev-python/requests python_targets_python2_7
 dev-python/rsa python_targets_python2_7
 dev-python/runsnakerun python_targets_python2_7
@@ -80,6 +90,7 @@ dev-python/sphinx python_targets_python2_7
 dev-python/squaremap python_targets_python2_7
 dev-python/subunit python_targets_python2_7
 dev-python/testtools python_targets_python2_7
+dev-python/tlslite python_targets_python2_7
 dev-python/tox python_targets_python2_7
 dev-python/traceback2 python_targets_python2_7
 dev-python/unittest2 python_targets_python2_7
@@ -100,6 +111,7 @@ media-sound/lilypond python_targets_python2_7
 net-fs/samba python_targets_python2_7
 net-libs/gtk-vnc python_targets_python2_7
 net-libs/nodejs python_targets_python2_7
+net-misc/electrum python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
 net-wireless/lorcon python_targets_python2_7
 sys-devel/llvm python_targets_python2_7
@@ -107,6 +119,7 @@ sys-libs/ldb python_targets_python2_7
 sys-libs/talloc python_targets_python2_7
 sys-libs/tdb python_targets_python2_7
 sys-libs/tevent python_targets_python2_7
+virtual/python-dnspython python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
 x11-drivers/xf86-video-qxl python_targets_python2_7
 x11-libs/xpyb python_targets_python2_7

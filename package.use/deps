@@ -12,6 +12,7 @@ dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 asm endomorphism
+dev-libs/protobuf python
 dev-python/ipython matplotlib nbconvert notebook
 dev-python/numpy lapack
 dev-python/PyQt5 webkit

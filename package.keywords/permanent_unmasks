@@ -37,3 +37,5 @@ www-client/firefox
 x11-apps/piglit **
 x11-drivers/nvidia-drivers
 x11-misc/envytools **
+net-p2p/gridcoin
+net-misc/electrum

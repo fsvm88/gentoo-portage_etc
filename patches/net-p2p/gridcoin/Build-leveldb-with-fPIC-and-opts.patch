@@ -1,0 +1,12 @@
+diff -Nuar Gridcoin-Research-3.6.0.0.orig/src/leveldb/Makefile Gridcoin-Research-3.6.0.0/src/leveldb/Makefile
+--- Gridcoin-Research-3.6.0.0.orig/src/leveldb/Makefile	2017-08-14 14:44:07.000000000 +0200
++++ Gridcoin-Research-3.6.0.0/src/leveldb/Makefile	2017-08-20 23:08:58.225132213 +0200
+@@ -6,7 +6,7 @@
+ # Uncomment exactly one of the lines labelled (A), (B), and (C) below
+ # to switch between compilation modes.
+ 
+-OPT ?= -O2 -DNDEBUG       # (A) Production use (optimized mode)
++OPT ?= -O3 -march=native -pipe -ggdb -fstack-protector-all -fPIC -DNDEBUG       # (A) Production use (optimized mode)
+ # OPT ?= -g2              # (B) Debug mode, w/ full line-level debugging symbols
+ # OPT ?= -O2 -g2 -DNDEBUG # (C) Profiling mode: opt, but w/debugging symbols
+ #-----------------------------------------------

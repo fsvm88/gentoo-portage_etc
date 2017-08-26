@@ -1,0 +1,70 @@
+diff -Nuar Gridcoin-Research-3.6.0.0.orig/src/makefile.unix Gridcoin-Research-3.6.0.0/src/makefile.unix
+--- Gridcoin-Research-3.6.0.0.orig/src/makefile.unix	2017-08-14 14:44:07.000000000 +0200
++++ Gridcoin-Research-3.6.0.0/src/makefile.unix	2017-08-20 22:42:27.960596124 +0200
+@@ -5,7 +5,6 @@
+ USE_UPNP:=0
+ 
+ LINK:=$(CXX)
+-ARCH:=$(system lscpu | head -n 1 | awk '{print $2}')
+ 
+ DEFS=-DBOOST_SPIRIT_THREADSAFE
+ 
+@@ -36,11 +35,6 @@
+    -l zip \
+    -l curl
+ 
+-# boost-1.55 has a bug where building with C++11 causes undefined references to
+-# copy_file. This is fixed in boost-1.57 and backported to 1.56. This workaround
+-# can be removed once boost is upgraded.
+-DEFS += -DBOOST_NO_CXX11_SCOPED_ENUMS
+-
+ ifndef USE_UPNP
+ 	override USE_UPNP = -
+ endif
+@@ -55,20 +49,6 @@
+ 
+ 
+ # Hardening
+-# Make some classes of vulnerabilities unexploitable in case one is discovered.
+-#
+-    # This is a workaround for Ubuntu bug #691722, the default -fstack-protector causes
+-    # -fstack-protector-all to be ignored unless -fno-stack-protector is used first.
+-    # see: https://bugs.launchpad.net/ubuntu/+source/gcc-4.5/+bug/691722
+-    HARDENING=-fno-stack-protector
+-
+-    # Stack Canaries
+-    # Put numbers at the beginning of each stack frame and check that they are the same.
+-    # If a stack buffer if overflowed, it writes over the canary number and then on return
+-    # when that number is checked, it won't be the same and the program will exit with
+-    # a "Stack smashing detected" error instead of being exploited.
+-    HARDENING+=-fstack-protector-all -Wstack-protector
+-
+     # Make some important things such as the global offset table read only as soon as
+     # the dynamic linker is finished building it. This will prevent overwriting of addresses
+     # which would later be jumped to.
+@@ -77,23 +57,8 @@
+     # Build position independent code to take advantage of Address Space Layout Randomization
+     # offered by some kernels.
+     # see doc/build-unix.txt for more information.
+-    ifdef PIE
+-        HARDENING+=-fPIE
+-        LDHARDENING+=-pie
+-    endif
+-
+-    # -D_FORTIFY_SOURCE=2 does some checking for potentially exploitable code patterns in
+-    # the source such overflowing a statically defined buffer.
+-    HARDENING+=-D_FORTIFY_SOURCE=2
+-#
+-
+-
+-DEBUGFLAGS=-g
+-
+-
+-ifeq (${ARCH}, i686)
+-    EXT_OPTIONS=-msse2
+-endif
++    HARDENING+=-fPIE
++    LDHARDENING+=-pie
+ 
+ # CXXFLAGS can be specified on the make command line, so we use xCXXFLAGS that only
+ # adds some defaults in front. Unfortunately, CXXFLAGS=... $(CXXFLAGS) does not work.

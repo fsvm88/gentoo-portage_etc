@@ -42,6 +42,7 @@
 <dev-python/pathlib2-2.4
 <dev-python/prompt_toolkit-1.1
 <dev-python/protobuf-python-3.2
+<dev-python/pyaes-1.7
 <dev-python/pycallgraph-1.1
 <dev-python/pyprof2calltree-1.4
 <dev-python/runsnakerun-2.1
@@ -67,6 +68,7 @@
 <media-libs/libpng-1.7
 <media-libs/libvpx-1.7
 <media-libs/vulkan-loader-1.1
+<media-video/ffmpeg-3.4
 <media-video/openshot-2.3
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9

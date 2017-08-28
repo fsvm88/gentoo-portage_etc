@@ -36,6 +36,7 @@ media-libs/mesa dri3 gbm gles2 llvm-shared-libs vulkan xa
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-sound/pulseaudio gnome
+media-video/ffmpeg chromium
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script

@@ -1,4 +1,5 @@
 app-text/tesseract
 app-text/unpaper
 dev-perl/HTML-TokeParser-Simple
+dev-perl/Image-Sane
 media-gfx/gscan2pdf

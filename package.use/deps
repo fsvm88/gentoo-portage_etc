@@ -2,6 +2,7 @@ app-admin/sysstat isag lm_sensors
 app-crypt/pinentry gnome-keyring
 app-crypt/qca -qt4
 app-emulation/libvirt-glib python
+app-text/tesseract osd tiff training
 app-text/texlive-core xetex
 app-text/texlive extra
 dev-db/sqlite secure-delete

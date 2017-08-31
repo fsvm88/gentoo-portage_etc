@@ -12,6 +12,7 @@ dev-python/virtualenv
 dev-util/bazel
 dev-util/cgdb
 dev-util/cloc
+dev-util/cppcheck
 dev-util/gprof2dot
 dev-util/kdevelop
 dev-util/meld

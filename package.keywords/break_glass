@@ -55,6 +55,7 @@
 <dev-util/bazel-0.5
 <dev-util/cargo-0.21.0
 <dev-util/colm-0.14
+<dev-util/cppcheck-1.80
 <dev-util/dialog-1.4
 <dev-util/gprof2dot-0_p20161231
 <dev-util/nvidia-cuda-toolkit-9
@@ -80,7 +81,7 @@
 <net-print/hplip-3.18
 <net-print/hplip-plugin-3.18
 <net-wireless/reaver-1.5
-<sci-astronomy/stellarium-0.16
+<sci-astronomy/stellarium-0.17
 <sci-libs/scikits-0.2
 <sci-libs/scikits_learn-0.18
 <sci-libs/scipy-0.19

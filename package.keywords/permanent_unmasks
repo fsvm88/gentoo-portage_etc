@@ -6,9 +6,7 @@ dev-java/icedtea
 dev-python/automat
 dev-python/incremental
 dev-python/m2r
-dev-python/nose_warnings_filters
 dev-python/snakeoil **
-dev-python/testpath
 dev-python/twisted
 games-util/steam-client-meta
 games-util/steam-games-meta
@@ -16,7 +14,6 @@ games-util/steam-launcher
 games-util/steam-meta
 media-libs/mesa **
 media-sound/teamspeak-client-bin
-net-misc/electrum
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet

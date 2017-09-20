@@ -2,16 +2,11 @@ app-admin/sudo
 app-misc/symlinks
 app-portage/mirrorselect
 dev-util/ccache
-net-misc/dhcpcd
-sys-apps/elfix
 sys-apps/gptfdisk
-sys-apps/hdparm
 sys-apps/irqbalance
-sys-apps/mlocate
 sys-boot/grub
 sys-boot/os-prober
 sys-devel/lld
-sys-kernel/dummy-sources
 sys-kernel/genkernel-next
 sys-kernel/linux-firmware
 sys-process/schedtool

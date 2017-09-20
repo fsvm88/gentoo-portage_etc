@@ -1,17 +1,7 @@
-app-crypt/seahorse
 app-office/libreoffice
-dev-libs/libappindicator:2
-dev-libs/libappindicator:3
 dev-libs/weston
 dev-qt/qtquickcontrols2
-dev-qt/qtwayland
 kde-plasma/plasma-meta
 media-sound/teamspeak-client-bin
-net-print/hplip
-x11-apps/setxkbmap
 x11-apps/xrandr
-x11-base/xorg-server
-x11-misc/sddm
 x11-misc/vdpauinfo
-#x11-terms/qterminal
-x11-themes/gtk-engines-adwaita

@@ -1,9 +1,7 @@
 app-text/zathura-meta
-kde-apps/dolphin
 kde-apps/dolphin-plugins
 kde-apps/gwenview
 kde-apps/kcalc
 kde-apps/konsole
 kde-apps/spectacle
 sys-power/acpilight
-x11-misc/xdg-user-dirs

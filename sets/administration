@@ -1,5 +1,4 @@
 app-admin/logrotate
-app-admin/mcelog
 app-admin/syslog-ng
 app-arch/hardlink
 app-misc/fdupes
@@ -7,7 +6,6 @@ app-misc/tmux
 app-portage/cpuid2cpuflags
 app-portage/layman
 app-shells/bash-completion
-dev-util/vmtouch
 net-dns/bind-tools
 net-misc/chrony
 net-misc/wakeonlan
@@ -16,4 +14,3 @@ sys-apps/mlocate
 sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof
-#sys-process/vixie-cron

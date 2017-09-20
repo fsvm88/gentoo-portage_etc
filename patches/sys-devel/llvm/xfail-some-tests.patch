@@ -1,0 +1,68 @@
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/eh.ll llvm-5.0.0.src/test/ExecutionEngine/MCJIT/eh.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/eh.ll	2015-12-16 00:46:21.000000000 +0100
++++ llvm-5.0.0.src/test/ExecutionEngine/MCJIT/eh.ll	2017-09-12 23:19:25.338265257 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ declare i8* @__cxa_allocate_exception(i64)
+ declare void @__cxa_throw(i8*, i8*, i8*)
+ declare i32 @__gxx_personality_v0(...)
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/multi-module-eh-a.ll llvm-5.0.0.src/test/ExecutionEngine/MCJIT/multi-module-eh-a.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/multi-module-eh-a.ll	2015-12-16 00:46:21.000000000 +0100
++++ llvm-5.0.0.src/test/ExecutionEngine/MCJIT/multi-module-eh-a.ll	2017-09-12 23:19:41.379264370 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli -extra-module=%p/Inputs/multi-module-eh-b.ll %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ declare i8* @__cxa_allocate_exception(i64)
+ declare void @__cxa_throw(i8*, i8*, i8*)
+ declare i32 @__gxx_personality_v0(...)
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/remote/eh.ll llvm-5.0.0.src/test/ExecutionEngine/MCJIT/remote/eh.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/MCJIT/remote/eh.ll	2016-04-26 05:59:19.000000000 +0200
++++ llvm-5.0.0.src/test/ExecutionEngine/MCJIT/remote/eh.ll	2017-09-12 23:20:02.112263223 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli -remote-mcjit -mcjit-remote-process=lli-child-target%exeext %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ ; UNSUPPORTED: powerpc64-unknown-linux-gnu
+ ; Remove UNSUPPORTED for powerpc64-unknown-linux-gnu if problem caused by r266663 is fixed
+ declare i8* @__cxa_allocate_exception(i64)
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/eh.ll llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/eh.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/eh.ll	2015-12-16 00:46:21.000000000 +0100
++++ llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/eh.ll	2017-09-12 23:20:29.292261720 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli -jit-kind=orc-mcjit %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ declare i8* @__cxa_allocate_exception(i64)
+ declare void @__cxa_throw(i8*, i8*, i8*)
+ declare i32 @__gxx_personality_v0(...)
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/multi-module-eh-a.ll llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/multi-module-eh-a.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/multi-module-eh-a.ll	2015-12-16 00:46:21.000000000 +0100
++++ llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/multi-module-eh-a.ll	2017-09-12 23:21:08.937259527 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli -jit-kind=orc-mcjit -extra-module=%p/Inputs/multi-module-eh-b.ll %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ declare i8* @__cxa_allocate_exception(i64)
+ declare void @__cxa_throw(i8*, i8*, i8*)
+ declare i32 @__gxx_personality_v0(...)
+diff -Nuar llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/remote/eh.ll llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/remote/eh.ll
+--- llvm-5.0.0.src.orig/test/ExecutionEngine/OrcMCJIT/remote/eh.ll	2016-04-26 05:59:19.000000000 +0200
++++ llvm-5.0.0.src/test/ExecutionEngine/OrcMCJIT/remote/eh.ll	2017-09-12 23:21:35.371258065 +0200
+@@ -1,5 +1,5 @@
+ ; RUN: %lli -remote-mcjit -mcjit-remote-process=lli-child-target%exeext %s
+-; XFAIL: arm, cygwin, win32, mingw
++; XFAIL: arm, cygwin, win32, mingw, i386, i686
+ ; UNSUPPORTED: powerpc64-unknown-linux-gnu
+ ; Remove UNSUPPORTED for powerpc64-unknown-linux-gnu if problem caused by r266663 is fixed
+ declare i8* @__cxa_allocate_exception(i64)
+diff -Nuar llvm-5.0.0.src.orig/test/Object/objdump-private-headers.test llvm-5.0.0.src/test/Object/objdump-private-headers.test
+--- llvm-5.0.0.src.orig/test/Object/objdump-private-headers.test	2014-12-04 08:37:02.000000000 +0100
++++ llvm-5.0.0.src/test/Object/objdump-private-headers.test	2017-09-12 23:22:14.964255875 +0200
+@@ -1,3 +1,4 @@
++// XFAIL: i386, i686
+ RUN: llvm-objdump -p %p/Inputs/program-headers.elf-i386 \
+ RUN:              | FileCheck %s -check-prefix ELF-i386
+ RUN: llvm-objdump -p %p/Inputs/program-headers.elf-x86-64 \

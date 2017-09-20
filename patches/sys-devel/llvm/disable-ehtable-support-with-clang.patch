@@ -1,0 +1,19 @@
+Description:
+Check whether clang is defined and avoid defining __register_frame and __deregister_frame,
+This is what literally everybody else is doing (including GCC) as libunwind (and NOT llvm-libunwind) does not define them anyway.
+llvm-libunwind defines them, but clashes with libunwind and is not drop-in replacement from package management perspective (missing *.pc files, for instance).
+Use this ugly hack to emulate everybody else's behaviour and make LLVM finally build.
+
+=================================
+diff -Nuar llvm-5.0.0.src.orig/lib/ExecutionEngine/RuntimeDyld/RTDyldMemoryManager.cpp llvm-5.0.0.src/lib/ExecutionEngine/RuntimeDyld/RTDyldMemoryManager.cpp
+--- llvm-5.0.0.src.orig/lib/ExecutionEngine/RuntimeDyld/RTDyldMemoryManager.cpp	2017-05-09 23:32:18.000000000 +0200
++++ llvm-5.0.0.src/lib/ExecutionEngine/RuntimeDyld/RTDyldMemoryManager.cpp	2017-09-12 21:19:21.762663710 +0200
+@@ -33,7 +33,7 @@
+ RTDyldMemoryManager::~RTDyldMemoryManager() {}
+ 
+ // Determine whether we can register EH tables.
+-#if (defined(__GNUC__) && !defined(__ARM_EABI__) && !defined(__ia64__) && \
++#if (defined(__GNUC__) && !defined(__clang__) && !defined(__ARM_EABI__) && !defined(__ia64__) && \
+      !defined(__SEH__) && !defined(__USING_SJLJ_EXCEPTIONS__))
+ #define HAVE_EHTABLE_SUPPORT 1
+ #else

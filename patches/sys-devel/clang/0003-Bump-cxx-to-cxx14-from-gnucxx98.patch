@@ -1,0 +1,15 @@
+diff -Nuar cfe-5.0.0.src.orig/lib/Frontend/CompilerInvocation.cpp cfe-5.0.0.src/lib/Frontend/CompilerInvocation.cpp
+--- cfe-5.0.0.src.orig/lib/Frontend/CompilerInvocation.cpp	2017-08-29 19:13:55.000000000 +0200
++++ cfe-5.0.0.src/lib/Frontend/CompilerInvocation.cpp	2017-09-13 21:37:34.122744103 +0200
+@@ -1694,7 +1694,10 @@
+       if (T.isPS4())
+         LangStd = LangStandard::lang_gnucxx11;
+       else
+-        LangStd = LangStandard::lang_gnucxx98;
++	// Use C++14 as default instead of upstream gnuc++98 to put it on par with GCC 6.x series
++	// Use the standard variant, not the GNU one (cxx14 vs gnucxx14)
++	// See include/clang/Frontend/LangStandards.def
++        LangStd = LangStandard::lang_cxx14;
+       break;
+     case InputKind::RenderScript:
+       LangStd = LangStandard::lang_c99;

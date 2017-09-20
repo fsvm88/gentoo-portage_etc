@@ -49,6 +49,7 @@ dev-python/matplotlib python_targets_python2_7
 dev-python/mimeparse python_targets_python2_7
 dev-python/namespace-sphinxcontrib python_targets_python2_7
 dev-python/ndg-httpsclient python_targets_python2_7
+dev-python/notify2 python_targets_python2_7
 dev-python/numpy python_targets_python2_7
 dev-python/oauth2client python_targets_python2_7
 dev-python/packaging python_targets_python2_7
@@ -114,6 +115,7 @@ net-libs/nodejs python_targets_python2_7
 net-misc/electrum python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
 net-wireless/lorcon python_targets_python2_7
+sys-devel/clang python_targets_python2_7
 sys-devel/llvm python_targets_python2_7
 sys-libs/ldb python_targets_python2_7
 sys-libs/talloc python_targets_python2_7

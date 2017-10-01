@@ -10,6 +10,7 @@
 <app-text/djvu-3.5.28
 <app-text/tesseract-3.10
 <app-text/unpaper-6.2
+<dev-db/sqlite-3.21
 <dev-java/bcprov-1.55
 <dev-lang/rust-1.20.0
 <dev-libs/icu-60
@@ -19,6 +20,7 @@
 <dev-libs/nss-3.35
 <dev-libs/protobuf-3.2
 <dev-libs/wayland-protocols-2.0
+<dev-libs/weston-3.1
 <dev-perl/Image-Sane-0.121
 <dev-python/cycler-0.11
 <dev-python/entrypoints-0.3
@@ -58,6 +60,7 @@
 <dev-util/ragel-7.1
 <dev-util/shadowman-9999
 <dev-util/strace-4.19
+<dev-util/valgrind-3.14
 <kde-apps/kio-extras-17.05
 <media-gfx/gscan2pdf-1.8.5
 <media-libs/libopenshot-0.2
@@ -67,10 +70,10 @@
 <media-libs/vulkan-loader-1.1
 <media-video/ffmpeg-3.4
 <media-video/openshot-2.3
-<net-libs/NativeThread-0_pre20081231
 <net-libs/cppzmq-0_pre170101
 <net-libs/libpcap-1.9
 <net-libs/libssh-0.8
+<net-libs/NativeThread-0_pre20081231
 <net-misc/radvd-2.18
 <net-print/hplip-3.18
 <net-print/hplip-plugin-3.18
@@ -94,6 +97,8 @@
 <sys-devel/llvmgold-6
 <sys-fs/cryptsetup-1.8
 <sys-fs/ddrescue-1.23
+<sys-fs/exfat-utils-1.2.9
+<sys-fs/fuse-exfat-1.2.9
 <sys-kernel/genkernel-next-67
 <sys-libs/compiler-rt-6.0.0
 <sys-libs/compiler-rt-sanitizers-6.0.0

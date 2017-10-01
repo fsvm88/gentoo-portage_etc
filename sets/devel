@@ -21,7 +21,6 @@ dev-util/patchutils
 dev-util/perf
 dev-util/pycharm-community
 dev-util/strace
-dev-util/valgrind
 dev-vcs/git
 sci-libs/scikits_learn
 sci-libs/scipy

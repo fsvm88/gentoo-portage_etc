@@ -4,5 +4,7 @@ sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/duperemove
+sys-fs/exfat-utils
 sys-fs/fuse
+sys-fs/fuse-exfat
 sys-fs/squashfs-tools

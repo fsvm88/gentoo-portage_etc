@@ -12,6 +12,7 @@ dev-libs/newt python_targets_python2_7
 dev-libs/protobuf python_targets_python2_7
 dev-libs/zziplib python_targets_python2_7
 dev-python/appdirs python_targets_python2_7
+dev-python/asn1crypto python_targets_python2_7
 dev-python/backports python_targets_python2_7
 dev-python/backports-ssl-match-hostname python_targets_python2_7
 dev-python/beautifulsoup python_targets_python2_7
@@ -79,7 +80,9 @@ dev-python/pytest-xprocess python_targets_python2_7
 dev-python/python-dateutil python_targets_python2_7
 dev-python/pytz python_targets_python2_7
 dev-python/qrcode python_targets_python2_7
+dev-python/regex python_targets_python2_7
 dev-python/requests python_targets_python2_7
+dev-python/rfc3987 python_targets_python2_7
 dev-python/rsa python_targets_python2_7
 dev-python/runsnakerun python_targets_python2_7
 dev-python/setuptools python_targets_python2_7

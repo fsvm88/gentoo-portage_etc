@@ -1,1 +1,1 @@
-LD="ld.bfd"
+LDFLAGS="${LDFLAGS} -fuse-ld=bfd"

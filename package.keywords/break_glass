@@ -1,3 +1,4 @@
+<11-base/xorg-server-1.19.6
 <app-admin/eselect-1.5
 <app-arch/pbzip2-1.1.20
 <app-crypt/gnupg-2.3
@@ -60,20 +61,24 @@
 <dev-qt/qtgraphicaleffects-5.10
 <dev-qt/qtgui-5.10
 <dev-qt/qtimageformats-5.10
+<dev-qt/qtlocation-5.10
 <dev-qt/qtmultimedia-5.10
 <dev-qt/qtnetwork-5.10
 <dev-qt/qtopengl-5.10
 <dev-qt/qtpaths-5.10
+<dev-qt/qtpositioning-5.10
 <dev-qt/qtprintsupport-5.10
 <dev-qt/qtquickcontrols2-5.10
 <dev-qt/qtquickcontrols-5.10
 <dev-qt/qtscript-5.10
+<dev-qt/qtsensors-5.10
 <dev-qt/qtserialport-5.10
 <dev-qt/qtsql-5.10
 <dev-qt/qtsvg-5.10
 <dev-qt/qttest-5.10
 <dev-qt/qtvirtualkeyboard-5.10
 <dev-qt/qtwayland-5.10
+<dev-qt/qtwebchannel-5.10
 <dev-qt/qtwebkit-5.10
 <dev-qt/qtwidgets-5.10
 <dev-qt/qtx11extras-5.10
@@ -117,6 +122,7 @@
 <sys-apps/busybox-1.27
 <sys-apps/dtc-1.5
 <sys-apps/microcode-ctl-1.29
+<sys-auth/consolekit-1.3
 <sys-auth/elogind-233
 <sys-devel/binutils-2.30
 <sys-devel/clang-6.0.0
@@ -133,6 +139,7 @@
 <sys-kernel/genkernel-next-67
 <sys-libs/compiler-rt-6.0.0
 <sys-libs/compiler-rt-sanitizers-6.0.0
+=sys-libs/db-5.13.28-r3
 <sys-libs/libcxx-6.0.0
 <sys-libs/libcxxabi-6.0.0
 <sys-libs/libomp-6.0.0
@@ -142,7 +149,9 @@
 <sys-power/thermald-1.7
 <sys-process/criu-3.5
 <virtual/rust-1.20.0
+<x11-base/xorg-server-1.19.6
 <x11-libs/libdrm-2.4.83
+<x11-libs/libdrm-2.4.86
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
 <x11-misc/sddm-0.16

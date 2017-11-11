@@ -101,6 +101,7 @@
 <kde-plasma/drkonqi-5.12
 <kde-plasma/plasma-vault-5.12
 <media-gfx/gscan2pdf-1.8.5
+<media-gfx/imagemagick-7.0.8
 <media-libs/libopenshot-0.2
 <media-libs/libopenshot-audio-0.2
 <media-libs/libpng-1.7
@@ -152,8 +153,7 @@
 <sys-process/criu-3.5
 <virtual/rust-1.20.0
 <x11-base/xorg-server-1.19.6
-<x11-libs/libdrm-2.4.83
-<x11-libs/libdrm-2.4.86
+<x11-libs/libdrm-2.4.89
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
 <x11-misc/sddm-0.16

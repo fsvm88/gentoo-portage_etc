@@ -38,6 +38,7 @@ media-gfx/imagemagick perl
 media-libs/freetype infinality
 media-libs/gst-plugins-bad wayland
 media-libs/lcms python
+media-libs/libopenshot -imagemagick
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles
 media-libs/libvpx postproc svc

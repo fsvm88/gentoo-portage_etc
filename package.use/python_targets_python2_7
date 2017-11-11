@@ -92,6 +92,7 @@ dev-python/six python_targets_python2_7
 dev-python/sphinxcontrib-websupport python_targets_python2_7
 dev-python/sphinx python_targets_python2_7
 dev-python/squaremap python_targets_python2_7
+dev-python/subprocess32 python_targets_python2_7
 dev-python/subunit python_targets_python2_7
 dev-python/testtools python_targets_python2_7
 dev-python/tlslite python_targets_python2_7

@@ -18,7 +18,6 @@ net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet
 net-p2p/go-ethereum
-net-p2p/gridcoin
 sci-misc/boinc
 sys-apps/paludis
 sys-apps/pkgcore **

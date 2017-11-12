@@ -93,7 +93,7 @@
 <dev-util/cppcheck-1.80
 <dev-util/dialog-1.4
 <dev-util/gprof2dot-2017.12.31
-<dev-util/nvidia-cuda-toolkit-9
+<dev-util/nvidia-cuda-toolkit-10
 <dev-util/perf-4.10
 <dev-util/ragel-7.1
 <dev-util/shadowman-9999

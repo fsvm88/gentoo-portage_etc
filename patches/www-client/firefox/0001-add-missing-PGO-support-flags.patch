@@ -1,0 +1,63 @@
+diff -Nuar firefox-57.0b14.orig/build/moz.configure/toolchain.configure firefox-57.0b14/build/moz.configure/toolchain.configure
+--- firefox-57.0b14.orig/build/moz.configure/toolchain.configure	2017-11-02 23:29:10.000000000 +0100
++++ firefox-57.0b14/build/moz.configure/toolchain.configure	2017-11-12 16:19:59.959094415 +0100
+@@ -1045,11 +1045,11 @@
+ def pgo_flags(compiler):
+     if compiler.type in ('gcc', 'clang'):
+         return namespace(
+-            gen_cflags=['-fprofile-generate'],
+-            gen_ldflags=['-fprofile-generate'],
+-            use_cflags=['-fprofile-use', '-fprofile-correction',
++            gen_cflags=['-fprofile-generate'],
++            gen_ldflags=['-fprofile-generate'],
++            use_cflags=['-fprofile-use', '-fprofile-correction',
+                         '-Wcoverage-mismatch'],
+-            use_ldflags=['-fprofile-use'],
++            use_ldflags=['-fprofile-use'],
+         )
+ 
+     if compiler.type == 'msvc':
+diff -Nuar firefox-57.0b14.orig/nsprpub/configure firefox-57.0b14/nsprpub/configure
+--- firefox-57.0b14.orig/nsprpub/configure	2017-11-12 15:27:52.334267414 +0100
++++ firefox-57.0b14/nsprpub/configure	2017-11-12 16:13:13.525116897 +0100
+@@ -5485,9 +5485,15 @@
+ $as_echo "$result" >&6; }
+ 
+ if test $result = "yes"; then
+-   PROFILE_GEN_LDFLAGS="-fprofile-generate"
+-   PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
+-   PROFILE_USE_LDFLAGS="-fprofile-use"
++   if test -n "${CLANG_CC}"; then
++     PROFILE_GEN_CFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-use"
++     PROFILE_USE_LDFLAGS="-fprofile-use"
++   else
++     PROFILE_GEN_LDFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
++     PROFILE_USE_LDFLAGS="-fprofile-use"
++   fi
+ fi
+ 
+ CFLAGS="$_SAVE_CFLAGS"
+diff -Nuar firefox-57.0b14.orig/nsprpub/configure.in firefox-57.0b14/nsprpub/configure.in
+--- firefox-57.0b14.orig/nsprpub/configure.in	2017-11-12 15:27:52.316267415 +0100
++++ firefox-57.0b14/nsprpub/configure.in	2017-11-12 16:14:00.596114293 +0100
+@@ -765,9 +765,15 @@
+ AC_MSG_RESULT([$result])
+ 
+ if test $result = "yes"; then
+-   PROFILE_GEN_LDFLAGS="-fprofile-generate"
+-   PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
+-   PROFILE_USE_LDFLAGS="-fprofile-use"
++   if test -n "${CLANG_CC}"; then
++     PROFILE_GEN_CFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-use"
++     PROFILE_USE_LDFLAGS="-fprofile-use"
++   else
++     PROFILE_GEN_LDFLAGS="-fprofile-generate"
++     PROFILE_USE_CFLAGS="-fprofile-use -fprofile-correction -Wcoverage-mismatch"
++     PROFILE_USE_LDFLAGS="-fprofile-use"
++   fi
+ fi
+ 
+ CFLAGS="$_SAVE_CFLAGS"

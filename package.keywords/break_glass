@@ -113,6 +113,7 @@
 <media-libs/vulkan-loader-1.1
 <media-video/openshot-2.3
 <net-libs/cppzmq-0_pre170101
+<net-libs/libnsl-1.2
 <net-libs/libpcap-1.9
 <net-libs/libssh-0.8
 <net-libs/NativeThread-0_pre20081231
@@ -161,3 +162,4 @@
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
 <x11-misc/sddm-0.16
+<dev-python/pyblake2-1.1

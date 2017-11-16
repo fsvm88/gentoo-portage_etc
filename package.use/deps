@@ -1,5 +1,6 @@
 app-admin/packagekit-base command-not-found cron
 app-admin/sysstat isag lm_sensors
+app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-crypt/qca -qt4
 app-emulation/libvirt-glib python
@@ -19,6 +20,7 @@ dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 asm endomorphism
 dev-libs/protobuf python
 dev-libs/weston wayland-compositor xwayland
+dev-libs/xmlsec nss
 dev-python/ipython matplotlib nbconvert notebook
 dev-python/numpy lapack
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib webkit x11extras xmlpatterns
@@ -56,7 +58,7 @@ net-fs/samba addc client gnutls winbind -fam -system-mitkrb5
 net-libs/gtk-vnc python
 net-misc/curl -adns
 net-misc/iputils arping clockdiff rarpd tracepath traceroute -caps -filecaps
-net-misc/networkmanager resolvconf
+net-misc/networkmanager dhcpcd resolvconf -dhclient
 net-misc/spice-gtk -gstreamer python usbredir
 net-vpn/openvpn down-root socks
 net-wireless/lorcon python

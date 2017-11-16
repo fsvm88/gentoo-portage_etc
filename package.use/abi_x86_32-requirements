@@ -25,6 +25,7 @@ dev-libs/libgcrypt abi_x86_32
 dev-libs/libgpg-error abi_x86_32
 dev-libs/libgudev abi_x86_32
 dev-libs/libltdl abi_x86_32
+dev-libs/libnl abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
 dev-libs/libtasn1 abi_x86_32
@@ -127,6 +128,7 @@ net-dns/libidn2 abi_x86_32
 net-fs/samba abi_x86_32
 net-libs/gnutls abi_x86_32
 net-libs/libasyncns abi_x86_32
+net-libs/libndp abi_x86_32
 net-libs/libssh abi_x86_32
 net-libs/socket_wrapper abi_x86_32
 net-print/cups abi_x86_32

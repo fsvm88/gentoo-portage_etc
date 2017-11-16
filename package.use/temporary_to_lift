@@ -1,2 +1,0 @@
-app-crypt/gpgme -cxx -qt5
-kde-frameworks/kwallet -gpg

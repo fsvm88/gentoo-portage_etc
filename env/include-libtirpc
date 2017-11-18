@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -I/usr/include/tirpc"
+CXXFLAGS="${CXXFLAGS} -I/usr/include/tirpc"

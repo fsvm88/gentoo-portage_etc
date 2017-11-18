@@ -61,6 +61,7 @@ kde-frameworks/kxmlgui
 kde-frameworks/kxmlrpcclient
 kde-frameworks/networkmanager-qt
 kde-frameworks/plasma
+kde-frameworks/qqc2-desktop-style
 kde-frameworks/solid
 kde-frameworks/sonnet
 kde-frameworks/syntax-highlighting
@@ -70,8 +71,8 @@ kde-plasma/breeze
 kde-plasma/breeze-gtk
 kde-plasma/kactivitymanagerd
 kde-plasma/kde-cli-tools
-kde-plasma/kdecoration
 kde-plasma/kde-gtk-config
+kde-plasma/kdecoration
 kde-plasma/kdeplasma-addons
 kde-plasma/kgamma
 kde-plasma/khotkeys

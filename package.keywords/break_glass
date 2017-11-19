@@ -103,6 +103,7 @@
 <kde-plasma/plasma-vault-5.12
 <media-gfx/gscan2pdf-1.8.5
 <media-gfx/imagemagick-7.0.8
+<media-libs/freetype-2.8.2
 <media-libs/libopenshot-0.2
 <media-libs/libopenshot-audio-0.2
 <media-libs/libpng-1.7
@@ -110,6 +111,7 @@
 <media-libs/qhull-2016
 <media-libs/vulkan-loader-1.1
 <media-video/openshot-2.3
+<net-fs/nfs-utils-2.3
 <net-libs/cppzmq-0_pre170101
 <net-libs/libnsl-1.2
 <net-libs/libpcap-1.9

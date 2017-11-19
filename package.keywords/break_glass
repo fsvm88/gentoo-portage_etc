@@ -20,7 +20,6 @@
 <dev-libs/wayland-protocols-2.0
 <dev-libs/weston-3.1
 <dev-perl/Image-Sane-0.121
-<dev-python/PyQt5-5.10
 <dev-python/cycler-0.11
 <dev-python/entrypoints-0.3
 <dev-python/hyperlink-17.2
@@ -45,6 +44,7 @@
 <dev-python/pyblake2-1.1
 <dev-python/pycallgraph-1.1
 <dev-python/pyprof2calltree-1.5
+<dev-python/PyQt5-5.10
 <dev-python/runsnakerun-2.1
 <dev-python/setuptools-36
 <dev-python/sip-4.20
@@ -71,8 +71,8 @@
 <dev-qt/qtpaths-5.10
 <dev-qt/qtpositioning-5.10
 <dev-qt/qtprintsupport-5.10
-<dev-qt/qtquickcontrols-5.10
 <dev-qt/qtquickcontrols2-5.10
+<dev-qt/qtquickcontrols-5.10
 <dev-qt/qtscript-5.10
 <dev-qt/qtsensors-5.10
 <dev-qt/qtserialport-5.10
@@ -110,11 +110,11 @@
 <media-libs/qhull-2016
 <media-libs/vulkan-loader-1.1
 <media-video/openshot-2.3
-<net-libs/NativeThread-0_pre20081231
 <net-libs/cppzmq-0_pre170101
 <net-libs/libnsl-1.2
 <net-libs/libpcap-1.9
 <net-libs/libssh-0.8
+<net-libs/NativeThread-0_pre20081231
 <net-misc/radvd-2.18
 <net-print/hplip-3.18
 <net-print/hplip-plugin-3.18

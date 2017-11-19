@@ -47,6 +47,7 @@ media-libs/libvpx postproc svc
 media-libs/mesa dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
+media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome
 media-video/ffmpeg aacplus amr bluray chromium libv4l postproc vpx

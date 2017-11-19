@@ -1,0 +1,13 @@
+diff -Nuar firefox-57.0.orig/old-configure firefox-57.0/old-configure
+--- firefox-57.0.orig/old-configure	2017-11-19 16:55:26.226036654 +0100
++++ firefox-57.0/old-configure	2017-11-19 16:58:05.439027847 +0100
+@@ -6308,8 +6308,7 @@
+         # If the linker supports ICF, foo and bar symbols will have
+         # the same address
+         if { ac_try='${CC-cc} -o conftest${ac_exeext} $LDFLAGS -Wl,--icf=all -ffunction-sections conftest.${ac_ext} $LIBS 1>&2'; { (eval echo configure:6311: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; } &&
+-           test -s conftest${ac_exeext} &&
+-           objdump -t conftest${ac_exeext} | awk '{a[$6] = $1} END {if (a["foo"] && (a["foo"] != a["bar"])) { exit 1 }}'; then
++           test -s conftest${ac_exeext}; then
+             LD_SUPPORTS_ICF=yes
+         else
+             LD_SUPPORTS_ICF=no

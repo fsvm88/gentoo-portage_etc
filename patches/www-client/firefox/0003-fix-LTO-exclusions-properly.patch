@@ -1,0 +1,125 @@
+diff -Nuar firefox-57.0.orig/build/unix/elfhack/moz.build firefox-57.0/build/unix/elfhack/moz.build
+--- firefox-57.0.orig/build/unix/elfhack/moz.build	2017-06-15 22:52:02.000000000 +0200
++++ firefox-57.0/build/unix/elfhack/moz.build	2017-11-19 14:05:59.336599016 +0100
+@@ -14,9 +14,12 @@
+         'test-ctors.c',
+     ]
+ 
+-    if '-flto' in CONFIG['OS_CFLAGS']:
++    if any(['-flto' in s for s in CONFIG['OS_CFLAGS']]):
+         SOURCES['test-array.c'].flags += ['-fno-lto']
+         SOURCES['test-ctors.c'].flags += ['-fno-lto']
++        if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CFLAGS']]):
++            SOURCES['test-array.c'].flags += ['-fno-whole-program-vtables']
++            SOURCES['test-ctors.c'].flags += ['-fno-whole-program-vtables']
+ 
+ HOST_SOURCES += [
+     'elf.cpp',
+diff -Nuar firefox-57.0.orig/js/src/ctypes/libffi/configure firefox-57.0/js/src/ctypes/libffi/configure
+--- firefox-57.0.orig/js/src/ctypes/libffi/configure	2017-11-19 13:51:21.903647550 +0100
++++ firefox-57.0/js/src/ctypes/libffi/configure	2017-11-19 14:04:16.468604706 +0100
+@@ -14079,6 +14079,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-57.0.orig/js/src/ctypes/libffi/ltmain.sh firefox-57.0/js/src/ctypes/libffi/ltmain.sh
+--- firefox-57.0.orig/js/src/ctypes/libffi/ltmain.sh	2017-11-19 13:51:21.681647562 +0100
++++ firefox-57.0/js/src/ctypes/libffi/ltmain.sh	2017-11-19 14:03:49.581606193 +0100
+@@ -5862,10 +5862,10 @@
+       # @file                GCC response files
+       # -tp=*                Portland pgcc target processor selection
+       # --sysroot=*          for sysroot support
+-      # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
++      # -O*, -flto*, -fwhole-program-vtables*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
++      -O*|-flto*|-fwhole-program-vtables*|-fwhopr*|-fuse-linker-plugin)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"
+diff -Nuar firefox-57.0.orig/js/src/ctypes/libffi/m4/libtool.m4 firefox-57.0/js/src/ctypes/libffi/m4/libtool.m4
+--- firefox-57.0.orig/js/src/ctypes/libffi/m4/libtool.m4	2017-06-15 22:51:58.000000000 +0200
++++ firefox-57.0/js/src/ctypes/libffi/m4/libtool.m4	2017-11-19 14:02:36.837610217 +0100
+@@ -6992,6 +6992,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-57.0.orig/modules/freetype2/builds/unix/aclocal.m4 firefox-57.0/modules/freetype2/builds/unix/aclocal.m4
+--- firefox-57.0.orig/modules/freetype2/builds/unix/aclocal.m4	2017-06-15 22:52:26.000000000 +0200
++++ firefox-57.0/modules/freetype2/builds/unix/aclocal.m4	2017-11-19 14:01:35.979613583 +0100
+@@ -7516,6 +7516,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-57.0.orig/modules/freetype2/builds/unix/ltmain.sh firefox-57.0/modules/freetype2/builds/unix/ltmain.sh
+--- firefox-57.0.orig/modules/freetype2/builds/unix/ltmain.sh	2017-11-19 13:51:22.974647490 +0100
++++ firefox-57.0/modules/freetype2/builds/unix/ltmain.sh	2017-11-19 14:02:10.526611672 +0100
+@@ -7283,11 +7283,11 @@
+       # @file                GCC response files
+       # -tp=*                Portland pgcc target processor selection
+       # --sysroot=*          for sysroot support
+-      # -O*, -g*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
++      # -O*, -g*, -flto*, -fwhole-program-vtables*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
+       # -stdlib=*            select c++ std lib with clang
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*)
++      -O*|-g*|-flto*|-fwhole-program-vtables*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*)
+         func_quote_for_eval "$arg"
+ 	arg=$func_quote_for_eval_result
+         func_append compile_command " $arg"
+diff -Nuar firefox-57.0.orig/security/sandbox/linux/moz.build firefox-57.0/security/sandbox/linux/moz.build
+--- firefox-57.0.orig/security/sandbox/linux/moz.build	2017-11-02 17:16:32.000000000 +0100
++++ firefox-57.0/security/sandbox/linux/moz.build	2017-11-19 13:58:42.127623200 +0100
+@@ -96,7 +96,7 @@
+ # gcc lto likes to put the top level asm in syscall.cc in a different partition
+ # from the function using it which breaks the build.  Work around that by
+ # forcing there to be only one partition.
+-if '-flto' in CONFIG['OS_CXXFLAGS'] and not CONFIG['CLANG_CXX']:
++if any(['-flto' in s for s in CONFIG['OS_CXXFLAGS']]) and not CONFIG['CLANG_CXX']:
+     LDFLAGS += ['--param lto-partitions=1']
+ 
+ DEFINES['NS_NO_XPCOM'] = True
+diff -Nuar firefox-57.0.orig/toolkit/library/moz.build firefox-57.0/toolkit/library/moz.build
+--- firefox-57.0.orig/toolkit/library/moz.build	2017-11-19 13:51:17.322647803 +0100
++++ firefox-57.0/toolkit/library/moz.build	2017-11-19 13:56:09.928631618 +0100
+@@ -82,8 +82,10 @@
+ SOURCES['StaticXULComponentsStart.cpp'].no_pgo = True
+ 
+ # Don't let LTO reorder StaticXULComponentsStart.o.
+-if '-flto' in CONFIG['OS_CXXFLAGS']:
++if any(['-flto' in s for s in CONFIG['OS_CXXFLAGS']]):
+     SOURCES['StaticXULComponentsStart.cpp'].flags += ['-fno-lto']
++    if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CXXFLAGS']]):
++        SOURCES['StaticXULComponentsStart.cpp'].flags += ['-fno-whole-program-vtables']
+ 
+ if CONFIG['OS_ARCH'] == 'WINNT':
+     SOURCES += [
+diff -Nuar firefox-57.0.orig/toolkit/library/StaticXULComponentsEnd/moz.build firefox-57.0/toolkit/library/StaticXULComponentsEnd/moz.build
+--- firefox-57.0.orig/toolkit/library/StaticXULComponentsEnd/moz.build	2017-06-15 22:52:34.000000000 +0200
++++ firefox-57.0/toolkit/library/StaticXULComponentsEnd/moz.build	2017-11-19 13:55:10.312634916 +0100
+@@ -7,8 +7,10 @@
+ ]
+ 
+ # Don't let LTO reorder StaticXULComponentsStart.o.
+-if '-flto' in CONFIG['OS_CXXFLAGS']:
++if any(['-flto' in s for s in CONFIG['OS_CXXFLAGS']]):
+     SOURCES['StaticXULComponentsEnd.cpp'].flags += ['-fno-lto']
++    if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CXXFLAGS']]):
++        SOURCES['StaticXULComponentsEnd.cpp'].flags += ['-fno-whole-program-vtables']
+ 
+ Library('StaticXULComponentsEnd')
+ 

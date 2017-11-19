@@ -1,0 +1,11 @@
+diff -Nuar firefox-57.0.orig/python/mozbuild/mozbuild/frontend/sandbox.py firefox-57.0/python/mozbuild/mozbuild/frontend/sandbox.py
+--- firefox-57.0.orig/python/mozbuild/mozbuild/frontend/sandbox.py	2017-11-02 17:16:31.000000000 +0100
++++ firefox-57.0/python/mozbuild/mozbuild/frontend/sandbox.py	2017-11-19 14:45:50.884466732 +0100
+@@ -111,6 +111,7 @@
+         'sorted': alphabetical_sorted,
+         'int': int,
+         'set': set,
++        'any': any,
+     })
+ 
+     def __init__(self, context, builtins=None, finder=default_finder):

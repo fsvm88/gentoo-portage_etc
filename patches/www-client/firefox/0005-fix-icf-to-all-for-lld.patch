@@ -1,0 +1,68 @@
+diff -Nuar firefox-57.0.orig/build/autoconf/compiler-opts.m4 firefox-57.0/build/autoconf/compiler-opts.m4
+--- firefox-57.0.orig/build/autoconf/compiler-opts.m4	2017-11-19 14:56:19.519431960 +0100
++++ firefox-57.0/build/autoconf/compiler-opts.m4	2017-11-19 15:00:01.588419677 +0100
+@@ -145,7 +145,7 @@
+               'int main() {return foo() - bar();}' > conftest.${ac_ext}
+         # If the linker supports ICF, foo and bar symbols will have
+         # the same address
+-        if AC_TRY_COMMAND([${CC-cc} -o conftest${ac_exeext} $LDFLAGS -Wl,--icf=safe -ffunction-sections conftest.${ac_ext} $LIBS 1>&2]) &&
++        if AC_TRY_COMMAND([${CC-cc} -o conftest${ac_exeext} $LDFLAGS -Wl,--icf=all -ffunction-sections conftest.${ac_ext} $LIBS 1>&2]) &&
+            test -s conftest${ac_exeext} &&
+            objdump -t conftest${ac_exeext} | awk changequote(<<, >>)'{a[<<$>>6] = <<$>>1} END {if (a["foo"] && (a["foo"] != a["bar"])) { exit 1 }}'changequote([, ]); then
+             LD_SUPPORTS_ICF=yes
+@@ -154,8 +154,8 @@
+         fi
+         rm -rf conftest*])
+     if test "$LD_SUPPORTS_ICF" = yes; then
+-        _SAVE_LDFLAGS="$LDFLAGS -Wl,--icf=safe"
+-        LDFLAGS="$LDFLAGS -Wl,--icf=safe -Wl,--print-icf-sections"
++        _SAVE_LDFLAGS="$LDFLAGS -Wl,--icf=all"
++        LDFLAGS="$LDFLAGS -Wl,--icf=all -Wl,--print-icf-sections"
+         AC_TRY_LINK([], [],
+                     [LD_PRINT_ICF_SECTIONS=-Wl,--print-icf-sections],
+                     [LD_PRINT_ICF_SECTIONS=])
+diff -Nuar firefox-57.0.orig/media/webrtc/trunk/build/common.gypi firefox-57.0/media/webrtc/trunk/build/common.gypi
+--- firefox-57.0.orig/media/webrtc/trunk/build/common.gypi	2017-11-02 17:16:36.000000000 +0100
++++ firefox-57.0/media/webrtc/trunk/build/common.gypi	2017-11-19 15:00:56.205416656 +0100
+@@ -2654,8 +2654,7 @@
+                       # in gold which can generate crashy binaries. As
+                       # a security measure, -pie takes precendence for
+                       # now.
+-                      #'-Wl,--icf=safe',
+-                      '-Wl,--icf=none',
++                      '-Wl,--icf=all',
+                     ],
+                   }],
+                 ],
+@@ -2887,7 +2886,7 @@
+               ['target_arch == "arm"', {
+                 'ldflags': [
+                   # Enable identical code folding to reduce size.
+-                  '-Wl,--icf=safe',
++                  '-Wl,--icf=all',
+                 ],
+               }],
+               # NOTE: The stlport header include paths below are specified in
+diff -Nuar firefox-57.0.orig/old-configure firefox-57.0/old-configure
+--- firefox-57.0.orig/old-configure	2017-11-12 15:58:43.000000000 +0100
++++ firefox-57.0/old-configure	2017-11-19 15:00:24.490418410 +0100
+@@ -6307,7 +6307,7 @@
+               'int main() {return foo() - bar();}' > conftest.${ac_ext}
+         # If the linker supports ICF, foo and bar symbols will have
+         # the same address
+-        if { ac_try='${CC-cc} -o conftest${ac_exeext} $LDFLAGS -Wl,--icf=safe -ffunction-sections conftest.${ac_ext} $LIBS 1>&2'; { (eval echo configure:6311: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; } &&
++        if { ac_try='${CC-cc} -o conftest${ac_exeext} $LDFLAGS -Wl,--icf=all -ffunction-sections conftest.${ac_ext} $LIBS 1>&2'; { (eval echo configure:6311: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; } &&
+            test -s conftest${ac_exeext} &&
+            objdump -t conftest${ac_exeext} | awk '{a[$6] = $1} END {if (a["foo"] && (a["foo"] != a["bar"])) { exit 1 }}'; then
+             LD_SUPPORTS_ICF=yes
+@@ -6319,8 +6319,8 @@
+ 
+ echo "$ac_t""$LD_SUPPORTS_ICF" 1>&6
+     if test "$LD_SUPPORTS_ICF" = yes; then
+-        _SAVE_LDFLAGS="$LDFLAGS -Wl,--icf=safe"
+-        LDFLAGS="$LDFLAGS -Wl,--icf=safe -Wl,--print-icf-sections"
++        _SAVE_LDFLAGS="$LDFLAGS -Wl,--icf=all"
++        LDFLAGS="$LDFLAGS -Wl,--icf=all -Wl,--print-icf-sections"
+         cat > conftest.$ac_ext <<EOF
+ #line 6326 "configure"
+ #include "confdefs.h"

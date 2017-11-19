@@ -1,2 +1,2 @@
-CFLAGS="${CFLAGS} -fuse-ld=lld -Wno-unused-argument"
-CXXFLAGS="${CXXFLAGS} -fuse-ld=lld -Wno-unused-argument"
+CFLAGS="${CFLAGS} -fuse-ld=lld -Wno-unused-command-line-argument"
+CXXFLAGS="${CXXFLAGS} -fuse-ld=lld -Wno-unused-command-line-argument"

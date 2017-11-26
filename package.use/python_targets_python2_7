@@ -13,6 +13,7 @@ dev-libs/protobuf python_targets_python2_7
 dev-libs/zziplib python_targets_python2_7
 dev-python/appdirs python_targets_python2_7
 dev-python/asn1crypto python_targets_python2_7
+dev-python/backports-functools-lru-cache python_targets_python2_7
 dev-python/backports python_targets_python2_7
 dev-python/backports-ssl-match-hostname python_targets_python2_7
 dev-python/beautifulsoup python_targets_python2_7

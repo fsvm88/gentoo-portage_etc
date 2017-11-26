@@ -1,0 +1,24 @@
+diff -Nuar libtool-2.4.6.orig/build-aux/ltmain.in libtool-2.4.6/build-aux/ltmain.in
+--- libtool-2.4.6.orig/build-aux/ltmain.in	2017-11-23 08:10:39.022915867 +0100
++++ libtool-2.4.6/build-aux/ltmain.in	2017-11-23 08:11:01.159914643 +0100
+@@ -5376,7 +5376,7 @@
+       # -fuse-ld=*           Linker select flags for GCC
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -O*|-g*|-flto*|-fwhopr*|-fwhole-program-tables|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
+       -specs=*|-fsanitize=*|-fuse-ld=*)
+         func_quote_for_eval "$arg"
+ 	arg=$func_quote_for_eval_result
+diff -Nuar libtool-2.4.6.orig/build-aux/ltmain.sh libtool-2.4.6/build-aux/ltmain.sh
+--- libtool-2.4.6.orig/build-aux/ltmain.sh	2017-11-23 08:10:39.024915867 +0100
++++ libtool-2.4.6/build-aux/ltmain.sh	2017-11-23 08:11:18.303913694 +0100
+@@ -7335,7 +7335,7 @@
+       # -fuse-ld=*           Linker select flags for GCC
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -O*|-g*|-flto*|-fwhopr*|-fwhole-program-vtables|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
+       -specs=*|-fsanitize=*|-fuse-ld=*)
+         func_quote_for_eval "$arg"
+ 	arg=$func_quote_for_eval_result

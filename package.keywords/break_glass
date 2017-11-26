@@ -45,6 +45,7 @@
 <dev-python/pycallgraph-1.1
 <dev-python/pyprof2calltree-1.5
 <dev-python/PyQt5-5.10
+<dev-python/qtconsole-4.4
 <dev-python/runsnakerun-2.1
 <dev-python/setuptools-36
 <dev-python/sip-4.20
@@ -97,7 +98,7 @@
 <dev-util/perf-4.10
 <dev-util/ragel-7.1
 <dev-util/shadowman-9999
-<dev-util/strace-4.19
+<dev-util/strace-4.20
 <kde-apps/kio-extras-17.05
 <kde-plasma/drkonqi-5.12
 <kde-plasma/plasma-vault-5.12

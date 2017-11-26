@@ -1,1 +1,0 @@
-CXXFLAGS="${CFLAGS} -std=c++11"

@@ -5,7 +5,8 @@ app-arch/libarchive abi_x86_32
 app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
 app-crypt/mit-krb5 abi_x86_32
-app-emulation/wine abi_x86_32
+app-emulation/wine-any abi_x86_32
+app-emulation/wine-gecko abi_x86_32
 app-i18n/enca abi_x86_32
 dev-lang/orc abi_x86_32
 dev-libs/atk abi_x86_32
@@ -178,6 +179,7 @@ virtual/libusb abi_x86_32
 virtual/opengl abi_x86_32
 virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
+virtual/wine abi_x86_32
 x11-libs/cairo abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32

@@ -1,0 +1,11 @@
+diff -Nuar boinc-client_release-7.8-7.8.1.orig/clientgui/AsyncRPC.cpp boinc-client_release-7.8-7.8.1/clientgui/AsyncRPC.cpp
+--- boinc-client_release-7.8-7.8.1.orig/clientgui/AsyncRPC.cpp	2017-08-10 07:59:31.000000000 +0200
++++ boinc-client_release-7.8-7.8.1/clientgui/AsyncRPC.cpp	2017-11-28 20:41:09.290461123 +0100
+@@ -19,7 +19,7 @@
+ #pragma implementation "AsyncRPC.h"
+ #endif
+ 
+-#if !(defined(_WIN32) || (defined(__WXMAC__) && (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4)))
++#if defined(HAVE_XLOCALE_H) && (!(defined(_WIN32) || (defined(__WXMAC__) && (MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4))))
+ #include <xlocale.h>
+ #endif

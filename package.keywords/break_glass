@@ -128,6 +128,7 @@
 <sci-libs/scipy-0.19
 <sys-apps/busybox-1.27
 <sys-apps/dtc-1.5
+<sys-apps/iproute2-4.15
 <sys-apps/microcode-ctl-1.29
 <sys-apps/openrc-0.35
 <sys-apps/sandbox-2.13
@@ -145,6 +146,7 @@
 <sys-fs/ddrescue-1.23
 <sys-fs/exfat-utils-1.2.9
 <sys-fs/fuse-exfat-1.2.9
+<sys-fs/udev-236
 <sys-kernel/genkernel-next-67
 <sys-libs/compiler-rt-6.0.0
 <sys-libs/compiler-rt-sanitizers-6.0.0

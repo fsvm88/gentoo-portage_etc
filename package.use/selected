@@ -2,7 +2,7 @@ app-admin/testdisk ntfs reiserfs
 app-emulation/docker btrfs overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu usbredir
-app-emulation/wine staging s3tc
+app-emulation/wine-any d3d9 staging s3tc
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
@@ -26,6 +26,7 @@ sys-apps/portage doc native-extensions
 sys-firmware/intel-microcode monolithic
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
+virtual/wine d3d9 staging
 www-client/firefox custom-cflags custom-optimization system-harfbuzz wifi startup-notification
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm

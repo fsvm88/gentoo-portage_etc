@@ -1,3 +1,4 @@
 app-emulation/docker
 app-emulation/lxc
 app-emulation/winetricks
+virtual/wine

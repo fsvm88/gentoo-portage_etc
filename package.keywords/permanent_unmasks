@@ -1,5 +1,6 @@
 app-arch/hardlink
 app-backup/btrbk
+app-crypt/hashcat
 app-crypt/veracrypt
 app-emulation/wine
 app-emulation/wine-any

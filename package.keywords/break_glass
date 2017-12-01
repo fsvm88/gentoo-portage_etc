@@ -10,13 +10,14 @@
 <app-text/unpaper-6.2
 <dev-db/sqlite-3.21
 <dev-java/bcprov-1.55
-<dev-lang/rust-1.20.0
+<dev-lang/rust-1.23.0
 <dev-libs/icu-60
 <dev-libs/libuv-1.15
 <dev-libs/mathjax-2.8
 <dev-libs/nspr-4.20
 <dev-libs/nss-3.35
 <dev-libs/protobuf-3.2
+<dev-libs/tinyxml2-3.1
 <dev-libs/wayland-protocols-2.0
 <dev-libs/weston-3.1
 <dev-perl/Image-Sane-0.121
@@ -89,7 +90,7 @@
 <dev-qt/qtxml-5.10
 <dev-qt/qtxmlpatterns-5.10
 <dev-util/bazel-0.5
-<dev-util/cargo-0.21.0
+<dev-util/cargo-0.23.0
 <dev-util/colm-0.14
 <dev-util/cppcheck-1.80
 <dev-util/dialog-1.4
@@ -99,6 +100,7 @@
 <dev-util/ragel-7.1
 <dev-util/shadowman-9999
 <dev-util/strace-4.20
+<dev-vcs/mercurial-4.5
 <kde-apps/kio-extras-17.05
 <kde-plasma/drkonqi-5.12
 <kde-plasma/plasma-vault-5.12
@@ -144,6 +146,7 @@
 <sys-devel/llvmgold-6
 <sys-fs/cryptsetup-1.8
 <sys-fs/ddrescue-1.23
+<sys-fs/encfs-2
 <sys-fs/exfat-utils-1.2.9
 <sys-fs/fuse-exfat-1.2.9
 <sys-fs/udev-236
@@ -158,8 +161,9 @@
 <sys-libs/llvm-libunwind-6.0.0
 <sys-power/thermald-1.7
 <sys-process/criu-3.5
-<virtual/rust-1.20.0
+<virtual/rust-1.23.0
 <x11-base/xorg-server-1.19.6
+<x11-libs/cairo-1.14.11
 <x11-libs/libdrm-2.4.89
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1

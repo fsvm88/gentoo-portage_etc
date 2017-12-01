@@ -9,7 +9,7 @@ diff -Nuar firefox-57.0.orig/build/unix/elfhack/moz.build firefox-57.0/build/uni
 +    if any(['-flto' in s for s in CONFIG['OS_CFLAGS']]):
          SOURCES['test-array.c'].flags += ['-fno-lto']
          SOURCES['test-ctors.c'].flags += ['-fno-lto']
-+        if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CFLAGS']]):
++        if any(['-fwhole-program-vtables' in s for s in CONFIG['OS_CFLAGS']]):
 +            SOURCES['test-array.c'].flags += ['-fno-whole-program-vtables']
 +            SOURCES['test-ctors.c'].flags += ['-fno-whole-program-vtables']
  
@@ -103,7 +103,7 @@ diff -Nuar firefox-57.0.orig/toolkit/library/moz.build firefox-57.0/toolkit/libr
 -if '-flto' in CONFIG['OS_CXXFLAGS']:
 +if any(['-flto' in s for s in CONFIG['OS_CXXFLAGS']]):
      SOURCES['StaticXULComponentsStart.cpp'].flags += ['-fno-lto']
-+    if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CXXFLAGS']]):
++    if any(['-fwhole-program-vtables' in s for s in CONFIG['OS_CXXFLAGS']]):
 +        SOURCES['StaticXULComponentsStart.cpp'].flags += ['-fno-whole-program-vtables']
  
  if CONFIG['OS_ARCH'] == 'WINNT':
@@ -118,7 +118,7 @@ diff -Nuar firefox-57.0.orig/toolkit/library/StaticXULComponentsEnd/moz.build fi
 -if '-flto' in CONFIG['OS_CXXFLAGS']:
 +if any(['-flto' in s for s in CONFIG['OS_CXXFLAGS']]):
      SOURCES['StaticXULComponentsEnd.cpp'].flags += ['-fno-lto']
-+    if any(['-fwhole-program-tables' in s for s in CONFIG['OS_CXXFLAGS']]):
++    if any(['-fwhole-program-vtables' in s for s in CONFIG['OS_CXXFLAGS']]):
 +        SOURCES['StaticXULComponentsEnd.cpp'].flags += ['-fno-whole-program-vtables']
  
  Library('StaticXULComponentsEnd')

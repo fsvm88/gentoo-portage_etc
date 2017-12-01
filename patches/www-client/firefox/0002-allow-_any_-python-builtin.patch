@@ -1,0 +1,11 @@
+diff -Nuar firefox-58.0b6.orig/python/mozbuild/mozbuild/frontend/sandbox.py firefox-58.0b6/python/mozbuild/mozbuild/frontend/sandbox.py
+--- firefox-58.0b6.orig/python/mozbuild/mozbuild/frontend/sandbox.py	2017-11-11 01:19:59.000000000 +0100
++++ firefox-58.0b6/python/mozbuild/mozbuild/frontend/sandbox.py	2017-11-29 23:22:57.420649955 +0100
+@@ -105,6 +105,7 @@
+     # The default set of builtins.
+     BUILTINS = ReadOnlyDict({
+         # Only real Python built-ins should go here.
++        'any': any,
+         'None': None,
+         'False': False,
+         'True': True,

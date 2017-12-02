@@ -37,7 +37,7 @@ kde-plasma/plasma-desktop legacy-systray
 kde-plasma/plasma-workspace qalculate
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
-media-libs/freetype infinality
+media-libs/freetype harfbuzz infinality
 media-libs/gst-plugins-bad wayland
 media-libs/lcms python
 media-libs/libopenshot -imagemagick

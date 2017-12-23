@@ -112,6 +112,7 @@ media-plugins/gst-plugins-libav abi_x86_32
 media-plugins/gst-plugins-mad abi_x86_32
 media-plugins/gst-plugins-meta abi_x86_32
 media-plugins/gst-plugins-mpeg2dec abi_x86_32
+media-plugins/gst-plugins-mpg123 abi_x86_32
 media-plugins/gst-plugins-pulse abi_x86_32
 media-plugins/gst-plugins-resindvd abi_x86_32
 media-plugins/gst-plugins-taglib abi_x86_32

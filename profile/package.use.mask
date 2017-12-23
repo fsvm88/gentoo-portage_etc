@@ -1,1 +1,2 @@
-sys-devel/gcc -pie -ssp
+dev-ruby/rubygems -ruby_targets_ruby23
+virtual/rubygems -ruby_targets_ruby23

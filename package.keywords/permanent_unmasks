@@ -18,6 +18,7 @@ games-util/steam-launcher
 games-util/steam-meta
 media-libs/mesa **
 media-sound/teamspeak-client-bin
+net-analyzer/ettercap
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet

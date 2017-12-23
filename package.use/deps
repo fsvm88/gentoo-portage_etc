@@ -6,13 +6,14 @@ app-crypt/qca -qt4
 app-emulation/libvirt-glib python
 app-emulation/libvirt nfs
 app-emulation/qemu nfs
-app-text/tesseract osd tiff training
+app-text/tesseract osd tiff training l10n_de l10n_es l10n_it
 app-text/texlive-core xetex
 app-text/texlive extra
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite
+dev-lang/rust libcxx
 dev-lang/rust system-llvm
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
@@ -67,7 +68,8 @@ sci-geosciences/gpsd python
 sys-apps/systemd xkb
 sys-auth/consolekit cgroups evdev
 sys-auth/polkit-qt -qt4
-sys-devel/gcc graphite objc mpx pie ssp
+sys-devel/clang-runtime libcxx
+sys-devel/gcc graphite objc mpx pie pgo ssp
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
@@ -82,3 +84,4 @@ x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidi
 x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms
 x11-libs/wxGTK:3.0 webkit
+x11-libs/wxGTK webkit

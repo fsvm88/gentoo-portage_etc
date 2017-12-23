@@ -106,6 +106,7 @@ dev-python/versioneer python_targets_python2_7
 dev-python/werkzeug python_targets_python2_7
 dev-python/wxpython python_targets_python2_7
 dev-python/xcffib python_targets_python2_7
+dev-util/gtk-doc python_targets_python2_7
 dev-util/itstool python_targets_python2_7
 dev-util/meld python_targets_python2_7
 dev-util/scons python_targets_python2_7

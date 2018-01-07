@@ -1,2 +1,2 @@
-dev-ruby/rubygems -ruby_targets_ruby23
-virtual/rubygems -ruby_targets_ruby23
+dev-ruby/rubygems -ruby_targets_ruby24
+virtual/rubygems -ruby_targets_ruby24

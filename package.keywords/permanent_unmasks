@@ -7,6 +7,7 @@ app-emulation/wine-any
 app-emulation/wine-desktop-common
 app-emulation/wine-mono
 dev-java/icedtea
+dev-libs/libressl
 dev-python/automat
 dev-python/incremental
 dev-python/m2r

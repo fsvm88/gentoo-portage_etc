@@ -86,3 +86,4 @@ x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit
+net-fs/cifs-utils -acl

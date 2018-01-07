@@ -193,3 +193,4 @@
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/wxGTK-3.1
 <x11-misc/sddm-0.16
+<net-libs/serf-1.4

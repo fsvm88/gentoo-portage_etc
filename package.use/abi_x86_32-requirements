@@ -29,6 +29,7 @@ dev-libs/libltdl abi_x86_32
 dev-libs/libnl abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
+dev-libs/libressl abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libunistring abi_x86_32
 dev-libs/libusb abi_x86_32
@@ -38,7 +39,6 @@ dev-libs/libxml2 abi_x86_32
 dev-libs/libxslt abi_x86_32
 dev-libs/lzo abi_x86_32
 dev-libs/nettle abi_x86_32
-dev-libs/openssl abi_x86_32
 dev-libs/popt abi_x86_32
 dev-libs/wayland abi_x86_32
 dev-python/subunit abi_x86_32

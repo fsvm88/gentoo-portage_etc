@@ -57,11 +57,12 @@ net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script
 net-firewall/iptables conntrack netlink
+net-fs/cifs-utils -acl
 net-fs/samba addc client gnutls winbind -fam -system-mitkrb5
 net-libs/gtk-vnc python
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
-net-misc/networkmanager dhcpcd resolvconf -dhclient
+net-misc/networkmanager resolvconf -dhclient
 net-misc/spice-gtk -gstreamer python usbredir
 net-vpn/openvpn down-root socks
 net-wireless/lorcon python
@@ -86,4 +87,3 @@ x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit
-net-fs/cifs-utils -acl

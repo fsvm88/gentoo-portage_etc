@@ -2,9 +2,7 @@ app-arch/hardlink
 app-backup/btrbk
 app-crypt/hashcat
 app-crypt/veracrypt
-app-emulation/wine
 app-emulation/wine-any
-app-emulation/wine-desktop-common
 app-emulation/wine-mono
 dev-java/icedtea
 dev-libs/libressl
@@ -19,11 +17,9 @@ games-util/steam-launcher
 games-util/steam-meta
 media-libs/mesa **
 media-sound/teamspeak-client-bin
-net-analyzer/ettercap
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet
-net-p2p/go-ethereum
 sci-misc/boinc
 sys-apps/paludis
 sys-apps/pkgcore **
@@ -33,7 +29,6 @@ sys-firmware/intel-microcode
 sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-fs/duperemove
-sys-kernel/dummy-sources
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc

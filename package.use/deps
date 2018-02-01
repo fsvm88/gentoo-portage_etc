@@ -69,6 +69,7 @@ net-wireless/lorcon python
 sci-geosciences/gpsd python
 sys-apps/systemd xkb
 sys-auth/consolekit cgroups evdev
+sys-auth/consolekit pm-utils
 sys-auth/polkit-qt -qt4
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite objc mpx pie pgo ssp

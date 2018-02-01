@@ -1,13 +1,15 @@
 <app-admin/eselect-1.5
 <app-arch/pbzip2-1.1.20
+<app-crypt/gnupg-2.3
 <app-editors/scite-3.7
 <app-eselect/eselect-ruby-20171231
 <app-portage/cpuid2cpuflags-6
 <app-portage/eix-0.34
+<app-portage/gemato-10.4
 <app-text/unpaper-6.2
 <dev-java/bcprov-1.55
 <dev-lang/ruby-2.5
-<dev-lang/rust-1.23.0
+<dev-lang/rust-1.24
 <dev-libs/icu-60
 <dev-libs/mathjax-2.8
 <dev-libs/nspr-4.20
@@ -88,7 +90,7 @@
 <dev-ruby/test-unit-3.3
 <dev-ruby/xmlrpc-0.4
 <dev-util/bazel-0.5
-<dev-util/cargo-0.23.0
+<dev-util/cargo-0.25
 <dev-util/colm-0.14
 <dev-util/dialog-1.4
 <dev-util/gprof2dot-2017.12.31
@@ -142,7 +144,7 @@
 <sys-libs/libudev-compat-187
 <sys-power/thermald-1.7
 <virtual/rubygems-15
-<virtual/rust-1.23.0
+<virtual/rust-1.24
 <x11-libs/cairo-1.14.11
 <x11-libs/libdrm-2.4.90
 <x11-libs/libvdpau-va-gl-0.4

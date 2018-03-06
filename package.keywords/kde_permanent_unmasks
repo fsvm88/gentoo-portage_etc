@@ -28,6 +28,7 @@ kde-frameworks/kemoticons
 kde-frameworks/kfilemetadata
 kde-frameworks/kglobalaccel
 kde-frameworks/kguiaddons
+kde-frameworks/kholidays
 kde-frameworks/khtml
 kde-frameworks/ki18n
 kde-frameworks/kiconthemes
@@ -69,6 +70,7 @@ kde-frameworks/threadweaver
 kde-plasma/bluedevil
 kde-plasma/breeze
 kde-plasma/breeze-gtk
+kde-plasma/drkonqi
 kde-plasma/kactivitymanagerd
 kde-plasma/kde-cli-tools
 kde-plasma/kdecoration

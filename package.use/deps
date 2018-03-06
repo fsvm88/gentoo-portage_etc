@@ -12,7 +12,7 @@ app-text/texlive extra
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
-dev-lang/python sqlite
+dev-lang/python sqlite tk
 dev-lang/rust libcxx
 dev-lang/rust system-llvm
 dev-libs/elfutils static-libs
@@ -23,6 +23,7 @@ dev-libs/protobuf python
 dev-libs/weston wayland-compositor xwayland
 dev-libs/xmlsec nss
 dev-python/ipython matplotlib nbconvert notebook
+dev-python/matplotlib tk
 dev-python/numpy lapack
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib webkit x11extras xmlpatterns
 dev-qt/designer -phonon
@@ -52,7 +53,7 @@ media-libs/phonon -qt4
 media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome
-media-video/ffmpeg aacplus amr bluray chromium libv4l postproc vpx
+media-video/ffmpeg aacplus amr bluray chromium libv4l openssl postproc vpx
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script

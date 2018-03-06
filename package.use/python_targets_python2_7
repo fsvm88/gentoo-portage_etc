@@ -49,6 +49,7 @@ dev-python/mako python_targets_python2_7
 dev-python/markupsafe python_targets_python2_7
 dev-python/matplotlib python_targets_python2_7
 dev-python/mimeparse python_targets_python2_7
+dev-python/namespace-google python_targets_python2_7
 dev-python/namespace-sphinxcontrib python_targets_python2_7
 dev-python/ndg-httpsclient python_targets_python2_7
 dev-python/notify2 python_targets_python2_7

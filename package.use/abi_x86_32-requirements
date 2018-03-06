@@ -11,6 +11,7 @@ app-i18n/enca abi_x86_32
 dev-lang/orc abi_x86_32
 dev-libs/atk abi_x86_32
 dev-libs/check abi_x86_32
+dev-libs/elfutils abi_x86_32
 dev-libs/expat abi_x86_32
 dev-libs/fribidi abi_x86_32
 dev-libs/glib abi_x86_32

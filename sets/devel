@@ -4,10 +4,12 @@ dev-python/bitstring
 dev-python/ipython
 dev-python/line_profiler
 dev-python/neo4j-python-driver
+dev-python/pandas
 dev-python/protobuf-python
 dev-python/pycallgraph
 dev-python/pyprof2calltree
 dev-python/runsnakerun
+dev-python/seaborn
 dev-python/virtualenv
 dev-python/wheel
 dev-util/bazel
@@ -25,7 +27,9 @@ dev-util/strace
 dev-vcs/git
 dev-vcs/mercurial
 media-libs/opencv
+sci-libs/scikits_image
 sci-libs/scikits_learn
+sci-libs/scikits_optimization
 sci-libs/scipy
 sys-devel/crossdev
 sys-devel/gdb

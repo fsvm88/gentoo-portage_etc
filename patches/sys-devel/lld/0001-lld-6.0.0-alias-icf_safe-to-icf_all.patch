@@ -1,0 +1,11 @@
+diff -Nuar lld-6.0.0.src.orig/ELF/Options.td lld-6.0.0.src/ELF/Options.td
+--- lld-6.0.0.src.orig/ELF/Options.td	2018-02-22 10:26:44.000000000 +0100
++++ lld-6.0.0.src/ELF/Options.td	2018-03-15 07:04:09.631351025 +0100
+@@ -369,6 +369,7 @@
+ def alias_Ttext_segment_eq: J<"Ttext-segment=">, Alias<Ttext>;
+ def alias_undefined_u: JoinedOrSeparate<["-"], "u">, Alias<undefined>;
+ def alias_version_V: Flag<["-"], "V">, Alias<version>;
++def alias_icf_safe: F<"icf=safe">, Alias<icf_all>;
+ 
+ // Our symbol resolution algorithm handles symbols in archive files differently
+ // than traditional linkers, so we don't need --start-group and --end-group.

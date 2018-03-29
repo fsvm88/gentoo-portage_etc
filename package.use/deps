@@ -68,6 +68,7 @@ net-misc/spice-gtk -gstreamer python usbredir
 net-vpn/openvpn down-root socks
 net-wireless/lorcon python
 sci-geosciences/gpsd python
+sci-libs/scipy sparse
 sys-apps/systemd xkb
 sys-auth/consolekit cgroups evdev
 sys-auth/consolekit pm-utils

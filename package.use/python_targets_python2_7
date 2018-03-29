@@ -1,4 +1,3 @@
-app-arch/rpm python_targets_python2_7
 app-emulation/libvirt-glib python_targets_python2_7
 app-emulation/qemu python_targets_python2_7
 app-emulation/virt-manager python_targets_python2_7
@@ -123,6 +122,8 @@ net-misc/electrum python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
 net-wireless/lorcon python_targets_python2_7
 sci-geosciences/gpsd python_targets_python2_7
+sci-libs/scikits_optimization python_targets_python2_7
+sci-libs/scikits python_targets_python2_7
 sys-devel/clang python_targets_python2_7
 sys-devel/llvm python_targets_python2_7
 sys-libs/ldb python_targets_python2_7

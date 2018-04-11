@@ -78,6 +78,7 @@ sys-devel/gcc graphite objc mpx pie pgo ssp
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
+sys-libs/libomp hwloc
 sys-libs/libunwind debug-frame libatomic
 sys-libs/ncurses tinfo
 sys-libs/ntdb python

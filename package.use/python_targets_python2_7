@@ -74,6 +74,7 @@ dev-python/pyopenssl python_targets_python2_7
 dev-python/pyparsing python_targets_python2_7
 dev-python/py python_targets_python2_7
 dev-python/PyQt5 python_targets_python2_7
+dev-python/pyrsistent python_targets_python2_7
 dev-python/PySocks python_targets_python2_7
 dev-python/pytest-cache python_targets_python2_7
 dev-python/pytest-localserver python_targets_python2_7

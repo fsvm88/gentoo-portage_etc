@@ -1,7 +1,7 @@
 CC="clang"
 CXX="clang++"
 CFLAGS="-O3 -march=native -pipe -ggdb -fstack-protector-all -flto=thin -fwhole-program-vtables -Wno-unused-command-line-argument"
-CXXFLAGS="${CFLAGS}"
+CXXFLAGS="${CFLAGS} -stdlib=libc++"
 AR="llvm-ar"
 NM="llvm-nm"
 RANLIB="llvm-ranlib"

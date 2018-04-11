@@ -1,3 +1,4 @@
+app-admin/hardening-check
 app-admin/logrotate
 app-admin/syslog-ng
 app-arch/hardlink

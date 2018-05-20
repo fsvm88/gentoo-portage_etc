@@ -1,6 +1,6 @@
 CC="clang"
 CXX="clang++"
-CFLAGS="-O3 -march=native -pipe -ggdb -fstack-protector-all -fuse-ld=lld -Wno-unused-command-line-argument -flto=thin -fwhole-program-vtables"
+CFLAGS="-O3 -march=native -pipe -glldb -fstack-protector-all -fuse-ld=lld -flto=thin -fwhole-program-vtables"
 CXXFLAGS="${CFLAGS}"
 AR="llvm-ar"
 NM="llvm-nm"

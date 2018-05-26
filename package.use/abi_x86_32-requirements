@@ -132,7 +132,9 @@ net-fs/samba abi_x86_32
 net-libs/gnutls abi_x86_32
 net-libs/libasyncns abi_x86_32
 net-libs/libndp abi_x86_32
+net-libs/libnsl abi_x86_32
 net-libs/libssh abi_x86_32
+net-libs/libtirpc abi_x86_32
 net-libs/socket_wrapper abi_x86_32
 net-print/cups abi_x86_32
 sys-apps/acl abi_x86_32
@@ -182,6 +184,7 @@ virtual/opengl abi_x86_32
 virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
 virtual/wine abi_x86_32
+x11-base/xcb-proto abi_x86_32
 x11-libs/cairo abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32
@@ -230,7 +233,6 @@ x11-proto/randrproto abi_x86_32
 x11-proto/recordproto abi_x86_32
 x11-proto/renderproto abi_x86_32
 x11-proto/videoproto abi_x86_32
-x11-proto/xcb-proto abi_x86_32
 x11-proto/xextproto abi_x86_32
 x11-proto/xf86bigfontproto abi_x86_32
 x11-proto/xf86driproto abi_x86_32

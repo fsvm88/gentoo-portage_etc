@@ -1,2 +1,2 @@
-sys-power/acpilight python_targets_python3_5
 dev-util/cppcheck python_targets_python3_5
+sys-power/acpilight python_targets_python3_5

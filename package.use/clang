@@ -1,2 +1,1 @@
-sys-devel/clang default-compiler-rt default-libcxx
 sys-devel/clang-runtime crt

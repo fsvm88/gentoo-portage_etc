@@ -45,7 +45,7 @@ media-libs/gst-plugins-bad wayland
 media-libs/lcms python
 media-libs/libopenshot -imagemagick
 media-libs/libsamplerate sndfile
-media-libs/libsdl2 gles
+media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
 media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
 media-libs/phonon-gstreamer -qt4
@@ -73,6 +73,7 @@ sys-apps/systemd xkb
 sys-auth/consolekit cgroups evdev
 sys-auth/consolekit pm-utils
 sys-auth/polkit-qt -qt4
+sys-boot/grub mount
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite objc mpx pie pgo ssp
 sys-devel/llvm gold udis86

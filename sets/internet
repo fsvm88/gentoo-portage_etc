@@ -5,6 +5,7 @@ net-analyzer/wireshark
 net-dns/bind-tools
 net-ftp/lftp
 net-ftp/ncftp
+net-misc/drive
 net-misc/netkit-telnetd
 net-misc/nyx
 net-misc/wakeonlan
@@ -14,5 +15,6 @@ net-vpn/tor
 net-wireless/iw
 net-wireless/rfkill
 sys-apps/ethtool
+www-client/chromium
 www-client/firefox
 www-plugins/adobe-flash

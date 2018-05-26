@@ -1,10 +1,10 @@
 app-admin/sudo
 app-misc/symlinks
 app-portage/mirrorselect
+dev-util/ccache
 dev-util/shadowman
 sys-apps/gptfdisk
 sys-apps/irqbalance
-sys-auth/libnss-nis
 sys-boot/grub
 sys-boot/os-prober
 sys-devel/lld

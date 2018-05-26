@@ -28,6 +28,7 @@ sys-firmware/intel-microcode monolithic
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
 virtual/wine d3d9 staging
+www-client/chromium jumbo-build
 www-client/firefox custom-cflags custom-optimization system-harfbuzz wifi startup-notification
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm

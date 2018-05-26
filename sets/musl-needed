@@ -1,0 +1,5 @@
+sys-libs/argp-standalone
+sys-libs/fts-standalone
+sys-libs/obstack-standalone
+sys-libs/queue
+sys-libs/rpmatch-standalone

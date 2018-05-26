@@ -22,6 +22,7 @@ dev-python/cairocffi python_targets_python2_7
 dev-python/certifi python_targets_python2_7
 dev-python/cffi python_targets_python2_7
 dev-python/chardet python_targets_python2_7
+dev-python/configparser python_targets_python2_7
 dev-python/cryptography python_targets_python2_7
 dev-python/cycler python_targets_python2_7
 dev-python/dbus-python python_targets_python2_7
@@ -40,6 +41,7 @@ dev-python/ipaddress python_targets_python2_7
 dev-python/ipaddr python_targets_python2_7
 dev-python/itsdangerous python_targets_python2_7
 dev-python/jsonrpclib python_targets_python2_7
+dev-python/kiwisolver python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
 dev-python/lxml python_targets_python2_7
@@ -50,6 +52,7 @@ dev-python/matplotlib python_targets_python2_7
 dev-python/mimeparse python_targets_python2_7
 dev-python/namespace-google python_targets_python2_7
 dev-python/namespace-sphinxcontrib python_targets_python2_7
+dev-python/namespace-zope python_targets_python2_7
 dev-python/ndg-httpsclient python_targets_python2_7
 dev-python/notify2 python_targets_python2_7
 dev-python/numpy python_targets_python2_7
@@ -64,6 +67,7 @@ dev-python/protobuf-python python_targets_python2_7
 dev-python/pyaes python_targets_python2_7
 dev-python/pyasn1 python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
+dev-python/pycodestyle python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
 dev-python/pycrypto python_targets_python2_7
 dev-python/pygobject python_targets_python2_7
@@ -109,6 +113,7 @@ dev-python/wxpython python_targets_python2_7
 dev-python/xcffib python_targets_python2_7
 dev-util/gtk-doc python_targets_python2_7
 dev-util/itstool python_targets_python2_7
+dev-util/lldb python_targets_python2_7
 dev-util/meld python_targets_python2_7
 dev-util/scons python_targets_python2_7
 dev-util/systemtap python_targets_python2_7
@@ -133,6 +138,5 @@ sys-libs/tdb python_targets_python2_7
 sys-libs/tevent python_targets_python2_7
 virtual/python-dnspython python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
+x11-base/xcb-proto python_targets_python2_7
 x11-drivers/xf86-video-qxl python_targets_python2_7
-x11-libs/xpyb python_targets_python2_7
-x11-proto/xcb-proto python_targets_python2_7

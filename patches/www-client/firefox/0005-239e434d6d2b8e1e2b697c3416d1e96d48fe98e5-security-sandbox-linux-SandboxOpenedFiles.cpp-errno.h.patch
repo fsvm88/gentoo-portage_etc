@@ -1,0 +1,11 @@
+diff -Nuar mozilla-release-239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.orig/security/sandbox/linux/SandboxOpenedFiles.cpp mozilla-release-239e434d6d2b8e1e2b697c3416d1e96d48fe98e5/security/sandbox/linux/SandboxOpenedFiles.cpp
+--- mozilla-release-239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.orig/security/sandbox/linux/SandboxOpenedFiles.cpp	2018-04-23 22:44:10.850336748 +0200
++++ mozilla-release-239e434d6d2b8e1e2b697c3416d1e96d48fe98e5/security/sandbox/linux/SandboxOpenedFiles.cpp	2018-04-23 22:44:51.322334510 +0200
+@@ -9,6 +9,7 @@
+ #include "mozilla/Move.h"
+ #include "SandboxLogging.h"
+ 
++#include <errno.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+ 

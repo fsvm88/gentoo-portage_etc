@@ -24,7 +24,7 @@ net-p2p/go-ethereum evm opencl
 net-print/hplip snmp
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/portage doc native-extensions
-sys-firmware/intel-microcode monolithic
+sys-firmware/intel-microcode hostonly monolithic
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
 virtual/wine d3d9 staging

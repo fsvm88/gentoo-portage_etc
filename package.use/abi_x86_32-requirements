@@ -30,7 +30,6 @@ dev-libs/libltdl abi_x86_32
 dev-libs/libnl abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
-dev-libs/libressl abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libunistring abi_x86_32
 dev-libs/libusb abi_x86_32
@@ -239,3 +238,5 @@ x11-proto/xf86driproto abi_x86_32
 x11-proto/xf86vidmodeproto abi_x86_32
 x11-proto/xineramaproto abi_x86_32
 x11-proto/xproto abi_x86_32
+sys-apps/lm_sensors abi_x86_32
+dev-libs/openssl abi_x86_32

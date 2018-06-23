@@ -103,3 +103,9 @@
 <x11-libs/libdrm-2.4.92
 <x11-libs/libvdpau-va-gl-0.4
 <x11-libs/libxcb-1.14
+<dev-libs/wayland-1.16
+<dev-libs/libgpg-error-1.30
+<dev-util/peg-0.2
+<net-print/cups-2.3
+<net-print/cups-filters-1.21
+<dev-libs/nss-3.38

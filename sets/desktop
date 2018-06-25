@@ -2,6 +2,6 @@ app-office/libreoffice
 dev-libs/weston
 dev-qt/qtquickcontrols2
 kde-plasma/plasma-meta
-media-sound/teamspeak-client-bin
+media-sound/teamspeak-client
 x11-apps/xrandr
 x11-misc/vdpauinfo

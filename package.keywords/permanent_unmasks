@@ -14,7 +14,7 @@ games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
 media-libs/mesa **
-media-sound/teamspeak-client-bin
+media-sound/teamspeak-client
 net-libs/serf
 net-p2p/bitcoin-cli
 net-p2p/bitcoind

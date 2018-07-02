@@ -108,6 +108,7 @@ dev-python/unittest2 python_targets_python2_7
 dev-python/uritemplate python_targets_python2_7
 dev-python/urllib3 python_targets_python2_7
 dev-python/versioneer python_targets_python2_7
+dev-python/webencodings python_targets_python2_7
 dev-python/werkzeug python_targets_python2_7
 dev-python/wxpython python_targets_python2_7
 dev-python/xcffib python_targets_python2_7

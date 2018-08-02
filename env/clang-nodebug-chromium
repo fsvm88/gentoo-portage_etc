@@ -1,0 +1,4 @@
+CC="clang"
+CFLAGS="-O3 -march=native -pipe -fstack-protector-all"
+CXX="clang++"
+CXXFLAGS="${CFLAGS}"

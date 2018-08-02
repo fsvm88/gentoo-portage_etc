@@ -13,8 +13,7 @@ dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
-dev-lang/rust libcxx
-dev-lang/rust system-llvm
+dev-lang/rust rls rustfmt
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16

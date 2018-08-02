@@ -2,6 +2,7 @@ app-admin/hardening-check
 app-admin/logrotate
 app-admin/syslog-ng
 app-arch/hardlink
+app-crypt/gentoo-keys
 app-misc/fdupes
 app-misc/tmux
 app-portage/cpuid2cpuflags

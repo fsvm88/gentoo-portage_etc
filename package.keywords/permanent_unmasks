@@ -35,4 +35,3 @@ virtual/wine
 www-client/firefox
 x11-apps/piglit **
 x11-drivers/nvidia-drivers
-x11-misc/envytools **

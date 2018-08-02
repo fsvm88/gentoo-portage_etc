@@ -141,3 +141,6 @@ virtual/python-dnspython python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
 x11-base/xcb-proto python_targets_python2_7
 x11-drivers/xf86-video-qxl python_targets_python2_7
+virtual/python-typing python_targets_python2_7
+dev-python/olefile python_targets_python2_7
+dev-python/pyhamcrest python_targets_python2_7

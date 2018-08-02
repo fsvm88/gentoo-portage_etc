@@ -13,7 +13,6 @@ net-p2p/freenet
 net-proxy/torsocks
 net-vpn/tor
 net-wireless/iw
-net-wireless/rfkill
 sys-apps/ethtool
 www-client/chromium
 www-client/firefox

@@ -32,3 +32,4 @@ www-client/chromium jumbo-build
 www-client/firefox custom-cflags custom-optimization system-harfbuzz wifi startup-notification
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm
+kde-plasma/powerdevil brightness-control

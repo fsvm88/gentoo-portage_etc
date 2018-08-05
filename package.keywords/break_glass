@@ -7,7 +7,7 @@
 <app-text/unpaper-6.2
 <dev-java/bcprov-1.55
 <dev-lang/ruby-2.5
-<dev-lang/rust-1.28
+<dev-lang/rust-1.29
 <dev-libs/libbytesize-1.4
 <dev-libs/mpc-1.2
 <dev-libs/mpfr-4.1
@@ -134,5 +134,5 @@
 <sys-power/thermald-1.8
 <virtual/pmake-2
 <virtual/rubygems-15
-<virtual/rust-1.28
+<virtual/rust-1.29
 <x11-apps/intel-gpu-tools-1.30

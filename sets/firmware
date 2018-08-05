@@ -1,4 +1,3 @@
 sys-apps/iucode_tool
-sys-apps/microcode-ctl
 sys-firmware/intel-microcode
 sys-firmware/nvidia-firmware

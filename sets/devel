@@ -9,7 +9,6 @@ dev-python/protobuf-python
 dev-python/pycallgraph
 dev-python/pylint
 dev-python/pyprof2calltree
-dev-python/runsnakerun
 dev-python/seaborn
 dev-python/virtualenv
 dev-python/wheel
@@ -27,7 +26,6 @@ dev-util/perf
 dev-util/pycharm-community
 dev-util/strace
 dev-vcs/git
-dev-vcs/mercurial
 media-libs/opencv
 sci-libs/scikits_image
 sci-libs/scikits_learn

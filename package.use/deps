@@ -18,6 +18,7 @@ dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 asm endomorphism
+dev-libs/libxml2 python
 dev-libs/protobuf python
 dev-libs/weston wayland-compositor xwayland
 dev-libs/xmlsec nss

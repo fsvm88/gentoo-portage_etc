@@ -108,6 +108,7 @@ media-plugins/gst-plugins-dts abi_x86_32
 media-plugins/gst-plugins-dvdread abi_x86_32
 media-plugins/gst-plugins-faad abi_x86_32
 media-plugins/gst-plugins-flac abi_x86_32
+media-plugins/gst-plugins-gtk abi_x86_32
 media-plugins/gst-plugins-lame abi_x86_32
 media-plugins/gst-plugins-libav abi_x86_32
 media-plugins/gst-plugins-mad abi_x86_32
@@ -221,4 +222,3 @@ x11-libs/libXvMC abi_x86_32
 x11-libs/libXxf86vm abi_x86_32
 x11-libs/pango abi_x86_32
 x11-libs/pixman abi_x86_32
-media-plugins/gst-plugins-gtk abi_x86_32

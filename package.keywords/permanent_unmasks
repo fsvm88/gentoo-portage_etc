@@ -1,13 +1,11 @@
 app-arch/hardlink
 app-backup/btrbk
-app-crypt/hashcat
 app-emulation/wine-any
 app-emulation/wine-mono
 dev-java/icedtea
 dev-python/automat
 dev-python/incremental
 dev-python/m2r
-dev-python/snakeoil **
 dev-python/twisted
 games-util/steam-client-meta
 games-util/steam-games-meta
@@ -20,8 +18,6 @@ net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet
 sci-misc/boinc
-sys-apps/paludis
-sys-apps/pkgcore **
 sys-apps/portage
 sys-devel/crossdev **
 sys-firmware/intel-microcode

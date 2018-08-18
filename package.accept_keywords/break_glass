@@ -76,8 +76,10 @@
 <dev-ruby/xmlrpc-0.4
 <dev-util/bazel-0.17
 <dev-util/cargo-1.28
+<dev-util/cmake-3.13
 <dev-util/colm-0.14
 <dev-util/dialog-1.4
+<dev-util/gn-0.1446
 <dev-util/gprof2dot-2017.12.31
 <dev-util/lldb-7
 <dev-util/nvidia-cuda-toolkit-10
@@ -102,6 +104,8 @@
 <net-print/cups-filters-1.21
 <net-print/hplip-plugin-3.19
 <net-wireless/reaver-1.5
+<net-wireless/reaver-wps-fork-t6x-1.8
+<net-wireless/rtl8812au_aircrack-ng-9999::pentoo
 <net-wireless/wpa_supplicant-2.7
 <sci-libs/scikits-0.2
 <sci-libs/scikits_image-0.14
@@ -135,4 +139,6 @@
 <virtual/pmake-2
 <virtual/rubygems-15
 <virtual/rust-1.29
+<www-client/chromium-70
 <x11-apps/intel-gpu-tools-1.30
+<x11-libs/libdrm-2.4.94

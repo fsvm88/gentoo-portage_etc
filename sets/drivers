@@ -1,0 +1,5 @@
+dev-libs/beignet
+dev-libs/ocl-icd
+dev-util/intel-ocl-sdk
+net-wireless/rtl8812au_aircrack-ng
+x11-drivers/nvidia-drivers

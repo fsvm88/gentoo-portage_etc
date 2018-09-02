@@ -14,6 +14,7 @@ dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
 dev-lang/rust rls rustfmt
+dev-libs/beignet ocl20
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16

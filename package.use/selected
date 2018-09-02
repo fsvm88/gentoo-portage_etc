@@ -1,4 +1,5 @@
 app-admin/testdisk ntfs reiserfs
+app-editors/vim python
 app-emulation/docker btrfs overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu usbredir
@@ -7,10 +8,12 @@ app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
 dev-libs/weston colord fbdev ivi rdp screen-sharing xwayland
+dev-python/PyQt5 webchannel
 dev-util/bazel tools
 dev-util/strace -unwind
 dev-vcs/subversion -dso
 games-util/steam-games-meta s3tc
+kde-plasma/libksysguard -detailedmemory
 kde-plasma/plasma-desktop touchpad
 kde-plasma/plasma-meta -crypt
 kde-plasma/powerdevil brightness-control
@@ -30,7 +33,7 @@ sys-firmware/intel-microcode hostonly monolithic
 sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
 virtual/wine d3d9 staging
-www-client/chromium jumbo-build
+www-client/chromium jumbo-build -system-icu
 www-client/firefox custom-cflags custom-optimization system-harfbuzz wifi startup-notification
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm

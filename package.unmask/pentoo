@@ -1,1 +1,6 @@
 <net-analyzer/nessus-bin-9999::pentoo
+net-wireless/cowpatty
+<net-wireless/hcxdumptool-5
+<net-wireless/hcxkeys-5
+<net-wireless/hcxtools-5
+<net-wireless/rtl8812au_aircrack-ng-9999::pentoo

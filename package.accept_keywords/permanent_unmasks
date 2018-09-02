@@ -10,6 +10,7 @@ dev-python/incremental
 dev-python/m2r
 dev-python/twisted
 dev-util/intel-ocl-sdk
+dev-util/pycharm-community
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
@@ -21,6 +22,7 @@ net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet
 net-wireless/cowpatty
+net-wireless/rtl8812au_aircrack-ng
 sci-misc/boinc
 sys-apps/portage
 sys-devel/crossdev **
@@ -35,3 +37,5 @@ virtual/wine
 www-client/firefox
 x11-apps/piglit **
 x11-drivers/nvidia-drivers
+net-analyzer/nmap
+net-analyzer/hydra

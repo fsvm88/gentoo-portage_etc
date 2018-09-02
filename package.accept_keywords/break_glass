@@ -1,4 +1,5 @@
 <app-arch/pbzip2-1.1.20
+<app-emulation/vkd3d-2
 <app-eselect/eselect-infinality-1.2
 <app-eselect/eselect-ruby-20171231
 <app-misc/ddcutil-0.9
@@ -87,6 +88,7 @@
 <dev-util/peg-0.2
 <dev-util/perf-4.10
 <dev-util/ragel-7.1
+<dev-util/spirv-headers-2
 <dev-util/vulkan-headers-1.2
 <media-libs/freetype-2.10
 <media-libs/libpng-1.7

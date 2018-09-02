@@ -5,6 +5,7 @@ app-arch/libarchive abi_x86_32
 app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
 app-crypt/mit-krb5 abi_x86_32
+app-emulation/vkd3d abi_x86_32
 app-emulation/wine-any abi_x86_32
 app-emulation/wine-gecko abi_x86_32
 app-i18n/enca abi_x86_32
@@ -97,6 +98,7 @@ media-libs/openjpeg abi_x86_32
 media-libs/taglib abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vo-aacenc abi_x86_32
+media-libs/vulkan-loader abi_x86_32
 media-libs/x264 abi_x86_32
 media-libs/x265 abi_x86_32
 media-libs/xvid abi_x86_32
@@ -147,6 +149,7 @@ sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
 sys-devel/clang:4 python_targets_python2_7
+sys-devel/clang abi_x86_32
 sys-devel/flex abi_x86_32
 sys-devel/gettext abi_x86_32
 sys-devel/llvm abi_x86_32
@@ -176,12 +179,14 @@ virtual/acl abi_x86_32
 virtual/ffmpeg abi_x86_32
 virtual/glu abi_x86_32
 virtual/jpeg abi_x86_32
+virtual/libelf abi_x86_32
 virtual/libffi abi_x86_32
 virtual/libgudev abi_x86_32
 virtual/libiconv abi_x86_32
 virtual/libintl abi_x86_32
 virtual/libudev abi_x86_32
 virtual/libusb abi_x86_32
+virtual/opencl abi_x86_32
 virtual/opengl abi_x86_32
 virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
@@ -222,3 +227,9 @@ x11-libs/libXvMC abi_x86_32
 x11-libs/libXxf86vm abi_x86_32
 x11-libs/pango abi_x86_32
 x11-libs/pixman abi_x86_32
+x11-libs/xcb-util abi_x86_32
+x11-libs/xcb-util-cursor abi_x86_32
+x11-libs/xcb-util-image abi_x86_32
+x11-libs/xcb-util-keysyms abi_x86_32
+x11-libs/xcb-util-renderutil abi_x86_32
+x11-libs/xcb-util-wm abi_x86_32

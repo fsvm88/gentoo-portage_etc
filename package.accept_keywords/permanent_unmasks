@@ -17,6 +17,8 @@ games-util/steam-launcher
 games-util/steam-meta
 media-libs/mesa **
 media-sound/teamspeak-client
+net-analyzer/hydra
+net-analyzer/nmap
 net-libs/serf
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
@@ -37,5 +39,3 @@ virtual/wine
 www-client/firefox
 x11-apps/piglit **
 x11-drivers/nvidia-drivers
-net-analyzer/nmap
-net-analyzer/hydra

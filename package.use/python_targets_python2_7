@@ -15,6 +15,7 @@ dev-python/functools32 python_targets_python2_7
 dev-python/futures python_targets_python2_7
 dev-python/idna python_targets_python2_7
 dev-python/ipaddress python_targets_python2_7
+dev-python/ipaddr python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/lit python_targets_python2_7
 dev-python/m2crypto python_targets_python2_7
@@ -56,4 +57,3 @@ sys-libs/ldb python_targets_python2_7
 sys-libs/talloc python_targets_python2_7
 sys-libs/tdb python_targets_python2_7
 sys-libs/tevent python_targets_python2_7
-dev-python/ipaddr python_targets_python2_7

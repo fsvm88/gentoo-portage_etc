@@ -6,9 +6,12 @@ app-emulation/wine-mono
 dev-java/icedtea
 dev-libs/beignet
 dev-python/automat
+dev-python/flask
+dev-python/flask-sqlalchemy
 dev-python/incremental
 dev-python/m2r
 dev-python/twisted
+dev-python/werkzeug
 dev-util/intel-ocl-sdk
 dev-util/pycharm-community
 games-util/steam-client-meta

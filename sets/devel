@@ -1,4 +1,5 @@
 app-doc/doxygen
+app-editors/visual-studio-code
 dev-cpp/gtest
 dev-python/bitstring
 dev-python/ipython

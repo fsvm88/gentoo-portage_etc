@@ -1,6 +1,5 @@
 app-emulation/docker
 dev-python/alembic
-dev-python/django
 dev-python/docker-py
 dev-python/flask
 dev-python/flask-sqlalchemy

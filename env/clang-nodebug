@@ -1,8 +1,0 @@
-AR="llvm-ar"
-CC="clang"
-CFLAGS="-O3 -march=native -pipe -fstack-protector-all"
-CXX="clang++"
-CXXFLAGS="${CFLAGS}"
-LDFLAGS="-Wl,-O1,-z,now,--as-needed"
-NM="llvm-nm"
-RANLIB="llvm-ranlib"

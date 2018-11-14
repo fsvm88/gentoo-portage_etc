@@ -13,8 +13,7 @@ dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
-dev-lang/rust rls rustfmt
-dev-libs/beignet ocl20
+dev-lang/rust cargo rls rustfmt
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16
@@ -37,7 +36,6 @@ dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 kde-plasma/kwin multimedia
-kde-plasma/plasma-desktop legacy-systray
 kde-plasma/plasma-workspace qalculate
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
@@ -45,6 +43,7 @@ media-libs/freetype harfbuzz infinality
 media-libs/gst-plugins-bad wayland
 media-libs/lcms python
 media-libs/libopenshot -imagemagick
+media-libs/libopenshot python
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
@@ -60,8 +59,9 @@ net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script
 net-firewall/iptables conntrack netlink
 net-fs/cifs-utils -acl
-net-fs/samba addc client gnutls winbind -fam -system-mitkrb5
+net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
+net-libs/nodejs inspector
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/networkmanager resolvconf -dhclient
@@ -80,11 +80,13 @@ sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite objc mpx pie pgo ssp
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
+sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
 sys-libs/libomp hwloc
 sys-libs/libunwind debug-frame libatomic
 sys-libs/ncurses tinfo
 sys-libs/ntdb python
+sys-libs/talloc python
 sys-libs/tdb python
 sys-libs/tevent python
 sys-libs/zlib minizip
@@ -92,5 +94,6 @@ virtual/notification-daemon kde
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms
+x11-libs/libdrm video_cards_amdgpu
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit

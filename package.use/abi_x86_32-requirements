@@ -9,6 +9,7 @@ app-emulation/vkd3d abi_x86_32
 app-emulation/wine-any abi_x86_32
 app-emulation/wine-gecko abi_x86_32
 app-i18n/enca abi_x86_32
+dev-db/lmdb abi_x86_32
 dev-lang/orc abi_x86_32
 dev-libs/atk abi_x86_32
 dev-libs/check abi_x86_32
@@ -40,6 +41,7 @@ dev-libs/libxml2 abi_x86_32
 dev-libs/libxslt abi_x86_32
 dev-libs/lzo abi_x86_32
 dev-libs/nettle abi_x86_32
+dev-libs/ocl-icd abi_x86_32
 dev-libs/openssl abi_x86_32
 dev-libs/popt abi_x86_32
 dev-libs/wayland abi_x86_32

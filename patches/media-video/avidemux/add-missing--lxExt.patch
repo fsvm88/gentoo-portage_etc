@@ -1,0 +1,14 @@
+diff -Nuar avidemux_2.7.1.orig/avidemux/qt4/ADM_openGL/src/CMakeLists.txt avidemux_2.7.1/avidemux/qt4/ADM_openGL/src/CMakeLists.txt
+--- avidemux_2.7.1.orig/avidemux/qt4/ADM_openGL/src/CMakeLists.txt	2018-10-12 09:33:45.882773167 +0200
++++ avidemux_2.7.1/avidemux/qt4/ADM_openGL/src/CMakeLists.txt	2018-10-12 09:43:20.205741399 +0200
+@@ -6,7 +6,9 @@
+   INCLUDE_DIRECTORIES(${QT_QTOPENGL_INCLUDE_DIR}) 
+   YASMIFY(azm ADM_openGlDownload_asm)
+   ADD_LIBRARY( ${ADM_OPENGL} SHARED ADM_openGl.cpp ADM_openGlDownloadTexture.cpp ADM_openGlDownload_asm.asm ${azm})
+-  TARGET_LINK_LIBRARIES(${ADM_OPENGL} ${OPENGL_LIBRARIES} ${QT_QTOPENGL_LIBRARIES} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ADM_coreUI6 ADM_core6 ADM_coreUtils6 ADM_coreImage6)
++  TARGET_LINK_LIBRARIES(${ADM_OPENGL} ${OPENGL_LIBRARIES}
++      ${QT_QTOPENGL_LIBRARIES} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY}
++      ADM_coreUI6 ADM_core6 ADM_coreUtils6 ADM_coreImage6 Xext)
+   ADM_INSTALL_LIB(${ADM_OPENGL})
+ ENDIF(USE_OPENGL)
+ 

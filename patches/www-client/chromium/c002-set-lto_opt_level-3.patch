@@ -1,0 +1,12 @@
+diff -Nuar chromium-71.0.3578.30.orig/build/config/compiler/BUILD.gn chromium-71.0.3578.30/build/config/compiler/BUILD.gn
+--- chromium-71.0.3578.30.orig/build/config/compiler/BUILD.gn	2018-11-11 11:58:21.672961342 +0100
++++ chromium-71.0.3578.30/build/config/compiler/BUILD.gn	2018-11-11 11:56:41.787966867 +0100
+@@ -619,7 +619,7 @@
+     cflags += [ "-flto=thin" ]
+ 
+     if (thin_lto_enable_optimizations) {
+-      lto_opt_level = 2
++      lto_opt_level = 3
+     } else {
+       lto_opt_level = 0
+     }

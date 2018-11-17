@@ -15,6 +15,7 @@ dev-python/ipaddress python_targets_python2_7
 dev-python/ipaddr python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
+dev-python/lit python_targets_python2_7
 dev-python/m2crypto python_targets_python2_7
 dev-python/mimeparse python_targets_python2_7
 dev-python/numpy python_targets_python2_7

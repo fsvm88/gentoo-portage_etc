@@ -20,6 +20,7 @@
 <dev-libs/nspr-4.20
 <dev-libs/nss-3.40
 <=dev-libs/re2-0.2019.01.01
+<=dev-libs/weston-5.1
 <dev-perl/Cairo-GObject-1.5
 <dev-perl/GooCanvas2-0.70
 <dev-perl/Gtk3-0.35
@@ -103,9 +104,11 @@
 <media-libs/avidemux-plugins-2.8
 <media-libs/freetype-2.10
 <media-libs/harfbuzz-2.1
+<=media-libs/ilmbase-2.4
 <media-libs/libpng-1.7
 <media-libs/libvpx-1.7
 <media-libs/opencv-3.4
+<=media-libs/openexr-2.4
 <media-libs/vulkan-loader-1.2
 <media-video/avidemux-2.8
 # move x11-apps/intel-gpu-tools x11-apps/igt-gpu-tools

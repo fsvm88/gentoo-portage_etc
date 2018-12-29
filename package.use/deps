@@ -1,0 +1,104 @@
+app-admin/packagekit-base command-not-found cron
+app-admin/sysstat isag lm_sensors
+app-crypt/gpgme cxx
+app-crypt/pinentry gnome-keyring
+app-crypt/qca -qt4
+app-emulation/libvirt-glib python
+app-emulation/libvirt nfs
+app-emulation/qemu nfs
+app-text/tesseract osd tiff training l10n_de l10n_es l10n_it
+app-text/texlive-core xetex
+app-text/texlive extra
+dev-db/sqlite secure-delete
+dev-java/icedtea infinality
+dev-lang/perl ithreads
+dev-lang/python sqlite tk
+dev-lang/rust cargo clippy rls rustfmt -jemalloc -system-llvm
+dev-libs/elfutils static-libs
+dev-libs/libdbusmenu-qt -qt4
+dev-libs/libpcre pcre16
+dev-libs/libsecp256k1 asm endomorphism
+dev-libs/libxml2 python
+dev-libs/protobuf python
+dev-libs/weston wayland-compositor xwayland
+dev-libs/xmlsec nss
+dev-python/ipython matplotlib nbconvert notebook
+dev-python/matplotlib tk
+dev-python/numpy lapack
+dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib webkit x11extras xmlpatterns
+dev-qt/designer -phonon
+dev-qt/qtgui accessibility eglfs evdev libinput
+dev-qt/qtmultimedia widgets
+dev-qt/qtscript scripttools
+dev-qt/qtwebkit multimedia orientation printsupport webchannel -gstreamer010 -gstreamer
+dev-util/cmake system-jsoncpp
+dev-util/systemtap libvirt sqlite
+dev-vcs/subversion -kwallet
+gnome-base/gvfs archive mtp
+kde-plasma/kwin multimedia
+kde-plasma/plasma-workspace qalculate
+media-gfx/exiv2 xmp
+media-gfx/imagemagick perl
+media-libs/freetype harfbuzz infinality
+media-libs/gst-plugins-bad wayland
+media-libs/lcms python
+media-libs/libopenshot -imagemagick
+media-libs/libopenshot python
+media-libs/libsamplerate sndfile
+media-libs/libsdl2 gles haptic
+media-libs/libvpx postproc svc
+media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
+media-libs/phonon-gstreamer -qt4
+media-libs/phonon -qt4
+media-libs/waffle gbm
+media-plugins/gst-plugins-meta lame vpx
+media-sound/pulseaudio gnome
+media-video/ffmpeg aacplus amr bluray chromium libv4l openssl postproc vpx
+net-analyzer/wireshark -qt4
+net-dns/avahi autoipd mdnsresponder-compat
+net-dns/dnsmasq script
+net-firewall/iptables conntrack netlink
+net-fs/cifs-utils -acl
+net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
+net-libs/gtk-vnc python
+net-libs/nodejs inspector
+net-misc/curl -adns
+net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
+net-misc/networkmanager resolvconf -dhclient
+net-misc/spice-gtk -gstreamer python usbredir
+net-print/cups-filters ipp_autosetup pclm
+net-vpn/openvpn down-root socks
+net-wireless/lorcon python
+sci-geosciences/gpsd python
+sci-libs/scipy sparse
+sys-apps/systemd xkb
+sys-auth/consolekit cgroups evdev
+sys-auth/consolekit pm-utils
+sys-auth/polkit-qt -qt4
+sys-boot/grub mount
+sys-devel/clang-runtime libcxx -sanitize
+sys-devel/gcc graphite pie pgo ssp
+sys-devel/llvm gold udis86
+sys-libs/glibc gd
+sys-libs/ldb python
+sys-libs/libcxx libcxxabi libunwind -libcxxrt
+sys-libs/libomp hwloc
+sys-libs/libunwind debug-frame libatomic
+sys-libs/ncurses tinfo
+sys-libs/ntdb python
+sys-libs/talloc python
+sys-libs/tdb python
+sys-libs/tevent python
+sys-libs/zlib minizip
+virtual/notification-daemon kde
+x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
+x11-base/xorg-server glamor xnest xvfb
+x11-libs/libdrm libkms
+x11-libs/libdrm video_cards_amdgpu
+x11-libs/wxGTK:3.0 webkit
+x11-libs/wxGTK webkit
+app-text/xmlto text
+dev-libs/libpcre2 pcre16
+x11-libs/libxcb xkb
+sys-libs/libunwind static-libs
+net-fs/cifs-utils -ads

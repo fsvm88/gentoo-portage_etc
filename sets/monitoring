@@ -1,0 +1,6 @@
+net-analyzer/iftop
+net-dns/bind-tools
+sys-apps/lm_sensors
+sys-apps/smartmontools
+sys-process/htop
+sys-process/iotop

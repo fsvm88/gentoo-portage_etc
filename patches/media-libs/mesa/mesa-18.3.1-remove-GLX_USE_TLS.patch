@@ -1,0 +1,11 @@
+diff -Nuar mesa-18.3.1.orig/meson.build mesa-18.3.1/meson.build
+--- mesa-18.3.1.orig/meson.build	2018-12-11 22:13:57.000000000 +0100
++++ mesa-18.3.1/meson.build	2018-12-29 12:53:43.400873243 +0100
+@@ -336,7 +336,6 @@
+   endif
+ endif
+ 
+-pre_args += '-DGLX_USE_TLS'
+ if with_glx != 'disabled'
+   if not (with_platform_x11 and with_any_opengl)
+     error('Cannot build GLX support without X11 platform support and at least one OpenGL API')

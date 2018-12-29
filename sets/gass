@@ -1,0 +1,8 @@
+app-emulation/docker
+dev-python/alembic
+dev-python/docker-py
+dev-python/flask
+dev-python/flask-sqlalchemy
+dev-python/psycopg
+dev-python/sqlalchemy
+dev-python/watchdog

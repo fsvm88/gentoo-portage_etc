@@ -1,0 +1,11 @@
+diff -Nuar ksysguard-5.14.4.orig/ksysguardd/Linux/lmsensors.c ksysguard-5.14.4/ksysguardd/Linux/lmsensors.c
+--- ksysguard-5.14.4.orig/ksysguardd/Linux/lmsensors.c	2018-11-27 17:09:52.000000000 +0100
++++ ksysguard-5.14.4/ksysguardd/Linux/lmsensors.c	2019-01-01 19:43:58.178406756 +0100
+@@ -20,6 +20,7 @@
+ 
+ #include "config-ksysguardd.h"
+ 
++#define _POSIX_SOURCE /* expose strdup(3) call */
+ #include <config-workspace.h>
+ #include <stdio.h>
+ #include <stdlib.h>

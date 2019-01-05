@@ -1,2 +1,2 @@
-dev-libs/elfutils::musl **
 <sys-libs/rpmatch-standalone-1.1
+dev-libs/elfutils::musl **

@@ -1,0 +1,12 @@
+diff -Nuar qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/third_party/webrtc/rtc_base/checks.cc qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/third_party/webrtc/rtc_base/checks.cc
+--- qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/third_party/webrtc/rtc_base/checks.cc	2019-01-05 11:32:30.336802292 +0100
++++ qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/third_party/webrtc/rtc_base/checks.cc	2019-01-05 11:34:48.905794627 +0100
+@@ -75,7 +75,7 @@
+ // to get usable symbols on Linux. This is copied from V8. Chromium has a more
+ // advanced stace trace system; also more difficult to copy.
+ void DumpBacktrace() {
+-#if defined(__GLIBCXX__) && !defined(__UCLIBC__)
++#if defined(__GLIBCXX__) && defined(__GLIBC__)
+   void* trace[100];
+   int size = backtrace(trace, sizeof(trace) / sizeof(*trace));
+   char** symbols = backtrace_symbols(trace, size);

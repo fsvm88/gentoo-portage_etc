@@ -1,0 +1,4 @@
+dev-libs/elfutils::musl **
+dev-libs/libexecinfo **
+net-misc/networkmanager::musl
+sys-freebsd/freebsd-mk-defs

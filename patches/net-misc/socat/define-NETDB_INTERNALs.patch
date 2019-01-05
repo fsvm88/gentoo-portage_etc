@@ -1,0 +1,18 @@
+diff -Nuar socat-1.7.3.2.orig/compat.h socat-1.7.3.2/compat.h
+--- socat-1.7.3.2.orig/compat.h	2017-01-06 21:58:40.000000000 +0100
++++ socat-1.7.3.2/compat.h	2019-01-02 11:45:13.011751256 +0100
+@@ -666,6 +666,14 @@
+ #  define NETDB_INTERNAL h_NETDB_INTERNAL
+ #endif
+ 
++#ifndef NETDB_INTERNAL
++#define NETDB_INTERNAL -1
++#endif
++
++#ifndef NETDB_SUCCESS
++#define NETDB_SUCCESS 0
++#endif
++
+ #ifndef INET_ADDRSTRLEN
+ #  define INET_ADDRSTRLEN sizeof(struct sockaddr_in)
+ #endif

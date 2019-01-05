@@ -2,6 +2,7 @@ app-emulation/virt-manager python_targets_python2_7
 app-text/asciidoc python_targets_python2_7
 dev-java/javatoolkit python_targets_python2_7
 dev-libs/libxml2 python_targets_python2_7
+dev-python/PySocks python_targets_python2_7
 dev-python/asn1crypto python_targets_python2_7
 dev-python/certifi python_targets_python2_7
 dev-python/cffi python_targets_python2_7
@@ -11,8 +12,8 @@ dev-python/enum34 python_targets_python2_7
 dev-python/extras python_targets_python2_7
 dev-python/fixtures python_targets_python2_7
 dev-python/idna python_targets_python2_7
-dev-python/ipaddress python_targets_python2_7
 dev-python/ipaddr python_targets_python2_7
+dev-python/ipaddress python_targets_python2_7
 dev-python/libvirt-python python_targets_python2_7
 dev-python/linecache2 python_targets_python2_7
 dev-python/lit python_targets_python2_7
@@ -25,8 +26,8 @@ dev-python/pycairo python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
 dev-python/pygobject python_targets_python2_7
 dev-python/pyopenssl python_targets_python2_7
+dev-python/pypax python_targets_python2_7
 dev-python/pyrsistent python_targets_python2_7
-dev-python/PySocks python_targets_python2_7
 dev-python/requests python_targets_python2_7
 dev-python/setuptools python_targets_python2_7
 dev-python/six python_targets_python2_7
@@ -45,8 +46,8 @@ net-fs/samba python_targets_python2_7
 net-libs/nodejs python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
 sci-geosciences/gpsd python_targets_python2_7
-sci-libs/scikits_optimization python_targets_python2_7
 sci-libs/scikits python_targets_python2_7
+sci-libs/scikits_optimization python_targets_python2_7
 sys-devel/clang python_targets_python2_7
 sys-libs/ldb python_targets_python2_7
 sys-libs/talloc python_targets_python2_7

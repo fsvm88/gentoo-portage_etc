@@ -1,0 +1,13 @@
+diff -Nuar qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/base/allocator/allocator_shim_internals.h qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/base/allocator/allocator_shim_internals.h
+--- qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/base/allocator/allocator_shim_internals.h	2018-11-19 19:55:45.000000000 +0100
++++ qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/base/allocator/allocator_shim_internals.h	2019-01-04 21:32:01.416111310 +0100
+@@ -7,7 +7,9 @@
+ 
+ #if defined(__GNUC__)
+ 
++#if defined(__GLIBC__)
+ #include <sys/cdefs.h>  // for __THROW
++#endif // __GLIBC__
+ 
+ #ifndef __THROW  // Not a glibc system
+ #ifdef _NOEXCEPT  // LLVM libc++ uses noexcept instead

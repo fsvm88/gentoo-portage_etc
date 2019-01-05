@@ -1,0 +1,12 @@
+diff -Nuar qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/content/child/content_child_helpers.cc qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/content/child/content_child_helpers.cc
+--- qtwebengine-everywhere-src-5.11.3.orig/src/3rdparty/chromium/content/child/content_child_helpers.cc	2018-11-19 19:55:45.000000000 +0100
++++ qtwebengine-everywhere-src-5.11.3/src/3rdparty/chromium/content/child/content_child_helpers.cc	2019-01-05 13:03:39.202499792 +0100
+@@ -25,7 +25,7 @@
+ // though, this provides only a partial and misleading value.
+ // Unfortunately some telemetry benchmark rely on it and these need to
+ // be refactored before getting rid of this. See crbug.com/581365 .
+-#if defined(OS_LINUX) || defined(OS_ANDROID)
++#if defined(__GLIBC__) || defined(OS_ANDROID)
+ size_t GetMemoryUsageKB() {
+   struct mallinfo minfo = mallinfo();
+   uint64_t mem_usage =

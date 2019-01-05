@@ -13,7 +13,7 @@
 <app-emulation/runc-1.1
 <app-emulation/vkd3d-2
 <app-eselect/eselect-ruby-20171231
-<app-misc/ddcutil-0.9
+<app-misc/ddcutil-1
 <app-portage/eix-0.34
 <app-text/tesseract-3.05.03
 <app-text/unpaper-6.2

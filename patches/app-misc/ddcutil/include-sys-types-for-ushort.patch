@@ -1,0 +1,13 @@
+diff -Nuar ddcutil-0.9.1.orig/src/util/edid.h ddcutil-0.9.1/src/util/edid.h
+--- ddcutil-0.9.1.orig/src/util/edid.h	2018-05-25 16:22:17.000000000 +0200
++++ ddcutil-0.9.1/src/util/edid.h	2019-01-05 22:02:19.375712062 +0100
+@@ -36,6 +36,9 @@
+ #include <stdint.h>
+ #include <stdio.h>
+ #include <stdlib.h>
++#ifndef ushort
++#include <sys/types.h>
++#endif
+ /** \endcond */
+ 
+ #include "coredefs.h"

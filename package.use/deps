@@ -23,7 +23,6 @@ dev-libs/libpcre2 pcre16
 dev-libs/libsecp256k1 asm endomorphism
 dev-libs/libxml2 python
 dev-libs/protobuf python
-dev-libs/weston wayland-compositor xwayland
 dev-libs/xmlsec nss
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib webkit x11extras xmlpatterns
 dev-python/ipython matplotlib nbconvert notebook

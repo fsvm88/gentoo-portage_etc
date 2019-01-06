@@ -1,3 +1,4 @@
+app-office/libreoffice::gentoo
 dev-libs/elfutils::gentoo
 net-dialup/ppp::gentoo
-net-misc/networkmanager::gento
+net-misc/networkmanager::gentoo

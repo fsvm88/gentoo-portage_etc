@@ -10,6 +10,7 @@
 <app-arch/pbzip2-1.1.20
 <app-emulation/docker-18.07
 <app-emulation/docker-proxy-0.9
+<app-emulation/lxc-3.2
 <app-emulation/runc-1.1
 <app-emulation/vkd3d-2
 <app-eselect/eselect-ruby-20171231
@@ -121,7 +122,9 @@
 <net-dns/libidn2-2.1
 <net-libs/NativeThread-0_pre20081231
 <net-libs/libpcap-1.9
+<net-libs/serf-1.4
 <net-libs/stem-1.7
+<net-misc/netkit-telnetd-0.18
 <net-misc/nyx-2.1
 <net-print/cups-2.3
 <net-print/hplip-3.19
@@ -164,6 +167,7 @@
 <virtual/cargo-1.32
 <virtual/pmake-2
 <virtual/rubygems-15
+<virtual/rust-1.32
 <www-client/chromium-70
 <x11-apps/igt-gpu-tools-1.30
 <x11-libs/cairo-1.17

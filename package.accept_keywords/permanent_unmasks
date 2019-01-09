@@ -22,7 +22,6 @@ media-libs/mesa
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
-net-libs/serf
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet

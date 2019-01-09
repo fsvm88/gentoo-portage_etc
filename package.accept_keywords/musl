@@ -1,4 +1,5 @@
 app-office/libreoffice::musl
+dev-java/icedtea::musl
 dev-libs/elfutils::musl **
 dev-libs/libexecinfo **
 net-misc/networkmanager::musl

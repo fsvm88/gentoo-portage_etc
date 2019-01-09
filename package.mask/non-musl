@@ -1,4 +1,5 @@
 app-office/libreoffice::gentoo
+dev-java/icedtea::gentoo
 dev-libs/elfutils::gentoo
 net-dialup/ppp::gentoo
 net-misc/networkmanager::gentoo

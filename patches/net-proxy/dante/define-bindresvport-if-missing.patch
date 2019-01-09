@@ -1,0 +1,13 @@
+diff -Nuar dante-1.4.2.orig/lib/Rbindresvport.c dante-1.4.2/lib/Rbindresvport.c
+--- dante-1.4.2.orig/lib/Rbindresvport.c	2013-10-27 16:24:42.000000000 +0100
++++ dante-1.4.2/lib/Rbindresvport.c	2019-01-08 14:02:27.536722956 +0100
+@@ -42,6 +42,9 @@
+  */
+ 
+ #include "common.h"
++#ifndef bindresvport
++extern int bindresvport (int __sockfd, struct sockaddr_in *__sock_in);
++#endif
+ 
+ static const char rcsid[] =
+ "$Id: Rbindresvport.c,v 1.47 2013/10/27 15:24:42 karls Exp $";

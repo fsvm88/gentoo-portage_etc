@@ -1,0 +1,14 @@
+diff -Nuar dante-1.4.2.orig/lib/Rconnect.c dante-1.4.2/lib/Rconnect.c
+--- dante-1.4.2.orig/lib/Rconnect.c	2017-01-31 09:17:38.000000000 +0100
++++ dante-1.4.2/lib/Rconnect.c	2019-01-08 13:43:04.037787313 +0100
+@@ -46,6 +46,10 @@
+ 
+ #include "upnp.h"
+ 
++#ifndef bindresvport
++#define bindresvport Rbindresvport
++#endif
++
+ static const char rcsid[] =
+ "$Id: Rconnect.c,v 1.242.6.3 2017/01/31 08:17:38 karls Exp $";
+ 

@@ -1,0 +1,22 @@
+diff -Nuar lxc-3.1.0.orig/src/include/prlimit.h lxc-3.1.0/src/include/prlimit.h
+--- lxc-3.1.0.orig/src/include/prlimit.h	2018-12-14 00:13:51.000000000 +0100
++++ lxc-3.1.0/src/include/prlimit.h	2019-01-07 16:55:06.838151002 +0100
+@@ -30,7 +30,6 @@
+ #define _PRLIMIT_H
+ 
+ #include <linux/resource.h>
+-#include <sys/cdefs.h>
+ #include <sys/types.h>
+ 
+ #define RLIM_SAVED_CUR RLIM_INFINITY
+diff -Nuar lxc-3.1.0.orig/src/lxc/compiler.h lxc-3.1.0/src/lxc/compiler.h
+--- lxc-3.1.0.orig/src/lxc/compiler.h	2018-12-14 00:13:51.000000000 +0100
++++ lxc-3.1.0/src/lxc/compiler.h	2019-01-07 16:54:40.698152448 +0100
+@@ -23,7 +23,6 @@
+ #ifndef _GNU_SOURCE
+ #define _GNU_SOURCE 1
+ #endif
+-#include <sys/cdefs.h>
+ 
+ #include "config.h"
+ 

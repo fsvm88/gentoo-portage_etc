@@ -39,6 +39,7 @@ dev-python/urllib3 python_targets_python2_7
 dev-util/gtk-doc python_targets_python2_7
 dev-util/itstool python_targets_python2_7
 dev-util/lldb python_targets_python2_7
+dev-util/scons python_targets_python2_7
 dev-util/systemtap python_targets_python2_7
 gnome-base/gconf python_targets_python2_7
 media-libs/avidemux-plugins python_targets_python2_7

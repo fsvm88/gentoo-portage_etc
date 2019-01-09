@@ -6,10 +6,10 @@ net-dns/bind-tools
 net-ftp/lftp
 net-ftp/ncftp
 net-misc/drive
-net-misc/netkit-telnetd
+#net-misc/netkit-telnetd
 net-misc/nyx
 net-misc/wakeonlan
-net-p2p/freenet
+#net-p2p/freenet
 net-proxy/torsocks
 net-vpn/tor
 net-wireless/iw

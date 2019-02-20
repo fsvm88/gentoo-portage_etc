@@ -1,3 +1,4 @@
+<virtual/libelf-4 **
 app-office/libreoffice::musl
 dev-java/icedtea::musl
 dev-libs/elfutils::musl **

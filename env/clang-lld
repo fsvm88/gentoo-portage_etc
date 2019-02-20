@@ -1,0 +1,7 @@
+CC="clang"
+CXX="clang++"
+CFLAGS="${CFLAGS} -fuse-ld=lld"
+CXXFLAGS="${CFLAGS}"
+AR="llvm-ar"
+NM="llvm-nm"
+RANLIB="llvm-ranlib"

@@ -1,0 +1,6 @@
+CC="clang-6.0"
+CXX="clang++-6.0"
+#CXXFLAGS="${CXXFLAGS} -fuse-ld=lld -D_GLIBCXX_USE_CXX11_ABI=0"
+AR="/usr/lib/llvm/6/bin/llvm-ar"
+NM="/usr/lib/llvm/6/bin/llvm-nm"
+RANLIB="/usr/lib/llvm/6/bin/llvm-ranlib"

@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -ggdb3 -fvar-tracking -fvar-tracking-assignments"
+CXXFLAGS="${CXXFLAGS} -ggdb3 -fvar-tracking -fvar-tracking-assignments"

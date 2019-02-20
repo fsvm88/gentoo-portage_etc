@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -rtlib=compiler-rt"
+CXXFLAGS="${CXXFLAGS} -rtlib=compiler-rt -stdlib=libc++"

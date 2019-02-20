@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -flto=thin -fwhole-program-vtables"
+CXXFLAGS="${CFLAGS}"

@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -Qunused-arguments"
+CXXFLAGS="${CXXFLAGS} -Qunused-arguments"

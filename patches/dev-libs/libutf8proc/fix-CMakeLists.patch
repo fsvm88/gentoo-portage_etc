@@ -1,0 +1,28 @@
+diff -Nuar libutf8proc-2.2.0-1.orig/CMakeLists.txt libutf8proc-2.2.0-1/CMakeLists.txt
+--- libutf8proc-2.2.0-1.orig/CMakeLists.txt	2018-08-23 19:19:20.000000000 +0200
++++ libutf8proc-2.2.0-1/CMakeLists.txt	2019-02-17 11:01:41.877871735 +0100
+@@ -17,10 +17,9 @@
+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -std=c99 -pedantic -Wall")
+ endif ()
+ 
+-add_library (utf8proc
+-  utf8proc.c
+-  utf8proc.h
+-)
++file(GLOB_RECURSE SRCFILES "src/*.c" "src/*.h")
++add_library(utf8proc ${SRCFILES})
++include_directories(include/libutf8proc/ src/)
+ 
+ if (BUILD_SHARED_LIBS)
+   # Building shared library
+@@ -45,7 +44,6 @@
+   LIBRARY DESTINATION lib
+   ARCHIVE DESTINATION lib)
+ 
+-install(
+-  FILES
+-    "${PROJECT_SOURCE_DIR}/utf8proc.h"
+-  DESTINATION include)
++install(DIRECTORY "include" DESTINATION include)
++configure_file(libutf8proc.pc.in libutf8proc.pc @ONLY)
++install(FILES "${CMAKE_BINARY_DIR}/libutf8proc.pc" DESTINATION "lib/pkgconfig")

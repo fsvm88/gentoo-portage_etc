@@ -1,0 +1,21 @@
+diff -Nuar autoconf-2.69.orig/lib/autoconf/c.m4 autoconf-2.69/lib/autoconf/c.m4
+--- autoconf-2.69.orig/lib/autoconf/c.m4	2012-01-21 14:46:39.000000000 +0100
++++ autoconf-2.69/lib/autoconf/c.m4	2019-02-17 22:35:24.203569475 +0100
+@@ -465,7 +465,7 @@
+   fi
+ fi
+ if test -z "$CC"; then
+-  AC_CHECK_PROG(CC, cc, cc, , , /usr/ucb/cc)
++  AC_CHECK_PROG(CC, cc, cc, clang, , , /usr/ucb/cc)
+ fi
+ if test -z "$CC"; then
+   AC_CHECK_TOOLS(CC, cl.exe)
+@@ -705,7 +705,7 @@
+   else
+     AC_CHECK_TOOLS(CXX,
+ 		   [m4_default([$1],
+-			       [g++ c++ gpp aCC CC cxx cc++ cl.exe FCC KCC RCC xlC_r xlC])],
++			       [g++ c++ clang++ gpp aCC CC cxx cc++ cl.exe FCC KCC RCC xlC_r xlC])],
+ 		   g++)
+   fi
+ fi

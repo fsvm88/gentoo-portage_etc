@@ -1,0 +1,12 @@
+diff -Nuar ddcutil-0.9.1.orig/src/i2c/i2c_bus_core.c ddcutil-0.9.1/src/i2c/i2c_bus_core.c
+--- ddcutil-0.9.1.orig/src/i2c/i2c_bus_core.c	2018-05-25 16:22:17.000000000 +0200
++++ ddcutil-0.9.1/src/i2c/i2c_bus_core.c	2019-02-18 23:10:01.978836810 +0100
+@@ -1144,7 +1144,7 @@
+       some_test_passed = true;
+    }
+    if (sel->edidbytes) {
+-      if ((!edid) || !memcmp(sel->edidbytes, edid->bytes, 128) != 0  ) {
++      if ((!edid) || (!memcmp(sel->edidbytes, edid->bytes, 128)) != 0  ) {
+          result = false;
+          goto bye;
+       }

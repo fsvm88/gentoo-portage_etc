@@ -1,0 +1,24 @@
+diff -Nuar libgcrypt-1.8.4.orig/random/jitterentropy-base.c libgcrypt-1.8.4/random/jitterentropy-base.c
+--- libgcrypt-1.8.4.orig/random/jitterentropy-base.c	2017-11-23 19:16:58.000000000 +0100
++++ libgcrypt-1.8.4/random/jitterentropy-base.c	2019-02-19 11:44:13.280097772 +0100
+@@ -51,12 +51,13 @@
+ 
+ #undef _FORTIFY_SOURCE
+ #pragma GCC optimize ("O0")
++#pragma clang optimize off
+ 
+ #include "jitterentropy.h"
+ 
+ #ifndef CONFIG_CRYPTO_CPU_JITTERENTROPY_STAT
+  /* only check optimization in a compilation for real work */
+- #ifdef __OPTIMIZE__
++ #if defined(__OPTIMIZE__) && defined(__GNUC__) && !defined(__clang__)
+   #error "The CPU Jitter random number generator must not be compiled with optimizations. See documentation. Use the compiler switch -O0 for compiling jitterentropy-base.c."
+  #endif
+ #endif
+@@ -787,3 +788,5 @@
+ 	return ((time2 - time));
+ }
+ #endif /* CONFIG_CRYPTO_CPU_JITTERENTROPY_STAT */
++#pragma clang optimize on
++

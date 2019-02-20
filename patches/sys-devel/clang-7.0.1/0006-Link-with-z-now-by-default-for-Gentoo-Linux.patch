@@ -1,0 +1,15 @@
+diff -Nuar cfe-7.0.1.src.orig/lib/Driver/ToolChains/Linux.cpp cfe-7.0.1.src/lib/Driver/ToolChains/Linux.cpp
+--- cfe-7.0.1.src.orig/lib/Driver/ToolChains/Linux.cpp	2019-01-09 20:14:32.075992062 +0100
++++ cfe-7.0.1.src/lib/Driver/ToolChains/Linux.cpp	2019-01-09 20:21:30.838968899 +0100
+@@ -228,6 +228,11 @@
+ 
+   Distro Distro(D.getVFS());
+ 
++  if (Distro.IsGentooLinux()) {
++    ExtraOpts.push_back("-z");
++    ExtraOpts.push_back("now");
++  }
++
+   if (Distro.IsAlpineLinux()) {
+     ExtraOpts.push_back("-z");
+     ExtraOpts.push_back("now");

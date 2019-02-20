@@ -1,0 +1,17 @@
+diff -Nuar pulseaudio-12.2.orig/Makefile.in pulseaudio-12.2/Makefile.in
+--- pulseaudio-12.2.orig/Makefile.in	2018-07-16 16:57:08.000000000 +0200
++++ pulseaudio-12.2/Makefile.in	2019-02-15 12:18:06.084086222 +0100
+@@ -237,12 +237,11 @@
+ 	$(top_srcdir)/build-aux/config.rpath \
+ 	$(top_srcdir)/build-aux/config.sub \
+ 	$(top_srcdir)/build-aux/install-sh \
+-	$(top_srcdir)/build-aux/ltmain.sh \
+ 	$(top_srcdir)/build-aux/missing \
+ 	$(top_srcdir)/src/pulse/version.h.in ABOUT-NLS NEWS README \
+ 	build-aux/compile build-aux/config.guess \
+ 	build-aux/config.rpath build-aux/config.sub \
+-	build-aux/install-sh build-aux/ltmain.sh build-aux/missing
++	build-aux/install-sh build-aux/missing
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ distdir = $(PACKAGE)-$(VERSION)
+ top_distdir = $(distdir)

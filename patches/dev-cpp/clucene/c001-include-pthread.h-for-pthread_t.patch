@@ -1,0 +1,11 @@
+diff -Nuar clucene-core-2.3.3.4.orig/src/shared/CLucene/LuceneThreads.h clucene-core-2.3.3.4/src/shared/CLucene/LuceneThreads.h
+--- clucene-core-2.3.3.4.orig/src/shared/CLucene/LuceneThreads.h	2011-03-17 01:21:07.000000000 +0100
++++ clucene-core-2.3.3.4/src/shared/CLucene/LuceneThreads.h	2019-02-19 07:29:09.910944249 +0100
+@@ -7,6 +7,7 @@
+ #ifndef _LuceneThreads_h
+ #define  _LuceneThreads_h
+ 
++#include <pthread.h>
+ 
+ CL_NS_DEF(util)
+ class CLuceneThreadIdCompare;

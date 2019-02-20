@@ -1,0 +1,26 @@
+diff -Nuar firefox-64.0.orig/build/moz.configure/rust.configure firefox-64.0/build/moz.configure/rust.configure
+--- firefox-64.0.orig/build/moz.configure/rust.configure	2019-01-09 13:40:33.508299585 +0100
++++ firefox-64.0/build/moz.configure/rust.configure	2019-01-09 14:09:43.694202777 +0100
+@@ -194,10 +194,12 @@
+         if rustc_target is None:
+             die("Don't know how to translate {} for rustc".format(
+                 host_or_target.alias))
++        
++        fixed_target = rustc_target.alias.replace('-unknown-', '-gentoo-').replace('-gnu-', '-musl-')
+ 
+         # Check to see whether our rustc has a reasonably functional stdlib
+         # for our chosen target.
+-        target_arg = '--target=' + rustc_target.alias
++        target_arg = '--target=' + fixed_target
+         in_fd, in_path = mkstemp(prefix='conftest', suffix='.rs')
+         out_fd, out_path = mkstemp(prefix='conftest', suffix='.rlib')
+         os.close(out_fd)
+@@ -234,7 +236,7 @@
+             os.remove(out_path)
+ 
+         # This target is usable.
+-        return rustc_target.alias
++        return fixed_target
+ 
+     return rust_target
+ 

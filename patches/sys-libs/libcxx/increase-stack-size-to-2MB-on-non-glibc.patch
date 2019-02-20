@@ -1,0 +1,28 @@
+diff -Nuar libcxx-7.0.1.src.orig/include/__threading_support libcxx-7.0.1.src/include/__threading_support
+--- libcxx-7.0.1.src.orig/include/__threading_support	2018-02-21 22:36:18.000000000 +0100
++++ libcxx-7.0.1.src/include/__threading_support	2019-01-16 10:03:35.641496836 +0100
+@@ -325,7 +325,21 @@
+ int __libcpp_thread_create(__libcpp_thread_t *__t, void *(*__func)(void *),
+                            void *__arg)
+ {
+-  return pthread_create(__t, 0, __func, __arg);
++  size_t stack_size = 0;
++  pthread_attr_t* attr = NULL;
++  pthread_attr_t attr_storage;
++
++#if defined(__linux__) && !defined(__GLIBC__)
++  stack_size = 2 << 20;
++#endif
++
++  if (stack_size > 0) {
++    attr = &attr_storage;
++    if (pthread_attr_init(attr)) abort();
++    if (pthread_attr_setstacksize(attr, stack_size)) abort();
++  }
++
++  return pthread_create(__t, attr, __func, __arg);
+ }
+ 
+ __libcpp_thread_id __libcpp_thread_get_current_id()
+diff: libcxx-7.0.1.src.orig/test/std/input.output/filesystems/Inputs/static_test_env/bad_symlink: No such file or directory
+diff: libcxx-7.0.1.src/test/std/input.output/filesystems/Inputs/static_test_env/bad_symlink: No such file or directory

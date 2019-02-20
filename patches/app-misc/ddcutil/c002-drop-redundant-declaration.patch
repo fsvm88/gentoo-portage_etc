@@ -1,0 +1,11 @@
+diff -Nuar ddcutil-0.9.1.orig/src/vcp/vcp_feature_codes.c ddcutil-0.9.1/src/vcp/vcp_feature_codes.c
+--- ddcutil-0.9.1.orig/src/vcp/vcp_feature_codes.c	2018-05-25 16:22:17.000000000 +0200
++++ ddcutil-0.9.1/src/vcp/vcp_feature_codes.c	2019-02-18 23:07:15.459846020 +0100
+@@ -3787,7 +3787,6 @@
+       .v20_flags= DDCA_RW | DDCA_SIMPLE_NC,
+       .v20_name="Window control on/off",
+       .v30_flags = DDCA_DEPRECATED,
+-      .v30_flags = DDCA_DEPRECATED,
+    },
+    {  .code=0x9a,
+       .vcp_spec_groups = VCP_SPEC_IMAGE | VCP_SPEC_WINDOW,   // 2.0: WINDOW, 3.0, 2.2: IMAGE

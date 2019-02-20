@@ -1,0 +1,14 @@
+=dev-libs/libffi-3.3_rc0
+=sys-devel/clang-common-6.0.1
+=sys-devel/lld-6.0.1
+=sys-devel/llvm-common-6.0.1
+=sys-devel/llvmgold-6
+=sys-libs/libcxx-6.0.1
+=sys-libs/libcxxabi-6.0.1
+=sys-libs/libomp-6.0.1-r1
+=sys-libs/llvm-libunwind-6.0.1
+sys-apps/hwloc
+sys-devel/clang-runtime:6.0.1
+sys-devel/clang:6
+sys-devel/llvm:6
+sys-libs/compiler-rt:6.0.1

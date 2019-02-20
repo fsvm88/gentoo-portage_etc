@@ -46,6 +46,7 @@ media-libs/avidemux-plugins python_targets_python2_7
 net-fs/samba python_targets_python2_7
 net-libs/nodejs python_targets_python2_7
 net-wireless/aircrack-ng python_targets_python2_7
+net-wireless/lorcon python_targets_python2_7
 sci-geosciences/gpsd python_targets_python2_7
 sci-libs/scikits python_targets_python2_7
 sci-libs/scikits_optimization python_targets_python2_7

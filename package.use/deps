@@ -25,9 +25,6 @@ dev-libs/libxml2 python
 dev-libs/protobuf python
 dev-libs/xmlsec nss
 dev-python/PyQt5 designer location gui multimedia network positioning printsupport sensors serialport sql testlib x11extras xmlpatterns
-dev-python/ipython matplotlib nbconvert notebook
-dev-python/matplotlib tk
-dev-python/numpy lapack
 dev-qt/designer -phonon
 dev-qt/qtgui accessibility eglfs evdev libinput
 dev-qt/qtmultimedia widgets
@@ -51,13 +48,13 @@ media-libs/libpng apng
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
-media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
+media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa -opencl
 media-libs/phonon -qt4
 media-libs/phonon-gstreamer -qt4
 media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome
-media-video/ffmpeg aacplus amr bluray chromium libv4l openssl postproc vpx
+media-video/ffmpeg aacplus amr bluray chromium libv4l openssl postproc vpx -video_cards_nvidia
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script
@@ -82,7 +79,7 @@ sys-auth/consolekit pm-utils
 sys-auth/polkit-qt -qt4
 sys-boot/grub mount
 sys-devel/clang-runtime libcxx -sanitize
-sys-devel/gcc graphite pie pgo ssp
+sys-devel/gcc fortran graphite pie pgo ssp
 sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/ldb python

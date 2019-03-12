@@ -1,0 +1,12 @@
+diff -Nuar duperemove-0.11.1.orig/Makefile duperemove-0.11.1/Makefile
+--- duperemove-0.11.1.orig/Makefile	2018-11-30 21:48:06.000000000 +0100
++++ duperemove-0.11.1/Makefile	2019-03-04 16:36:23.605855122 +0100
+@@ -52,7 +52,7 @@
+ endif
+ override CFLAGS += -D_FILE_OFFSET_BITS=64 -DVERSTRING=\"$(RELEASE)\" \
+ 	$(hash_CFLAGS) $(glib_CFLAGS) $(sqlite_CFLAGS) -rdynamic $(DEBUG_FLAGS)
+-LIBRARY_FLAGS += -Wl,--as-needed -latomic -lm
++LIBRARY_FLAGS += -Wl,--as-needed -latomic_ops -lm
+ LIBRARY_FLAGS += $(hash_LIBS) $(glib_LIBS) $(sqlite_LIBS)
+ 
+ # make C=1 to enable sparse

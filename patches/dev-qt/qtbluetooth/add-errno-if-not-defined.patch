@@ -1,0 +1,13 @@
+diff -Nuar qtconnectivity-everywhere-src-5.12.1.orig/src/bluetooth/bluez/bluetoothmanagement.cpp qtconnectivity-everywhere-src-5.12.1/src/bluetooth/bluez/bluetoothmanagement.cpp
+--- qtconnectivity-everywhere-src-5.12.1.orig/src/bluetooth/bluez/bluetoothmanagement.cpp	2019-01-17 10:56:51.000000000 +0100
++++ qtconnectivity-everywhere-src-5.12.1/src/bluetooth/bluez/bluetoothmanagement.cpp	2019-03-10 21:05:59.686811056 +0100
+@@ -50,6 +50,9 @@
+ #include <sys/syscall.h>
+ #include <sys/types.h>
+ #include <linux/capability.h>
++#ifndef errno
++#include <errno.h>
++#endif
+ 
+ 
+ QT_BEGIN_NAMESPACE

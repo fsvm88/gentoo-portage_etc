@@ -1,0 +1,17 @@
+diff -Nuar qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-lsb-g++/qplatformdefs.h qtbase-everywhere-src-5.12.1/mkspecs/linux-lsb-g++/qplatformdefs.h
+--- qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-lsb-g++/qplatformdefs.h	2019-01-28 18:11:52.000000000 +0100
++++ qtbase-everywhere-src-5.12.1/mkspecs/linux-lsb-g++/qplatformdefs.h	2019-03-10 20:54:57.398847689 +0100
+@@ -89,10 +89,10 @@
+ 
+ #define QT_OPEN_LARGEFILE       0
+ 
+-#if defined(__GLIBC__) && (__GLIBC__ >= 2)
+-#define QT_SOCKLEN_T            socklen_t
+-#else
++#if defined(__GLIBC__) && (__GLIBC__ < 2)
+ #define QT_SOCKLEN_T            int
++#else
++#define QT_SOCKLEN_T            socklen_t
+ #endif
+ 
+ #ifndef SIOCGIFBRDADDR

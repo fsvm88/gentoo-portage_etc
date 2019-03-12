@@ -1,0 +1,34 @@
+diff -Nuar qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-clang/qplatformdefs.h qtbase-everywhere-src-5.12.1/mkspecs/linux-clang/qplatformdefs.h
+--- qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-clang/qplatformdefs.h	2019-01-28 18:11:52.000000000 +0100
++++ qtbase-everywhere-src-5.12.1/mkspecs/linux-clang/qplatformdefs.h	2019-03-10 16:59:43.134628393 +0100
+@@ -81,10 +81,10 @@
+ 
+ #undef QT_SOCKLEN_T
+ 
+-#if defined(__GLIBC__) && (__GLIBC__ >= 2)
+-#define QT_SOCKLEN_T            socklen_t
+-#else
++#if defined(__GLIBC__) && (__GLIBC__ < 2)
+ #define QT_SOCKLEN_T            int
++#else
++#define QT_SOCKLEN_T            socklen_t
+ #endif
+ 
+ #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE >= 500)
+diff -Nuar qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-llvm/qplatformdefs.h qtbase-everywhere-src-5.12.1/mkspecs/linux-llvm/qplatformdefs.h
+--- qtbase-everywhere-src-5.12.1.orig/mkspecs/linux-llvm/qplatformdefs.h	2019-01-28 18:11:52.000000000 +0100
++++ qtbase-everywhere-src-5.12.1/mkspecs/linux-llvm/qplatformdefs.h	2019-03-10 17:00:14.350626666 +0100
+@@ -82,10 +82,10 @@
+ 
+ #undef QT_SOCKLEN_T
+ 
+-#if defined(__GLIBC__) && (__GLIBC__ >= 2)
+-#define QT_SOCKLEN_T            socklen_t
+-#else
++#if defined(__GLIBC__) && (__GLIBC__ < 2)
+ #define QT_SOCKLEN_T            int
++#else
++#define QT_SOCKLEN_T            socklen_t
+ #endif
+ 
+ #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE >= 500)

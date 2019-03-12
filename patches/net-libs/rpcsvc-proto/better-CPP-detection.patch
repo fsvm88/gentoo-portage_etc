@@ -1,0 +1,24 @@
+diff -Nuar rpcsvc-proto-1.3.1.orig/rpcgen/rpc_main.c rpcsvc-proto-1.3.1/rpcgen/rpc_main.c
+--- rpcsvc-proto-1.3.1.orig/rpcgen/rpc_main.c	2019-03-06 18:48:39.660808236 +0100
++++ rpcsvc-proto-1.3.1/rpcgen/rpc_main.c	2019-03-06 18:49:00.007807111 +0100
+@@ -83,7 +83,7 @@
+ 
+ static const char *svcclosetime = "120";
+ static int cppDefined;	/* explicit path for C preprocessor */
+-static const char *CPP = "/lib/cpp";
++static const char *CPP = "/usr/bin/cpp";
+ static const char CPPFLAGS[] = "-C";
+ static char *pathbuf;
+ static int cpp_pid;
+@@ -336,6 +336,11 @@
+   if (stat64 (CPP, &buf) == 0)
+     return;
+ 
++  const char* s = getenv("CPP");
++  if (s != NULL) { CPP = s; return; }
++  if (stat64 ("/usr/bin/cpp", &buf) == 0) { CPP = "/usr/bin/cpp"; return; }
++  if (stat64 ("/usr/bin/clang-cpp", &buf) == 0) { CPP = "/usr/bin/clang-cpp"; return; }
++
+   if (cppDefined) /* user specified cpp but it does not exist */
+     {
+       fprintf (stderr, _ ("cannot find C preprocessor: %s\n"), CPP);

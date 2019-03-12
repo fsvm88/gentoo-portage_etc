@@ -1,0 +1,12 @@
+diff -Nuar efibootmgr-16.orig/src/Makefile efibootmgr-16/src/Makefile
+--- efibootmgr-16.orig/src/Makefile	2018-04-09 22:38:51.000000000 +0200
++++ efibootmgr-16/src/Makefile	2019-03-04 16:00:24.971974522 +0100
+@@ -5,7 +5,7 @@
+ include $(TOPDIR)/Make.rules
+ include $(TOPDIR)/Make.defaults
+ 
+-SUBDIR_CFLAGS = -I$(SRCDIR)/include
++SUBDIR_CFLAGS = -I$(SRCDIR)/include -I/usr/include/efivar
+ 
+ BINTARGETS=efibootmgr efibootdump
+ TARGETS=$(BINTARGETS)

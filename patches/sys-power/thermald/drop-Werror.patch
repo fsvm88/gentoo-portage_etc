@@ -1,0 +1,13 @@
+diff -Nuar thermal_daemon-1.8.orig/Makefile.am thermal_daemon-1.8/Makefile.am
+--- thermal_daemon-1.8.orig/Makefile.am	2018-09-12 22:58:08.000000000 +0200
++++ thermal_daemon-1.8/Makefile.am	2019-03-09 21:04:02.937887319 +0100
+@@ -22,8 +22,7 @@
+ 		-Wignored-qualifiers\
+ 		-Wmissing-field-initializers\
+ 		-Wtype-limits\
+-		-Wuninitialized\
+-		-Werror
++		-Wuninitialized
+ 
+ EXTRA_DIST=Makefile.glib \
+ 	thermald.pc.in

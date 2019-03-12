@@ -1,0 +1,28 @@
+diff -Nuar gentoo-headers-base-4.20.orig/Makefile gentoo-headers-base-4.20/Makefile
+--- gentoo-headers-base-4.20.orig/Makefile	2018-12-24 11:21:26.000000000 +0100
++++ gentoo-headers-base-4.20/Makefile	2019-03-04 14:08:07.256347206 +0100
+@@ -364,8 +364,6 @@
+ HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
+ HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
+ 
+-HOSTCC       = gcc
+-HOSTCXX      = g++
+ KBUILD_HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
+ 		-fomit-frame-pointer -std=gnu89 $(HOST_LFS_CFLAGS) \
+ 		$(HOSTCFLAGS)
+@@ -374,15 +372,6 @@
+ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
+ 
+ # Make variables (CC, etc...)
+-AS		= $(CROSS_COMPILE)as
+-LD		= $(CROSS_COMPILE)ld
+-CC		= $(CROSS_COMPILE)gcc
+-CPP		= $(CC) -E
+-AR		= $(CROSS_COMPILE)ar
+-NM		= $(CROSS_COMPILE)nm
+-STRIP		= $(CROSS_COMPILE)strip
+-OBJCOPY		= $(CROSS_COMPILE)objcopy
+-OBJDUMP		= $(CROSS_COMPILE)objdump
+ LEX		= flex
+ YACC		= bison
+ AWK		= awk

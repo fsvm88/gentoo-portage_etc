@@ -1,0 +1,9 @@
+diff -Nuar mozjs-52.9.1pre1.orig/config/gcc_hidden.h mozjs-52.9.1pre1/config/gcc_hidden.h
+--- mozjs-52.9.1pre1.orig/config/gcc_hidden.h	2018-05-08 20:51:25.000000000 +0200
++++ mozjs-52.9.1pre1/config/gcc_hidden.h	2019-03-04 18:47:25.552831762 +0100
+@@ -3,4 +3,4 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ /* Begin all files as hidden visibility */
+-#pragma GCC visibility push(hidden)
++#pragma GCC visibility push(default)

@@ -1,0 +1,12 @@
+diff -Nuar samba-4.9.4.orig/source3/wscript_build samba-4.9.4/source3/wscript_build
+--- samba-4.9.4.orig/source3/wscript_build	2018-11-08 08:58:08.000000000 +0100
++++ samba-4.9.4/source3/wscript_build	2019-03-12 00:22:21.693562085 +0100
+@@ -135,7 +135,7 @@
+                      '!get_attr_list']
+ private_pdb_match.append('!pdb_nds_*')
+ private_pdb_match.append('!pdb_ldapsam_init*')
+-private_pdb_match.append('!pdb_*_init')
++#private_pdb_match.append('!pdb_*_init')
+ private_pdb_match = private_pdb_match + ldapsam_pdb_match
+ 
+ bld.SAMBA3_LIBRARY('samba-passdb',

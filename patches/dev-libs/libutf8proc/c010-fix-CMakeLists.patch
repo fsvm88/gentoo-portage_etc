@@ -23,6 +23,6 @@ diff -Nuar libutf8proc-2.2.0-1.orig/CMakeLists.txt libutf8proc-2.2.0-1/CMakeList
 -  FILES
 -    "${PROJECT_SOURCE_DIR}/utf8proc.h"
 -  DESTINATION include)
-+install(DIRECTORY "include" DESTINATION include)
++install(DIRECTORY "include/libutf8proc" DESTINATION include)
 +configure_file(libutf8proc.pc.in libutf8proc.pc @ONLY)
 +install(FILES "${CMAKE_BINARY_DIR}/libutf8proc.pc" DESTINATION "lib/pkgconfig")

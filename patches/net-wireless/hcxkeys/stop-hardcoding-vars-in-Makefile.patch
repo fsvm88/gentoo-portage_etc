@@ -1,0 +1,13 @@
+diff -Nuar hcxkeys-451c639d5fc099acb3eb86f647450650452cba2e.orig/Makefile hcxkeys-451c639d5fc099acb3eb86f647450650452cba2e/Makefile
+--- hcxkeys-451c639d5fc099acb3eb86f647450650452cba2e.orig/Makefile	2018-08-08 13:42:47.000000000 +0200
++++ hcxkeys-451c639d5fc099acb3eb86f647450650452cba2e/Makefile	2019-03-04 14:04:10.660360293 +0100
+@@ -1,9 +1,4 @@
+-PREFIX		?=/usr/local
+-INSTALLDIR	= $(DESTDIR)$(PREFIX)/bin
+-
+ HOSTOS := $(shell uname -s)
+-CC	= gcc
+-CFLAGS	?= -O3 -Wall -Wextra
+ CFLAGS	+= -std=gnu99
+ INSTFLAGS = -m 0755
+ 

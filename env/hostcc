@@ -1,0 +1,2 @@
+HOSTCC="${CC}"
+HOSTCXX="${CXX}"

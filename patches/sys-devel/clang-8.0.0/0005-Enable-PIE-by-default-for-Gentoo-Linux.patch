@@ -1,0 +1,36 @@
+diff -Nuar cfe-7.0.1.src.orig/lib/Driver/ToolChains/Gnu.cpp cfe-7.0.1.src/lib/Driver/ToolChains/Gnu.cpp
+--- cfe-7.0.1.src.orig/lib/Driver/ToolChains/Gnu.cpp	2019-01-09 20:18:36.783978527 +0100
++++ cfe-7.0.1.src/lib/Driver/ToolChains/Gnu.cpp	2019-01-09 20:18:19.663979474 +0100
+@@ -334,7 +334,9 @@
+   if (!D.SysRoot.empty())
+     CmdArgs.push_back(Args.MakeArgString("--sysroot=" + D.SysRoot));
+ 
+-  if (IsPIE)
++  if (Args.hasArg(options::OPT_nopie))
++    CmdArgs.push_back("-nopie");
++  else if (IsPIE)
+     CmdArgs.push_back("-pie");
+ 
+   if (Args.hasArg(options::OPT_rdynamic))
+diff -Nuar cfe-7.0.1.src.orig/test/Driver/pic.c cfe-7.0.1.src/test/Driver/pic.c
+--- cfe-7.0.1.src.orig/test/Driver/pic.c	2018-04-16 12:21:24.000000000 +0200
++++ cfe-7.0.1.src/test/Driver/pic.c	2019-01-09 20:20:05.454973622 +0100
+@@ -267,6 +267,18 @@
+ // RUN: %clang %s -target i386-pc-openbsd -no-pie -### 2>&1 \
+ // RUN:   | FileCheck %s --check-prefix=CHECK-NOPIE-LD
+ //
++// On Gentoo Linux, we want similar PIE-by-default behavior
++// RUN: %clang -c %s -target x86_64-gentoo-linux-musl -### 2>&1 \
++// RUN:   | FileCheck %s --check-prefix=CHECK-PIE2
++// RUN: %clang -c %s -target i686-gentoo-linux-musl -### 2>&1 \
++// RUN:   | FileCheck %s --check-prefix=CHECK-PIE2
++// RUN: %clang -c %s -target armv6-gentoo-linux-musleabihf -### 2>&1 \
++// RUN:   | FileCheck %s --check-prefix=CHECK-PIE2
++// RUN: %clang -c %s -target armv7-gentoo-linux-musleabihf -### 2>&1 \
++// RUN:   | FileCheck %s --check-prefix=CHECK-PIE2
++// RUN: %clang %s -target x86_64-gentoo-linux-musl -nopie -### 2>&1 \
++// RUN:   | FileCheck %s --check-prefix=CHECK-NOPIE-LD
++//
+ // On Android PIC is enabled by default, and PIE is enabled by default starting
+ // with API16.
+ // RUN: %clang -c %s -target i686-linux-android -### 2>&1 \

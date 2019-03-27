@@ -1,0 +1,12 @@
+diff -Nuar cfe-7.0.1.src.orig/include/clang/Driver/ToolChain.h cfe-7.0.1.src/include/clang/Driver/ToolChain.h
+--- cfe-7.0.1.src.orig/include/clang/Driver/ToolChain.h	2018-07-27 21:45:14.000000000 +0200
++++ cfe-7.0.1.src/include/clang/Driver/ToolChain.h	2019-02-17 15:22:20.805006697 +0100
+@@ -341,7 +341,7 @@
+   }
+ 
+   /// GetDefaultLinker - Get the default linker to use.
+-  virtual const char *getDefaultLinker() const { return "ld"; }
++  virtual const char *getDefaultLinker() const { return "ld.lld"; }
+ 
+   /// GetDefaultRuntimeLibType - Get the default runtime library variant to use.
+   virtual RuntimeLibType GetDefaultRuntimeLibType() const {

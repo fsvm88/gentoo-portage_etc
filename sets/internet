@@ -1,7 +1,7 @@
 #net-misc/netkit-telnetd
 #net-p2p/freenet
 #www-plugins/adobe-flash
-media-sound/teamspeak-client
+#media-sound/teamspeak-client
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/wireshark

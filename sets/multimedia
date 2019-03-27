@@ -1,4 +1,4 @@
 media-libs/vulkan-loader
-media-sound/teamspeak-client
+#media-sound/teamspeak-client
 media-video/avidemux
 media-video/smplayer

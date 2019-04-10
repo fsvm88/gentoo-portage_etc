@@ -1,0 +1,20 @@
+diff -Nuar elfutils-0.176.orig/backends/aarch64_initreg.c elfutils-0.176/backends/aarch64_initreg.c
+--- elfutils-0.176.orig/backends/aarch64_initreg.c	2019-02-15 16:46:47.000000000 +0100
++++ elfutils-0.176/backends/aarch64_initreg.c	2019-03-09 16:36:22.866775651 +0100
+@@ -33,7 +33,6 @@
+ #include "system.h"
+ #include <assert.h>
+ #if defined(__aarch64__) && defined(__linux__)
+-# include <linux/uio.h>
+ # include <sys/user.h>
+ # include <sys/ptrace.h>
+ /* Deal with old glibc defining user_pt_regs instead of user_regs_struct.  */
+@@ -82,7 +81,7 @@
+ 
+   Dwarf_Word dwarf_fregs[32];
+   for (int r = 0; r < 32; r++)
+-    dwarf_fregs[r] = fregs.vregs[r] & 0xFFFFFFFF;
++    dwarf_fregs[r] = (Dwarf_Word)fregs.vregs[r];
+ 
+   if (! setfunc (64, 32, dwarf_fregs, arg))
+     return false;

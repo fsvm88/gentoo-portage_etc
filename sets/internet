@@ -1,14 +1,13 @@
+#media-sound/teamspeak-client
 #net-misc/netkit-telnetd
 #net-p2p/freenet
 #www-plugins/adobe-flash
-#media-sound/teamspeak-client
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/wireshark
 net-dns/bind-tools
 net-ftp/lftp
 net-ftp/ncftp
-net-misc/drive
 net-misc/nyx
 net-misc/wakeonlan
 net-proxy/torsocks

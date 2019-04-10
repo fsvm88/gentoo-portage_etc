@@ -1,1 +1,2 @@
 app-crypt/hashcat -video_cards_nvidia
+net-misc/networkmanager -bluetooth

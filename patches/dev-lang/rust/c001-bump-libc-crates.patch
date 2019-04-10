@@ -1,0 +1,34 @@
+diff -Nuar rustc-1.33.0-src.orig/src/librustc_codegen_ssa/Cargo.toml rustc-1.33.0-src/src/librustc_codegen_ssa/Cargo.toml
+--- rustc-1.33.0-src.orig/src/librustc_codegen_ssa/Cargo.toml	2019-02-28 09:53:34.000000000 +0100
++++ rustc-1.33.0-src/src/librustc_codegen_ssa/Cargo.toml	2019-04-05 23:46:12.926148403 +0200
+@@ -16,7 +16,7 @@
+ rustc-demangle = "0.1.4"
+ memmap = "0.6"
+ log = "0.4.5"
+-libc = "0.2.44"
++libc = "0.2"
+ jobserver = "0.1.11"
+ 
+ serialize = { path = "../libserialize" }
+diff -Nuar rustc-1.33.0-src.orig/src/libstd/Cargo.toml rustc-1.33.0-src/src/libstd/Cargo.toml
+--- rustc-1.33.0-src.orig/src/libstd/Cargo.toml	2019-02-28 09:53:34.000000000 +0100
++++ rustc-1.33.0-src/src/libstd/Cargo.toml	2019-04-05 23:45:53.166149496 +0200
+@@ -17,7 +17,7 @@
+ panic_unwind = { path = "../libpanic_unwind", optional = true }
+ panic_abort = { path = "../libpanic_abort" }
+ core = { path = "../libcore" }
+-libc = { version = "0.2.44", default-features = false, features = ['rustc-dep-of-std'] }
++libc = { version = "0.2", default-features = false, features = ['rustc-dep-of-std'] }
+ compiler_builtins = { version = "0.1.1" }
+ profiler_builtins = { path = "../libprofiler_builtins", optional = true }
+ unwind = { path = "../libunwind" }
+diff -Nuar rustc-1.33.0-src.orig/src/libunwind/Cargo.toml rustc-1.33.0-src/src/libunwind/Cargo.toml
+--- rustc-1.33.0-src.orig/src/libunwind/Cargo.toml	2019-02-28 09:53:34.000000000 +0100
++++ rustc-1.33.0-src/src/libunwind/Cargo.toml	2019-04-05 23:46:44.679146647 +0200
+@@ -13,5 +13,5 @@
+ 
+ [dependencies]
+ core = { path = "../libcore" }
+-libc = { version = "0.2.43", features = ['rustc-dep-of-std'], default-features = false }
++libc = { version = "0.2", features = ['rustc-dep-of-std'], default-features = false }
+ compiler_builtins = "0.1.0"

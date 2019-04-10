@@ -1,0 +1,13 @@
+--- rustc-1.33.0-src.orig/src/libstd/sys/unix/backtrace/tracing/mod.rs	2019-02-28 09:53:34.000000000 +0100
++++ rustc-1.33.0-src/src/libstd/sys/unix/backtrace/tracing/mod.rs	2019-04-06 00:17:35.006044299 +0200
+@@ -1,8 +1,8 @@
+ pub use self::imp::*;
+ 
+-#[cfg(not(all(target_os = "ios", target_arch = "arm")))]
++#[cfg(not(any(target_os = "linux", all(target_os = "ios", target_arch = "arm"))))]
+ #[path = "gcc_s.rs"]
+ mod imp;
+-#[cfg(all(target_os = "ios", target_arch = "arm"))]
++#[cfg(any(target_os = "linux", all(target_os = "ios", target_arch = "arm")))]
+ #[path = "backtrace_fn.rs"]
+ mod imp;

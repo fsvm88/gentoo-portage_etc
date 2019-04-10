@@ -1,0 +1,11 @@
+diff -Nuar rustc-1.33.0-src.orig/src/libunwind/build.rs rustc-1.33.0-src/src/libunwind/build.rs
+--- rustc-1.33.0-src.orig/src/libunwind/build.rs	2019-04-10 18:21:41.977346135 +0000
++++ rustc-1.33.0-src/src/libunwind/build.rs	2019-04-10 18:22:38.167673079 +0000
+@@ -5,6 +5,7 @@
+     let target = env::var("TARGET").expect("TARGET was not set");
+ 
+     if target.contains("linux") {
++        println!("cargo:rustc-link-lib=static-nobundle=execinfo");
+         println!("cargo:rustc-link-lib=static-nobundle=unwind");
+     } else if target.contains("freebsd") {
+         println!("cargo:rustc-link-lib=gcc_s");

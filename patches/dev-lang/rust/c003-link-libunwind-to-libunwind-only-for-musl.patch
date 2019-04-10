@@ -1,0 +1,11 @@
+diff -Nuar rustc-1.33.0-src.orig/src/libunwind/lib.rs rustc-1.33.0-src/src/libunwind/lib.rs
+--- rustc-1.33.0-src.orig/src/libunwind/lib.rs	2019-02-28 09:53:34.000000000 +0100
++++ rustc-1.33.0-src/src/libunwind/lib.rs	2019-04-06 11:27:46.666785403 +0200
+@@ -26,6 +26,5 @@
+ }
+ 
+ #[cfg(target_env = "musl")]
+-#[link(name = "unwind", kind = "static", cfg(target_feature = "crt-static"))]
+-#[link(name = "gcc_s", cfg(not(target_feature = "crt-static")))]
++#[link(name = "unwind", kind = "static-nobundle")]
+ extern {}

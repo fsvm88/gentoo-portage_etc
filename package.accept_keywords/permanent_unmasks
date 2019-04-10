@@ -13,12 +13,13 @@ dev-python/m2r
 dev-python/twisted
 dev-python/werkzeug
 dev-util/intel-ocl-sdk
+dev-util/patchelf
 dev-util/pycharm-community
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
-media-libs/mesa
+media-libs/mesa::musl
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
@@ -41,4 +42,3 @@ virtual/wine
 www-client/firefox
 x11-apps/piglit **
 x11-drivers/nvidia-drivers
-dev-util/patchelf

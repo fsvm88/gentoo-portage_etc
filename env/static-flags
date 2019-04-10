@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -static"
+CXXFLAGS="${CXXFLAGS} -static"

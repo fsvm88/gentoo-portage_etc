@@ -1,0 +1,13 @@
+CHOST="x86_64-gentoo-linux-musl"
+
+CC="clang"
+CPP="clang-cpp"
+CXX="clang++"
+AR="llvm-ar"
+NM="llvm-nm"
+RANLIB="llvm-ranlib"
+
+CFLAGS="-O3 -march=native -pipe -glldb -fuse-ld=bfd"
+CXXFLAGS="${CFLAGS}"
+LDFLAGS="-Wl,-O1,-z,now,--as-needed"
+LD="ld.bfd"

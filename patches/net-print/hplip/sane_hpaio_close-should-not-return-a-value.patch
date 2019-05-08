@@ -1,0 +1,16 @@
+diff -Nuar hplip-3.19.3.orig/scan/sane/hpaio.c hplip-3.19.3/scan/sane/hpaio.c
+--- hplip-3.19.3.orig/scan/sane/hpaio.c	2019-04-14 16:52:38.506717039 +0200
++++ hplip-3.19.3/scan/sane/hpaio.c	2019-04-14 16:53:56.017712752 +0200
+@@ -421,8 +421,10 @@
+        return sclpml_close(handle);
+     if (strcmp(*((char **)handle), "ESCL") == 0)
+        return escl_close(handle);
+-    if (strcmp(*((char **)handle), "ORBLITE") == 0)
+-       return orblite_close(handle);
++    if (strcmp(*((char **)handle), "ORBLITE") == 0) {
++       orblite_close(handle);
++       return;
++    }
+ }  /* sane_hpaio_close() */
+ 
+ extern const SANE_Option_Descriptor * sane_hpaio_get_option_descriptor(SANE_Handle handle, SANE_Int option)

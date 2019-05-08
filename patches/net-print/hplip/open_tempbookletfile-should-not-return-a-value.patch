@@ -1,0 +1,12 @@
+diff -Nuar hplip-3.19.3.orig/prnt/hpps/hppsfilter.c hplip-3.19.3/prnt/hpps/hppsfilter.c
+--- hplip-3.19.3.orig/prnt/hpps/hppsfilter.c	2019-03-14 10:29:15.000000000 +0100
++++ hplip-3.19.3/prnt/hpps/hppsfilter.c	2019-04-14 16:55:01.001709157 +0200
+@@ -104,7 +104,7 @@
+     if(ptempbooklet_file == NULL)
+     {
+             fprintf(stderr, "ERROR: Unable to open temp file %s\n", temp_filename);
+-            return 1;
++            return;
+     }  
+     chmod(temp_filename, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+ 

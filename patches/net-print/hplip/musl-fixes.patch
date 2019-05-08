@@ -1,0 +1,11 @@
+diff -Nuar hplip-3.19.3.orig/protocol/discovery/mdns.c hplip-3.19.3/protocol/discovery/mdns.c
+--- hplip-3.19.3.orig/protocol/discovery/mdns.c	2019-04-14 16:49:43.110726741 +0200
++++ hplip-3.19.3/protocol/discovery/mdns.c	2019-04-14 16:49:59.267725847 +0200
+@@ -33,6 +33,7 @@
+ #include <string.h>
+ #include <syslog.h>
+ #include <sys/socket.h>
++#include <sys/select.h>
+ #include <netinet/in.h>
+ #include <netdb.h>
+ #include <arpa/inet.h>

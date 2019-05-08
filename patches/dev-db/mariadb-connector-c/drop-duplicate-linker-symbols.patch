@@ -1,0 +1,20 @@
+--- mariadb-connector-c-3.0.9-src.orig/libmariadb/CMakeLists.txt	2019-04-14 22:00:42.288694644 +0200
++++ mariadb-connector-c-3.0.9-src/libmariadb/CMakeLists.txt	2019-04-14 22:03:10.231686460 +0200
+@@ -17,8 +17,6 @@
+  mariadb_get_charset_by_nr
+  mariadb_get_info
+  mariadb_get_infov
+- mysql_get_timeout_value
+- mysql_get_timeout_value_ms
+  mysql_optionsv
+  mysql_ps_fetch_functions
+  mariadb_reconnect
+@@ -194,8 +192,6 @@
+  mysql_fetch_row_start
+  mysql_free_result_cont
+  mysql_free_result_start
+- mysql_get_timeout_value
+- mysql_get_timeout_value_ms
+  mysql_kill_cont
+  mysql_kill_start
+  mysql_list_fields_cont

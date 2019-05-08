@@ -12,7 +12,6 @@ dev-util/cgdb
 dev-util/cloc
 dev-util/cppcheck
 dev-util/gprof2dot
-dev-util/kdevelop
 dev-util/lldb
 dev-util/meld
 dev-util/ninja

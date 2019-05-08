@@ -16,3 +16,4 @@ sys-apps/mlocate
 sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof
+sys-apps/man-pages

@@ -1,0 +1,13 @@
+--- avidemux_2.7.3.orig/avidemux_core/ADM_core/include/ADM_assert.h	2019-03-21 18:47:24.000000000 +0100
++++ avidemux_2.7.3/avidemux_core/ADM_core/include/ADM_assert.h	2019-04-16 19:44:06.141879508 +0200
+@@ -69,10 +69,6 @@
+ 
+ #define ADM_dealloc(x) ADM_dezalloc( (void *)x)
+ 
+-#ifndef __APPLE__
+-  #define memcpy myAdmMemcpy
+-#endif
+-
+ // Override fread/fwrite ..
+ #define fread   ADM_fread
+ #define fwrite  ADM_fwrite

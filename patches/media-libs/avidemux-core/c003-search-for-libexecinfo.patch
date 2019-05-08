@@ -1,0 +1,11 @@
+--- avidemux_2.7.3.orig/cmake/admCheckMiscLibs.cmake	2019-03-21 18:47:24.000000000 +0100
++++ avidemux_2.7.3/cmake/admCheckMiscLibs.cmake	2019-04-16 20:05:56.710807016 +0200
+@@ -67,7 +67,7 @@
+ MESSAGE(STATUS "Checking for execinfo")
+ MESSAGE(STATUS "*********************")
+ 
+-FIND_HEADER_AND_LIB(EXECINFO execinfo.h c backtrace_symbols)
++FIND_HEADER_AND_LIB(EXECINFO execinfo.h execinfo backtrace_symbols)
+ PRINT_LIBRARY_INFO("execinfo" EXECINFO_FOUND "${EXECINFO_INCLUDE_DIR}" "${EXECINFO_LIBRARY_DIR}")
+ 
+ IF (EXECINFO_INCLUDE_DIR)

@@ -1,0 +1,38 @@
+diff -Nuar chromium-72.0.3626.121.orig/build/config/compiler/BUILD.gn chromium-72.0.3626.121/build/config/compiler/BUILD.gn
+--- chromium-72.0.3626.121.orig/build/config/compiler/BUILD.gn	2019-03-13 19:46:24.109546525 +0100
++++ chromium-72.0.3626.121/build/config/compiler/BUILD.gn	2019-03-13 19:49:32.824536087 +0100
+@@ -654,10 +654,10 @@
+ 
+         # Disable caching on Chrome OS temporarily (crbug.com/889967)
+         if (!is_chromeos) {
+-          # Limit the size of the ThinLTO cache to the lesser of 10% of
+-          # available disk space, 10GB and 100000 files.
++          # Limit the size of the ThinLTO cache to the lesser of 25% of
++          # available disk space, 30GB and 1000000 files.
+           cache_policy =
+-              "cache_size=10%:cache_size_bytes=10g:cache_size_files=100000"
++              "cache_size=25%:cache_size_bytes=30g:cache_size_files=1000000"
+           ldflags += [
+             "-Wl,--thinlto-cache-dir=" +
+                 rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
+diff: chromium-72.0.3626.121.orig/buildtools/third_party/libc++/trunk/test/std/input.output/filesystems/Inputs/static_test_env/bad_symlink: File o directory non esistente
+diff: chromium-72.0.3626.121/buildtools/third_party/libc++/trunk/test/std/input.output/filesystems/Inputs/static_test_env/bad_symlink: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/third_party/chromite/venv/chromite: ciclo ricorsivo tra le directory
+diff: chromium-72.0.3626.121.orig/third_party/perfetto/test/data: File o directory non esistente
+diff: chromium-72.0.3626.121/third_party/perfetto/test/data: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/third_party/perfetto/ui/src/gen: File o directory non esistente
+diff: chromium-72.0.3626.121/third_party/perfetto/ui/src/gen: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/third_party/skia/tools/gyp: File o directory non esistente
+diff: chromium-72.0.3626.121/third_party/skia/tools/gyp: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/isolate: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/isolate: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/isolated: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/isolated: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/swarming: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/swarming: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/.versions/isolate.cipd_version: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/.versions/isolate.cipd_version: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/.versions/isolated.cipd_version: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/.versions/isolated.cipd_version: File o directory non esistente
+diff: chromium-72.0.3626.121.orig/tools/luci-go/.versions/swarming.cipd_version: File o directory non esistente
+diff: chromium-72.0.3626.121/tools/luci-go/.versions/swarming.cipd_version: File o directory non esistente

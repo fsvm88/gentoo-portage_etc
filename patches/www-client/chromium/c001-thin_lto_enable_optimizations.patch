@@ -1,11 +1,12 @@
-diff -Nuar chromium-71.0.3578.30.orig/build/config/compiler/BUILD.gn chromium-71.0.3578.30/build/config/compiler/BUILD.gn
---- chromium-71.0.3578.30.orig/build/config/compiler/BUILD.gn	2018-11-11 11:49:34.089990524 +0100
-+++ chromium-71.0.3578.30/build/config/compiler/BUILD.gn	2018-11-11 11:53:36.168977134 +0100
-@@ -135,7 +135,7 @@
+diff -Nuar chromium-73.0.3683.86.orig/build/config/compiler/BUILD.gn chromium-73.0.3683.86/build/config/compiler/BUILD.gn
+--- chromium-73.0.3683.86.orig/build/config/compiler/BUILD.gn	2019-03-27 09:30:00.839350903 +0100
++++ chromium-73.0.3683.86/build/config/compiler/BUILD.gn	2019-03-27 09:36:16.944330100 +0100
+@@ -135,8 +135,7 @@
    # TODO(gbiv): We disable optimizations by default on most platforms because
    # the space overhead is too great. We should use some mixture of profiles and
    # optimization settings to better tune the size increase.
--  thin_lto_enable_optimizations = is_chromeos
+-  thin_lto_enable_optimizations =
+-      (is_chromeos || is_android) && is_official_build
 +  thin_lto_enable_optimizations = true
  
    # By default only the binaries in official builds get build IDs.

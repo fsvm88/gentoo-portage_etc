@@ -1,0 +1,12 @@
+diff -Nuar cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp
+--- cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp	2019-03-27 10:49:39.993086553 +0100
++++ cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp	2019-03-27 10:50:41.784083135 +0100
+@@ -236,7 +236,7 @@
+ 
+   Distro Distro(D.getVFS());
+ 
+-  if (Distro.IsAlpineLinux() || Triple.isAndroid()) {
++  if (Distro.IsAlpineLinux() || Distro.IsGentooLinux() || Triple.isAndroid()) {
+     ExtraOpts.push_back("-z");
+     ExtraOpts.push_back("now");
+   }

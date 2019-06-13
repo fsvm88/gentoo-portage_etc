@@ -1,2 +1,0 @@
-dev-ruby/rubygems -ruby_targets_ruby24
-virtual/rubygems -ruby_targets_ruby24

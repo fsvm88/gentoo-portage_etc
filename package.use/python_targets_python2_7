@@ -1,3 +1,4 @@
+app-emulation/playonlinux python_targets_python2_7
 app-emulation/virt-manager python_targets_python2_7
 app-text/asciidoc python_targets_python2_7
 dev-java/javatoolkit python_targets_python2_7
@@ -24,6 +25,7 @@ dev-python/ply python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
 dev-python/pygobject python_targets_python2_7
+dev-python/pyopengl python_targets_python2_7
 dev-python/pyopenssl python_targets_python2_7
 dev-python/pyrsistent python_targets_python2_7
 dev-python/PySocks python_targets_python2_7
@@ -33,11 +35,14 @@ dev-python/six python_targets_python2_7
 dev-python/subunit python_targets_python2_7
 dev-python/testtools python_targets_python2_7
 dev-python/traceback2 python_targets_python2_7
+dev-python/typing python_targets_python2_7
 dev-python/unittest2 python_targets_python2_7
 dev-python/urllib3 python_targets_python2_7
+dev-python/wxpython python_targets_python2_7
 dev-util/gtk-doc python_targets_python2_7
 dev-util/itstool python_targets_python2_7
 dev-util/lldb python_targets_python2_7
+dev-util/scons python_targets_python2_7
 dev-util/systemtap python_targets_python2_7
 gnome-base/gconf python_targets_python2_7
 media-libs/avidemux-plugins python_targets_python2_7
@@ -48,3 +53,9 @@ sci-geosciences/gpsd python_targets_python2_7
 sci-libs/scikits_optimization python_targets_python2_7
 sci-libs/scikits python_targets_python2_7
 sys-devel/clang python_targets_python2_7
+sys-libs/ldb python_targets_python2_7
+sys-libs/talloc python_targets_python2_7
+sys-libs/tdb python_targets_python2_7
+sys-libs/tevent python_targets_python2_7
+virtual/python-enum34 python_targets_python2_7
+virtual/python-typing python_targets_python2_7

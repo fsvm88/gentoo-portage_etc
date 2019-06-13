@@ -4,10 +4,13 @@ app-arch/bzip2 abi_x86_32
 app-arch/libarchive abi_x86_32
 app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
+app-arch/zstd abi_x86_32
 app-crypt/mit-krb5 abi_x86_32
+app-emulation/faudio abi_x86_32
 app-emulation/vkd3d abi_x86_32
 app-emulation/wine-any abi_x86_32
 app-emulation/wine-gecko abi_x86_32
+app-emulation/wine-vanilla abi_x86_32
 app-i18n/enca abi_x86_32
 dev-db/lmdb abi_x86_32
 dev-lang/orc abi_x86_32
@@ -31,6 +34,7 @@ dev-libs/libgudev abi_x86_32
 dev-libs/libltdl abi_x86_32
 dev-libs/libnl abi_x86_32
 dev-libs/libpcre abi_x86_32
+dev-libs/libpcre-debian abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libunistring abi_x86_32
@@ -46,6 +50,7 @@ dev-libs/openssl abi_x86_32
 dev-libs/popt abi_x86_32
 dev-libs/wayland abi_x86_32
 dev-python/subunit abi_x86_32
+dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
 dev-util/pkgconfig abi_x86_32
 gnome-base/librsvg abi_x86_32
@@ -61,6 +66,7 @@ media-libs/fontconfig abi_x86_32
 media-libs/freeglut abi_x86_32
 media-libs/freetype abi_x86_32
 media-libs/glu abi_x86_32
+media-libs/graphene abi_x86_32
 media-libs/gst-plugins-bad abi_x86_32
 media-libs/gst-plugins-base abi_x86_32
 media-libs/gst-plugins-good abi_x86_32
@@ -93,6 +99,7 @@ media-libs/libvorbis abi_x86_32
 media-libs/libvpx abi_x86_32
 media-libs/libwebp abi_x86_32
 media-libs/mesa abi_x86_32
+media-libs/nv-codec-headers abi_x86_32
 media-libs/openal abi_x86_32
 media-libs/opencore-amr abi_x86_32
 media-libs/openh264 abi_x86_32
@@ -166,11 +173,12 @@ sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
 sys-libs/libcxxabi abi_x86_32
 sys-libs/libcxx abi_x86_32
+sys-libs/libselinux abi_x86_32
+sys-libs/libsepol abi_x86_32
 sys-libs/libudev-compat abi_x86_32
 sys-libs/libunwind abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/nss_wrapper abi_x86_32
-sys-libs/ntdb abi_x86_32
 sys-libs/pam abi_x86_32
 sys-libs/talloc abi_x86_32
 sys-libs/tdb abi_x86_32
@@ -194,6 +202,7 @@ virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
 virtual/wine abi_x86_32
 x11-base/xcb-proto abi_x86_32
+x11-drivers/nvidia-drivers abi_x86_32
 x11-libs/cairo abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32
@@ -202,6 +211,7 @@ x11-libs/libICE abi_x86_32
 x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
 x11-libs/libva abi_x86_32
+x11-libs/libva-compat abi_x86_32
 x11-libs/libva-intel-driver abi_x86_32
 x11-libs/libva-vdpau-driver abi_x86_32
 x11-libs/libvdpau abi_x86_32

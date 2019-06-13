@@ -1,0 +1,39 @@
+diff --git a/package/network/utils/dante/patches/210-fix-hack-that-fails-with-musl.patch b/package/network/utils/dante/patches/210-fix-hack-that-fails-with-musl.patch
+new file mode 100644
+index 0000000..d48b497
+--- /dev/null
++++ b/package/network/utils/dante/patches/210-fix-hack-that-fails-with-musl.patch
+@@ -0,0 +1,33 @@
++Index: dante-1.2.2/include/osdep.h
++===================================================================
++--- dante-1.2.2.orig/include/osdep.h
+++++ dante-1.2.2/include/osdep.h
++@@ -44,20 +44,6 @@
++ 
++ /* $Id: osdep.h,v 1.51.2.2 2010/05/24 16:38:23 karls Exp $ */
++ 
++-#if HAVE_LINUX_ECCENTRICITIES
++-/*
++- * XXX This is a hack. Avoid transparent sockaddr union used in Linux
++- *  to avoid the use of the union in the code. Mainly used in
++- *  interposition.c (also for CMSG_)
++- */
++-
++-#ifdef __GNUC__
++-#undef __GNUC__
++-#define __GNUC__ 0
++-#endif /* __GNUC__ */
++-
++-#endif /* HAVE_LINUX_ECCENTRICITIES */
++-
++ #include <sys/types.h>
++ #if HAVE_SYS_TIME_H
++ #include <sys/time.h>
++@@ -142,6 +128,7 @@
++ #include <strings.h>
++ #endif /* HAVE_STRINGS_H */
++ #include <string.h>
+++
++ #include <syslog.h>
++ #if HAVE_LIBWRAP && HAVE_TCPD_H
++ #include <tcpd.h>

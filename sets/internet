@@ -1,6 +1,9 @@
+dev-python/awscli
 media-sound/teamspeak-client
 net-analyzer/nmap
 net-analyzer/tcpdump
+net-analyzer/tcptraceroute
+net-analyzer/traceroute
 net-analyzer/wireshark
 net-dns/bind-tools
 net-ftp/lftp

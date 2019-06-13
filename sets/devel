@@ -1,5 +1,6 @@
 app-doc/doxygen
 app-editors/visual-studio-code
+app-emulation/docker-compose
 dev-cpp/gtest
 dev-python/bitstring
 dev-python/ipython
@@ -18,15 +19,17 @@ dev-util/cgdb
 dev-util/cloc
 dev-util/cppcheck
 dev-util/gprof2dot
+#dev-util/include-what-you-use
 dev-util/kdevelop
 dev-util/lldb
 dev-util/meld
 dev-util/ninja
 dev-util/patchutils
 dev-util/perf
-dev-util/pycharm-community
 dev-util/strace
+dev-util/valgrind
 dev-vcs/git
+dev-vcs/tig
 media-libs/opencv
 sci-libs/scikits_image
 sci-libs/scikits_learn

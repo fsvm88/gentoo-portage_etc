@@ -1,3 +1,4 @@
+app-admin/eclean-kernel
 app-admin/hardening-check
 app-admin/logrotate
 app-admin/syslog-ng
@@ -13,6 +14,7 @@ net-misc/chrony
 net-misc/wakeonlan
 sys-apps/hdparm
 sys-apps/mlocate
+sys-apps/ripgrep
 sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof

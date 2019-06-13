@@ -1,7 +1,9 @@
 app-text/zathura-meta
-kde-apps/dolphin-plugins
+kde-apps/dolphin-plugins-git
 kde-apps/gwenview
 kde-apps/kcalc
 kde-apps/konsole
+kde-apps/kwalletmanager
 kde-apps/spectacle
+kde-apps/sweeper
 sys-power/acpilight

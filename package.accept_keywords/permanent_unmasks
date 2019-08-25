@@ -1,6 +1,6 @@
-app-arch/hardlink
 app-backup/btrbk
 app-crypt/hashcat
+app-editors/visual-studio-code::pentoo
 app-emulation/wine-mono
 app-emulation/wine-vanilla
 dev-java/icedtea

@@ -122,7 +122,6 @@ media-plugins/gst-plugins-flac abi_x86_32
 media-plugins/gst-plugins-gtk abi_x86_32
 media-plugins/gst-plugins-lame abi_x86_32
 media-plugins/gst-plugins-libav abi_x86_32
-media-plugins/gst-plugins-mad abi_x86_32
 media-plugins/gst-plugins-meta abi_x86_32
 media-plugins/gst-plugins-mpeg2dec abi_x86_32
 media-plugins/gst-plugins-mpg123 abi_x86_32
@@ -157,7 +156,6 @@ sys-apps/lm_sensors abi_x86_32
 sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
-sys-devel/clang:4 python_targets_python2_7
 sys-devel/clang abi_x86_32
 sys-devel/flex abi_x86_32
 sys-devel/gettext abi_x86_32

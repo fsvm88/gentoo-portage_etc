@@ -22,6 +22,7 @@
 <dev-libs/univalue-1.0.5
 <dev-libs/wayland-protocols-1.19
 <=dev-libs/weston-6.1
+<dev-libs/weston-8.0.0
 <dev-perl/GooCanvas2-0.70
 <dev-perl/Gtk3-0.35
 <dev-perl/Gtk3-SimpleList-0.171

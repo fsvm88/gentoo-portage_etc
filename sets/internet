@@ -17,6 +17,5 @@ net-proxy/torsocks
 net-vpn/tor
 net-wireless/iw
 sys-apps/ethtool
-www-client/chromium
 www-client/firefox
 www-plugins/adobe-flash

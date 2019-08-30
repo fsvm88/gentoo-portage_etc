@@ -1,0 +1,11 @@
+--- stellarium-0.19.0.orig/src/external/libindi/libs/indibase/indilogger.h	2019-04-16 00:30:08.569146874 +0200
++++ stellarium-0.19.0/src/external/libindi/libs/indibase/indilogger.h	2019-04-16 00:48:55.474084541 +0200
+@@ -129,7 +129,7 @@
+     /// Stream used when logging on a file
+     std::ofstream out_;
+     /// Initial time (used to print relative times)
+-    struct timeval initialTime_;
++    struct timeval *initialTime_;
+     /// Verbosity threshold for files
+     static unsigned int fileVerbosityLevel_;
+     /// Verbosity threshold for screen

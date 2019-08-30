@@ -1,0 +1,11 @@
+diff -Nuar cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp
+--- cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp	2018-11-29 19:52:22.000000000 +0100
++++ cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp	2019-07-05 00:10:18.642816234 +0200
+@@ -242,6 +242,7 @@
+   }
+ 
+   if (Distro.IsOpenSUSE() || Distro.IsUbuntu() || Distro.IsAlpineLinux() ||
++      Distro.IsGentoo() ||
+       Triple.isAndroid()) {
+     ExtraOpts.push_back("-z");
+     ExtraOpts.push_back("relro");

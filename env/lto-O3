@@ -1,2 +1,0 @@
-CFLAGS="${CFLAGS} -Wl,--lto-O3,--lto-partitions=8"
-CXXFLAGS="${CXXFLAGS} -Wl,--lto-O3,--lto-partitions=8"

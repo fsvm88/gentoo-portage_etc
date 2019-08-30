@@ -1,0 +1,11 @@
+--- glib-2.52.1/glib/tests/strfuncs.c.old	2016-10-22 00:21:44.000000000 -0500
++++ glib-2.52.1/glib/tests/strfuncs.c	2017-08-20 22:48:18.233702952 -0500
+@@ -1335,7 +1335,7 @@
+   setlocale (LC_ALL, "C");
+ 
+   strs = g_hash_table_new (g_str_hash, g_str_equal);
+-  for (i = 1; i < 200; i++)
++  for (i = 1; i < 40; i++)
+     {
+       str = g_strerror (i);
+       g_assert (str != NULL);

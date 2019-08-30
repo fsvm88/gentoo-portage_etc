@@ -1,20 +1,14 @@
-app-arch/hardlink
-app-emulation/wine-vanilla
 app-backup/btrbk
 app-crypt/hashcat
+app-editors/visual-studio-code::pentoo
 app-emulation/wine-mono
+app-emulation/wine-vanilla
 dev-java/icedtea
-dev-libs/beignet
 dev-python/automat
-dev-python/flask
-dev-python/flask-sqlalchemy
 dev-python/incremental
 dev-python/m2r
 dev-python/twisted
-dev-python/werkzeug
 dev-util/intel-ocl-sdk
-dev-util/patchelf
-dev-util/pycharm-community
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
@@ -23,11 +17,11 @@ media-libs/mesa::musl
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
+net-libs/serf
 net-p2p/bitcoin-cli
 net-p2p/bitcoind
 net-p2p/freenet
-net-wireless/cowpatty
-net-wireless/rtl8812au_aircrack-ng
+net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/portage
 sys-devel/crossdev **
@@ -40,6 +34,5 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/wine
 www-client/firefox
-x11-apps/piglit **
-x11-drivers/nvidia-drivers
 x11-base/xorg-server::musl **
+x11-drivers/nvidia-drivers

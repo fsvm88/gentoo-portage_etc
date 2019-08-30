@@ -1,2 +1,0 @@
-CFLAGS="${CFLAGS} -ggdb3"
-CXXFLAGS="${CXXFLAGS} -ggdb3"

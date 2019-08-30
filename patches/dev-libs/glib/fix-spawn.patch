@@ -1,0 +1,22 @@
+--- glib-2.52.1/glib/tests/spawn-singlethread.c.old	2016-10-22 00:21:35.000000000 -0500
++++ glib-2.52.1/glib/tests/spawn-singlethread.c	2017-08-20 22:31:52.548311424 -0500
+@@ -210,7 +210,7 @@
+   g_test_init (&argc, &argv, NULL);
+ 
+   dirname = g_path_get_dirname (argv[0]);
+-  echo_prog_path = g_build_filename (dirname, "test-spawn-echo" EXEEXT, NULL);
++  echo_prog_path = g_build_filename (dirname, "../test-spawn-echo" EXEEXT, NULL);
+   if (!g_file_test (echo_prog_path, G_FILE_TEST_EXISTS))
+     {
+       g_free (echo_prog_path);
+--- glib-2.52.1/glib/tests/spawn-multithreaded.c.old	2016-10-22 00:21:44.000000000 -0500
++++ glib-2.52.1/glib/tests/spawn-multithreaded.c	2017-08-20 22:32:15.981614460 -0500
+@@ -222,7 +222,7 @@
+   g_test_init (&argc, &argv, NULL);
+ 
+   dirname = g_path_get_dirname (argv[0]);
+-  echo_prog_path = g_build_filename (dirname, "test-spawn-echo" EXEEXT, NULL);
++  echo_prog_path = g_build_filename (dirname, "../test-spawn-echo" EXEEXT, NULL);
+   if (!g_file_test (echo_prog_path, G_FILE_TEST_EXISTS))
+     {
+       g_free (echo_prog_path);

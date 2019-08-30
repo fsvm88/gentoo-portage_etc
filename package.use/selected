@@ -33,11 +33,10 @@ net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/portage doc native-extensions
 sys-devel/gdb python
 sys-firmware/intel-microcode hostonly monolithic
-sys-fs/cryptsetup -openssl
 sys-fs/ntfs3g -external-fuse
 sys-process/fcron system-crontab
 virtual/wine d3d9 staging
-www-client/chromium jumbo-build -closure-compile -system-icu
-www-client/firefox custom-cflags custom-optimization system-harfbuzz system-jpeg system-libevent system-sqlite wifi startup-notification
+www-client/chromium -closure-compile -system-icu -tcmalloc
+www-client/firefox clang custom-cflags custom-optimization system-harfbuzz system-jpeg system-libevent system-sqlite wifi startup-notification lto
 x11-apps/mesa-progs gles2
 x11-drivers/nvidia-drivers uvm

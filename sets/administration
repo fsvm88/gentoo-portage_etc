@@ -1,3 +1,4 @@
+app-admin/eclean-kernel
 app-admin/hardening-check
 app-admin/logrotate
 app-admin/syslog-ng
@@ -12,8 +13,9 @@ net-dns/bind-tools
 net-misc/chrony
 net-misc/wakeonlan
 sys-apps/hdparm
+sys-apps/man-pages
 sys-apps/mlocate
+sys-apps/ripgrep
 sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof
-sys-apps/man-pages

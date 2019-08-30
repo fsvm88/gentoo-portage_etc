@@ -1,4 +1,0 @@
-<sys-libs/rpmatch-standalone-1.1
-app-text/enchant::musl
-dev-libs/elfutils::musl **
-dev-libs/glib::musl

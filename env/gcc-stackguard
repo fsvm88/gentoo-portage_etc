@@ -1,2 +1,0 @@
-CFLAGS="${CFLAGS} -fstack-protector-all -ggdb"
-CXXFLAGS="${CXXFLAGS} -fstack-protector-all -ggdb"

@@ -1,3 +1,4 @@
+app-emulation/playonlinux python_targets_python2_7
 app-emulation/virt-manager python_targets_python2_7
 app-text/asciidoc python_targets_python2_7
 dev-java/javatoolkit python_targets_python2_7
@@ -25,17 +26,21 @@ dev-python/ply python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
 dev-python/pycparser python_targets_python2_7
 dev-python/pygobject python_targets_python2_7
+dev-python/pyopengl python_targets_python2_7
 dev-python/pyopenssl python_targets_python2_7
 dev-python/pypax python_targets_python2_7
 dev-python/pyrsistent python_targets_python2_7
 dev-python/requests python_targets_python2_7
+dev-python/scandir python_targets_python2_7
 dev-python/setuptools python_targets_python2_7
 dev-python/six python_targets_python2_7
 dev-python/subunit python_targets_python2_7
 dev-python/testtools python_targets_python2_7
 dev-python/traceback2 python_targets_python2_7
+dev-python/typing python_targets_python2_7
 dev-python/unittest2 python_targets_python2_7
 dev-python/urllib3 python_targets_python2_7
+dev-python/wxpython python_targets_python2_7
 dev-util/gtk-doc python_targets_python2_7
 dev-util/itstool python_targets_python2_7
 dev-util/lldb python_targets_python2_7
@@ -58,3 +63,4 @@ sys-libs/tdb python_targets_python2_7
 sys-libs/tevent python_targets_python2_7
 virtual/python-enum34 python_targets_python2_7
 virtual/python-ipaddress python_targets_python2_7
+virtual/python-typing python_targets_python2_7

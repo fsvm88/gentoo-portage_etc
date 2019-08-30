@@ -1,0 +1,12 @@
+--- gjs-1.54.3.orig/configure.ac	2019-05-30 13:31:39.058730898 +0200
++++ gjs-1.54.3/configure.ac	2019-05-30 13:35:34.674717865 +0200
+@@ -155,7 +155,8 @@
+   have_sigev_thread_id=no
+   AC_MSG_CHECKING([for Linux SIGEV_THREAD_ID])
+   AC_COMPILE_IFELSE([
+-    AC_LANG_PROGRAM([[#include <linux/signal.h>]], [return SIGEV_THREAD_ID;])
++    AC_LANG_PROGRAM([[#include <stddef.h>
++                     #include <linux/signal.h>]], [return SIGEV_THREAD_ID;])
+   ], [
+     have_sigev_thread_id=yes
+     AC_MSG_RESULT([yes])

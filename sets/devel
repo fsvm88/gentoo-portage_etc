@@ -1,5 +1,6 @@
 app-doc/doxygen
 app-editors/visual-studio-code
+app-emulation/docker-compose
 dev-cpp/gtest
 dev-python/bitstring
 dev-python/protobuf-python
@@ -18,7 +19,9 @@ dev-util/ninja
 dev-util/patchutils
 dev-util/perf
 dev-util/strace
+dev-util/valgrind
 dev-vcs/git
+dev-vcs/tig
 media-libs/opencv
 sys-devel/crossdev
 sys-devel/gdb

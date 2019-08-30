@@ -1,0 +1,19 @@
+diff -Nuar boinc-client_release-7.14-7.14.2.orig/Makefile.incl boinc-client_release-7.14-7.14.2/Makefile.incl
+--- boinc-client_release-7.14-7.14.2.orig/Makefile.incl	2018-10-11 02:43:27.000000000 +0200
++++ boinc-client_release-7.14-7.14.2/Makefile.incl	2019-04-16 09:47:23.440859867 +0200
+@@ -6,9 +6,6 @@
+ 
+ # Note: MYSQL_CFLAGS and MYSQL_LIBS set by configure from mysql_config
+ 
+-# ignore any LIBS set by configure
+-LIBS=
+-
+ LIBBOINC_VERSION = @LIBBOINC_VERSION@
+ 
+ MYSQL_LIBS = @MYSQL_LIBS@
+diff: boinc-client_release-7.14-7.14.2.orig/drupal/sites/default/files: No such file or directory
+diff: boinc-client_release-7.14-7.14.2/drupal/sites/default/files: No such file or directory
+diff: boinc-client_release-7.14-7.14.2.orig/drupal/sites/default/modules/project: No such file or directory
+diff: boinc-client_release-7.14-7.14.2/drupal/sites/default/modules/project: No such file or directory
+diff: boinc-client_release-7.14-7.14.2.orig/drupal/sites/default/themes/project: No such file or directory
+diff: boinc-client_release-7.14-7.14.2/drupal/sites/default/themes/project: No such file or directory

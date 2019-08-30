@@ -1,0 +1,10 @@
+--- gjs-1.54.3.orig/configure	2019-05-30 13:31:39.360730881 +0200
++++ gjs-1.54.3/configure	2019-05-30 13:35:05.313719489 +0200
+@@ -22158,6 +22158,7 @@
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++    #include <stddef.h>
+     #include <linux/signal.h>
+ int
+ main ()

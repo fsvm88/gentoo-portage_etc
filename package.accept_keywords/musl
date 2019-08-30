@@ -1,7 +1,0 @@
-<virtual/libelf-4 **
-app-office/libreoffice::musl
-dev-java/icedtea::musl
-dev-libs/elfutils::musl **
-dev-libs/libexecinfo **
-net-misc/networkmanager::musl
-sys-apps/iucode_tool::musl

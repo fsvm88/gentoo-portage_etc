@@ -1,5 +1,0 @@
-CC="clang-7"
-CXX="clang++-7"
-AR="llvm-ar"
-NM="llvm-nm"
-RANLIB="llvm-ranlib"

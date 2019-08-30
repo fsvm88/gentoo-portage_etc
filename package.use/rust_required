@@ -1,1 +1,2 @@
+dev-lang/rust system-llvm
 sys-libs/llvm-libunwind static-libs

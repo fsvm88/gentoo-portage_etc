@@ -1,0 +1,11 @@
+diff -Nuar stellarium-0.19.0.orig/src/external/libindi/libs/indibase/indilogger.h stellarium-0.19.0/src/external/libindi/libs/indibase/indilogger.h
+--- stellarium-0.19.0.orig/src/external/libindi/libs/indibase/indilogger.h	2019-03-23 15:43:26.000000000 +0100
++++ stellarium-0.19.0/src/external/libindi/libs/indibase/indilogger.h	2019-04-16 00:30:08.569146874 +0200
+@@ -22,6 +22,7 @@
+ 
+ #include "indiapi.h"
+ #include "defaultdevice.h"
++#include "time.h"
+ 
+ #include <stdarg.h>
+ #include <fstream>

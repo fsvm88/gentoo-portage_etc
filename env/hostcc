@@ -1,2 +1,0 @@
-HOSTCC="${CC}"
-HOSTCXX="${CXX}"

@@ -3,6 +3,7 @@ sys-apps/hwloc
 sys-devel/clang
 sys-devel/clang-common
 sys-devel/clang-runtime
+sys-devel/lld
 sys-devel/llvm
 sys-devel/llvm-common
 sys-devel/llvmgold
@@ -10,4 +11,5 @@ sys-libs/compiler-rt
 sys-libs/libcxx
 sys-libs/libcxxabi
 sys-libs/libomp
+sys-libs/llvm-libunwind
 sys-libs/netbsd-csu

@@ -13,6 +13,7 @@ net-dns/bind-tools
 net-misc/chrony
 net-misc/wakeonlan
 sys-apps/hdparm
+sys-apps/man-pages
 sys-apps/mlocate
 sys-apps/ripgrep
 sys-fs/ncdu

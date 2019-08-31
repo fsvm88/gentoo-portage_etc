@@ -11,4 +11,5 @@ sys-devel/lld
 sys-kernel/genkernel-next
 sys-kernel/linux-firmware
 sys-process/schedtool
+sys-process/time
 www-client/links

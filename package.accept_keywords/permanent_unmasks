@@ -4,10 +4,12 @@ app-editors/visual-studio-code::pentoo
 app-emulation/wine-mono
 app-emulation/wine-vanilla
 dev-java/icedtea
+dev-libs/libexecinfo::local-overlay **
 dev-python/automat
 dev-python/incremental
 dev-python/m2r
 dev-python/twisted
+dev-qt/qtwebengine::local-overlay
 dev-util/intel-ocl-sdk
 games-util/steam-client-meta
 games-util/steam-games-meta
@@ -23,7 +25,9 @@ net-p2p/bitcoind
 net-p2p/freenet
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
+sys-apps/iucode_tool::musl
 sys-apps/portage
+sys-apps/sandbox::musl
 sys-devel/crossdev **
 sys-firmware/intel-microcode
 sys-firmware/nvidia-firmware
@@ -32,7 +36,8 @@ sys-fs/duperemove
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
+sys-libs/rpmatch-standalone
 virtual/wine
-www-client/firefox
+www-client/firefox **
 x11-base/xorg-server::musl **
 x11-drivers/nvidia-drivers

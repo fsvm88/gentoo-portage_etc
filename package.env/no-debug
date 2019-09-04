@@ -1,0 +1,5 @@
+app-office/libreoffice no-debug
+dev-util/bazel no-ccache
+net-libs/webkit-gtk no-debug
+sys-devel/gcc no-debug
+www-client/firefox no-debug

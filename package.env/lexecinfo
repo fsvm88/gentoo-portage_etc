@@ -1,0 +1,3 @@
+app-misc/ddcutil lexecinfo
+sci-misc/boinc lexecinfo
+sys-process/htop lexecinfo

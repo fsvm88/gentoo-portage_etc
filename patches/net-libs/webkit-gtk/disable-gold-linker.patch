@@ -1,0 +1,13 @@
+diff -Nuar webkitgtk-2.24.4.orig/Source/cmake/OptionsCommon.cmake webkitgtk-2.24.4/Source/cmake/OptionsCommon.cmake
+--- webkitgtk-2.24.4.orig/Source/cmake/OptionsCommon.cmake	2019-08-26 16:55:47.000000000 +0200
++++ webkitgtk-2.24.4/Source/cmake/OptionsCommon.cmake	2019-09-05 21:44:45.292584803 +0200
+@@ -60,7 +60,8 @@
+ endif ()
+ 
+ # Use ld.gold if it is available and isn't disabled explicitly
+-CMAKE_DEPENDENT_OPTION(USE_LD_GOLD "Use GNU gold linker" ON
++# Disable gold for musl
++CMAKE_DEPENDENT_OPTION(USE_LD_GOLD "Use GNU gold linker" OFF
+                        "NOT CXX_ACCEPTS_MFIX_CORTEX_A53_835769;NOT ARM_TRADITIONAL_DETECTED;NOT WIN32;NOT APPLE" OFF)
+ if (USE_LD_GOLD)
+     execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE LD_VERSION)

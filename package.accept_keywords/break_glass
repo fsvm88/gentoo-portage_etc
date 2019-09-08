@@ -14,7 +14,7 @@
 <app-text/unpaper-6.2
 <dev-cpp/tbb-2019.20190101
 <dev-java/bcprov-1.55
-<dev-lang/rust-1.37
+<dev-lang/rust-1.38
 <dev-libs/libbytesize-2.2
 <dev-libs/libffi-3.4
 <dev-libs/libgcrypt-1.8.5
@@ -119,10 +119,10 @@
 <sys-libs/netbsd-csu-7.2
 <sys-power/thermald-1.8
 <sys-process/numactl-2.0.13
-<virtual/cargo-1.37
+<virtual/cargo-1.38
 <virtual/libffi-3.4
 <virtual/pmake-2
-<virtual/rust-1.37
+<virtual/rust-1.38
 <x11-apps/igt-gpu-tools-1.30
 <x11-libs/libdrm-2.4.100
 <x11-libs/libva-vdpau-driver-0.7.5

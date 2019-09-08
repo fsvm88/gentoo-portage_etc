@@ -29,6 +29,7 @@ sys-firmware/intel-microcode
 sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-fs/duperemove
+sys-fs/zfs-auto-snapshot
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc

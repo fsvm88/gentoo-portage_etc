@@ -8,7 +8,7 @@ dev-python/automat
 dev-python/incremental
 dev-python/m2r
 dev-python/twisted
-dev-util/intel-ocl-sdk
+dev-util/android-studio
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
@@ -25,14 +25,12 @@ net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/portage
 sys-devel/crossdev **
-sys-firmware/intel-microcode
-sys-firmware/nvidia-firmware
 sys-fs/btrfs-progs
 sys-fs/duperemove
 sys-fs/zfs-auto-snapshot
+sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
 virtual/wine
 www-client/firefox
-x11-drivers/nvidia-drivers

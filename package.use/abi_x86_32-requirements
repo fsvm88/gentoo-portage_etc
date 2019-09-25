@@ -152,7 +152,7 @@ sys-apps/acl abi_x86_32
 sys-apps/attr abi_x86_32
 sys-apps/dbus abi_x86_32
 sys-apps/keyutils abi_x86_32
-sys-apps/lm_sensors abi_x86_32
+sys-apps/lm-sensors abi_x86_32
 sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
@@ -200,7 +200,6 @@ virtual/pam abi_x86_32
 virtual/pkgconfig abi_x86_32
 virtual/wine abi_x86_32
 x11-base/xcb-proto abi_x86_32
-x11-drivers/nvidia-drivers abi_x86_32
 x11-libs/cairo abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32
@@ -210,7 +209,6 @@ x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
 x11-libs/libva abi_x86_32
 x11-libs/libva-compat abi_x86_32
-x11-libs/libva-intel-driver abi_x86_32
 x11-libs/libva-vdpau-driver abi_x86_32
 x11-libs/libvdpau abi_x86_32
 x11-libs/libX11 abi_x86_32

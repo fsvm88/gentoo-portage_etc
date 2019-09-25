@@ -1,0 +1,11 @@
+diff -Nuar cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp
+--- cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp	2019-03-27 10:29:38.421153016 +0100
++++ cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp	2019-03-27 10:31:16.919147568 +0100
+@@ -284,6 +284,7 @@
+   // Hexagon linker/loader does not support .gnu.hash
+   if (!IsMips && !IsHexagon) {
+     if (Distro.IsRedhat() || Distro.IsOpenSUSE() || Distro.IsAlpineLinux() ||
++    	Distro.IsGentooLinux() ||
+         (Distro.IsUbuntu() && Distro >= Distro::UbuntuMaverick) ||
+         (IsAndroid && !Triple.isAndroidVersionLT(23)))
+       ExtraOpts.push_back("--hash-style=gnu");

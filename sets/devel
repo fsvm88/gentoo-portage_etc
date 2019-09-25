@@ -5,10 +5,8 @@ dev-cpp/gtest
 dev-python/bitstring
 dev-python/ipython
 dev-python/line_profiler
-dev-python/neo4j-python-driver
 dev-python/pandas
 dev-python/protobuf-python
-dev-python/pycallgraph
 dev-python/pylint
 dev-python/pyprof2calltree
 dev-python/seaborn

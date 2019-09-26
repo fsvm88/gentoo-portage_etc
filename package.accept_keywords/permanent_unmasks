@@ -13,6 +13,7 @@ games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
+media-libs/mesa
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
@@ -33,4 +34,3 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/wine
 www-client/firefox
-media-libs/mesa

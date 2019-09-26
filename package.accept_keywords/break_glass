@@ -149,6 +149,7 @@
 <sys-devel/llvmgold-10
 <sys-devel/llvmgold-9
 <sys-fs/ddrescue-1.25
+<sys-kernel/genkernel-next-71
 <sys-libs/compiler-rt-9
 <sys-libs/compiler-rt-9.0.99
 <sys-libs/compiler-rt-sanitizers-9

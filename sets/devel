@@ -4,7 +4,6 @@ app-emulation/docker-compose
 dev-cpp/gtest
 dev-python/bitstring
 dev-python/protobuf-python
-dev-python/pycallgraph
 dev-python/pylint
 dev-python/pyprof2calltree
 dev-python/virtualenv

@@ -1,4 +1,5 @@
 dev-libs/libffi
+dev-util/lldb
 sys-apps/hwloc
 sys-devel/clang
 sys-devel/clang-common

@@ -4,6 +4,7 @@
 #net-p2p/freenet
 #www-plugins/adobe-flash
 dev-python/awscli
+media-sound/teamspeak-client
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/tcptraceroute

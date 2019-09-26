@@ -1,11 +1,17 @@
 app-office/libreoffice no-debug
 dev-lang/rust no-debug
+dev-lang/spidermonkey no-debug
 dev-libs/libffi no-debug
+dev-python/PyQt5 no-debug
+dev-qt/qtlocation no-debug
+dev-qt/qtwebkit no-debug
 dev-util/bazel no-ccache
 dev-util/cmake no-debug
+dev-util/kdevelop no-debug
 dev-util/lldb no-debug
 net-libs/nodejs no-debug
 net-libs/webkit-gtk no-debug
+sci-astronomy/stellarium no-debug
 sys-apps/hwloc no-debug
 sys-devel/clang no-debug
 sys-devel/clang-common no-debug

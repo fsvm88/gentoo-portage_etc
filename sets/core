@@ -5,6 +5,7 @@ dev-util/ccache
 dev-util/shadowman
 sys-apps/gptfdisk
 sys-apps/irqbalance
+sys-apps/nvme-cli
 sys-boot/grub
 sys-boot/os-prober
 sys-devel/lld

@@ -1,3 +1,4 @@
+dev-libs/libexecinfo
 sys-libs/argp-standalone
 sys-libs/fts-standalone
 sys-libs/obstack-standalone

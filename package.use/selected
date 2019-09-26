@@ -6,7 +6,9 @@ app-emulation/qemu spice usbredir
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
-dev-libs/weston colord fbdev ivi rdp screen-sharing xwayland
+dev-java/icedtea-bin -webstart
+dev-java/icedtea -webstart
+dev-libs/weston colord fbdev ivi wayland-compositor xwayland -screen-sharing
 dev-python/PyQt5 webchannel
 dev-util/bazel tools
 dev-util/perf -clang
@@ -21,6 +23,8 @@ media-video/mplayer bluray faac
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska omxil opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
+net-misc/networkmanager-openconnect -gtk
+net-misc/networkmanager-vpnc -gtk
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-print/hplip snmp
@@ -31,6 +35,5 @@ sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse
 sys-process/fcron system-crontab
 virtual/wine d3d9 staging
-www-client/chromium jumbo-build -system-icu
 www-client/firefox clang custom-cflags custom-optimization lto system-harfbuzz system-jpeg system-libevent system-sqlite wifi startup-notification
 x11-apps/mesa-progs gles2

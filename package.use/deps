@@ -16,6 +16,7 @@ dev-lang/python sqlite tk
 dev-lang/rust cargo clippy rls rustfmt -system-llvm
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
+dev-libs/libpcre2 pcre16
 dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 asm endomorphism
 dev-libs/libxml2 python
@@ -25,14 +26,15 @@ dev-libs/xmlsec nss
 dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/numpy lapack
-dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib webkit x11extras xmlpatterns
+dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
 dev-qt/designer -phonon
 dev-qt/qtgui accessibility eglfs evdev libinput
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
-dev-qt/qtwebengine geolocation
+dev-qt/qtwebengine geolocation jumbo-build
 dev-qt/qtwebkit multimedia orientation printsupport webchannel -gstreamer010 -gstreamer
 dev-util/cmake system-jsoncpp
+dev-util/perf -gtk
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
@@ -45,6 +47,7 @@ media-libs/gst-plugins-bad wayland
 media-libs/lcms python
 media-libs/libopenshot -imagemagick
 media-libs/libopenshot python
+media-libs/libpng apng
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc

@@ -1,6 +1,5 @@
 app-arch/hardlink
 app-misc/fdupes
-sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/duperemove

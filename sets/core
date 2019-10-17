@@ -8,7 +8,6 @@ sys-apps/irqbalance
 sys-apps/nvme-cli
 sys-boot/grub
 sys-boot/os-prober
-sys-devel/lld
 sys-kernel/genkernel-next
 sys-kernel/linux-firmware
 sys-process/schedtool

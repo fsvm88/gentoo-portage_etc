@@ -1,1 +1,4 @@
+app-emulation/docker
+app-emulation/lxc
 app-emulation/virt-manager
+app-emulation/wine-vanilla

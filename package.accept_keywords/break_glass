@@ -32,6 +32,7 @@
 <dev-python/hyperlink-17.2
 <dev-python/line_profiler-2.1
 <dev-python/lit-9
+<dev-python/lit-9.0.99
 <dev-python/neo4j-python-driver-1.5
 <dev-python/pybind11-3
 <dev-python/pylint-1.9
@@ -112,6 +113,7 @@
 <media-libs/vulkan-loader-1.2
 <media-video/avidemux-2.8
 <media-video/simplescreenrecorder-0.4
+<net-analyzer/macchanger-1.7.1
 <net-dns/dnsmasq-2.81
 <net-libs/libpcap-1.9
 <net-libs/NativeThread-0_pre20081231
@@ -161,6 +163,8 @@
 <sys-libs/libomp-9
 <sys-libs/libomp-9.0.99
 <sys-libs/libudev-compat-187
+<sys-libs/llvm-libunwind-9.0.99
+<sys-libs/ncurses-6.1_p20190801
 <sys-libs/netbsd-csu-7.2
 <sys-power/thermald-1.8
 <virtual/cargo-1.38
@@ -168,7 +172,3 @@
 <virtual/rust-1.38
 <x11-apps/igt-gpu-tools-1.30
 <x11-libs/libdrm-2.4.100
-<net-analyzer/macchanger-1.7.1
-<dev-python/lit-9.0.99
-<sys-libs/llvm-libunwind-9.0.99
-<sys-libs/ncurses-6.1_p20190801

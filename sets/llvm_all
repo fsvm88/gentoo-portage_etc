@@ -12,5 +12,4 @@ sys-libs/compiler-rt
 sys-libs/libcxx
 sys-libs/libcxxabi
 sys-libs/libomp
-sys-libs/llvm-libunwind
 sys-libs/netbsd-csu

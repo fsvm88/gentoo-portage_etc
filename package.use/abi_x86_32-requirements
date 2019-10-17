@@ -73,7 +73,6 @@ media-libs/gst-plugins-good abi_x86_32
 media-libs/gst-plugins-ugly abi_x86_32
 media-libs/gstreamer abi_x86_32
 media-libs/harfbuzz abi_x86_32
-media-libs/jasper abi_x86_32
 media-libs/lcms abi_x86_32
 media-libs/libaacplus abi_x86_32
 media-libs/libass abi_x86_32

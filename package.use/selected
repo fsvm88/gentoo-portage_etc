@@ -1,6 +1,6 @@
 app-admin/testdisk ntfs reiserfs
 app-editors/vim python
-app-emulation/docker btrfs overlay
+app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu spice usbredir
 app-office/libreoffice -postgres
@@ -23,8 +23,6 @@ media-video/mplayer bluray faac
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska omxil opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
-net-misc/networkmanager-openconnect -gtk
-net-misc/networkmanager-vpnc -gtk
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-print/hplip snmp

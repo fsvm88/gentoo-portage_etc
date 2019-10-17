@@ -34,3 +34,5 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/wine
 www-client/firefox
+x11-libs/libva-compat
+=media-libs/mesa-9999 **

@@ -168,3 +168,7 @@
 <virtual/rust-1.38
 <x11-apps/igt-gpu-tools-1.30
 <x11-libs/libdrm-2.4.100
+<net-analyzer/macchanger-1.7.1
+<dev-python/lit-9.0.99
+<sys-libs/llvm-libunwind-9.0.99
+<sys-libs/ncurses-6.1_p20190801

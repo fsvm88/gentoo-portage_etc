@@ -33,7 +33,6 @@ dev-qt/qtscript scripttools
 dev-qt/qtwebengine geolocation jumbo-build
 dev-qt/qtwebkit multimedia orientation printsupport webchannel -gstreamer010 -gstreamer
 dev-util/cmake system-jsoncpp
-dev-util/perf -gtk
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp

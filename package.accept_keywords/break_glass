@@ -9,6 +9,7 @@
 <app-text/tessdata_best-5
 <app-text/tesseract-5
 <app-text/unpaper-6.2
+<dev-lang/rust-1.39
 <dev-libs/libbytesize-2.2
 <dev-libs/mpc-1.2
 <dev-libs/mpfr-4.1
@@ -110,5 +111,7 @@
 <sys-libs/libudev-compat-187
 <sys-libs/ncurses-6.1_p20190801
 <sys-power/thermald-2
+<virtual/cargo-1.39
 <virtual/pmake-2
+<virtual/rust-1.39
 <x11-libs/libdrm-2.4.101

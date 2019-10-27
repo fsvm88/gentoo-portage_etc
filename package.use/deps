@@ -15,6 +15,7 @@ dev-lang/go system-bootstrap
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
 dev-lang/rust cargo clippy rls rustfmt -system-llvm
+dev-libs/boost nls
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16
@@ -105,4 +106,3 @@ x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
 x11-libs/libxcb xkb
 x11-libs/wxGTK webkit
 x11-libs/wxGTK:3.0 webkit
-dev-libs/boost nls

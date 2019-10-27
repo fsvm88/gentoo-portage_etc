@@ -117,6 +117,7 @@
 <media-libs/vulkan-loader-1.2
 <media-video/avidemux-2.8
 <media-video/simplescreenrecorder-0.4
+<net-analyzer/macchanger-1.7.1
 <net-dns/bind-tools-9.14.6
 <net-dns/dnsmasq-2.81
 <net-libs/NativeThread-0_pre20081231
@@ -172,6 +173,7 @@
 <sys-libs/libomp-9
 <sys-libs/libomp-9.0.99
 <sys-libs/libudev-compat-187
+<sys-libs/musl-1.1.25
 <sys-libs/ncurses-6.1_p20190701
 <sys-libs/netbsd-csu-7.2
 <sys-power/thermald-1.8
@@ -183,5 +185,3 @@
 <x11-apps/igt-gpu-tools-1.30
 <x11-libs/libdrm-2.4.100
 <x11-libs/libva-vdpau-driver-0.7.5
-<net-analyzer/macchanger-1.7.1
-<sys-libs/musl-1.1.25

@@ -21,5 +21,5 @@ sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
 www-client/firefox
-x11-libs/libva-compat
 x11-drivers/xf86-video-amdgpu
+x11-libs/libva-compat

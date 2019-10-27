@@ -13,6 +13,7 @@
 <dev-libs/libbytesize-2.2
 <dev-libs/mpc-1.2
 <dev-libs/mpfr-4.1
+<dev-libs/nss-3.48
 <dev-libs/weston-8.0.0
 <dev-perl/GooCanvas2-0.70
 <dev-perl/Gtk3-0.35
@@ -68,6 +69,7 @@
 <dev-util/dialog-1.4
 <dev-util/lldb-9.0.99
 <dev-util/perf-5.2
+<dev-util/perf-5.4
 <dev-util/ragel-7.1
 <dev-vcs/tig-2.5
 <media-gfx/gimp-2.11
@@ -89,6 +91,7 @@
 <net-wireless/pixiewps-1.5
 <net-wireless/reaver-wps-fork-t6x-1.8
 <sys-apps/hwloc-2.1
+<sys-apps/install-xattr-0.8
 <sys-apps/nvme-cli-2
 <sys-devel/binutils-2.33
 <sys-devel/bmake-20180101
@@ -115,6 +118,3 @@
 <virtual/pmake-2
 <virtual/rust-1.39
 <x11-libs/libdrm-2.4.101
-<dev-util/perf-5.4
-<sys-apps/install-xattr-0.8
-<dev-libs/nss-3.48

@@ -1,16 +1,9 @@
-app-backup/btrbk
 app-crypt/hashcat
 app-editors/visual-studio-code::pentoo
 app-emulation/wine-mono
 app-emulation/wine-vanilla
-dev-java/icedtea
 dev-libs/libexecinfo::local-overlay **
-dev-python/automat
-dev-python/incremental
-dev-python/m2r
-dev-python/twisted
 dev-qt/qtwebengine::local-overlay
-dev-util/android-studio
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
@@ -21,23 +14,19 @@ net-analyzer/hydra
 net-analyzer/nmap
 net-libs/serf
 net-libs/webkit-gtk::musl
-net-p2p/bitcoin-cli
-net-p2p/bitcoind
-net-p2p/freenet
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/iucode_tool::musl
 sys-apps/portage
 sys-apps/sandbox::musl
 sys-devel/crossdev **
-sys-fs/btrfs-progs
-sys-fs/duperemove
 sys-fs/zfs-auto-snapshot
 sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc
 sys-libs/rpmatch-standalone
-virtual/wine
 www-client/firefox **
 x11-base/xorg-server::musl **
+x11-drivers/xf86-video-amdgpu
+x11-libs/libva-compat

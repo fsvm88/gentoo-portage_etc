@@ -1,8 +1,6 @@
 # net-dns/bind-tools # throws weird comp errors
 # net-ftp/lftp # requires bindresvport
 # net-misc/netkit-telnetd # requires logwtmp which musl doesn't provide
-#net-p2p/freenet
-#www-plugins/adobe-flash
 dev-python/awscli
 media-sound/teamspeak-client
 net-analyzer/nmap

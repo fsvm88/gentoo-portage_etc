@@ -1,14 +1,12 @@
 app-admin/testdisk ntfs reiserfs
 app-editors/vim python
-app-emulation/docker btrfs overlay
+app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu spice usbredir
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
-dev-java/icedtea -webstart
-dev-java/icedtea-bin -webstart
-dev-libs/weston colord fbdev ivi wayland-compositor xwayland -screen-sharing -rdp
+dev-libs/weston colord fbdev ivi wayland-compositor xwayland -screen-sharing
 dev-python/PyQt5 webchannel
 dev-util/bazel tools
 dev-util/perf -clang

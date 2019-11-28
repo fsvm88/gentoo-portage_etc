@@ -1,5 +1,4 @@
 app-admin/eclean-kernel
-app-admin/hardening-check
 app-admin/logrotate
 app-admin/syslog-ng
 app-arch/hardlink

@@ -1,6 +1,5 @@
 app-office/libreoffice
 dev-libs/weston
-dev-qt/qtquickcontrols2
 kde-plasma/plasma-meta
 media-sound/teamspeak-client
 media-video/libva-utils

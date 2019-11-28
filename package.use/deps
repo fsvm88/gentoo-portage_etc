@@ -20,7 +20,6 @@ dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre pcre16
 dev-libs/libpcre2 pcre16
-dev-libs/libsecp256k1 asm endomorphism
 dev-libs/libxml2 python
 dev-libs/protobuf python
 dev-libs/weston wayland-compositor xwayland
@@ -36,7 +35,6 @@ dev-qt/qtscript scripttools
 dev-qt/qtwebengine geolocation jumbo-build
 dev-qt/qtwebkit multimedia orientation printsupport webchannel -gstreamer010 -gstreamer
 dev-util/cmake system-jsoncpp
-dev-util/perf -gtk
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
@@ -77,7 +75,6 @@ net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks
 net-wireless/lorcon python
 sci-geosciences/gpsd python
-sci-libs/scipy sparse
 sys-apps/systemd xkb
 sys-auth/consolekit cgroups evdev
 sys-auth/consolekit pm-utils
@@ -92,9 +89,7 @@ sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
 sys-libs/libomp hwloc
 sys-libs/libunwind debug-frame libatomic
-sys-libs/libunwind static-libs
 sys-libs/ncurses tinfo
-sys-libs/ntdb python
 sys-libs/talloc python
 sys-libs/tdb python
 sys-libs/tevent python
@@ -105,4 +100,3 @@ x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
 x11-libs/libxcb xkb
 x11-libs/wxGTK webkit
-x11-libs/wxGTK:3.0 webkit

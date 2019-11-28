@@ -98,3 +98,4 @@ x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit
+sys-apps/util-linux static-libs

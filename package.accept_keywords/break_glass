@@ -68,7 +68,6 @@
 <dev-util/colm-0.14
 <dev-util/dialog-1.4
 <dev-util/lldb-9.0.99
-<dev-util/perf-5.2
 <dev-util/perf-5.4
 <dev-util/ragel-7.1
 <dev-vcs/tig-2.5
@@ -101,6 +100,7 @@
 <sys-devel/gcc-9.3
 <sys-devel/libtool-2.5
 <sys-devel/lld-9.0.99
+<sys-devel/lldb-9.0.99
 <sys-devel/llvm-9.0.99
 <sys-devel/llvm-common-9.0.99
 <sys-devel/llvmgold-9.0.99
@@ -118,3 +118,14 @@
 <virtual/pmake-2
 <virtual/rust-1.39
 <x11-libs/libdrm-2.4.101
+<media-libs/libnsgif-0.3
+<media-sound/audacity-2.4
+<media-libs/portaudio-19.07
+<media-libs/suil-0.11
+<sys-boot/grub-2.05
+<net-misc/networkmanager-1.18.5
+<sys-fs/lvm2-2.02.186-r99
+<dev-python/botocore-1.14
+<sys-apps/bolt-0.9
+<dev-util/umockdev-0.13
+<dev-util/netsurf-buildsystem-1.8

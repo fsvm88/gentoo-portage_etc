@@ -89,6 +89,7 @@ media-libs/libmad abi_x86_32
 media-libs/libmpeg2 abi_x86_32
 media-libs/libogg abi_x86_32
 media-libs/libpng abi_x86_32
+media-libs/libpng-compat abi_x86_32
 media-libs/libsdl2 abi_x86_32
 media-libs/libsdl abi_x86_32
 media-libs/libsndfile abi_x86_32
@@ -238,4 +239,3 @@ x11-libs/xcb-util-image abi_x86_32
 x11-libs/xcb-util-keysyms abi_x86_32
 x11-libs/xcb-util-renderutil abi_x86_32
 x11-libs/xcb-util-wm abi_x86_32
-media-libs/libpng-compat abi_x86_32

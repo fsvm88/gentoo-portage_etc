@@ -74,6 +74,7 @@ net-vpn/openvpn down-root socks
 net-wireless/lorcon python
 sci-geosciences/gpsd python
 sys-apps/systemd xkb
+sys-apps/util-linux static-libs
 sys-auth/consolekit cgroups evdev
 sys-auth/consolekit pm-utils
 sys-auth/polkit-qt -qt4
@@ -98,4 +99,3 @@ x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit
-sys-apps/util-linux static-libs

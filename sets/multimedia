@@ -1,8 +1,8 @@
 media-gfx/gimp
 media-libs/vulkan-loader
+media-sound/audacity
 media-sound/teamspeak-client
 media-video/avidemux
 media-video/smplayer
 media-video/vlc
 x11-apps/mesa-progs
-media-sound/audacity

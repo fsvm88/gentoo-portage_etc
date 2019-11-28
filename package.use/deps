@@ -76,6 +76,7 @@ net-vpn/openvpn down-root socks
 net-wireless/lorcon python
 sci-geosciences/gpsd python
 sys-apps/systemd xkb
+sys-apps/util-linux static-libs
 sys-auth/consolekit cgroups evdev
 sys-auth/consolekit pm-utils
 sys-auth/polkit-qt -qt4

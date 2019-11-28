@@ -1,0 +1,71 @@
+diff -Nuar clang-9.0.0.9999.orig/lib/Driver/ToolChains/Linux.cpp clang-9.0.0.9999/lib/Driver/ToolChains/Linux.cpp
+--- clang-9.0.0.9999.orig/lib/Driver/ToolChains/Linux.cpp	2019-09-14 20:29:10.549613526 +0200
++++ clang-9.0.0.9999/lib/Driver/ToolChains/Linux.cpp	2019-09-14 20:30:01.634269971 +0200
+@@ -987,6 +987,13 @@
+   return Generic_ELF::IsMathErrnoDefault();
+ }
+ 
++unsigned Linux::GetDefaultStackProtectorLevel(bool KernelOrKext) const {
++  StringRef VendorName = Linux::getTriple().getVendorName();
++  if (VendorName.compare("gentoo") == 0)
++    return 2;
++  return 1;
++}
++
+ SanitizerMask Linux::getSupportedSanitizers() const {
+   const bool IsX86 = getTriple().getArch() == llvm::Triple::x86;
+   const bool IsX86_64 = getTriple().getArch() == llvm::Triple::x86_64;
+diff -Nuar clang-9.0.0.9999.orig/lib/Driver/ToolChains/Linux.h clang-9.0.0.9999/lib/Driver/ToolChains/Linux.h
+--- clang-9.0.0.9999.orig/lib/Driver/ToolChains/Linux.h	2019-09-14 20:29:09.041594503 +0200
++++ clang-9.0.0.9999/lib/Driver/ToolChains/Linux.h	2019-09-14 20:30:39.666773041 +0200
+@@ -38,6 +38,7 @@
+                            llvm::opt::ArgStringList &CC1Args) const override;
+   CXXStdlibType GetDefaultCXXStdlibType() const override;
+   bool isPIEDefault() const override;
++  unsigned GetDefaultStackProtectorLevel(bool KernelOrKext) const override;
+   bool isNoExecStackDefault() const override;
+   bool IsMathErrnoDefault() const override;
+   SanitizerMask getSupportedSanitizers() const override;
+diff -Nuar clang-9.0.0.9999.orig/test/Driver/fsanitize.c clang-9.0.0.9999/test/Driver/fsanitize.c
+--- clang-9.0.0.9999.orig/test/Driver/fsanitize.c	2019-09-14 20:29:09.685602625 +0200
++++ clang-9.0.0.9999/test/Driver/fsanitize.c	2019-09-14 20:30:01.634269971 +0200
+@@ -645,12 +645,12 @@
+ // RUN: %clang -fno-sanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=NOSP
+ // NOSP-NOT: "-fsanitize=safe-stack"
+ 
+-// RUN: %clang -target x86_64-linux-gnu -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=NO-SP
++// RUN: %clang -target x86_64-linux-gnu -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=SP
+ // RUN: %clang -target x86_64-linux-gnu -fsanitize=address,safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=SP-ASAN
+ // RUN: %clang -target x86_64-linux-gnu -fstack-protector -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=SP
+ // RUN: %clang -target x86_64-linux-gnu -fsanitize=safe-stack -fstack-protector-all -### %s 2>&1 | FileCheck %s -check-prefix=SP
+-// RUN: %clang -target arm-linux-androideabi -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=NO-SP
+-// RUN: %clang -target aarch64-linux-android -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=NO-SP
++// RUN: %clang -target arm-linux-androideabi -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=SP
++// RUN: %clang -target aarch64-linux-android -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=SP
+ // RUN: %clang -target i386-contiki-unknown -fsanitize=safe-stack -### %s 2>&1 | FileCheck %s -check-prefix=NO-SP
+ // NO-SP-NOT: stack-protector
+ // NO-SP: "-fsanitize=safe-stack"
+diff -Nuar clang-9.0.0.9999.orig/test/Driver/stack-protector.c clang-9.0.0.9999/test/Driver/stack-protector.c
+--- clang-9.0.0.9999.orig/test/Driver/stack-protector.c	2019-09-14 20:29:09.701602825 +0200
++++ clang-9.0.0.9999/test/Driver/stack-protector.c	2019-09-14 20:30:01.634269971 +0200
+@@ -24,6 +24,20 @@
+ // SSP-ALL: "-stack-protector" "3"
+ // SSP-ALL-NOT: "-stack-protector-buffer-size" 
+ 
++// RUN: %clang -target x86_64-gentoo-linux-musl -### %s 2>&1 | FileCheck %s -check-prefix=GENTOO
++// GENTOO: "-stack-protector" "2"
++
++// RUN: %clang -target x86_64-gentoo-linux-musl -fstack-protector -### %s 2>&1 | FileCheck %s -check-prefix=GENTOO_SPS
++// GENTOO_SPS: "-stack-protector" "2"
++
++// RUN: %clang -target x86_64-gentoo-linux-musl -fstack-protector-all -### %s 2>&1 | FileCheck %s -check-prefix=GENTOO_ALL
++// GENTOO_ALL: "-stack-protector" "3"
++// GENTOO_ALL-NOT: "-stack-protector-buffer-size"
++
++// RUN: %clang -target x86_64-gentoo-linux-musl -fno-stack-protector -### %s 2>&1 | FileCheck %s -check-prefix=GENTOO_NOSSP
++// GENTOO_NOSSP-NOT: "-stack-protector"
++// GENTOO_NOSSP-NOT: "-stack-protector-buffer-size"
++
+ // RUN: %clang -target x86_64-scei-ps4 -### %s 2>&1 | FileCheck %s -check-prefix=SSP-PS4
+ // RUN: %clang -target x86_64-scei-ps4 -fstack-protector -### %s 2>&1 | FileCheck %s -check-prefix=SSP-PS4
+ // SSP-PS4: "-stack-protector" "2"

@@ -1,0 +1,31 @@
+diff -Nuar zfs-0.8.2.orig/include/spl/sys/sysmacros.h zfs-0.8.2/include/spl/sys/sysmacros.h
+--- zfs-0.8.2.orig/include/spl/sys/sysmacros.h	2019-09-25 22:05:14.432774608 +0200
++++ zfs-0.8.2/include/spl/sys/sysmacros.h	2019-11-06 22:37:59.758134520 +0100
+@@ -27,6 +27,7 @@
+ 
+ #include <linux/module.h>
+ #include <linux/sched.h>
++#include <linux/sched/isolation.h>
+ #include <linux/cpumask.h>
+ #include <sys/debug.h>
+ #include <sys/zone.h>
+@@ -78,6 +79,7 @@
+ #define	curproc				current
+ #define	max_ncpus			num_possible_cpus()
+ #define	boot_ncpus			num_online_cpus()
++#define	avail_cpus			housekeeping_cpumask(HK_FLAG_DOMAIN)
+ #define	CPU_SEQID			smp_processor_id()
+ #define	is_system_labeled()		0
+ 
+diff -Nuar zfs-0.8.2.orig/module/spl/spl-taskq.c zfs-0.8.2/module/spl/spl-taskq.c
+--- zfs-0.8.2.orig/module/spl/spl-taskq.c	2019-09-25 22:44:42.589285423 +0200
++++ zfs-0.8.2/module/spl/spl-taskq.c	2019-11-06 22:39:44.580136190 +0100
+@@ -994,7 +994,7 @@
+ 	}
+ 
+ 	if (spl_taskq_thread_bind) {
+-		last_used_cpu = (last_used_cpu + 1) % num_online_cpus();
++                last_used_cpu = cpumask_next_wrap(last_used_cpu, avail_cpus, last_used_cpu, true);
+ 		kthread_bind(tqt->tqt_thread, last_used_cpu);
+ 	}
+ 

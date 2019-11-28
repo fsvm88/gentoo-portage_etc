@@ -1,0 +1,47 @@
+diff -Nuar cfe-8.0.0.src.orig/include/clang/Driver/Distro.h cfe-8.0.0.src/include/clang/Driver/Distro.h
+--- cfe-8.0.0.src.orig/include/clang/Driver/Distro.h	2018-12-23 16:07:19.000000000 +0100
++++ cfe-8.0.0.src/include/clang/Driver/Distro.h	2019-03-27 10:26:55.209162044 +0100
+@@ -35,6 +35,7 @@
+     DebianStretch,
+     DebianBuster,
+     Exherbo,
++    GentooLinux,
+     RHEL5,
+     RHEL6,
+     RHEL7,
+@@ -103,6 +104,10 @@
+   /// @}
+   /// @name Convenience Predicates
+   /// @{
++  
++  bool IsGentooLinux() const {
++    return DistroVal == GentooLinux;
++  }
+ 
+   bool IsRedhat() const {
+     return DistroVal == Fedora || (DistroVal >= RHEL5 && DistroVal <= RHEL7);
+diff -Nuar cfe-8.0.0.src.orig/lib/Driver/Distro.cpp cfe-8.0.0.src/lib/Driver/Distro.cpp
+--- cfe-8.0.0.src.orig/lib/Driver/Distro.cpp	2018-12-23 16:07:19.000000000 +0100
++++ cfe-8.0.0.src/lib/Driver/Distro.cpp	2019-03-27 10:26:55.210162044 +0100
+@@ -141,6 +141,9 @@
+   if (VFS.exists("/etc/gentoo-release"))
+     return Distro::Gentoo;
+ 
++  if (VFS.exists("/etc/gentoo-release"))
++    return Distro::GentooLinux;
++
+   return Distro::UnknownDistro;
+ }
+ 
+diff -Nuar cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp
+--- cfe-8.0.0.src.orig/lib/Driver/ToolChains/Linux.cpp	2018-11-29 19:52:22.000000000 +0100
++++ cfe-8.0.0.src/lib/Driver/ToolChains/Linux.cpp	2019-03-27 10:27:55.912158686 +0100
+@@ -241,7 +241,7 @@
+     ExtraOpts.push_back("now");
+   }
+ 
+-  if (Distro.IsOpenSUSE() || Distro.IsUbuntu() || Distro.IsAlpineLinux() ||
++  if (Distro.IsOpenSUSE() || Distro.IsUbuntu() || Distro.IsAlpineLinux() || Distro.IsGentooLinux() ||
+       Triple.isAndroid()) {
+     ExtraOpts.push_back("-z");
+     ExtraOpts.push_back("relro");

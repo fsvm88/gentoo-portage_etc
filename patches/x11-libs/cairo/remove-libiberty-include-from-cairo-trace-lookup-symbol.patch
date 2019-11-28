@@ -1,0 +1,11 @@
+diff -Nuar cairo-1.12.16.orig/util/cairo-trace/lookup-symbol.c cairo-1.12.16/util/cairo-trace/lookup-symbol.c
+--- cairo-1.12.16.orig/util/cairo-trace/lookup-symbol.c	2013-08-26 17:07:21.000000000 +0200
++++ cairo-1.12.16/util/cairo-trace/lookup-symbol.c	2014-08-08 18:39:24.417500576 +0200
+@@ -65,7 +65,6 @@
+ 
+ #if HAVE_BFD
+ #include <bfd.h>
+-#include <libiberty.h>
+ 
+ struct symtab {
+     bfd *bfd;

@@ -1,0 +1,12 @@
+diff -Nuar libreoffice-6.0.4.2.orig/bridges/Library_cpp_uno.mk libreoffice-6.0.4.2/bridges/Library_cpp_uno.mk
+--- libreoffice-6.0.4.2.orig/bridges/Library_cpp_uno.mk	2018-05-04 15:30:05.000000000 +0200
++++ libreoffice-6.0.4.2/bridges/Library_cpp_uno.mk	2018-05-12 23:02:56.012456647 +0200
+@@ -201,7 +201,7 @@
+ $(eval $(call gb_Library_add_cxxflags,gcc3_uno,\
+ 	-fno-omit-frame-pointer \
+ 	-fno-strict-aliasing \
+-	$(if $(filter TRUE,$(ENABLE_LTO)),-fno-lto) \
++	$(if $(filter TRUE,$(ENABLE_LTO)),-fno-lto -fno-whole-program-vtables) \
+ 	$(if $(filter TRUE,$(HAVE_GCC_AVX)),-mno-avx) \
+ ))
+ 

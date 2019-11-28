@@ -1,0 +1,11 @@
+--- ./dist/ExtUtils-ParseXS/lib/ExtUtils/ParseXS.pm.orig	2013-03-04 16:16:21.000000000 +0100
++++ ./dist/ExtUtils-ParseXS/lib/ExtUtils/ParseXS.pm	2014-03-14 10:27:17.000000000 +0100
+@@ -508,7 +508,7 @@ 
+ #XS_EUPXS(XS_${Full_func_name}); /* prototype to pass -Wmissing-prototypes */
+ #XS_EUPXS(XS_${Full_func_name})
+ #[[
+-#    dVAR; dXSARGS;
++#    dXSARGS;
+ EOF
+     print Q(<<"EOF") if $ALIAS;
+ #    dXSI32;

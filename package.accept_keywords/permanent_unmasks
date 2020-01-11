@@ -2,6 +2,7 @@ app-crypt/hashcat
 app-editors/visual-studio-code::pentoo
 app-emulation/wine-mono
 app-emulation/wine-vanilla
+dev-libs/elfutils::musl
 dev-libs/libexecinfo::local-overlay **
 dev-qt/qtwebengine::local-overlay
 games-util/steam-client-meta

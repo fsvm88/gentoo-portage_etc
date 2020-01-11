@@ -14,10 +14,7 @@
 <dev-libs/libbytesize-2.2
 <dev-libs/mpc-1.2
 <dev-libs/mpfr-4.1
-<dev-libs/nspr-4.24
 <dev-libs/nspr-4.25
-<dev-libs/nss-3.48
-<dev-libs/nss-3.49
 <dev-libs/nss-3.50
 <dev-libs/weston-8.0.0
 <dev-perl/GooCanvas2-0.70
@@ -61,7 +58,6 @@
 <dev-qt/qtwayland-5.12.6
 <dev-qt/qtwebchannel-5.12.6
 <dev-qt/qtwebengine-5.12.6
-<dev-qt/qtwebkit-5.212.0_pre20190701
 <dev-qt/qtwidgets-5.12.6
 <dev-qt/qtx11extras-5.12.6
 <dev-qt/qtxml-5.12.6
@@ -97,13 +93,14 @@
 <media-video/avidemux-2.8
 <media-video/simplescreenrecorder-0.4
 <net-analyzer/macchanger-1.7.1
-<net-fs/samba-4.11::musl
+<net-firewall/nftables-0.9.4
+<net-fs/samba-4.12::musl
+<net-libs/libnftnl-1.2
 <net-libs/stem-1.7
 <net-misc/networkmanager-1.18.5
 <net-misc/nyx-2.1
 <net-misc/radvd-2.19::musl
 <net-print/hplip-3.20
-<net-print/hplip-plugin-3.19
 <net-print/hplip-plugin-3.20
 <net-wireless/hcxdumptool-5.2
 <net-wireless/hcxtools-5.2
@@ -113,8 +110,8 @@
 <sys-apps/hwloc-2.1
 <sys-apps/install-xattr-0.8
 <sys-apps/nvme-cli-2
+<sys-apps/util-linux-2.35
 <sys-boot/grub-2.05
-<sys-devel/binutils-2.33
 <sys-devel/binutils-2.34
 <sys-devel/bmake-20180101
 <sys-devel/clang-9.0.99
@@ -134,7 +131,7 @@
 <sys-kernel/genkernel-next-71
 <sys-libs/compiler-rt-9.0.99
 <sys-libs/compiler-rt-sanitizers-9.0.99
-<sys-libs/ldb-1.5.6::musl
+<sys-libs/ldb-2.1::musl
 <sys-libs/libcxx-9.0.99
 <sys-libs/libcxxabi-9.0.99
 <sys-libs/libomp-9.0.99
@@ -145,9 +142,7 @@
 <sys-libs/tdb-1.5
 <sys-libs/tevent-0.11
 <sys-power/thermald-2
-<virtual/cargo-1.39
-<virtual/cargo-1.40
+<virtual/cargo-1.41
 <virtual/pmake-2
-<virtual/rust-1.39
-<virtual/rust-1.40
+<virtual/rust-1.41
 <x11-libs/libdrm-2.4.101

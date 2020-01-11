@@ -9,6 +9,7 @@ app-portage/cpuid2cpuflags
 app-portage/layman
 app-shells/bash-completion
 net-dns/bind-tools
+net-firewall/nftables
 net-misc/chrony
 net-misc/wakeonlan
 sys-apps/hdparm

@@ -1,0 +1,4 @@
+app-office/libreoffice::gentoo
+net-fs/nfs-utils::gentoo
+net-misc/networkmanager::gentoo
+sys-fs/lvm2::gentoo

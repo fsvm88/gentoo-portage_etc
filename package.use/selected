@@ -6,8 +6,6 @@ app-emulation/qemu spice usbredir
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
-dev-java/icedtea-bin -webstart
-dev-java/icedtea -webstart
 dev-libs/weston colord fbdev ivi wayland-compositor xwayland -screen-sharing
 dev-python/PyQt5 webchannel
 dev-util/bazel tools
@@ -23,6 +21,7 @@ media-video/mplayer bluray faac
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska omxil opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
+net-firewall/nftables xtables
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-print/hplip snmp

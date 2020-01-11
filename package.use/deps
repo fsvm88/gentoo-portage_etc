@@ -13,7 +13,7 @@ dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
-dev-lang/rust cargo clippy rls rustfmt -system-llvm
+dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-llvm
 dev-libs/elfutils static-libs
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre2 pcre16
@@ -52,6 +52,7 @@ media-libs/libvpx postproc svc
 media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
+media-libs/vulkan-loader layers
 media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome

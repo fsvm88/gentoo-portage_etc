@@ -85,6 +85,7 @@ sys-devel/binutils cxx
 sys-devel/clang-runtime libcxx -sanitize
 sys-devel/gcc graphite lto pie pgo ssp
 sys-devel/llvm gold udis86
+sys-fs/quota rpc
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt

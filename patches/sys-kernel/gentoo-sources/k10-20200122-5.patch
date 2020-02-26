@@ -1,0 +1,20 @@
+---
+ drivers/hwmon/k10temp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/hwmon/k10temp.c b/drivers/hwmon/k10temp.c
+index b961e12c6f58..4a470b5195ee 100644
+--- a/drivers/hwmon/k10temp.c
++++ b/drivers/hwmon/k10temp.c
+@@ -355,7 +355,7 @@ static umode_t k10temp_is_visible(const void *_data,
+ 			}
+ 			break;
+ 		case hwmon_temp_max:
+-			if (channel)
++			if (channel || data->show_tdie)
+ 				return 0;
+ 			break;
+ 		case hwmon_temp_crit:
+-- 
+2.17.1
+

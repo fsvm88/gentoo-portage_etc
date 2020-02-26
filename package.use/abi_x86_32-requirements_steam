@@ -10,7 +10,6 @@ dev-libs/nspr abi_x86_32
 dev-libs/nss abi_x86_32
 dev-util/pkgconfig abi_x86_32
 gnome-base/gconf abi_x86_32
-media-libs/libtxc_dxtn abi_x86_32
 media-libs/mesa abi_x86_32
 net-libs/libssh2 abi_x86_32
 net-libs/nghttp2 abi_x86_32

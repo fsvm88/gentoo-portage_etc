@@ -1,4 +1,4 @@
-app-editors/visual-studio-code
+app-editors/vscode-bin
 app-emulation/docker-compose
 dev-python/pylint
 dev-python/virtualenv

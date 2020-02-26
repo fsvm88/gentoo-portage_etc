@@ -1,5 +1,5 @@
 app-crypt/hashcat
-app-editors/visual-studio-code::pentoo
+app-editors/vscode-bin::jorgicio
 app-emulation/wine-mono
 app-emulation/wine-vanilla
 games-util/steam-client-meta

@@ -3,6 +3,7 @@
 <app-arch/zstd-1.5
 <app-editors/sublime-text-4
 <app-emulation/faudio-20
+<app-emulation/wine-gecko-2.48
 <app-misc/ddcutil-0.9.6
 <app-misc/fdupes-1.7
 <app-portage/mirrorselect-2.2.7
@@ -17,7 +18,9 @@ dev-lang/ruby:2.6
 <dev-libs/mpfr-4.1
 <dev-libs/nspr-4.25
 <dev-libs/nss-3.50
-<dev-libs/weston-8.0.0
+<dev-libs/ocl-icd-2.2.13
+<dev-libs/rocm-opencl-runtime-3.1
+<dev-libs/weston-9
 <dev-perl/GooCanvas2-0.70
 <dev-perl/Gtk3-0.35
 <dev-perl/Gtk3-SimpleList-0.171

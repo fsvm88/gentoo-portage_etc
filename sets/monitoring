@@ -4,3 +4,4 @@ sys-apps/lm-sensors
 sys-apps/smartmontools
 sys-process/htop
 sys-process/iotop
+app-metrics/node_exporter

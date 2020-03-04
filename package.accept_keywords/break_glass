@@ -99,3 +99,6 @@ dev-lang/ruby:2.6
 <sys-fs/zfs-kmod-0.8.3
 <sys-libs/libudev-compat-187
 <sys-power/thermald-2
+<dev-python/awscli-1.19
+<dev-python/botocore-1.16
+<dev-python/s3transfer-0.4

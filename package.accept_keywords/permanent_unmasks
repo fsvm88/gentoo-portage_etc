@@ -16,7 +16,6 @@ sci-misc/boinc
 sys-apps/portage
 sys-devel/crossdev **
 sys-fs/zfs-auto-snapshot
-sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
 sys-libs/glibc

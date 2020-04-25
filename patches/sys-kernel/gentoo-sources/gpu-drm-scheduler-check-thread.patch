@@ -1,0 +1,21 @@
+---
+ drivers/gpu/drm/scheduler/sched_main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+index a18eabf692e4..9380fa58c8f1 100644
+--- a/drivers/gpu/drm/scheduler/sched_main.c
++++ b/drivers/gpu/drm/scheduler/sched_main.c
+@@ -674,7 +674,7 @@ drm_sched_get_cleanup_job(struct drm_gpu_scheduler *sched)
+ 	 */
+ 	if ((sched->timeout != MAX_SCHEDULE_TIMEOUT &&
+ 	    !cancel_delayed_work(&sched->work_tdr)) ||
+-	    __kthread_should_park(sched->thread))
++	    kthread_should_park())
+ 		return NULL;
+ 
+ 	spin_lock(&sched->job_list_lock);
+-- 
+2.20.1
+
+  

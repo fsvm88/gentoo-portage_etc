@@ -1,0 +1,7 @@
+dev-libs/glib utils
+dev-libs/nss utils
+media-gfx/imagemagick corefonts
+media-libs/babl introspection
+media-libs/gegl introspection
+media-libs/gexiv2 python
+media-libs/soxr examples

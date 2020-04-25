@@ -11,6 +11,7 @@ app-emulation/vkd3d abi_x86_32
 app-emulation/wine-gecko abi_x86_32
 app-emulation/wine-vanilla abi_x86_32
 app-i18n/enca abi_x86_32
+app-text/tesseract abi_x86_32
 dev-db/lmdb abi_x86_32
 dev-lang/orc abi_x86_32
 dev-libs/atk abi_x86_32
@@ -23,14 +24,18 @@ dev-libs/gmp abi_x86_32
 dev-libs/icu abi_x86_32
 dev-libs/json-c abi_x86_32
 dev-libs/libaio abi_x86_32
+dev-libs/libappindicator abi_x86_32
 dev-libs/libatomic_ops abi_x86_32
 dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
+dev-libs/libdbusmenu abi_x86_32
 dev-libs/libev abi_x86_32
+dev-libs/libevent abi_x86_32
 dev-libs/libffi abi_x86_32
 dev-libs/libgcrypt abi_x86_32
 dev-libs/libgpg-error abi_x86_32
 dev-libs/libgudev abi_x86_32
+dev-libs/libindicator abi_x86_32
 dev-libs/libltdl abi_x86_32
 dev-libs/libnl abi_x86_32
 dev-libs/libpcre abi_x86_32
@@ -60,13 +65,16 @@ media-gfx/graphite2 abi_x86_32
 media-gfx/sane-backends abi_x86_32
 media-libs/a52dec abi_x86_32
 media-libs/alsa-lib abi_x86_32
+media-libs/aribb24 abi_x86_32
 media-libs/audiofile abi_x86_32
+media-libs/dav1d abi_x86_32
 media-libs/faac abi_x86_32
 media-libs/faad2 abi_x86_32
 media-libs/flac abi_x86_32
 media-libs/fontconfig abi_x86_32
 media-libs/freeglut abi_x86_32
 media-libs/freetype abi_x86_32
+media-libs/giflib abi_x86_32
 media-libs/glu abi_x86_32
 media-libs/graphene abi_x86_32
 media-libs/gst-plugins-bad abi_x86_32
@@ -76,6 +84,7 @@ media-libs/gst-plugins-ugly abi_x86_32
 media-libs/gstreamer abi_x86_32
 media-libs/harfbuzz abi_x86_32
 media-libs/lcms abi_x86_32
+media-libs/leptonica abi_x86_32
 media-libs/libaacplus abi_x86_32
 media-libs/libass abi_x86_32
 media-libs/libbluray abi_x86_32
@@ -85,6 +94,7 @@ media-libs/libdvdnav abi_x86_32
 media-libs/libdvdread abi_x86_32
 media-libs/libepoxy abi_x86_32
 media-libs/libexif abi_x86_32
+media-libs/libglvnd abi_x86_32
 media-libs/libgphoto2 abi_x86_32
 media-libs/libjpeg-turbo abi_x86_32
 media-libs/libmad abi_x86_32
@@ -108,6 +118,7 @@ media-libs/openh264 abi_x86_32
 media-libs/openjpeg abi_x86_32
 media-libs/taglib abi_x86_32
 media-libs/tiff abi_x86_32
+media-libs/vidstab abi_x86_32
 media-libs/vo-aacenc abi_x86_32
 media-libs/vulkan-layers abi_x86_32
 media-libs/vulkan-loader abi_x86_32

@@ -1,5 +1,6 @@
 app-admin/packagekit-base command-not-found cron
 app-admin/sysstat isag lm_sensors
+app-arch/bzip2 static-libs
 app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-crypt/qca -qt4
@@ -47,16 +48,17 @@ media-libs/libopenshot -imagemagick
 media-libs/libopenshot python
 media-libs/libpng apng
 media-libs/libsamplerate sndfile
+media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
-media-libs/mesa d3d9 dri3 gbm gles2 llvm llvm-shared-libs vulkan xa
+media-libs/mesa dri3 gbm gles2 llvm llvm-shared-libs vulkan
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-libs/vulkan-loader layers
 media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome
-media-video/ffmpeg aacplus amr bluray chromium libv4l openssl postproc vpx
+media-video/ffmpeg aacplus amr bluray chromium dav1d libaribb24 libtesseract libv4l openssl postproc vidstab vpx
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script
@@ -75,6 +77,7 @@ net-vpn/openvpn down-root socks
 net-wireless/bluez btpclient deprecated experimental extra-tools user-session
 net-wireless/lorcon python
 sci-geosciences/gpsd python
+sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd xkb
 sys-apps/util-linux static-libs
 sys-auth/consolekit cgroups evdev
@@ -95,9 +98,11 @@ sys-libs/talloc python
 sys-libs/tdb python
 sys-libs/tevent python
 sys-libs/zlib minizip
+sys-libs/zlib static-libs
+virtual/libcrypt static-libs
 virtual/notification-daemon kde
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb
-x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
+x11-libs/libdrm libkms video_cards_amdgpu
 x11-libs/wxGTK:3.0 webkit
 x11-libs/wxGTK webkit

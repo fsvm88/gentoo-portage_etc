@@ -3,6 +3,7 @@ app-editors/vim python
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu spice usbredir
+app-emulation/wine-vanilla vkd3d
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
@@ -12,6 +13,7 @@ dev-util/bazel tools
 dev-util/perf -clang
 dev-util/strace -unwind
 dev-vcs/subversion -dso
+games-util/steam-client-meta trayicon
 games-util/steam-games-meta s3tc
 kde-plasma/libksysguard -detailedmemory
 kde-plasma/plasma-desktop touchpad
@@ -31,6 +33,5 @@ sys-apps/portage doc native-extensions
 sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse
 sys-process/fcron system-crontab
-virtual/wine d3d9 staging
 www-client/firefox clang custom-cflags custom-optimization lto system-harfbuzz system-jpeg system-libevent system-sqlite wifi startup-notification
 x11-apps/mesa-progs gles2

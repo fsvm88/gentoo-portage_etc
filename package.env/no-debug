@@ -26,4 +26,3 @@ sys-libs/libcxx no-debug
 sys-libs/libomp no-debug
 sys-libs/llvm-libunwind no-debug
 sys-libs/netbsd-csu no-debug
-www-client/firefox no-debug

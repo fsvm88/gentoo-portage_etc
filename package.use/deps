@@ -1,4 +1,3 @@
-app-admin/packagekit-base command-not-found cron
 app-admin/sysstat isag lm_sensors
 app-arch/bzip2 static-libs
 app-crypt/gpgme cxx

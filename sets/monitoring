@@ -1,7 +1,8 @@
+app-metrics/collectd
+app-metrics/node_exporter
 net-analyzer/iftop
 net-dns/bind-tools
 sys-apps/lm-sensors
 sys-apps/smartmontools
 sys-process/htop
 sys-process/iotop
-app-metrics/node_exporter

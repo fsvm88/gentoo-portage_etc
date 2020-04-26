@@ -55,6 +55,7 @@ dev-lang/ruby:2.6
 <media-video/avidemux-2.8
 <media-video/simplescreenrecorder-0.4
 <net-analyzer/macchanger-1.7.1
+<net-libs/kdsoap-2
 <net-libs/kdsoap-ws-discovery-client-0.3
 <net-libs/stem-1.9
 <net-misc/nyx-2.2

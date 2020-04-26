@@ -116,6 +116,7 @@ media-libs/openal abi_x86_32
 media-libs/opencore-amr abi_x86_32
 media-libs/openh264 abi_x86_32
 media-libs/openjpeg abi_x86_32
+media-libs/opus abi_x86_32
 media-libs/taglib abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vidstab abi_x86_32

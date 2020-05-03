@@ -91,6 +91,7 @@ sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
 sys-libs/libomp hwloc
+sys-libs/libomp offload
 sys-libs/libunwind debug-frame libatomic
 sys-libs/ncurses tinfo
 sys-libs/talloc python

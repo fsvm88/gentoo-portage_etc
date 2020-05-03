@@ -1,9 +1,0 @@
-dev-python/certifi python_targets_python2_7
-dev-python/cliapp python_targets_python2_7
-dev-python/cython python_targets_python2_7
-dev-python/markdown python_targets_python2_7
-dev-python/pyyaml python_targets_python2_7
-dev-python/setuptools python_targets_python2_7
-dev-python/ttystatus python_targets_python2_7
-dev-util/cmdtest python_targets_python2_7
-media-sound/lilypond python_targets_python2_7

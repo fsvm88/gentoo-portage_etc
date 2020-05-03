@@ -18,6 +18,7 @@ games-util/steam-games-meta s3tc
 kde-plasma/libksysguard -detailedmemory
 kde-plasma/plasma-desktop touchpad
 kde-plasma/plasma-meta -crypt
+kde-plasma/plasma-meta thunderbolt
 kde-plasma/powerdevil brightness-control
 media-video/mplayer bluray faac
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska omxil opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
@@ -30,8 +31,11 @@ net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/portage doc native-extensions
+sys-devel/clang-runtime crt
 sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse
+sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
-www-client/firefox clang custom-cflags custom-optimization lto system-harfbuzz system-jpeg system-libevent system-sqlite wifi startup-notification
+virtual/wine -d3d9 -staging
+www-client/firefox clang custom-cflags custom-optimization lto system-harfbuzz system-jpeg system-libevent system-sqlite pgo wifi startup-notification
 x11-apps/mesa-progs gles2

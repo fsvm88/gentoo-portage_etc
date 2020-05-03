@@ -1,0 +1,31 @@
+diff -Nuar zfs-kmod-9999.orig/include/os/linux/spl/sys/sysmacros.h zfs-kmod-9999/include/os/linux/spl/sys/sysmacros.h
+--- zfs-kmod-9999.orig/include/os/linux/spl/sys/sysmacros.h	2020-04-29 08:39:30.382258364 +0200
++++ zfs-kmod-9999/include/os/linux/spl/sys/sysmacros.h	2020-04-29 08:45:39.233264240 +0200
+@@ -27,6 +27,7 @@
+ 
+ #include <linux/module.h>
+ #include <linux/sched.h>
++#include <linux/sched/isolation.h>
+ #include <linux/sched/rt.h>
+ #include <linux/cpumask.h>
+ #include <sys/debug.h>
+@@ -76,6 +77,7 @@
+ #define	curproc				current
+ #define	max_ncpus			num_possible_cpus()
+ #define	boot_ncpus			num_online_cpus()
++#define avail_cpus                      housekeeping_cpumask(HK_FLAG_DOMAIN)
+ #define	CPU_SEQID			smp_processor_id()
+ #define	is_system_labeled()		0
+ 
+diff -Nuar zfs-kmod-9999.orig/module/os/linux/spl/spl-taskq.c zfs-kmod-9999/module/os/linux/spl/spl-taskq.c
+--- zfs-kmod-9999.orig/module/os/linux/spl/spl-taskq.c	2020-04-29 08:39:30.568258367 +0200
++++ zfs-kmod-9999/module/os/linux/spl/spl-taskq.c	2020-04-29 08:43:35.736262273 +0200
+@@ -1012,7 +1012,7 @@
+ 	}
+ 
+ 	if (spl_taskq_thread_bind) {
+-		last_used_cpu = (last_used_cpu + 1) % num_online_cpus();
++                last_used_cpu = cpumask_next_wrap(last_used_cpu, avail_cpus, last_used_cpu, true);
+ 		kthread_bind(tqt->tqt_thread, last_used_cpu);
+ 	}
+ 

@@ -1,0 +1,9 @@
+dev-util/lldb extra_cmake-llvm
+sys-devel/clang extra_cmake-llvm
+sys-devel/lld extra_cmake-llvm
+sys-devel/llvm extra_cmake-llvm
+sys-devel/llvmgold extra_cmake-llvm
+sys-libs/compiler-rt extra_cmake-llvm
+sys-libs/libcxxabi extra_cmake-llvm
+sys-libs/libcxx extra_cmake-llvm
+sys-libs/libomp extra_cmake-llvm

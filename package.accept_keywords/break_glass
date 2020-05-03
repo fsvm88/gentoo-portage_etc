@@ -58,6 +58,7 @@ dev-lang/ruby:2.6
 <net-libs/kdsoap-2
 <net-libs/kdsoap-ws-discovery-client-0.3
 <net-libs/stem-1.9
+<net-misc/chrony-4.1
 <net-misc/nyx-2.2
 <net-print/hplip-plugin-3.20
 <net-wireless/aircrack-ng-1.7
@@ -81,6 +82,7 @@ dev-lang/ruby:2.6
 <sys-devel/clang-runtime-11
 <sys-devel/lld-11
 <sys-devel/llvm-11
+<sys-devel/llvm-common-11
 <sys-devel/llvmgold-11
 <sys-fs/zfs-0.8.3
 <sys-fs/zfs-kmod-0.8.3
@@ -91,5 +93,8 @@ dev-lang/ruby:2.6
 <sys-libs/libcxxabi-11
 <sys-libs/libomp-11
 <sys-libs/libudev-compat-187
+<sys-libs/libunwind-1.5
+<sys-libs/llvm-libunwind-11
 <virtual/opencl-4
 <x11-base/xorg-server-1.21
+<x11-misc/lightdm-1.31

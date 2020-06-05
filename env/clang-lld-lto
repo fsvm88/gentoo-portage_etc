@@ -1,0 +1,8 @@
+CC="clang"
+CXX="clang++"
+CFLAGS="-O3 -march=native -pipe -ggdb -flto=full -fwhole-program-vtables -fvirtual-function-elimination -flto-jobs=0 -fuse-ld=lld"
+CXXFLAGS="${CFLAGS}"
+LDFLAGS="-Wl,-O3,-z,now,--as-needed"
+AR="llvm-ar"
+RANLIB="llvm-ranlib"
+NM="llvm-nm"

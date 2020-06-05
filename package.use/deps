@@ -57,6 +57,7 @@ media-libs/vulkan-loader layers
 media-libs/waffle gbm
 media-plugins/gst-plugins-meta lame vpx
 media-sound/pulseaudio gnome
+media-sound/pulseaudio native-headset
 media-video/ffmpeg aacplus amr bluray chromium dav1d libaribb24 libtesseract libv4l openssl postproc vidstab vpx
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat

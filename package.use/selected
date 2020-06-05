@@ -3,6 +3,7 @@ app-editors/vim python
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu spice usbredir
+app-emulation/wine-vanilla -unwind
 app-emulation/wine-vanilla vkd3d
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools

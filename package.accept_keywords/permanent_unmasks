@@ -6,7 +6,8 @@ games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
-=media-libs/mesa-9999 **
+gui-libs/wlroots
+gui-wm/sway
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap

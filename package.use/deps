@@ -41,7 +41,9 @@ kde-plasma/plasma-workspace qalculate
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
 media-libs/freetype harfbuzz infinality
+media-libs/gst-plugins-bad gles2
 media-libs/gst-plugins-bad wayland
+media-libs/gst-plugins-base gles2
 media-libs/lcms python
 media-libs/libopenshot -imagemagick
 media-libs/libopenshot python
@@ -55,7 +57,9 @@ media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-libs/vulkan-loader layers
 media-libs/waffle gbm
+media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
+media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome
 media-sound/pulseaudio native-headset
 media-video/ffmpeg aacplus amr bluray chromium dav1d libaribb24 libtesseract libv4l openssl postproc vidstab vpx
@@ -68,6 +72,7 @@ net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
 net-libs/nodejs inspector
+net-libs/webkit-gtk gles2
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/networkmanager resolvconf -bluetooth -dhclient -modemmanager -ppp

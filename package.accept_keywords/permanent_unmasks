@@ -15,6 +15,7 @@ games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
+gui-apps/swaylock
 gui-libs/wlroots
 gui-wm/sway
 media-sound/teamspeak-client

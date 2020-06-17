@@ -2,6 +2,15 @@ app-crypt/hashcat
 app-editors/vscode-bin::jorgicio
 app-emulation/wine-mono
 app-emulation/wine-vanilla
+dev-libs/hsa-ext-rocr
+dev-libs/rocclr
+dev-libs/rocm-comgr
+dev-libs/rocm-device-libs
+dev-libs/rocm-opencl-runtime
+dev-libs/rocr-runtime
+dev-libs/roct-thunk-interface
+dev-util/clinfo
+dev-util/rocm-cmake
 games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
@@ -16,6 +25,8 @@ net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/portage
 sys-devel/crossdev **
+sys-devel/llvm-roc
+sys-fs/ntfs3g
 sys-fs/zfs-auto-snapshot
 sys-kernel/linux-firmware
 sys-kernel/linux-headers

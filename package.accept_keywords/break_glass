@@ -64,6 +64,7 @@ dev-lang/ruby:2.6
 <dev-ruby/test-unit-3.4
 <dev-util/colm-0.14
 <dev-util/dialog-1.4
+<dev-util/glslang-8.13.3745
 <dev-util/lldb-11
 <dev-util/perf-5.7
 <dev-util/ragel-7.1
@@ -78,6 +79,7 @@ dev-lang/ruby:2.6
 <media-libs/libvpx-1.9
 <media-libs/opencv-4.2
 <media-libs/portaudio-19.07
+<media-libs/shaderc-2020.5
 <media-libs/x265-3.5
 <media-sound/audacity-2.4
 <media-video/avidemux-2.8

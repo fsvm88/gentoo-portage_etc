@@ -53,6 +53,7 @@ media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
 media-libs/mesa dri3 gbm gles2 llvm llvm-shared-libs vulkan
+media-libs/mesa -opencl
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-libs/vulkan-loader layers
@@ -62,7 +63,7 @@ media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome
 media-sound/pulseaudio native-headset
-media-video/ffmpeg aacplus amr bluray chromium dav1d libaribb24 libtesseract libv4l openssl postproc vidstab vpx
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script

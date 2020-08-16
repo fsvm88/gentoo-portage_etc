@@ -1,5 +1,5 @@
 CC="clang"
 CXX="clang++"
-CFLAGS="-O3 -march=native -pipe -fstack-protector-all"
+CFLAGS="-O3 -march=native -pipe -ggdb -fstack-protector-all"
 CXXFLAGS="${CFLAGS}"
 LDFLAGS="-Wl,-O3,-z,now,--as-needed"

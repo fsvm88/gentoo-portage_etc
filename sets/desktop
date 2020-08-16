@@ -4,4 +4,5 @@ kde-plasma/plasma-meta
 media-sound/teamspeak-client
 media-video/libva-utils
 media-video/simplescreenrecorder
+x11-apps/xinput
 x11-apps/xrandr

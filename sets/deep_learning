@@ -1,0 +1,8 @@
+dev-libs/libsecp256k1
+dev-python/h5py
+dev-python/joblib
+dev-python/loky
+dev-python/numpy
+dev-python/pandas
+sci-libs/scikits_learn
+sci-libs/tensorflow

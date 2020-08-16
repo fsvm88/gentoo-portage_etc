@@ -2,6 +2,7 @@ app-admin/testdisk ntfs reiserfs
 app-editors/vim python
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
+app-emulation/qemu io-uring
 app-emulation/qemu spice usbredir
 app-emulation/wine-vanilla -unwind
 app-emulation/wine-vanilla vkd3d
@@ -34,6 +35,7 @@ net-p2p/go-ethereum evm opencl
 net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
+sci-libs/tensorflow mpi opencl python rocm xla
 sys-apps/portage doc native-extensions
 sys-devel/clang-runtime crt
 sys-devel/gdb python

@@ -6,6 +6,7 @@ app-crypt/qca -qt4
 app-emulation/libvirt-glib python
 app-emulation/libvirt nfs
 app-emulation/qemu nfs
+app-emulation/qemu virgl
 app-text/tesseract osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
@@ -15,6 +16,7 @@ dev-lang/perl ithreads
 dev-lang/python sqlite tk
 dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-llvm
 dev-libs/elfutils static-libs
+dev-libs/json-c cpu-flags-x86-rdrand
 dev-libs/libdbusmenu-qt -qt4
 dev-libs/libpcre2 pcre16
 dev-libs/libpcre pcre16
@@ -47,6 +49,7 @@ media-libs/gst-plugins-base gles2
 media-libs/lcms python
 media-libs/libopenshot -imagemagick
 media-libs/libopenshot python
+media-libs/libplacebo glslang
 media-libs/libpng apng
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles2
@@ -83,6 +86,7 @@ net-vpn/openvpn down-root socks
 net-wireless/bluez btpclient deprecated experimental extra-tools user-session
 net-wireless/lorcon python
 sci-geosciences/gpsd python
+sci-libs/hdf5 -threads
 sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd xkb
 sys-apps/util-linux static-libs

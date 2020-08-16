@@ -1,0 +1,14 @@
+dev-libs/libffi w-tests
+#dev-util/lldb w-tests
+sys-apps/hwloc w-tests
+sys-devel/clang-common w-tests
+sys-devel/clang-runtime w-tests
+#sys-devel/clang w-tests
+sys-devel/lld w-tests
+sys-devel/llvm-common w-tests
+sys-devel/llvmgold w-tests
+sys-devel/llvm w-tests
+sys-libs/compiler-rt w-tests
+sys-libs/libcxxabi w-tests
+sys-libs/libcxx w-tests
+sys-libs/libomp w-tests

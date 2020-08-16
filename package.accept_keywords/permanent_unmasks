@@ -1,4 +1,3 @@
-app-admin/checksec
 app-arch/zstd
 app-crypt/hashcat
 app-editors/vscode-bin::jorgicio

@@ -1,3 +1,4 @@
+app-admin/vault
 app-arch/zstd
 app-crypt/hashcat
 app-editors/vscode-bin::jorgicio
@@ -40,9 +41,12 @@ gui-wm/sway
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
+net-im/slack
+net-im/teams
 net-libs/google-cloud-cpp
 net-libs/grpc
 net-libs/serf
+net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-libs/scikits
 sci-libs/scikits_learn

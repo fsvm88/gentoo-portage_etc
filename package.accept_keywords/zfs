@@ -1,2 +1,2 @@
-sys-fs/zfs **
-sys-fs/zfs-kmod **
+<sys-fs/zfs-9999
+<sys-fs/zfs-kmod-9999

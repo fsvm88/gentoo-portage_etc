@@ -4,3 +4,4 @@ dev-perl/HTML-TokeParser-Simple
 dev-perl/Image-Sane
 media-gfx/gscan2pdf
 media-gfx/OCRmyPDF
+media-gfx/sane-frontends

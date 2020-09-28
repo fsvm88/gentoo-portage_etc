@@ -9,6 +9,7 @@ dev-db/lmdb abi_x86_32
 dev-db/sqlite abi_x86_32
 dev-libs/atk abi_x86_32
 dev-libs/check abi_x86_32
+dev-libs/dbus-glib abi_x86_32
 dev-libs/elfutils abi_x86_32
 dev-libs/expat abi_x86_32
 dev-libs/fribidi abi_x86_32
@@ -36,7 +37,9 @@ dev-libs/wayland abi_x86_32
 dev-python/subunit abi_x86_32
 dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
+dev-util/glslang abi_x86_32
 dev-util/pkgconfig abi_X86_32
+dev-util/spirv-tools abi_x86_32
 gnome-base/librsvg abi_x86_32
 media-gfx/graphite2 abi_x86_32
 media-libs/alsa-lib abi_x86_32
@@ -69,6 +72,8 @@ media-libs/openjpeg abi_x86_32
 media-libs/opus abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vidstab abi_x86_32
+media-libs/vulkan-layers abi_x86_32
+media-libs/vulkan-loader abi_x86_32
 media-libs/x264 abi_x86_32
 media-libs/x265 abi_x86_32
 media-libs/xvid abi_x86_32

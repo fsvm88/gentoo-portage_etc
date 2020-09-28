@@ -1,0 +1,5 @@
+net-dialup/ppp eap-tls
+net-misc/networkmanager ppp
+net-misc/tigervnc dri3
+net-vpn/openconnect libproxy lz4 stoken
+sys-auth/oath-toolkit pskc

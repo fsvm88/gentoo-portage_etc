@@ -23,6 +23,7 @@ kde-plasma/plasma-desktop touchpad
 kde-plasma/plasma-meta -crypt
 kde-plasma/plasma-meta thunderbolt
 kde-plasma/powerdevil brightness-control
+media-gfx/sane-frontends gimp
 media-libs/opencv -gtk3
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
@@ -32,6 +33,7 @@ net-analyzer/wireshark smi -qt4
 net-firewall/nftables xtables
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
+net-print/hplip-plugin orblite
 net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp

@@ -14,6 +14,7 @@ dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
+dev-lang/rust abi_x86_32
 dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-llvm
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
@@ -55,8 +56,7 @@ media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
-media-libs/mesa dri3 gbm gles2 llvm llvm-shared-libs vulkan
-media-libs/mesa -opencl
+media-libs/mesa -opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-libs/vulkan-loader layers
@@ -112,6 +112,7 @@ sys-libs/zlib minizip
 sys-libs/zlib static-libs
 virtual/libcrypt static-libs
 virtual/notification-daemon kde
+virtual/rust abi_x86_32
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb
 x11-libs/libdrm libkms video_cards_amdgpu

@@ -1,1 +1,4 @@
+dev-libs/protobuf clang
+net-libs/google-cloud-cpp clang
 sci-libs/tensorflow clang
+sys-devel/clang clang

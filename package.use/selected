@@ -27,17 +27,19 @@ media-gfx/sane-frontends gimp
 media-libs/opencv -gtk3
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
-media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska omxil opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
+media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
+net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
 net-firewall/nftables xtables
+net-im/teams -system-ffmpeg -system-mesa
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-print/hplip-plugin orblite
 net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
-sci-libs/tensorflow mpi opencl python rocm xla
+sci-libs/tensorflow opencl python rocm xla
 sys-apps/portage doc native-extensions
 sys-devel/clang-runtime crt
 sys-devel/gdb python

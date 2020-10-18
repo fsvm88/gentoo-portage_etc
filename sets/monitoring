@@ -1,5 +1,6 @@
 app-metrics/collectd
 app-metrics/node_exporter
+net-analyzer/goaccess
 net-analyzer/iftop
 net-dns/bind-tools
 sys-apps/lm-sensors

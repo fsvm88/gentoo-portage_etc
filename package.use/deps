@@ -15,7 +15,7 @@ dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python sqlite tk
 dev-lang/rust abi_x86_32
-dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-llvm
+dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-bootstrap system-llvm
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
 dev-libs/libdbusmenu-qt -qt4
@@ -33,7 +33,7 @@ dev-qt/designer -phonon
 dev-qt/qtgui accessibility eglfs evdev libinput
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
-dev-qt/qtwebengine geolocation jumbo-build
+dev-qt/qtwebengine geolocation
 dev-qt/qtwebkit multimedia orientation printsupport webchannel -gstreamer010 -gstreamer
 dev-util/cmake system-jsoncpp
 dev-util/systemtap libvirt sqlite
@@ -98,6 +98,7 @@ sys-devel/binutils cxx
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp
 sys-devel/llvm gold udis86
+sys-devel/llvm-roc runtime
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt

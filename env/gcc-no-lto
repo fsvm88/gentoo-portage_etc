@@ -1,6 +1,6 @@
 CC="gcc"
 CXX="g++"
-CFLAGS="-O2 -march=native -pipe -ggdb -flto=0 -fwhole-program"
+CFLAGS="-O2 -march=native -pipe -ggdb"
 CXXFLAGS="${CFLAGS}"
 LDFLAGS="-Wl,-O2,-z,now,--as-needed"
 AR="ar"

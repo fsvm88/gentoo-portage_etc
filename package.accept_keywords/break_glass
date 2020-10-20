@@ -96,3 +96,5 @@
 <sys-libs/libudev-compat-187
 <x11-misc/appmenu-gtk-module-0.8
 <x11-misc/xsettingsd-1.1
+<sys-apps/sysvinit-2.98
+<sys-apps/attr-2.4.48-r99

@@ -1,0 +1,3 @@
+sys-apps/attr clang-no-lto
+sys-apps/acl clang-no-lto
+dev-qt/qtcore clang-no-lto

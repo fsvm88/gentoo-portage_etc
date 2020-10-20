@@ -1,0 +1,6 @@
+sys-devel/llvm extra_cmake-llvm
+sys-devel/clang extra_cmake-llvm
+sys-devel/lld extra_cmake-llvm
+sys-devel/libcxx extra_cmake-llvm
+sys-devel/libcxxabi extra_cmake-llvm
+sys-devel/lldb extra_cmake-llvm

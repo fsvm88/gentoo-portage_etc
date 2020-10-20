@@ -1,3 +1,0 @@
-CFLAGS="${CFLAGS} -O3 -flto=full -fwhole-program-vtables -fvirtual-function-elimination"
-CXXFLAGS="${CFLAGS}"
-LDFLAGS="${LDFLAGS},-O4"

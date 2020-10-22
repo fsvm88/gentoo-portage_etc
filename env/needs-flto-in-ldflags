@@ -1,1 +1,1 @@
-LDFLAGS="${LDFLAGS},-flto=full,-fwhole-program-vtables,-fvirtual-function-elimination"
+LDFLAGS="${LDFLAGS},-flto=thin,-fwhole-program-vtables"

@@ -1,1 +1,6 @@
+dev-cpp/clucene gcc
+dev-lang/ocaml gcc
 dev-libs/libffi gcc
+media-libs/ftgl gcc
+net-dialup/xl2tpd gcc
+sys-libs/db gcc

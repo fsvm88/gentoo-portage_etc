@@ -4,8 +4,7 @@ app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu io-uring
 app-emulation/qemu spice usbredir
-app-emulation/wine-vanilla -unwind
-app-emulation/wine-vanilla vkd3d
+app-emulation/wine-vanilla vkd3d -unwind
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
@@ -27,7 +26,7 @@ media-gfx/sane-frontends gimp
 media-libs/opencv -gtk3
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
-media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc projectm sdl-image sftp soxr speex tremor twolame vpx
+media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
@@ -41,6 +40,7 @@ net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sci-libs/tensorflow opencl python rocm xla
 sys-apps/portage doc native-extensions
+sys-devel/clang default-lld
 sys-devel/clang-runtime crt
 sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse
@@ -49,4 +49,3 @@ sys-process/fcron system-crontab
 virtual/wine -d3d9 -staging
 www-client/firefox clang custom-cflags custom-optimization lto system-harfbuzz system-jpeg system-libevent system-sqlite pgo wifi startup-notification
 x11-apps/mesa-progs gles2
-sys-devel/clang default-lld

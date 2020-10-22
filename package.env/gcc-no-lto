@@ -1,1 +1,4 @@
+dev-libs/elfutils gcc-no-lto
+dev-libs/json-glib gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto
+net-dialup/ppp gcc-no-lto

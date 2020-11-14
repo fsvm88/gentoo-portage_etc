@@ -1,0 +1,21 @@
+diff -Nuar lld.orig/ELF/Config.h lld/ELF/Config.h
+--- a/lld/ELF/Config.h	2020-10-07 12:10:48.000000000 +0200
++++ b/lld/ELF/Config.h	2020-10-27 21:41:22.947654773 +0100
+@@ -138,7 +138,7 @@
+   bool armHasBlx = false;
+   bool armHasMovtMovw = false;
+   bool armJ1J2BranchEncoding = false;
+-  bool asNeeded = false;
++  bool asNeeded = true;
+   bool bsymbolic;
+   bool bsymbolicFunctions;
+   bool callGraphProfileSort;
+@@ -161,7 +161,7 @@
+   bool formatBinary = false;
+   bool gcSections;
+   bool gdbIndex;
+-  bool gnuHash = false;
++  bool gnuHash = true;
+   bool gnuUnique;
+   bool hasDynSymTab;
+   bool ignoreDataAddressEquality;

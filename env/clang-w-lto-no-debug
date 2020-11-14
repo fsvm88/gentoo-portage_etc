@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -g0"
+CXXFLAGS="${CFLAGS}"

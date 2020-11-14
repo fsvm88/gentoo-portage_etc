@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} -fopenmp"
+CXXFLAGS="${CXXFLAGS} -fopenmp"

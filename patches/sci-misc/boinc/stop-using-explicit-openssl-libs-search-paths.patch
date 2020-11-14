@@ -1,0 +1,12 @@
+diff -Nuar boinc-client_release-7.14-7.14.2.orig/m4/check_ssl.m4 boinc-client_release-7.14-7.14.2/m4/check_ssl.m4
+--- boinc-client_release-7.14-7.14.2.orig/m4/check_ssl.m4	2018-10-11 02:43:27.000000000 +0200
++++ boinc-client_release-7.14-7.14.2/m4/check_ssl.m4	2020-11-10 22:53:07.737075558 +0100
+@@ -46,7 +46,7 @@
+       SSLDIR="${ssldir}"
+       SSL_CFLAGS="-I$ssldir/include -I$ssldir/include/openssl";
+       SSL_CXXFLAGS="-I$ssldir/include -I$ssldir/include/openssl";
+-      SSL_LIBS="-L$ssldir -L$ssldir/lib -lssl -lcrypto"
++      SSL_LIBS="-lssl -lcrypto"
+       AC_CHECK_LIB([dl], [dlopen], 
+           [SSL_LIBS="${SSL_LIBS} ${sah_lib_last}"])
+       AC_CHECK_LIB([z], [gzopen], 

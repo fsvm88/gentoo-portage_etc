@@ -1,0 +1,14 @@
+diff -Nuar qtwebengine-everywhere-src-5.15.1.orig/src/3rdparty/chromium/third_party/perfetto/src/tracing/core/virtual_destructors.cc qtwebengine-everywhere-src-5.15.1/src/3rdparty/chromium/third_party/perfetto/src/tracing/core/virtual_destructors.cc
+--- qtwebengine-everywhere-src-5.15.1.orig/src/3rdparty/chromium/third_party/perfetto/src/tracing/core/virtual_destructors.cc	2020-09-01 13:02:34.000000000 +0200
++++ qtwebengine-everywhere-src-5.15.1/src/3rdparty/chromium/third_party/perfetto/src/tracing/core/virtual_destructors.cc	2020-11-09 09:51:48.801107644 +0100
+@@ -30,8 +30,8 @@
+ Consumer::~Consumer() = default;
+ Producer::~Producer() = default;
+ TracingService::~TracingService() = default;
+-TracingService::ConsumerEndpoint::~ConsumerEndpoint() = default;
+-TracingService::ProducerEndpoint::~ProducerEndpoint() = default;
++ConsumerEndpoint::~ConsumerEndpoint() = default;
++ProducerEndpoint::~ProducerEndpoint() = default;
+ SharedMemory::~SharedMemory() = default;
+ SharedMemory::Factory::~Factory() = default;
+ SharedMemoryArbiter::~SharedMemoryArbiter() = default;

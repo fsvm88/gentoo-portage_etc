@@ -1,7 +1,6 @@
-diff -Nuar llvm.orig/CMakeLists.txt llvm/CMakeLists.txt
---- a/llvm/CMakeLists.txt	2020-10-17 12:37:19.824702608 +0200
-+++ b/llvm/CMakeLists.txt	2020-10-17 12:39:41.348093097 +0200
-@@ -832,6 +832,11 @@
+--- llvm-project-rocm-3.9.0.orig/llvm/CMakeLists.txt	2020-11-12 22:03:09.902293395 +0100
++++ llvm-project-rocm-3.9.0/llvm/CMakeLists.txt	2020-11-12 22:07:28.185294853 +0100
+@@ -824,6 +824,11 @@
    ${LLVM_INCLUDE_DIR}/llvm/Config/Targets.def
    )
  
@@ -13,7 +12,7 @@ diff -Nuar llvm.orig/CMakeLists.txt llvm/CMakeLists.txt
  # For up-to-date instructions for installing the Tensorflow dependency, refer to
  # the bot setup script: https://github.com/google/ml-compiler-opt/blob/master/buildbot/buildbot_init.sh
  # In this case, the latest C API library is available for download from
-@@ -840,9 +845,9 @@
+@@ -832,18 +837,13 @@
  # LLVM_HAVE_TF_API, through llvm-config.h, so that a user of the LLVM library may
  # also leverage the dependency.
  set(TENSORFLOW_C_LIB_PATH "" CACHE PATH "Path to TensorFlow C library install")
@@ -25,15 +24,12 @@ diff -Nuar llvm.orig/CMakeLists.txt llvm/CMakeLists.txt
    set(LLVM_HAVE_TF_API "ON" CACHE BOOL "Full Tensorflow API available")
    include_directories(${TENSORFLOW_C_LIB_PATH}/include)
  endif()
-@@ -878,11 +883,6 @@
- set_target_properties(srpm PROPERTIES FOLDER "Misc")
- 
  
 -# They are not referenced. See set_output_directory().
 -set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${LLVM_BINARY_DIR}/bin )
 -set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LLVM_BINARY_DIR}/lib${LLVM_LIBDIR_SUFFIX} )
 -set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LLVM_BINARY_DIR}/lib${LLVM_LIBDIR_SUFFIX} )
 -
- if(APPLE AND DARWIN_LTO_LIBRARY)
-   set(CMAKE_EXE_LINKER_FLAGS
-     "${CMAKE_EXE_LINKER_FLAGS} -Wl,-lto_library -Wl,${DARWIN_LTO_LIBRARY}")
+ # For up-to-date instructions for installing the Tensorflow dependency, refer to
+ # the bot setup script: https://github.com/google/ml-compiler-opt/blob/master/buildbot/buildbot_init.sh
+ # Specifically, assuming python3 is installed:

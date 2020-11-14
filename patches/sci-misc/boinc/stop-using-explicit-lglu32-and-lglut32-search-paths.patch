@@ -1,0 +1,42 @@
+diff -Nuar boinc-client_release-7.14-7.14.2.orig/m4/ax_check_glu.m4 boinc-client_release-7.14-7.14.2/m4/ax_check_glu.m4
+--- boinc-client_release-7.14-7.14.2.orig/m4/ax_check_glu.m4	2020-11-10 23:04:35.171560710 +0100
++++ boinc-client_release-7.14-7.14.2/m4/ax_check_glu.m4	2020-11-10 23:05:32.527335367 +0100
+@@ -19,7 +19,7 @@
+     else
+       ax_try_lib="${ax_lib}"
+     fi
+-    LIBS="-L${prefix}/lib ${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
++    LIBS="${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
+     #
+     # libGLU typically links with libstdc++ on POSIX platforms. However,
+     # setting the language to C++ means that test program source is named
+@@ -37,7 +37,7 @@
+ # endif
+ # include <GL/glu.h>]],
+                      [[gluBeginCurve(0)]])],
+-    [ax_cv_check_glu_libglu="-L${prefix}/lib ${ax_try_lib}"; break])
++    [ax_cv_check_glu_libglu="${ax_try_lib}"; break])
+     if test X$ax_compiler_ms = Xyes; then
+       AC_LANG_POP([C])
+     fi
+diff -Nuar boinc-client_release-7.14-7.14.2.orig/m4/ax_check_glut.m4 boinc-client_release-7.14-7.14.2/m4/ax_check_glut.m4
+--- boinc-client_release-7.14-7.14.2.orig/m4/ax_check_glut.m4	2020-11-10 23:04:35.172560705 +0100
++++ boinc-client_release-7.14-7.14.2/m4/ax_check_glut.m4	2020-11-10 23:05:51.384261278 +0100
+@@ -41,7 +41,7 @@
+     else
+       ax_try_lib="${ax_lib}"
+     fi
+-    LIBS="-L${prefix}/lib ${ax_try_lib} ${GLUT_LIBS} ${ax_save_LIBS}"
++    LIBS="${ax_try_lib} ${GLUT_LIBS} ${ax_save_LIBS}"
+     AC_LINK_IFELSE(
+     [AC_LANG_PROGRAM([[
+ #define FREEGLUT_STATIC 1
+@@ -50,7 +50,7 @@
+ # endif
+ # include <GL/glut.h>]],
+                      [[glutMainLoop()]])],
+-    [ax_cv_check_glut_libglut="-L${prefix}/lib ${ax_try_lib}"; break])
++    [ax_cv_check_glut_libglut="${ax_try_lib}"; break])
+ 
+   done
+   LIBS=${ax_save_LIBS}

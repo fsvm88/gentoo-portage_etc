@@ -95,6 +95,8 @@ net-print/cups abi_x86_32
 sys-apps/acl abi_x86_32
 sys-apps/attr abi_x86_32
 sys-apps/dbus abi_x86_32
+sys-apps/hwloc abi_x86_32
+sys-apps/pciutils abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
 sys-devel/clang abi_x86_32
@@ -109,6 +111,7 @@ sys-libs/gdbm abi_x86_32
 sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
+sys-libs/libomp abi_x86_32
 sys-libs/liburing abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/pam abi_x86_32
@@ -136,6 +139,7 @@ x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32
 x11-libs/libdrm abi_x86_32
 x11-libs/libICE abi_x86_32
+x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
 x11-libs/libva abi_x86_32
 x11-libs/libvdpau abi_x86_32

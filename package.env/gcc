@@ -1,6 +1,5 @@
 app-emulation/qemu gcc
 dev-lang/ocaml gcc
-dev-python/grpcio gcc
 dev-util/ragel gcc
 mail-mta/nullmailer gcc
 media-gfx/libimagequant gcc

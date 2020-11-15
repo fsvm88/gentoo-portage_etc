@@ -50,8 +50,8 @@ net-libs/serf
 net-misc/teamviewer
 net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo
+sci-libs/scikit-learn
 sci-libs/scikits
-sci-libs/scikits_learn
 sci-libs/tensorflow
 sci-libs/tensorflow-estimator
 sci-misc/boinc

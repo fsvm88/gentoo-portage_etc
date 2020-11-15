@@ -4,5 +4,5 @@ dev-python/joblib
 dev-python/loky
 dev-python/numpy
 dev-python/pandas
-sci-libs/scikits_learn
+sci-libs/scikit-learn
 sci-libs/tensorflow

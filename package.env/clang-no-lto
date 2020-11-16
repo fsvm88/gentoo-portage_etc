@@ -45,6 +45,8 @@ dev-util/perf clang-no-lto
 kde-frameworks/kded clang-no-lto
 kde-frameworks/kdesignerplugin clang-no-lto
 kde-plasma/drkonqi clang-no-lto
+kde-plasma/kde-cli-tools clang-no-lto
+kde-plasma/systemsettings clang-no-lto
 media-libs/libglvnd clang-no-lto
 media-libs/mlt clang-no-lto
 media-libs/vidstab clang-no-lto

@@ -4,11 +4,8 @@ app-crypt/hashcat
 app-editors/vscode-bin::jorgicio
 app-emulation/wine-mono
 app-emulation/wine-vanilla
-app-portage/euses
 dev-cpp/abseil-cpp
 dev-lang/rust
-dev-libs/hsa-ext-rocr
-dev-libs/libsecp256k1
 dev-libs/rocclr
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
@@ -16,14 +13,10 @@ dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
 dev-python/astunparse
-dev-python/cython
-dev-python/gast
 dev-python/google-auth
 dev-python/google-auth-oauthlib
 dev-python/google-pasta
-dev-python/grpcio
 dev-python/grpcio-tools
-dev-python/numpy
 dev-python/pandas
 dev-util/bazel
 dev-util/ccache
@@ -35,9 +28,7 @@ games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
 games-util/steam-networkmanager-compat
-gui-apps/swaylock
 gui-apps/wf-recorder
-gui-libs/wlroots
 gui-wm/sway
 media-sound/teamspeak-client
 net-analyzer/hydra

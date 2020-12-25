@@ -1,5 +1,8 @@
+app-admin/helm
 app-editors/vscode-bin
 app-emulation/docker-compose
+dev-dotnet/dotnetcore-sdk-bin
+dev-lang/mono
 dev-python/pylint
 dev-python/virtualenv
 dev-util/cloc
@@ -10,6 +13,7 @@ dev-util/perf
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
+dev-vcs/git-flow
 dev-vcs/tig
 sys-devel/crossdev
 sys-devel/gdb

@@ -27,9 +27,10 @@ games-util/steam-client-meta
 games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
-games-util/steam-networkmanager-compat
 gui-apps/wf-recorder
+gui-libs/display-manager-init
 gui-wm/sway
+media-gfx/ocrmypdf
 media-sound/teamspeak-client
 net-analyzer/hydra
 net-analyzer/nmap
@@ -47,6 +48,7 @@ sci-libs/tensorflow
 sci-libs/tensorflow-estimator
 sci-misc/boinc
 sci-visualization/tensorboard
+sys-apps/fwupd
 sys-apps/portage
 sys-devel/crossdev **
 sys-devel/llvm-roc
@@ -58,3 +60,5 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/rust
 www-client/firefox
+x11-apps/radeon-profile
+x11-apps/radeon-profile-daemon

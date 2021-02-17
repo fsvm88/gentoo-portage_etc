@@ -1,3 +1,4 @@
+dev-lang/python clang-no-lto
 dev-lang/spidermonkey clang-no-lto
 dev-libs/libffi clang-no-lto
 dev-libs/weston clang-no-lto

@@ -8,3 +8,4 @@ media-video/mpv
 media-video/smplayer
 media-video/vlc
 x11-apps/mesa-progs
+x11-misc/adriconf

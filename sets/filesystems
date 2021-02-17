@@ -1,5 +1,6 @@
 app-arch/hardlink
 app-misc/fdupes
+sys-boot/woeusb
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools

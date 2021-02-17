@@ -1,0 +1,8 @@
+CC="gcc"
+CXX="g++"
+CFLAGS="-O2 -march=native -pipe"
+CXXFLAGS="${CFLAGS}"
+LDFLAGS="-Wl,-O1,-z,now,--as-needed"
+AR="ar"
+NM="nm"
+RANLIB="ranlib"

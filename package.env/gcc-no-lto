@@ -5,7 +5,6 @@ dev-libs/elfutils gcc-no-lto
 dev-libs/json-glib gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto
 dev-python/grpcio gcc-no-lto
-dev-qt/qtwebkit gcc-no-lto
 media-libs/dav1d gcc-no-lto
 media-libs/openal gcc-no-lto
 media-libs/x264 gcc-no-lto

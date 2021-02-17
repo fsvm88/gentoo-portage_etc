@@ -21,12 +21,14 @@ dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
 dev-libs/libdbusmenu-qt -qt4
-dev-libs/libpcre2 pcre16
+dev-libs/libpcre2 pcre16 pcre32
 dev-libs/libpcre pcre16
+dev-libs/libsecp256k1 precompute-ecmult
 dev-libs/libxml2 python
 dev-libs/protobuf python
 dev-libs/weston wayland-compositor xwayland
 dev-libs/xmlsec nss
+dev-perl/DBD-mysql mysql
 dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/numpy lapack
@@ -69,7 +71,7 @@ media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome
 media-sound/pulseaudio native-headset
-media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/dnsmasq script
@@ -78,6 +80,7 @@ net-fs/cifs-utils -acl
 net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
+net-libs/libnm-glib abi_x86_32
 net-libs/nodejs inspector
 net-libs/webkit-gtk gles2
 net-misc/curl -adns
@@ -100,6 +103,7 @@ sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp
 sys-devel/llvm gold udis86
 sys-devel/llvm-roc runtime
+sys-kernel/linux-firmware savedconfig
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcxx libcxxabi libunwind -libcxxrt

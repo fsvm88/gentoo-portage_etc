@@ -13,6 +13,7 @@ net-dialup/xl2tpd gcc
 net-firewall/conntrack-tools gcc
 net-libs/libnetfilter_conntrack gcc
 net-libs/libnetfilter_queue gcc
+net-libs/libnm-glib gcc
 sys-apps/busybox gcc
 sys-boot/efibootmgr gcc
 sys-boot/grub gcc

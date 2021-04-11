@@ -33,6 +33,7 @@ dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/numpy lapack
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
+dev-python/QtPy printsupport
 dev-qt/designer -phonon
 dev-qt/qtgui accessibility eglfs evdev libinput
 dev-qt/qtmultimedia widgets
@@ -44,6 +45,7 @@ dev-util/lldb lzma
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
+gui-libs/wlroots x11-backend
 kde-plasma/kwin multimedia
 kde-plasma/plasma-workspace qalculate
 media-gfx/exiv2 xmp
@@ -83,6 +85,7 @@ net-libs/gtk-vnc python
 net-libs/libnm-glib abi_x86_32
 net-libs/nodejs inspector
 net-libs/webkit-gtk gles2
+net-libs/zeromq drafts
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/networkmanager resolvconf -bluetooth -dhclient -modemmanager -ppp

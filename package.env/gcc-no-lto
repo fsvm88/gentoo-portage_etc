@@ -1,6 +1,7 @@
 app-crypt/hashcat gcc-no-lto
 app-emulation/wine-vanilla gcc-no-lto
 dev-cpp/clucene gcc-no-lto
+dev-libs/crypto++ gcc-no-lto
 dev-libs/elfutils gcc-no-lto
 dev-libs/json-glib gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto
@@ -12,6 +13,7 @@ media-sound/pulseaudio gcc-no-lto
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-firewall/conntrack-tools gcc-no-lto
+net-p2p/amule gcc-no-lto
 net-wireless/cowpatty gcc-no-lto
 net-wireless/crda gcc-no-lto
 sci-libs/lapack gcc-no-lto

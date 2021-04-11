@@ -3,6 +3,7 @@ app-editors/vscode-bin
 app-emulation/docker-compose
 dev-dotnet/dotnetcore-sdk-bin
 dev-lang/mono
+dev-python/notebook
 dev-python/pylint
 dev-python/virtualenv
 dev-util/ccache
@@ -11,11 +12,13 @@ dev-util/lldb
 dev-util/meld
 dev-util/patchutils
 dev-util/perf
+dev-util/shellcheck-bin
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
 dev-vcs/git-flow
 dev-vcs/tig
+net-misc/postman-bin
 sys-devel/crossdev
 sys-devel/gdb
 sys-libs/ncurses-compat

@@ -17,10 +17,13 @@ dev-libs/glib abi_x86_32
 dev-libs/gmp abi_x86_32
 dev-libs/icu abi_x86_32
 dev-libs/libaio abi_x86_32
+dev-libs/libappindicator abi_x86_32
 dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
+dev-libs/libdbusmenu abi_x86_32
 dev-libs/libevent abi_x86_32
 dev-libs/libffi abi_x86_32
+dev-libs/libindicator abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libunistring abi_x86_32
@@ -86,9 +89,11 @@ media-sound/lame abi_x86_32
 media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 net-dns/avahi abi_x86_32
+net-dns/libidn2 abi_x86_32
 net-fs/samba abi_x86_32
 net-libs/gnutls abi_x86_32
 net-libs/libasyncns abi_x86_32
+net-libs/libndp abi_x86_32
 net-libs/libnsl abi_x86_32
 net-libs/libssh2 abi_x86_32
 net-libs/libssh abi_x86_32
@@ -116,6 +121,7 @@ sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32
 sys-libs/libcap abi_x86_32
 sys-libs/libomp abi_x86_32
+sys-libs/libudev-compat abi_x86_32
 sys-libs/liburing abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/pam abi_x86_32
@@ -146,6 +152,7 @@ x11-libs/libICE abi_x86_32
 x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
 x11-libs/libva abi_x86_32
+x11-libs/libva-compat abi_x86_32
 x11-libs/libvdpau abi_x86_32
 x11-libs/libX11 abi_x86_32
 x11-libs/libXau abi_x86_32

@@ -2,6 +2,7 @@ app-office/libreoffice
 dev-libs/weston
 gui-libs/display-manager-init
 kde-plasma/plasma-meta
+media-fonts/fonts-meta
 media-sound/teamspeak-client
 media-video/libva-utils
 media-video/simplescreenrecorder

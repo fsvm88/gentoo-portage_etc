@@ -3,6 +3,7 @@ net-im/slack
 net-im/teams
 net-misc/remmina
 net-misc/tigervnc
+net-vpn/networkmanager-fortisslvpn
 net-vpn/networkmanager-l2tp
 net-vpn/networkmanager-openconnect
 net-vpn/vpnc

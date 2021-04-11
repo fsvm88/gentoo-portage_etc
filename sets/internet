@@ -6,6 +6,7 @@ net-analyzer/tcptraceroute
 net-analyzer/traceroute
 net-analyzer/wireshark
 net-dns/bind-tools
+net-dns/knot
 net-ftp/lftp
 net-ftp/ncftp
 net-libs/miniupnpc

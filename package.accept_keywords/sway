@@ -1,2 +1,4 @@
-media-sound/playerctl
+app-text/scdoc **
+gui-libs/wlroots **
+gui-wm/sway **
 x11-misc/dmenu

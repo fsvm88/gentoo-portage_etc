@@ -22,6 +22,7 @@ kde-plasma/plasma-desktop touchpad
 kde-plasma/plasma-meta -crypt
 kde-plasma/plasma-meta thunderbolt
 kde-plasma/powerdevil brightness-control
+media-fonts/fonts-meta ms
 media-gfx/sane-frontends gimp
 media-libs/opencv lto -gtk3
 media-video/mplayer bluray faac

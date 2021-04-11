@@ -44,7 +44,6 @@ dev-qt/qtxmlpatterns clang-no-lto
 dev-util/bazel clang-no-lto
 dev-util/perf clang-no-lto
 kde-frameworks/kded clang-no-lto
-kde-frameworks/kdesignerplugin clang-no-lto
 kde-plasma/drkonqi clang-no-lto
 kde-plasma/kde-cli-tools clang-no-lto
 kde-plasma/systemsettings clang-no-lto
@@ -52,6 +51,7 @@ media-libs/libglvnd clang-no-lto
 media-libs/mlt clang-no-lto
 media-libs/vidstab clang-no-lto
 media-video/mpv clang-no-lto
+net-analyzer/hydra clang-no-lto
 net-firewall/conntrack-tools clang-no-lto
 net-libs/libnetfilter_conntrack clang-no-lto
 net-libs/libnetfilter_cthelper clang-no-lto

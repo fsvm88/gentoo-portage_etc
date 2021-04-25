@@ -19,5 +19,4 @@ net-wireless/crda gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-fs/fuse gcc-no-lto
 sys-libs/glibc gcc-no-lto
-www-client/firefox gcc-no-lto
 x11-base/xorg-server gcc-no-lto

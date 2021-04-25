@@ -37,6 +37,7 @@ media-fonts/heuristica
 media-fonts/paratype
 media-fonts/signika
 media-gfx/ocrmypdf
+media-video/pipewire
 net-analyzer/hydra
 net-analyzer/nmap
 net-im/slack

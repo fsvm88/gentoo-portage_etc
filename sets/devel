@@ -15,9 +15,11 @@ dev-util/perf
 dev-util/shellcheck-bin
 dev-util/strace
 dev-util/valgrind
+dev-vcs/bfg
 dev-vcs/git
 dev-vcs/git-flow
 dev-vcs/tig
+media-gfx/graphviz
 net-misc/postman-bin
 sys-devel/crossdev
 sys-devel/gdb

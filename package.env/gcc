@@ -1,6 +1,7 @@
 app-emulation/qemu gcc
 dev-dotnet/libgdiplus gcc
 dev-lang/ocaml gcc
+dev-libs/ell gcc
 dev-util/colm gcc
 dev-util/ragel gcc
 mail-mta/nullmailer gcc

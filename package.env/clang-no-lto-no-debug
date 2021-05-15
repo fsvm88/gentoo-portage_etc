@@ -1,3 +1,2 @@
 dev-qt/qtwebengine clang-no-lto-no-debug
 sci-libs/tensorflow clang-no-lto-no-debug
-www-client/chromium clang-no-lto-no-debug

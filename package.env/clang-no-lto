@@ -47,6 +47,7 @@ kde-frameworks/kded clang-no-lto
 kde-plasma/drkonqi clang-no-lto
 kde-plasma/kde-cli-tools clang-no-lto
 kde-plasma/systemsettings clang-no-lto
+media-gfx/imagemagick clang-no-lto
 media-libs/libglvnd clang-no-lto
 media-libs/mlt clang-no-lto
 media-libs/vidstab clang-no-lto
@@ -61,6 +62,7 @@ net-misc/rsync clang-no-lto
 sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto
+sys-devel/llvm-roc clang-no-lto
 sys-libs/ncurses-compat clang-no-lto
 sys-process/numactl clang-no-lto
 x11-libs/pango clang-no-lto

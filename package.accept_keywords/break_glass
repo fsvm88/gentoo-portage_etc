@@ -5,6 +5,7 @@
 <app-misc/ddcutil-1.0.0
 <app-text/opensp-1.5.2-r99
 <app-text/tessdata_best-5
+=dev-cpp/abseil-cpp-20200923.3
 <dev-db/postgresql-14
 <dev-dotnet/dotnetcore-sdk-bin-5.0.999
 <dev-dotnet/dotnetcore-sdk-bin-common-5.0.999
@@ -31,12 +32,14 @@
 <dev-util/colm-0.15
 <dev-util/glslang-11
 <dev-util/lldb-13
+<dev-util/perf-5.13
 <dev-util/perf-5.9
 <dev-util/ragel-7.1
 <dev-util/spirv-headers-1.6
 <dev-util/spirv-tools-2021.12
 <games-util/game-device-udev-rules-20201231
 <media-gfx/gscan2pdf-2.12
+<media-gfx/imagemagick-7.0.12
 <media-gfx/img2pdf-0.4
 <media-libs/avidemux-core-2.8
 <media-libs/avidemux-plugins-2.8

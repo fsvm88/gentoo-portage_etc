@@ -3,7 +3,6 @@ app-arch/zstd
 app-editors/vscode-bin::jorgicio
 app-emulation/wine-mono
 app-emulation/wine-vanilla
-dev-cpp/abseil-cpp
 dev-lang/rust
 dev-libs/rocclr
 dev-libs/rocm-comgr

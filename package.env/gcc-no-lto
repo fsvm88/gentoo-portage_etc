@@ -13,10 +13,13 @@ media-sound/pulseaudio gcc-no-lto
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-firewall/conntrack-tools gcc-no-lto
+net-libs/grpc gcc-no-lto
+net-misc/x11-ssh-askpass gcc-no-lto
 net-p2p/amule gcc-no-lto
 net-wireless/cowpatty gcc-no-lto
 net-wireless/crda gcc-no-lto
 sci-libs/lapack gcc-no-lto
+sys-devel/gcc gcc-no-lto
 sys-fs/fuse gcc-no-lto
 sys-libs/glibc gcc-no-lto
 x11-base/xorg-server gcc-no-lto

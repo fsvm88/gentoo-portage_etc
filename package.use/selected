@@ -26,6 +26,7 @@ media-fonts/fonts-meta ms
 media-gfx/graphviz python
 media-gfx/sane-frontends gimp
 media-libs/opencv lto -gtk3
+media-libs/opencv python
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc sdl-image sftp soxr speex tremor twolame vpx

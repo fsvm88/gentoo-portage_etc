@@ -19,6 +19,7 @@ dev-python/pandas
 dev-util/bazel
 dev-util/ccache
 dev-util/clinfo
+dev-util/hip
 dev-util/rocm-cmake
 dev-util/rocminfo
 games-util/steam-client-meta

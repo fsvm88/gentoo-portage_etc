@@ -15,7 +15,7 @@
 <dev-lang/python-3.9.6
 <dev-libs/libappindicator-12.11
 <dev-libs/libsecp256k1-0.2
-<dev-libs/plasma-wayland-protocols-1.2.2
+<dev-libs/plasma-wayland-protocols-1.4
 <dev-libs/protobuf-3.16
 <dev-libs/re2-0.2021.12.31
 <dev-perl/Gtk3-ImageView-6.1

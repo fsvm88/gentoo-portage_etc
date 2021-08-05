@@ -6,8 +6,6 @@ app-crypt/pinentry gnome-keyring
 app-crypt/qca -qt4
 app-emulation/libvirt-glib python
 app-emulation/libvirt nfs
-app-emulation/qemu nfs
-app-emulation/qemu virgl
 app-text/tesseract osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
@@ -64,6 +62,7 @@ media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
 media-libs/mesa -opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
+media-libs/mlt jack fftw
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
 media-libs/vulkan-loader layers
@@ -77,6 +76,7 @@ media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdr
 media-video/pipewire aptx extra ldac
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
+net-dns/avahi python
 net-dns/dnsmasq script
 net-firewall/iptables conntrack netlink
 net-fs/cifs-utils -acl
@@ -89,7 +89,7 @@ net-libs/webkit-gtk gles2
 net-libs/zeromq drafts
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
-net-misc/networkmanager resolvconf -bluetooth -dhclient -modemmanager -ppp
+net-misc/networkmanager resolvconf -bluetooth -modemmanager -ppp
 net-misc/spice-gtk -gstreamer python usbredir
 net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks
@@ -104,7 +104,7 @@ sys-auth/polkit-qt -qt4
 sys-boot/grub mount
 sys-devel/binutils cxx
 sys-devel/clang-runtime libcxx
-sys-devel/gcc graphite lto pie pgo ssp
+sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-devel/llvm gold udis86
 sys-devel/llvm-roc runtime
 sys-kernel/linux-firmware savedconfig
@@ -114,7 +114,8 @@ sys-libs/libcxx libcxxabi libunwind -libcxxrt
 sys-libs/libomp hwloc
 sys-libs/libomp offload
 sys-libs/libunwind debug-frame libatomic
-sys-libs/ncurses tinfo
+sys-libs/libxcrypt static-libs
+sys-libs/ncurses static-libs tinfo
 sys-libs/talloc python
 sys-libs/tdb python
 sys-libs/tevent python

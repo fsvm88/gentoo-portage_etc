@@ -15,7 +15,10 @@ net-firewall/conntrack-tools gcc
 net-libs/libnetfilter_conntrack gcc
 net-libs/libnetfilter_queue gcc
 net-libs/libnm-glib gcc
+sci-mathematics/gmp-ecm gcc
+sci-mathematics/yafu gcc
 sys-apps/busybox gcc
+sys-apps/fwupd-efi gcc
 sys-boot/efibootmgr gcc
 sys-boot/grub gcc
 sys-libs/db gcc

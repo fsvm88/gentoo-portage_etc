@@ -17,6 +17,7 @@ net-ftp/tftp-hpa
 net-misc/chrony
 net-misc/wakeonlan
 net-nds/openldap
+net-vpn/wireguard-tools
 sys-apps/fwupd
 sys-apps/hdparm
 sys-apps/man-pages

@@ -1,6 +1,7 @@
 app-admin/helm
 app-editors/vscode-bin
 app-emulation/docker-compose
+app-misc/mosquitto
 dev-dotnet/dotnetcore-sdk-bin
 dev-lang/mono
 dev-python/notebook

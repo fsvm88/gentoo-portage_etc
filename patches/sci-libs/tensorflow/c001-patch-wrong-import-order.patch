@@ -1,0 +1,13 @@
+diff -Nuar tensorflow-2.5.0.orig/tensorflow/python/__init__.py tensorflow-2.5.0/tensorflow/python/__init__.py
+--- tensorflow-2.5.0.orig/tensorflow/python/__init__.py	2021-05-12 15:26:41.000000000 +0200
++++ tensorflow-2.5.0/tensorflow/python/__init__.py	2021-07-11 20:46:58.405387423 +0200
+@@ -37,8 +37,8 @@
+ # go/tf-wildcard-import
+ # pylint: disable=wildcard-import,g-bad-import-order,g-import-not-at-top
+ 
+-from tensorflow.python.eager import context
+ from tensorflow.python import pywrap_tensorflow as _pywrap_tensorflow
++from tensorflow.python.eager import context
+ 
+ # pylint: enable=wildcard-import
+ 

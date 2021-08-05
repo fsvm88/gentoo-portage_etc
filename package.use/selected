@@ -2,8 +2,7 @@ app-admin/testdisk ntfs reiserfs
 app-editors/vim python
 app-emulation/docker overlay
 app-emulation/libvirt virt-network
-app-emulation/qemu io-uring
-app-emulation/qemu spice usbredir
+app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs
 app-emulation/wine-vanilla vkd3d -unwind
 app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
@@ -53,5 +52,5 @@ sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
 virtual/wine -d3d9 -staging
-www-client/firefox clang custom-cflags custom-optimization hardened lto system-harfbuzz system-jpeg system-libevent system-sqlite pgo wifi startup-notification screencast
+www-client/firefox clang custom-cflags custom-optimization hardened lto system-harfbuzz pgo system-jpeg system-libevent system-sqlite wifi startup-notification screencast
 x11-apps/mesa-progs gles2

@@ -1,5 +1,6 @@
-dev-python/awscli
+app-admin/awscli
 media-sound/teamspeak-client
+# move dev-python/awscli app-admin/awscli
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/tcptraceroute

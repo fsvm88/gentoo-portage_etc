@@ -1,0 +1,12 @@
+diff -Nuar a/src/libixion/model_context.cpp b/src/libixion/model_context.cpp
+--- a/src/libixion/model_context.cpp	2020-08-28 23:23:48.000000000 +0200
++++ b/src/libixion/model_context.cpp	2021-06-02 17:46:19.398203870 +0200
+@@ -17,7 +17,7 @@
+ 
+ namespace ixion {
+ 
+-model_context::input_cell::input_cell(nullptr_t) : type(celltype_t::empty) {}
++model_context::input_cell::input_cell(std::nullptr_t) : type(celltype_t::empty) {}
+ model_context::input_cell::input_cell(bool b) : type(celltype_t::boolean)
+ {
+     value.boolean = b;

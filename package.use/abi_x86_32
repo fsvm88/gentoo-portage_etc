@@ -26,6 +26,7 @@ dev-libs/libffi abi_x86_32
 dev-libs/libindicator abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libtasn1 abi_x86_32
+dev-libs/libudfread abi_x86_32
 dev-libs/libunistring abi_x86_32
 dev-libs/libusb abi_x86_32
 dev-libs/libusb-compat abi_x86_32
@@ -89,6 +90,7 @@ media-plugins/alsa-plugins abi_x86_32
 media-sound/lame abi_x86_32
 media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
+media-video/pipewire abi_x86_32
 net-dns/avahi abi_x86_32
 net-dns/libidn2 abi_x86_32
 net-fs/samba abi_x86_32
@@ -124,6 +126,7 @@ sys-libs/libcap abi_x86_32
 sys-libs/libomp abi_x86_32
 sys-libs/libudev-compat abi_x86_32
 sys-libs/liburing abi_x86_32
+sys-libs/libxcrypt abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/pam abi_x86_32
 sys-libs/readline abi_x86_32

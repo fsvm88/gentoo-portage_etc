@@ -42,7 +42,7 @@ net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sci-libs/tensorflow opencl python rocm xla
-sys-apps/fwupd gnutls nvme thunderbolt tpm uefi
+sys-apps/fwupd gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
 sys-devel/clang default-lld

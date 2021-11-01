@@ -1,6 +1,7 @@
 dev-lang/python clang-no-lto
 dev-lang/spidermonkey clang-no-lto
 dev-libs/libffi clang-no-lto
+dev-libs/rocr-runtime clang-no-lto
 dev-libs/weston clang-no-lto
 dev-python/numpy clang-no-lto
 dev-python/scipy clang-no-lto
@@ -11,6 +12,7 @@ kde-plasma/drkonqi clang-no-lto
 kde-plasma/kde-cli-tools clang-no-lto
 kde-plasma/systemsettings clang-no-lto
 media-gfx/imagemagick clang-no-lto
+media-libs/alsa-lib clang-no-lto
 media-libs/libglvnd clang-no-lto
 media-libs/mlt clang-no-lto
 media-libs/vidstab clang-no-lto
@@ -27,8 +29,10 @@ net-misc/rsync clang-no-lto
 sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto
+sys-apps/pciutils clang-no-lto
 sys-apps/sandbox clang-no-lto
 sys-devel/llvm-roc clang-no-lto
+sys-libs/libxcrypt clang-no-lto
 sys-libs/ncurses-compat clang-no-lto
 sys-process/numactl clang-no-lto
 x11-libs/pango clang-no-lto

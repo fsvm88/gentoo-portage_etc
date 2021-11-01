@@ -8,6 +8,7 @@ mail-mta/nullmailer gcc
 media-gfx/libimagequant gcc
 media-libs/ftgl gcc
 media-libs/libass gcc
+media-libs/vulkan-layers gcc
 media-libs/xvid gcc
 media-sound/audacity gcc
 net-dialup/xl2tpd gcc

@@ -1,9 +1,3 @@
 dev-libs/libsecp256k1
-dev-python/h5py
-dev-python/joblib
-dev-python/loky
 dev-python/numpy
 dev-python/pandas
-dev-util/hip
-sci-libs/scikit-learn
-sci-libs/tensorflow

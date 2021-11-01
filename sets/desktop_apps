@@ -19,5 +19,3 @@ kde-apps/zeroconf-ioslave
 media-sound/pavucontrol
 net-print/hplip-plugin
 sys-power/acpilight
-x11-apps/radeon-profile
-x11-apps/radeon-profile-daemon

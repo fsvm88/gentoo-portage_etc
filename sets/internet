@@ -1,13 +1,11 @@
 app-admin/awscli
 media-sound/teamspeak-client
-# move dev-python/awscli app-admin/awscli
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/tcptraceroute
 net-analyzer/traceroute
 net-analyzer/wireshark
 net-dns/bind-tools
-net-dns/knot
 net-ftp/lftp
 net-ftp/ncftp
 net-libs/miniupnpc

@@ -2,4 +2,5 @@ app-emulation/docker
 app-emulation/lxc
 app-emulation/virt-manager
 app-emulation/virt-viewer
+app-emulation/winetricks
 app-emulation/wine-vanilla

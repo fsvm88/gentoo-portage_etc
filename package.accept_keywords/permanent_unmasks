@@ -14,7 +14,6 @@ dev-python/astunparse
 dev-python/google-auth
 dev-python/google-auth-oauthlib
 dev-python/google-pasta
-dev-python/grpcio-tools
 dev-python/pandas
 dev-util/bazel
 dev-util/ccache
@@ -43,7 +42,6 @@ net-analyzer/nmap
 net-im/slack
 net-im/teams
 net-libs/google-cloud-cpp
-net-libs/grpc
 net-misc/teamviewer
 net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo

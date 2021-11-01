@@ -61,7 +61,7 @@ media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libvpx postproc svc
-media-libs/mesa -opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
+media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/mlt jack fftw
 media-libs/phonon-gstreamer -qt4
 media-libs/phonon -qt4
@@ -73,7 +73,7 @@ media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome
 media-sound/pulseaudio native-headset
 media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
-media-video/pipewire aptx extra ldac
+media-video/pipewire aptx echo-cancel extra ldac
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/avahi python

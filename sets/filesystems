@@ -1,4 +1,3 @@
-app-arch/hardlink
 app-misc/fdupes
 sys-boot/woeusb
 sys-fs/btrfs-progs

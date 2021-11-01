@@ -44,7 +44,7 @@ dev-python/subunit abi_x86_32
 dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
 dev-util/glslang abi_x86_32
-dev-util/pkgconfig abi_X86_32
+dev-util/pkgconfig abi_x86_32
 dev-util/spirv-tools abi_x86_32
 dev-util/wayland-scanner abi_x86_32
 gnome-base/librsvg abi_x86_32
@@ -141,7 +141,6 @@ virtual/glu abi_x86_32
 virtual/jpeg abi_x86_32
 virtual/libcrypt abi_x86_32
 virtual/libelf abi_x86_32
-virtual/libffi abi_x86_32
 virtual/libiconv abi_x86_32
 virtual/libintl abi_x86_32
 virtual/libudev abi_x86_32

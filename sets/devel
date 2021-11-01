@@ -1,5 +1,5 @@
 app-admin/helm
-app-editors/vscode-bin
+app-editors/vscode
 app-emulation/docker-compose
 app-misc/mosquitto
 dev-lang/mono

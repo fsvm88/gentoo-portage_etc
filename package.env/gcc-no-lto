@@ -10,7 +10,6 @@ media-libs/dav1d gcc-no-lto
 media-libs/openal gcc-no-lto
 media-libs/x264 gcc-no-lto
 media-sound/pulseaudio gcc-no-lto
-media-tv/xawtv gcc-no-lto
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-firewall/conntrack-tools gcc-no-lto

@@ -44,7 +44,6 @@ dev-python/subunit abi_x86_32
 dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
 dev-util/glslang abi_x86_32
-dev-util/pkgconfig abi_x86_32
 dev-util/spirv-tools abi_x86_32
 dev-util/wayland-scanner abi_x86_32
 gnome-base/librsvg abi_x86_32

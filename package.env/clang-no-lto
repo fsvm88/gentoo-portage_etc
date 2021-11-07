@@ -14,6 +14,7 @@ kde-plasma/systemsettings clang-no-lto
 media-gfx/imagemagick clang-no-lto
 media-libs/alsa-lib clang-no-lto
 media-libs/libglvnd clang-no-lto
+media-libs/libwebp clang-no-lto
 media-libs/mlt clang-no-lto
 media-libs/vidstab clang-no-lto
 media-video/mpv clang-no-lto

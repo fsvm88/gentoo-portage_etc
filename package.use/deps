@@ -88,7 +88,7 @@ net-libs/webkit-gtk gles2
 net-libs/zeromq drafts
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
-net-misc/networkmanager resolvconf -bluetooth -modemmanager -ppp
+net-misc/networkmanager -resolvconf -bluetooth -modemmanager -ppp
 net-misc/spice-gtk -gstreamer python usbredir
 net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks

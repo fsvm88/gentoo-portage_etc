@@ -1,7 +1,6 @@
 app-admin/helm
 app-editors/vscode
 app-emulation/docker-compose
-app-misc/mosquitto
 dev-lang/mono
 dev-python/notebook
 dev-python/pylint

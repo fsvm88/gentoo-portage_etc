@@ -1,4 +1,4 @@
-<app-editors/vscode-1.62
+<app-editors/vscode-1.99
 <app-misc/ddcutil-1.0.0
 <app-text/opensp-1.5.2-r99
 <app-text/tessdata_best-5
@@ -13,12 +13,15 @@
 <dev-libs/plasma-wayland-protocols-1.5
 <dev-libs/wayland-protocols-1.24
 <dev-perl/Gtk3-ImageView-11
+<dev-python/capturer-3.1
 <dev-python/coloredlogs-16
 <dev-python/humanfriendly-11
 <dev-python/importlib_resources-5.5
 <dev-python/lit-14
 <dev-python/notebook-7
+<dev-python/pdfrw-0.5
 <dev-python/pikepdf-4.1
+<dev-python/verboselogs-1.8
 <dev-qt/qtchooser-67
 <dev-ruby/bundler-2.2.26
 <dev-util/colm-0.15
@@ -68,6 +71,7 @@
 <sys-devel/llvm-common-14
 <sys-devel/llvmgold-14
 <sys-fs/fuse-3.11
+<sys-kernel/genkernel-4.2.7
 <sys-kernel/gentoo-sources-5.15
 <sys-libs/binutils-libs-2.36
 <sys-libs/compiler-rt-14

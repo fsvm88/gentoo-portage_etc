@@ -1,25 +1,35 @@
 app-crypt/hashcat gcc-no-lto
 app-emulation/wine-vanilla gcc-no-lto
 dev-cpp/clucene gcc-no-lto
+dev-cpp/doctest gcc-no-lto
 dev-libs/crypto++ gcc-no-lto
 dev-libs/elfutils gcc-no-lto
+dev-libs/glib gcc-no-lto # fails tests otherwise
 dev-libs/json-glib gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto
+dev-python/cffi gcc-no-lto
 dev-python/grpcio gcc-no-lto
+gnome-base/gnome-keyring gcc-no-lto
+kde-frameworks/kjs gcc-no-lto
 media-libs/dav1d gcc-no-lto
+media-libs/harfbuzz gcc-no-lto
+media-libs/libglvnd gcc-no-lto # fails tests otherwise
 media-libs/openal gcc-no-lto
 media-libs/x264 gcc-no-lto
 media-sound/pulseaudio gcc-no-lto
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-firewall/conntrack-tools gcc-no-lto
+net-fs/samba gcc-no-lto
 net-libs/grpc gcc-no-lto
 net-libs/libnm-glib gcc-no-lto
+net-misc/networkmanager gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
 net-p2p/amule gcc-no-lto
 net-wireless/cowpatty gcc-no-lto
 net-wireless/crda gcc-no-lto
 sci-libs/lapack gcc-no-lto
+sci-libs/umfpack gcc-no-lto
 sys-auth/elogind gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-fs/fuse gcc-no-lto

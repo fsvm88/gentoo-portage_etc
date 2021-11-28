@@ -1,0 +1,20 @@
+app-admin/syslog-ng python
+app-arch/brotli python
+app-crypt/p11-kit abi_x86_32
+dev-lang/tcl abi_x86_32
+dev-libs/json-glib abi_x86_32
+dev-libs/libzip tools
+dev-libs/nss utils
+dev-libs/weston headless
+dev-python/QtPy testlib
+dev-util/cunit abi_x86_32
+media-gfx/fontforge python
+media-gfx/imagemagick corefonts
+media-gfx/imagemagick postscript
+media-gfx/sane-backends sane_backends_test
+media-libs/babl introspection
+media-libs/gegl introspection
+media-libs/gexiv2 python
+media-libs/soxr examples
+net-libs/gnutls tools pkcs11
+sci-libs/adolc sparse

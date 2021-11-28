@@ -1,0 +1,129 @@
+app-crypt/hashcat no-tests
+app-editors/vim no-tests # fails regardless
+app-emulation/qemu no-tests
+app-emulation/wine-vanilla no-tests
+app-shells/bash-completion no-tests # broken test suite
+app-text/docbook2X no-tests # broken test suite
+dev-cpp/abseil-cpp no-tests # broken LSAN test
+dev-cpp/clucene no-tests
+dev-cpp/eigen no-tests # fails regardless
+dev-db/sqlite no-tests # stuff does not even build for whatever reason
+dev-dotnet/libgdiplus no-tests
+dev-lang/mono no-tests
+dev-lang/ocaml no-tests
+dev-lang/ruby no-tests
+dev-lang/tcl no-tests
+dev-libs/crypto++ no-tests
+dev-libs/elfutils no-tests
+dev-libs/ell no-tests
+dev-libs/json-glib no-tests
+dev-libs/libgcrypt no-tests
+dev-libs/weston no-tests # fails regardless
+dev-lua/kyua no-tests
+dev-lua/lutok no-tests
+dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
+dev-python/aiohttp no-tests
+dev-python/argh no-tests # fails regardless
+dev-python/async_timeout no-tests
+dev-python/beautifulsoup4 no-tests
+dev-python/cucumber-wire no-tests
+dev-python/cython no-tests # fails in every conceivable way
+dev-python/expects no-tests
+dev-python/flaky no-tests
+dev-python/grpcio no-tests
+dev-python/iniconfig no-tests
+dev-python/ipyparallel no-tests # dependency fails
+dev-python/ipython no-tests # fails regardless
+dev-python/jedi no-tests
+dev-python/jupyter-client no-tests
+dev-python/mamba no-tests
+dev-python/matplotlib no-tests # fails regardless
+dev-python/ocrmypdf no-tests
+dev-python/pikepdf no-tests
+dev-python/pluggy no-tests
+dev-python/psutil no-tests # fails regardless
+dev-python/pycurl no-tests # broken test suite
+dev-python/pyfakefs no-tests # fails regardless
+dev-python/pygobject no-tests # fails regardless
+dev-python/PyQt5 no-tests
+dev-python/pytest-cov no-tests
+dev-python/pytest no-tests
+dev-python/pytest-xprocess no-tests # fails regardless
+dev-python/python-dbusmock no-tests # fails regardless
+dev-python/pyzmq no-tests
+dev-python/QtPy no-tests
+dev-python/scipy no-tests # fails regardless
+dev-python/soupsieve no-tests
+dev-python/sphinxcontrib-* no-tests
+dev-python/sphinx no-tests
+dev-python/statsmodels no-tests # fails regardless
+dev-qt/* no-tests
+dev-ruby/diff-lcs no-tests
+dev-ruby/rspec* no-tests
+dev-ruby/rubygems no-tests # fails regardless
+dev-util/cmake no-tests # fails same across clang and gcc
+dev-util/colm no-tests
+dev-util/ctags no-tests # fails regardless
+dev-util/cucumber no-tests
+dev-util/cucumber-wire no-tests
+dev-util/ragel no-tests
+dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
+kde-frameworks/kquickcharts no-tests # fails regardless
+mail-mta/nullmailer no-tests
+media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
+media-gfx/libimagequant no-tests
+media-gfx/ocrmypdf no-tests
+media-libs/dav1d no-tests
+media-libs/ftgl no-tests
+media-libs/gst-plugins-base no-tests # fails regardless
+media-libs/libass no-tests
+media-libs/libepoxy no-tests # fails in every conceivable way
+media-libs/libplacebo no-tests # fails regardless, opengl test
+media-libs/mesa no-tests # not required, lengthy
+media-libs/openal no-tests
+media-libs/vulkan-layers no-tests
+media-libs/x264 no-tests
+media-libs/xvid no-tests
+media-sound/audacity no-tests
+media-sound/pulseaudio no-tests
+media-video/ffmpeg no-tests
+net-dialup/ppp no-tests
+net-dialup/xl2tpd no-tests
+net-firewall/conntrack-tools no-tests
+net-fs/samba no-tests # fails regardless
+net-libs/gnutls no-tests # fails regardless
+net-libs/grpc no-tests
+net-libs/libnetfilter_conntrack no-tests
+net-libs/libnetfilter_queue no-tests
+net-libs/libnm-glib no-tests
+net-libs/nodejs no-tests # as expected of JS, tests are broken
+net-misc/x11-ssh-askpass no-tests
+net-p2p/amule no-tests
+net-wireless/cowpatty no-tests
+net-wireless/crda no-tests
+sci-libs/lapack no-tests
+sci-libs/pastix no-tests # tons of sandbox violation when attempting to run tests
+sci-mathematics/gmp-ecm no-tests
+sci-mathematics/yafu no-tests
+sys-apps/busybox no-tests
+sys-apps/coreutils no-tests # fails tests regardless
+sys-apps/fwupd-efi no-tests
+sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
+sys-auth/elogind no-tests
+sys-block/thin-provisioning-tools no-tests # fails in every conceivable way
+sys-boot/efibootmgr no-tests
+sys-boot/grub no-tests
+sys-devel/binutils no-tests # fails regardless
+sys-devel/gcc no-tests
+sys-devel/gdb no-tests # fails regardless
+sys-devel/lld no-tests # custom patches
+sys-fs/fuse no-tests
+sys-kernel/linux-headers no-tests
+sys-libs/compiler-rt-sanitizers no-tests # fails regardless, too big not to fail
+sys-libs/db no-tests
+sys-libs/glibc no-tests
+sys-libs/ldb no-tests # exotic build system
+sys-libs/libomp no-tests # fails regardless
+www-client/chromium no-tests
+www-client/firefox no-tests
+x11-base/xorg-server no-tests

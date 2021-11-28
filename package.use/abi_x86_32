@@ -2,6 +2,7 @@ app-accessibility/at-spi2-atk abi_x86_32
 app-accessibility/at-spi2-core abi_x86_32
 app-arch/bzip2 abi_x86_32
 app-arch/libarchive abi_x86_32
+app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
 app-arch/zstd abi_x86_32
 app-crypt/libmd abi_x86_32
@@ -24,6 +25,8 @@ dev-libs/libcroco abi_x86_32
 dev-libs/libdbusmenu abi_x86_32
 dev-libs/libevent abi_x86_32
 dev-libs/libffi abi_x86_32
+dev-libs/libgcrypt abi_x86_32
+dev-libs/libgpg-error abi_x86_32
 dev-libs/libindicator abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libtasn1 abi_x86_32
@@ -110,6 +113,7 @@ sys-apps/attr abi_x86_32
 sys-apps/dbus abi_x86_32
 sys-apps/hwloc abi_x86_32
 sys-apps/pciutils abi_x86_32
+sys-apps/systemd abi_x86_32
 sys-apps/tcp-wrappers abi_x86_32
 sys-apps/util-linux abi_x86_32
 sys-devel/clang abi_x86_32

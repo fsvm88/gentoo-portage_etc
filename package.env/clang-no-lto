@@ -41,9 +41,12 @@ net-misc/rsync clang-no-lto
 sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto
+sys-apps/fwupd clang-no-lto
 sys-apps/pciutils clang-no-lto
 sys-apps/sandbox clang-no-lto
 sys-devel/llvm-roc clang-no-lto
+sys-libs/libosinfo clang-no-lto
+sys-libs/liburing clang-no-lto
 sys-libs/libxcrypt clang-no-lto
 sys-libs/ncurses-compat clang-no-lto
 sys-process/numactl clang-no-lto

@@ -3,7 +3,6 @@ dev-dotnet/libgdiplus gcc
 dev-lang/ocaml gcc
 dev-libs/ell gcc
 dev-libs/wayland-protocols gcc
-dev-util/cmocka gcc
 dev-util/colm gcc
 dev-util/ragel gcc
 mail-mta/nullmailer gcc

@@ -9,6 +9,9 @@ dev-libs/json-glib gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto
 dev-python/cffi gcc-no-lto
 dev-python/grpcio gcc-no-lto
+dev-python/mypy gcc-no-lto
+dev-python/numpy gcc-no-lto
+dev-util/cmocka gcc-no-lto
 gnome-base/gnome-keyring gcc-no-lto
 kde-frameworks/kjs gcc-no-lto
 media-libs/dav1d gcc-no-lto

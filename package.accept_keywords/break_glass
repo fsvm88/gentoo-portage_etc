@@ -50,6 +50,7 @@
 <media-video/avidemux-2.8
 <media-video/smplayer-21.9
 <media-video/wireplumber-0.5
+<net-fs/samba-4.15.3
 <net-libs/grpc-1.39
 <net-libs/libnm-glib-1.19
 <net-libs/stem-1.9
@@ -76,11 +77,14 @@
 <sys-libs/binutils-libs-2.36
 <sys-libs/compiler-rt-14
 <sys-libs/compiler-rt-sanitizers-14
+<sys-libs/ldb-2.4.2
 <sys-libs/libcxx-14
 <sys-libs/libcxxabi-14
 <sys-libs/libomp-14
 <sys-libs/libudev-compat-187
 <sys-libs/libxcrypt-4.4.28
+<sys-libs/talloc-2.3.4
+<sys-libs/tevent-0.11.1
 <sys-process/nmon-17
 <x11-base/xwayland-22
 <x11-misc/adriconf-2.5

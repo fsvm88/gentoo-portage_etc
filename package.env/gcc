@@ -1,5 +1,6 @@
 app-emulation/qemu gcc
 dev-dotnet/libgdiplus gcc
+dev-lang/go gcc # clang uses LLD, which is custom patched to use --icf=safe, which Go ofc doesn't like
 dev-lang/ocaml gcc
 dev-libs/ell gcc
 dev-libs/wayland-protocols gcc

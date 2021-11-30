@@ -12,7 +12,7 @@ app-text/texlive extra
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
-dev-lang/python sqlite tk
+dev-lang/python lto sqlite tk pgo
 dev-lang/rust abi_x86_32
 dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-bootstrap system-llvm
 dev-lang/spidermonkey lto

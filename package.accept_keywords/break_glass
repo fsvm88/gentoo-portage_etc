@@ -11,7 +11,9 @@
 <dev-libs/nss-3.71
 <dev-libs/nss-3.73
 <dev-libs/plasma-wayland-protocols-1.5
+<dev-libs/plasma-wayland-protocols-1.6
 <dev-libs/wayland-protocols-1.24
+<dev-libs/wayland-protocols-1.25
 <dev-perl/Gtk3-ImageView-11
 <dev-python/capturer-3.1
 <dev-python/coloredlogs-16
@@ -27,6 +29,7 @@
 <dev-util/colm-0.15
 <dev-util/glslang-11.7
 <dev-util/lldb-14
+<dev-util/meson-0.61
 <dev-util/perf-5.13
 <dev-util/ragel-7.1
 <dev-util/spirv-headers-20211231
@@ -64,6 +67,7 @@
 <sci-astronomy/stellarium-0.22
 <sci-mathematics/yafu-1.35
 <sys-apps/fwupd-efi-1.2
+<sys-apps/hwdata-0.354
 <sys-devel/clang-14
 <sys-devel/clang-common-14
 <sys-devel/clang-runtime-14
@@ -73,7 +77,7 @@
 <sys-devel/llvmgold-14
 <sys-fs/fuse-3.11
 <sys-kernel/genkernel-4.2.7
-<sys-kernel/gentoo-sources-5.15
+<sys-kernel/gentoo-sources-5.16
 <sys-libs/binutils-libs-2.36
 <sys-libs/compiler-rt-14
 <sys-libs/compiler-rt-sanitizers-14
@@ -87,4 +91,5 @@
 <sys-libs/tevent-0.11.1
 <sys-process/nmon-17
 <x11-base/xwayland-22
+<x11-libs/libdrm-2.4.110
 <x11-misc/adriconf-2.5

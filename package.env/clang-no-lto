@@ -16,7 +16,6 @@ dev-scheme/guile clang-no-lto
 dev-util/bazel clang-no-lto
 dev-util/perf clang-no-lto
 kde-frameworks/kded clang-no-lto
-kde-plasma/drkonqi clang-no-lto
 kde-plasma/kde-cli-tools clang-no-lto
 kde-plasma/systemsettings clang-no-lto
 media-gfx/imagemagick clang-no-lto

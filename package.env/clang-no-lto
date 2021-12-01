@@ -1,10 +1,12 @@
 app-crypt/gcr clang-no-lto
+app-emulation/wine-vanilla clang-no-lto
 app-text/libetonyek clang-no-lto
 app-text/libqxp clang-no-lto
 app-text/texlive-core clang-no-lto
 dev-cpp/glibmm clang-no-lto
 dev-lang/python clang-no-lto
 dev-lang/spidermonkey clang-no-lto
+dev-libs/elfutils clang-no-lto
 dev-libs/grantlee clang-no-lto
 dev-libs/libffi clang-no-lto
 dev-libs/rocr-runtime clang-no-lto
@@ -22,7 +24,6 @@ media-gfx/imagemagick clang-no-lto
 media-libs/alsa-lib clang-no-lto
 media-libs/kimageannotator clang-no-lto
 media-libs/libfreehand clang-no-lto
-media-libs/libglvnd clang-no-lto
 media-libs/libvisio clang-no-lto
 media-libs/libwebp clang-no-lto
 media-libs/mlt clang-no-lto
@@ -30,7 +31,6 @@ media-libs/vidstab clang-no-lto
 media-video/mpv clang-no-lto
 media-video/smplayer clang-no-lto
 net-analyzer/hydra clang-no-lto
-net-firewall/conntrack-tools clang-no-lto
 net-libs/libnetfilter_conntrack clang-no-lto
 net-libs/libnetfilter_cthelper clang-no-lto
 net-libs/libnetfilter_cttimeout clang-no-lto
@@ -44,6 +44,7 @@ sys-apps/fwupd clang-no-lto
 sys-apps/pciutils clang-no-lto
 sys-apps/sandbox clang-no-lto
 sys-devel/llvm-roc clang-no-lto
+sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto
 sys-libs/liburing clang-no-lto
 sys-libs/libxcrypt clang-no-lto

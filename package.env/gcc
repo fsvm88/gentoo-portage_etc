@@ -13,11 +13,12 @@ media-libs/libass gcc
 media-libs/vulkan-layers gcc
 media-libs/xvid gcc
 media-sound/audacity gcc
-net-dialup/xl2tpd gcc
-net-firewall/conntrack-tools gcc
+net-dialup/ppp gcc
 net-libs/libnetfilter_conntrack gcc
 net-libs/libnetfilter_queue gcc
-net-libs/libnm-glib gcc
+#net-libs/libnm-glib gcc
+net-misc/x11-ssh-askpass gcc
+net-wireless/cowpatty gcc
 sci-libs/colpack gcc
 sci-libs/hdf5 gcc
 sci-libs/spqr gcc
@@ -28,3 +29,4 @@ sys-apps/fwupd-efi gcc
 sys-boot/efibootmgr gcc
 sys-boot/grub gcc
 sys-libs/db gcc
+x11-base/xorg-server gcc

@@ -1,6 +1,5 @@
 app-crypt/hashcat no-tests
 app-editors/vim no-tests # fails regardless
-app-emulation/qemu no-tests
 app-emulation/wine-vanilla no-tests
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite

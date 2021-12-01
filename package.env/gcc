@@ -1,4 +1,3 @@
-app-emulation/qemu gcc
 dev-dotnet/libgdiplus gcc
 dev-lang/go gcc # clang uses LLD, which is custom patched to use --icf=safe, which Go ofc doesn't like
 dev-lang/ocaml gcc
@@ -29,4 +28,3 @@ sys-apps/fwupd-efi gcc
 sys-boot/efibootmgr gcc
 sys-boot/grub gcc
 sys-libs/db gcc
-x11-base/xorg-server gcc

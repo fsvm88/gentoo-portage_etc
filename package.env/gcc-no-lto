@@ -15,3 +15,4 @@ net-misc/networkmanager gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-libs/glibc gcc-no-lto
+x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports

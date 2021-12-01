@@ -18,3 +18,4 @@ media-libs/gexiv2 python
 media-libs/soxr examples
 net-libs/gnutls tools pkcs11
 sci-libs/adolc sparse
+dev-libs/glib utils

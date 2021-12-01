@@ -31,13 +31,10 @@ media-libs/vidstab clang-no-lto
 media-video/mpv clang-no-lto
 media-video/smplayer clang-no-lto
 net-analyzer/hydra clang-no-lto
-net-libs/libnetfilter_conntrack clang-no-lto
 net-libs/libnetfilter_cthelper clang-no-lto
 net-libs/libnetfilter_cttimeout clang-no-lto
-net-libs/libnetfilter_queue clang-no-lto
 net-libs/nodejs clang-no-lto
 net-misc/rsync clang-no-lto
-sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto
 sys-apps/fwupd clang-no-lto

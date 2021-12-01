@@ -8,15 +8,13 @@ dev-cpp/abseil-cpp no-tests # broken LSAN test
 dev-cpp/clucene no-tests
 dev-cpp/eigen no-tests # fails regardless
 dev-db/sqlite no-tests # stuff does not even build for whatever reason
-dev-dotnet/libgdiplus no-tests
 dev-lang/mono no-tests
-dev-lang/ocaml no-tests
+#dev-lang/ocaml no-tests
 dev-lang/ruby no-tests
 dev-lang/tcl no-tests
 dev-libs/criterion no-tests # fails regardless
 dev-libs/crypto++ no-tests
 dev-libs/elfutils no-tests
-dev-libs/ell no-tests
 dev-libs/weston no-tests # fails regardless
 dev-lua/kyua no-tests
 dev-lua/lutok no-tests
@@ -67,34 +65,22 @@ dev-ruby/diff-lcs no-tests
 dev-ruby/rspec* no-tests
 dev-ruby/rubygems no-tests # fails regardless
 dev-util/cmake no-tests # fails same across clang and gcc
-dev-util/colm no-tests
 dev-util/ctags no-tests # fails regardless
 dev-util/cucumber no-tests
 dev-util/cucumber-wire no-tests
-dev-util/ragel no-tests
 dev-util/scons no-tests # tests hangs because python multiprocessing sucks (and something is left hanging)
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 kde-frameworks/kquickcharts no-tests # fails regardless
 kde-plasma/drkonqi no-tests # fails cleanuptest
-mail-mta/nullmailer no-tests
 media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
-media-gfx/libimagequant no-tests
 media-gfx/ocrmypdf no-tests
-media-libs/ftgl no-tests
 media-libs/gst-plugins-base no-tests # fails regardless
-media-libs/libass no-tests
 media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
 media-libs/mesa no-tests # not required, lengthy
-media-libs/vulkan-layers no-tests
-#media-libs/x264 no-tests
-media-libs/xvid no-tests
-media-sound/audacity no-tests
 media-video/vlc no-tests # fails regardless
 net-libs/gnutls no-tests # fails regardless
 net-libs/grpc no-tests
-net-libs/libnetfilter_conntrack no-tests
-net-libs/libnetfilter_queue no-tests
 net-libs/libsoup no-tests # fails regardless
 net-libs/nodejs no-tests # as expected of JS, tests are broken
 net-libs/stem no-tests # fails regardless
@@ -102,11 +88,7 @@ net-p2p/amule no-tests
 net-vpn/ocserv no-tests # fails regardless
 #sci-libs/lapack no-tests
 sci-libs/pastix no-tests # tons of sandbox violation when attempting to run tests
-sci-mathematics/gmp-ecm no-tests
-sci-mathematics/yafu no-tests
-sys-apps/busybox no-tests
 sys-apps/coreutils no-tests # fails tests regardless
-sys-apps/fwupd-efi no-tests
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
 sys-auth/elogind no-tests
 sys-block/thin-provisioning-tools no-tests # fails in every conceivable way

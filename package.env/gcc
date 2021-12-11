@@ -1,19 +1,22 @@
+app-arch/wimlib gcc
 dev-dotnet/libgdiplus gcc # fails to build when using LLD
 dev-lang/go gcc # clang uses LLD, which is custom patched to use --icf=safe, which Go ofc doesn't like
 dev-lang/ocaml gcc
 dev-util/colm gcc
+dev-util/xdelta gcc
+media-libs/audiofile gcc
 media-libs/ftgl gcc
+media-libs/glm gcc
 media-libs/libass gcc
 media-libs/vulkan-layers gcc
 media-libs/xvid gcc
 net-dialup/ppp gcc
-#net-libs/libnm-glib gcc
 net-misc/x11-ssh-askpass gcc
 net-wireless/cowpatty gcc
 sci-libs/hdf5 gcc
 sci-libs/spqr gcc
 sci-mathematics/yafu gcc
 sys-apps/fwupd-efi gcc
-#sys-boot/efibootmgr gcc
 sys-boot/grub gcc
+sys-fs/udisks gcc
 sys-libs/db gcc

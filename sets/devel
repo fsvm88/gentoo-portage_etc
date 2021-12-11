@@ -1,4 +1,5 @@
 app-admin/helm
+app-admin/terraform
 app-editors/vscode
 app-emulation/docker-compose
 dev-lang/mono
@@ -15,6 +16,7 @@ dev-util/shellcheck-bin
 dev-util/strace
 dev-util/valgrind
 dev-vcs/git
+dev-vcs/git-filter-repo
 dev-vcs/git-flow
 dev-vcs/tig
 media-gfx/graphviz

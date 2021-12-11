@@ -1,10 +1,15 @@
 dev-cpp/doctest gcc-no-lto # does not compile at all with clang
+dev-db/sqlite gcc-no-lto
+dev-libs/ell gcc-no-lto # fails to link/test otherwise
 dev-libs/glib gcc-no-lto # fails tests otherwise
 dev-libs/libgcrypt gcc-no-lto # fails otherwise
 dev-python/cffi gcc-no-lto # fails tests otherwise
 dev-python/mypy gcc-no-lto
 dev-python/numpy gcc-no-lto
+dev-python/pexpect gcc-no-lto
 dev-util/cmocka gcc-no-lto # -no-lto because revdevps otherwise fail at linking stage
+dev-util/patchelf gcc-no-lto
+dev-util/valgrind gcc-no-lto
 gnome-base/gnome-keyring gcc-no-lto
 kde-frameworks/kjs gcc-no-lto
 media-libs/harfbuzz gcc-no-lto
@@ -14,6 +19,7 @@ media-video/ffmpeg gcc-no-lto
 net-misc/networkmanager gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
+sys-devel/libtool gcc-no-lto # tests fail with any other config
 sys-libs/glibc gcc-no-lto
 x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports
-dev-libs/ell gcc-no-lto # fails to link/test otherwise
+x11-libs/pixman gcc-no-lto

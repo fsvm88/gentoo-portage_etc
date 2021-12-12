@@ -1,0 +1,12 @@
+diff -Nuar firefox-95.0.orig/build/mach_initialize.py firefox-95.0/build/mach_initialize.py
+--- firefox-95.0.orig/build/mach_initialize.py	2021-11-29 17:08:48.000000000 +0100
++++ firefox-95.0/build/mach_initialize.py	2021-12-12 17:38:59.097765203 +0100
+@@ -219,7 +219,7 @@
+         assert (
+             not requirements.pypi_requirements
+         ), "Mach pip package requirements must be optional."
+-        if has_pip:
++        if False:
+             pip = [sys.executable, "-m", "pip"]
+             check_result = subprocess.run(
+                 pip + ["check"],

@@ -8,7 +8,6 @@ app-text/docbook2X no-tests # broken test suite
 dev-cpp/abseil-cpp no-tests # broken LSAN test
 dev-cpp/clucene no-tests
 dev-cpp/eigen no-tests # fails regardless
-dev-db/sqlite no-tests # stuff does not even build for whatever reason
 dev-lang/mono no-tests
 dev-lang/ruby no-tests
 dev-lang/tcl no-tests

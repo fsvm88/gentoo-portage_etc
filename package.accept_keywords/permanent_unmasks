@@ -8,8 +8,6 @@ dev-libs/rocm-device-libs
 dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
-dev-python/google-pasta
-dev-python/pandas
 dev-util/ccache
 dev-util/clinfo
 dev-util/hip
@@ -20,14 +18,11 @@ games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
 gui-apps/wf-recorder
-gui-wm/sway
 media-gfx/ocrmypdf
 media-video/pipewire
-net-analyzer/hydra
 net-analyzer/nmap
 net-im/slack
 net-im/teams
-net-libs/google-cloud-cpp
 net-misc/teamviewer
 net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo

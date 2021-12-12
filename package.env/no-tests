@@ -19,14 +19,12 @@ dev-libs/libappindicator:2 no-tests # fails regardless
 dev-libs/rocm-comgr no-tests # specific tests fails with all configs
 dev-libs/rocm-device-libs no-tests # specific tests fails with all configs
 dev-libs/weston no-tests # fails regardless
-dev-lua/kyua no-tests
 dev-lua/lutok no-tests
 dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
 dev-python/aiohttp no-tests
 dev-python/argh no-tests # fails regardless
 dev-python/async_timeout no-tests
 dev-python/beautifulsoup4 no-tests
-dev-python/cucumber-wire no-tests
 dev-python/cython no-tests # fails in every conceivable way
 dev-python/expects no-tests
 dev-python/flaky no-tests
@@ -34,14 +32,12 @@ dev-python/iniconfig no-tests
 dev-python/ipyparallel no-tests # dependency fails
 dev-python/ipython no-tests # fails regardless
 dev-python/jedi no-tests
-dev-python/jupyter-client no-tests
 dev-python/mamba no-tests
 dev-python/matplotlib no-tests # fails regardless
 dev-python/nbclient no-tests # fails regardless
 dev-python/nbconvert no-tests # fails regardless
 dev-python/nose_warnings_filters no-tests # fails regardless due to non-code dep
 dev-python/notify2 no-tests # fails regardless
-dev-python/ocrmypdf no-tests
 dev-python/pexpect no-tests # fails regardless
 dev-python/pikepdf no-tests
 dev-python/pluggy no-tests
@@ -75,7 +71,6 @@ dev-ruby/rubygems no-tests # fails regardless
 dev-util/cmake no-tests # fails same across clang and gcc
 dev-util/ctags no-tests # fails regardless
 dev-util/cucumber no-tests
-dev-util/cucumber-wire no-tests
 dev-util/scons no-tests # tests hangs because python multiprocessing sucks (and something is left hanging)
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny

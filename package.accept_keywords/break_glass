@@ -26,6 +26,7 @@
 <dev-python/notebook-7
 <dev-python/pdfrw-0.5
 <dev-python/pikepdf-4.1
+<dev-python/setuptools-59.6
 <dev-python/verboselogs-1.8
 <dev-qt/qtchooser-67
 <dev-ruby/bundler-2.2.26

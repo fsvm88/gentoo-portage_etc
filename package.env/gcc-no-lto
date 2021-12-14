@@ -9,7 +9,6 @@ dev-python/pexpect gcc-no-lto
 dev-util/cmocka gcc-no-lto # -no-lto because revdevps otherwise fail at linking stage
 dev-util/patchelf gcc-no-lto
 dev-util/valgrind gcc-no-lto
-gnome-base/gnome-keyring gcc-no-lto
 kde-frameworks/kjs gcc-no-lto
 media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise

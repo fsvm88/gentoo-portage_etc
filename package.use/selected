@@ -34,6 +34,7 @@ net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4
 net-firewall/nftables xtables
+net-im/slack appindicator
 net-im/teams -system-ffmpeg -system-mesa
 net-misc/remmina rdp spice telemetry vnc
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
@@ -42,6 +43,7 @@ net-print/hplip-plugin orblite
 net-print/hplip snmp
 net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
+net-wireless/blueman appindicator
 sci-libs/tensorflow opencl python rocm xla
 sys-apps/fwupd gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions

@@ -8,6 +8,7 @@ media-libs/audiofile gcc
 media-libs/ftgl gcc
 media-libs/glm gcc
 media-libs/libass gcc
+media-libs/libgphoto2 gcc
 media-libs/vulkan-layers gcc
 media-libs/xvid gcc
 net-dialup/ppp gcc

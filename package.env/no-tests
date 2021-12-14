@@ -74,6 +74,7 @@ dev-util/cucumber no-tests
 dev-util/scons no-tests # tests hangs because python multiprocessing sucks (and something is left hanging)
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
+gnome-base/gnome-keyring no-tests # non-deterministic failures
 kde-frameworks/kquickcharts no-tests # fails regardless
 kde-plasma/drkonqi no-tests # fails cleanuptest
 media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time

@@ -6,6 +6,7 @@
 <dev-libs/gjs-1.71
 <dev-libs/libappindicator-12.11
 <dev-libs/nss-3.73
+<dev-libs/wayland-1.21
 <dev-libs/wayland-protocols-1.25
 <dev-python/capturer-3.1
 <dev-python/coloredlogs-16
@@ -24,6 +25,7 @@
 <dev-util/meson-0.61
 <dev-util/perf-5.13
 <dev-util/ragel-7.1
+<dev-util/wayland-scanner-1.21
 <dev-vcs/git-filter-repo-2.35
 <games-util/game-device-udev-rules-20201231
 <gui-libs/wlroots-9999
@@ -41,7 +43,7 @@
 <net-libs/stem-1.9
 <net-misc/networkmanager-1.33
 <net-misc/nyx-2.2
-<net-misc/postman-bin-9.1
+<net-misc/postman-bin-9.5
 <net-misc/remmina-1.5
 <net-print/hplip-3.22
 <net-print/hplip-plugin-3.22
@@ -67,4 +69,6 @@
 <sys-libs/tevent-0.11.1
 <x11-base/xwayland-22
 <x11-libs/libdrm-2.4.110
+<x11-libs/libva-2.14
+<x11-libs/libva-compat-1.84
 <x11-misc/adriconf-2.5

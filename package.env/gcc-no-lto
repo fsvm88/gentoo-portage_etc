@@ -14,7 +14,11 @@ media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise
 media-libs/x264 gcc-no-lto
 media-video/ffmpeg gcc-no-lto
+net-dialup/ppp gcc-no-lto
+net-dialup/xl2tpd gcc-no-lto
 net-misc/networkmanager gcc-no-lto
+net-vpn/networkmanager-fortisslvpn gcc-no-lto
+net-vpn/networkmanager-l2tp gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config

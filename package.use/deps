@@ -92,6 +92,7 @@ net-misc/networkmanager -resolvconf -bluetooth -modemmanager -ppp
 net-misc/spice-gtk -gstreamer python usbredir
 net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks
+net-vpn/strongswan -caps -non-root
 net-wireless/bluez btpclient deprecated experimental extra-tools user-session
 net-wireless/lorcon python
 sci-geosciences/gpsd python

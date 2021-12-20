@@ -1,6 +1,6 @@
+app-containers/docker-cli no-tests # requires gotestsum, not sure where to find it
 app-crypt/hashcat no-tests
 app-editors/vim no-tests # fails regardless
-app-emulation/docker-cli no-tests # requires gotestsum, not sure where to find it
 app-emulation/vkd3d no-tests # fails regardless
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite

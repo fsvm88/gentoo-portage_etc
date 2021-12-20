@@ -1,6 +1,6 @@
 app-admin/testdisk ntfs reiserfs
+app-containers/docker overlay
 app-editors/vim python
-app-emulation/docker overlay
 app-emulation/libvirt virt-network
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs
 app-emulation/wine-vanilla vkd3d -unwind

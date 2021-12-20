@@ -1,4 +1,4 @@
-app-emulation/docker
+app-containers/docker
 app-emulation/lxc
 app-emulation/virt-manager
 app-emulation/virt-viewer

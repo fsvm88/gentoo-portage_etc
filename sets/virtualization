@@ -1,5 +1,5 @@
 app-containers/docker
-app-emulation/lxc
+app-containers/lxc
 app-emulation/virt-manager
 app-emulation/virt-viewer
 app-emulation/winetricks

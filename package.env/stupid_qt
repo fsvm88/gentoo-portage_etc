@@ -152,3 +152,4 @@ kde-plasma/sddm-kcm clang-no-lto
 kde-plasma/systemsettings clang-no-lto
 kde-plasma/xdg-desktop-portal-kde clang-no-lto
 kde-plasma/xembed-sni-proxy clang-no-lto
+media-video/smplayer clang-no-lto

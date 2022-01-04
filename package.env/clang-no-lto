@@ -23,6 +23,7 @@ media-libs/alsa-lib clang-no-lto
 media-libs/kimageannotator clang-no-lto
 media-libs/libfreehand clang-no-lto
 media-libs/libvisio clang-no-lto
+media-libs/libwebp clang-no-lto # will make firefox tabs crash with LTO
 net-libs/nodejs clang-no-lto
 sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto

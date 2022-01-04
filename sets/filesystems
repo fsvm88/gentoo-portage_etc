@@ -3,7 +3,6 @@ sys-boot/woeusb
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools
-sys-fs/exfat-utils
+sys-fs/exfatprogs
 sys-fs/fuse
-sys-fs/fuse-exfat
 sys-fs/squashfs-tools

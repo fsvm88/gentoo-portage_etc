@@ -5,3 +5,4 @@ kde-plasma/plasma-meta
 media-fonts/fonts-meta
 media-sound/teamspeak-client
 media-video/libva-utils
+x11-terms/alacritty

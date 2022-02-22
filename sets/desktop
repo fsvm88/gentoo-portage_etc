@@ -1,5 +1,6 @@
 app-office/libreoffice
 dev-libs/weston
+gui-apps/mako
 gui-libs/display-manager-init
 kde-plasma/plasma-meta
 media-fonts/fonts-meta

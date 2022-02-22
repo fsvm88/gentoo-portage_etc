@@ -26,10 +26,8 @@ net-im/teams
 net-misc/teamviewer
 net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo
-sci-libs/tensorflow
-sci-libs/tensorflow-estimator
+sci-astronomy/stellarium
 sci-misc/boinc
-sci-visualization/tensorboard
 sys-apps/fwupd
 sys-apps/portage
 sys-devel/llvm-roc

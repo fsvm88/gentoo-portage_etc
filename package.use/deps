@@ -31,7 +31,8 @@ dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/numpy lapack
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
-dev-python/QtPy printsupport
+dev-python/pyside2 testlib
+dev-python/QtPy printsupport pyside2
 dev-qt/designer -phonon
 dev-qt/qtgui accessibility eglfs evdev libinput
 dev-qt/qtmultimedia widgets
@@ -83,7 +84,7 @@ net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
 net-libs/libnm-glib abi_x86_32
-net-libs/nodejs inspector
+net-libs/nodejs inspector lto
 net-libs/webkit-gtk gles2
 net-libs/zeromq drafts
 net-misc/curl -adns

@@ -5,11 +5,15 @@ app-emulation/vkd3d no-tests # fails regardless
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite
 app-text/docbook2X no-tests # broken test suite
+app-text/zathura no-tests # TODO: remove this when clang-14 is out, it's an LLD bug with testing
 dev-cpp/abseil-cpp no-tests # broken LSAN test
 dev-cpp/clucene no-tests
 dev-cpp/eigen no-tests # fails regardless
+dev-db/sqlite no-tests # regresses too easily
 dev-lang/mono no-tests
+dev-lang/python:3.9 no-tests # fails tests after upgrade
 dev-lang/ruby no-tests
+dev-lang/spidermonkey no-tests
 dev-lang/tcl no-tests
 dev-lang/tk no-tests # tests hang all the time, no use in running them
 dev-libs/criterion no-tests # fails regardless
@@ -29,6 +33,7 @@ dev-python/cython no-tests # fails in every conceivable way
 dev-python/expects no-tests
 dev-python/flaky no-tests
 dev-python/iniconfig no-tests
+dev-python/ipykernel no-tests # fails as of 2022.01.14
 dev-python/ipyparallel no-tests # dependency fails
 dev-python/ipython no-tests # fails regardless
 dev-python/jedi no-tests
@@ -56,6 +61,7 @@ dev-python/python-socks no-tests # fails regardless
 dev-python/pyzmq no-tests
 dev-python/QtPy no-tests
 dev-python/scipy no-tests # fails regardless
+dev-python/setuptools no-tests
 dev-python/soupsieve no-tests
 dev-python/sphinxcontrib-* no-tests
 dev-python/sphinx no-tests
@@ -77,6 +83,7 @@ dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly
 gnome-base/gnome-keyring no-tests # non-deterministic failures
 kde-frameworks/kquickcharts no-tests # fails regardless
 kde-plasma/drkonqi no-tests # fails cleanuptest
+kde-plasma/libksysguard no-tests
 media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
 media-gfx/ocrmypdf no-tests
 media-libs/gst-plugins-base no-tests # fails regardless

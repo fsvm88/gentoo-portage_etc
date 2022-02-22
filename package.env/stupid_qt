@@ -40,6 +40,7 @@ kde-frameworks/attica clang-no-lto
 kde-frameworks/baloo clang-no-lto
 kde-frameworks/bluez-qt clang-no-lto
 kde-frameworks/breeze-icons clang-no-lto
+kde-frameworks/breeze-icons no-tests
 kde-frameworks/extra-cmake-modules clang-no-lto
 kde-frameworks/frameworkintegration clang-no-lto
 kde-frameworks/kactivities clang-no-lto
@@ -65,6 +66,7 @@ kde-frameworks/kemoticons clang-no-lto
 kde-frameworks/kf-env clang-no-lto
 kde-frameworks/kfilemetadata clang-no-lto
 kde-frameworks/kglobalaccel clang-no-lto
+kde-frameworks/kglobalaccel no-tests
 kde-frameworks/kguiaddons clang-no-lto
 kde-frameworks/kholidays clang-no-lto
 kde-frameworks/khtml clang-no-lto
@@ -78,7 +80,7 @@ kde-frameworks/kirigami clang-no-lto
 kde-frameworks/kitemmodels clang-no-lto
 kde-frameworks/kitemviews clang-no-lto
 kde-frameworks/kjobwidgets clang-no-lto
-kde-frameworks/kjs clang-no-lto
+kde-frameworks/kjs gcc-no-lto
 kde-frameworks/knewstuff clang-no-lto
 kde-frameworks/knotifications clang-no-lto
 kde-frameworks/knotifyconfig clang-no-lto
@@ -88,6 +90,7 @@ kde-frameworks/kpeople clang-no-lto
 kde-frameworks/kpty clang-no-lto
 kde-frameworks/kquickcharts clang-no-lto
 kde-frameworks/krunner clang-no-lto
+kde-frameworks/krunner no-tests # regressed
 kde-frameworks/kservice clang-no-lto
 kde-frameworks/ktexteditor clang-no-lto
 kde-frameworks/ktextwidgets clang-no-lto

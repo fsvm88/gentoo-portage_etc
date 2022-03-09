@@ -55,5 +55,5 @@ sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
 virtual/wine -d3d9 -staging
-www-client/firefox clang custom-cflags custom-optimization hardened lto system-harfbuzz pgo system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast
+www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast -pgo
 x11-apps/mesa-progs gles2

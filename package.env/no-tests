@@ -43,6 +43,7 @@ dev-python/nbclient no-tests # fails regardless
 dev-python/nbconvert no-tests # fails regardless
 dev-python/nose_warnings_filters no-tests # fails regardless due to non-code dep
 dev-python/notify2 no-tests # fails regardless
+dev-python/pbr no-tests # break depcycle
 dev-python/pexpect no-tests # fails regardless
 dev-python/pikepdf no-tests
 dev-python/pluggy no-tests
@@ -99,6 +100,7 @@ net-libs/libsoup no-tests # fails regardless
 net-libs/nodejs no-tests # as expected of JS, tests are broken
 net-libs/stem no-tests # fails regardless
 net-misc/curl no-tests # fails tests regardless
+net-misc/nyx no-tests
 net-misc/openssh no-tests # tests fail, known bug, to remove after upgrade to 8.7
 net-misc/rclone no-tests # requires golangci-lint, not sure where to find that
 net-vpn/ocserv no-tests # fails regardless

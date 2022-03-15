@@ -8,6 +8,7 @@
 <dev-libs/libappindicator-12.11
 <dev-libs/nss-3.76
 <dev-libs/wayland-protocols-1.26
+<dev-perl/URI-Encode-1.1.2
 <dev-python/appdirs-1.5
 <dev-python/autocommand-2.3
 <dev-python/capturer-3.1

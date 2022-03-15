@@ -2,6 +2,7 @@ dev-libs/ocl-icd
 dev-libs/rocm-opencl-runtime
 #dev-libs/rocm-smi-lib
 #dev-libs/rocr-debug-agent
+dev-util/hip
 #dev-util/rocm-bandwidth-test
 #dev-util/rocm-clang-ocl
 dev-util/rocminfo

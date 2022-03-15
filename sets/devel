@@ -2,6 +2,7 @@ app-admin/helm
 app-admin/terraform
 app-containers/docker-compose
 app-editors/vscode
+app-portage/repoman
 dev-lang/mono
 dev-python/notebook
 dev-python/pylint
@@ -21,5 +22,6 @@ dev-vcs/git-flow
 dev-vcs/tig
 media-gfx/graphviz
 net-misc/postman-bin
+sys-apps/pkgcore
 sys-devel/gdb
 sys-libs/ncurses-compat

@@ -84,7 +84,7 @@ kde-frameworks/kjs gcc-no-lto
 kde-frameworks/knewstuff clang-no-lto
 kde-frameworks/knotifications clang-no-lto
 kde-frameworks/knotifyconfig clang-no-lto
-kde-frameworks/kpackage clang-no-lto
+kde-frameworks/kpackage gcc-no-lto
 kde-frameworks/kparts clang-no-lto
 kde-frameworks/kpeople clang-no-lto
 kde-frameworks/kpty clang-no-lto

@@ -2,7 +2,6 @@ app-arch/zstd
 app-emulation/wine-mono
 app-emulation/wine-vanilla
 dev-lang/rust
-dev-libs/rocclr
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
 dev-libs/rocm-opencl-runtime
@@ -13,8 +12,9 @@ dev-util/clinfo
 dev-util/hip
 dev-util/rocm-cmake
 dev-util/rocminfo
+games-util/esteam
+games-util/game-device-udev-rules
 games-util/steam-client-meta
-games-util/steam-games-meta
 games-util/steam-launcher
 games-util/steam-meta
 gui-apps/wf-recorder
@@ -23,7 +23,6 @@ media-video/pipewire
 net-analyzer/nmap
 net-im/slack
 net-im/teams
-net-misc/teamviewer
 net-vpn/networkmanager-l2tp
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-astronomy/stellarium

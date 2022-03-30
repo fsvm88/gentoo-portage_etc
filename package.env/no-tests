@@ -29,9 +29,11 @@ dev-python/aiohttp no-tests
 dev-python/argh no-tests # fails regardless
 dev-python/async_timeout no-tests
 dev-python/beautifulsoup4 no-tests
+dev-python/colorama no-tests # weird imports in tests
 dev-python/cython no-tests # fails in every conceivable way
 dev-python/expects no-tests
 dev-python/flaky no-tests
+dev-python/humanfriendly no-tests # seems an attribute is missing somewhere
 dev-python/iniconfig no-tests
 dev-python/ipykernel no-tests # fails as of 2022.01.14
 dev-python/ipyparallel no-tests # dependency fails
@@ -54,20 +56,25 @@ dev-python/pygobject no-tests # fails regardless
 dev-python/pylama no-tests # fails regardless due to non-code dep
 dev-python/PyQt5 no-tests
 dev-python/pytest-cov no-tests
+dev-python/pytest-forked no-tests # mismatched lines in test expectations
 dev-python/pytest-localserver no-tests # fails regardless
 dev-python/pytest no-tests
 dev-python/pytest-xprocess no-tests # fails regardless
 dev-python/python-dbusmock no-tests # fails regardless
 dev-python/python-socks no-tests # fails regardless
+dev-python/pythran no-tests # failing tests
 dev-python/pyzmq no-tests
 dev-python/QtPy no-tests
+dev-python/rdflib no-tests # missing attribute in tests
 dev-python/scipy no-tests # fails regardless
 dev-python/setuptools no-tests
+dev-python/snakeoil no-tests # missing attribute in tests
 dev-python/soupsieve no-tests
 dev-python/sphinxcontrib-* no-tests
 dev-python/sphinx no-tests
 dev-python/statsmodels no-tests # fails regardless
 dev-python/terminado no-tests # fails regardless due to non-code dep
+dev-python/twisted no-tests # manages to create files impossible to access/remove/stat during testing
 dev-python/typed-ast no-tests # fails regardless
 dev-python/urllib3 no-tests # fails regardless
 dev-qt/* no-tests
@@ -87,6 +94,7 @@ kde-plasma/drkonqi no-tests # fails cleanuptest
 kde-plasma/libksysguard no-tests
 media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
 media-gfx/ocrmypdf no-tests
+media-libs/audiofile no-tests # does not compile with clang, fails tests with gcc and gcc-no-lto
 media-libs/gst-plugins-base no-tests # fails regardless
 media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
@@ -99,6 +107,7 @@ net-libs/grpc no-tests
 net-libs/libsoup no-tests # fails regardless
 net-libs/nodejs no-tests # as expected of JS, tests are broken
 net-libs/stem no-tests # fails regardless
+net-mail/mailutils no-tests # fails putmail tests, not sure why
 net-misc/curl no-tests # fails tests regardless
 net-misc/nyx no-tests
 net-misc/openssh no-tests # tests fail, known bug, to remove after upgrade to 8.7
@@ -107,6 +116,7 @@ net-vpn/ocserv no-tests # fails regardless
 net-wireless/bluez no-tests # fails regardless
 sci-libs/pastix no-tests # tons of sandbox violation when attempting to run tests
 sys-apps/attr no-tests # fails tests regardless
+sys-apps/bolt no-tests # usual MALLOC_PERTURB_ failures
 sys-apps/coreutils no-tests # fails tests regardless
 sys-apps/gawk no-tests # fails regardless
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features

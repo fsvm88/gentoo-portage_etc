@@ -20,4 +20,5 @@ sci-mathematics/yafu gcc
 sys-apps/fwupd-efi gcc
 sys-boot/grub gcc
 sys-fs/udisks gcc
+sys-kernel/gentoo-sources gcc
 sys-libs/db gcc

@@ -2,6 +2,7 @@ app-admin/helm
 app-admin/terraform
 app-containers/docker-compose
 app-editors/vscode
+app-portage/portage-utils
 app-portage/repoman
 dev-lang/mono
 dev-python/notebook
@@ -13,6 +14,7 @@ dev-util/lldb
 dev-util/meld
 dev-util/patchutils
 dev-util/perf
+dev-util/pkgcheck
 dev-util/shellcheck-bin
 dev-util/strace
 dev-util/valgrind

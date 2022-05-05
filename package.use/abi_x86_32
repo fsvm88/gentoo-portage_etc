@@ -92,6 +92,7 @@ media-libs/x265 abi_x86_32
 media-libs/xvid abi_x86_32
 media-plugins/alsa-plugins abi_x86_32
 media-sound/lame abi_x86_32
+media-sound/mpg123 abi_x86_32
 media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 media-video/pipewire abi_x86_32
@@ -119,6 +120,7 @@ sys-apps/util-linux abi_x86_32
 sys-devel/clang abi_x86_32
 sys-devel/gettext abi_x86_32
 sys-devel/llvm abi_x86_32
+sys-fs/e2fsprogs abi_x86_32
 sys-fs/udev abi_x86_32
 sys-libs/binutils-libs abi_x86_32
 sys-libs/cracklib abi_x86_32

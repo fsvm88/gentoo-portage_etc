@@ -1,6 +1,7 @@
 app-metrics/node_exporter
 net-analyzer/iftop
 net-dns/bind-tools
+net-misc/iperf:3
 sys-apps/lm-sensors
 sys-apps/lshw
 sys-apps/smartmontools

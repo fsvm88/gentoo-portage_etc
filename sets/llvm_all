@@ -1,3 +1,4 @@
+dev-libs/libclc
 dev-libs/libffi
 dev-util/lldb
 sys-apps/hwloc

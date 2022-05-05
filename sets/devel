@@ -8,7 +8,6 @@ dev-lang/mono
 dev-python/notebook
 dev-python/pylint
 dev-python/virtualenv
-dev-util/ccache
 dev-util/cloc
 dev-util/lldb
 dev-util/meld
@@ -21,6 +20,7 @@ dev-util/valgrind
 dev-vcs/git
 dev-vcs/git-filter-repo
 dev-vcs/git-flow
+dev-vcs/git-lfs
 dev-vcs/tig
 media-gfx/graphviz
 net-misc/postman-bin

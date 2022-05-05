@@ -1,0 +1,6 @@
+app-office/libreoffice huge-package
+dev-lang/rust huge-package
+dev-qt/qtwebengine huge-package
+sys-devel/clang huge-package
+sys-devel/gcc huge-package
+sys-devel/llvm huge-package

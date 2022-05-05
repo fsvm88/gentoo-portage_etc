@@ -1,9 +1,11 @@
+app-arch/libarchive no-tests
 app-containers/docker-cli no-tests # requires gotestsum, not sure where to find it
 app-crypt/hashcat no-tests
 app-editors/vim no-tests # fails regardless
 app-emulation/vkd3d no-tests # fails regardless
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite
+app-shells/fish no-tests # regression on 1 test
 app-text/docbook2X no-tests # broken test suite
 app-text/zathura no-tests # TODO: remove this when clang-14 is out, it's an LLD bug with testing
 dev-cpp/abseil-cpp no-tests # broken LSAN test
@@ -20,6 +22,9 @@ dev-libs/criterion no-tests # fails regardless
 dev-libs/crypto++ no-tests
 dev-libs/elfutils no-tests
 dev-libs/libappindicator:2 no-tests # fails regardless
+dev-libs/libdbusmenu no-tests # dep stops at py3.9
+dev-libs/libindicator no-tests # dep stops at py3.9
+dev-libs/quazip no-tests # regression with Clang 14.0.1?
 dev-libs/rocm-comgr no-tests # specific tests fails with all configs
 dev-libs/rocm-device-libs no-tests # specific tests fails with all configs
 dev-libs/weston no-tests # fails regardless
@@ -27,24 +32,46 @@ dev-lua/lutok no-tests
 dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
 dev-python/aiohttp no-tests
 dev-python/argh no-tests # fails regardless
+dev-python/astroid no-tests # regression
 dev-python/async_timeout no-tests
+dev-python/attrs no-tests # break depcycle
 dev-python/beautifulsoup4 no-tests
 dev-python/colorama no-tests # weird imports in tests
+dev-python/constantly no-tests # break depcycle
+dev-python/cssselect no-tests # break depcycle
 dev-python/cython no-tests # fails in every conceivable way
 dev-python/expects no-tests
+dev-python/flake8 no-tests # break depcycle
 dev-python/flaky no-tests
+dev-python/flit_core no-tests # break depcycle
+dev-python/freezegun no-tests # break depcycle
+dev-python/gpep517 no-tests # break depcycle
 dev-python/humanfriendly no-tests # seems an attribute is missing somewhere
+dev-python/incremental no-tests # break depcycle
 dev-python/iniconfig no-tests
+dev-python/installer no-tests # break depcycle
 dev-python/ipykernel no-tests # fails as of 2022.01.14
 dev-python/ipyparallel no-tests # dependency fails
+dev-python/ipython no-tests # break depcycle
 dev-python/ipython no-tests # fails regardless
+dev-python/jaraco-text no-tests # break depcycle
 dev-python/jedi no-tests
+dev-python/jupyter_client no-tests # break depcycle
+dev-python/jupyter_core no-tests # break depcycle
+dev-python/lxml no-tests # break depcycle
 dev-python/mamba no-tests
 dev-python/matplotlib no-tests # fails regardless
+dev-python/mccabe no-tests # break depcycle
+dev-python/more-itertools no-tests # break depcycle
 dev-python/nbclient no-tests # fails regardless
 dev-python/nbconvert no-tests # fails regardless
 dev-python/nose_warnings_filters no-tests # fails regardless due to non-code dep
+dev-python/* no-tests # break depcycleS
 dev-python/notify2 no-tests # fails regardless
+dev-python/nspektr no-tests # break depcycle
+dev-python/ordered-set no-tests # break depcycle
+dev-python/packaging no-tests # break depcycle
+dev-python/pandas no-tests # break depcycle
 dev-python/pbr no-tests # break depcycle
 dev-python/pexpect no-tests # fails regardless
 dev-python/pikepdf no-tests
@@ -54,29 +81,38 @@ dev-python/pycurl no-tests # broken test suite
 dev-python/pyfakefs no-tests # fails regardless
 dev-python/pygobject no-tests # fails regardless
 dev-python/pylama no-tests # fails regardless due to non-code dep
+dev-python/pyparsing no-tests # break depcycle
 dev-python/PyQt5 no-tests
 dev-python/pytest-cov no-tests
 dev-python/pytest-forked no-tests # mismatched lines in test expectations
 dev-python/pytest-localserver no-tests # fails regardless
 dev-python/pytest no-tests
+dev-python/pytest no-tests # break depcycle
 dev-python/pytest-xprocess no-tests # fails regardless
+dev-python/python-dateutil no-tests # break depcycle
 dev-python/python-dbusmock no-tests # fails regardless
 dev-python/python-socks no-tests # fails regardless
 dev-python/pythran no-tests # failing tests
 dev-python/pyzmq no-tests
 dev-python/QtPy no-tests
 dev-python/rdflib no-tests # missing attribute in tests
+dev-python/requests no-tests # otherwise deps clash: dev-python/flask vs dev-python/shiboken2
 dev-python/scipy no-tests # fails regardless
 dev-python/setuptools no-tests
+dev-python/setuptools_scm no-tests # break depcycle
 dev-python/snakeoil no-tests # missing attribute in tests
 dev-python/soupsieve no-tests
 dev-python/sphinxcontrib-* no-tests
 dev-python/sphinx no-tests
 dev-python/statsmodels no-tests # fails regardless
 dev-python/terminado no-tests # fails regardless due to non-code dep
+dev-python/tomli no-tests # break depcycle
+dev-python/twisted no-tests # break depcycle
 dev-python/twisted no-tests # manages to create files impossible to access/remove/stat during testing
 dev-python/typed-ast no-tests # fails regardless
 dev-python/urllib3 no-tests # fails regardless
+dev-python/wheel no-tests # break depcycle
+dev-python/xarray no-tests # break depcycle
 dev-qt/* no-tests
 dev-ruby/diff-lcs no-tests
 dev-ruby/httpclient no-tests # fails regardless
@@ -86,6 +122,7 @@ dev-util/cmake no-tests # fails same across clang and gcc
 dev-util/ctags no-tests # fails regardless
 dev-util/cucumber no-tests
 dev-util/scons no-tests # tests hangs because python multiprocessing sucks (and something is left hanging)
+dev-vcs/git-filter-repo no-tests # fails most likely because of git version 2.35, to reenable after upgrade
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gnome-base/gnome-keyring no-tests # non-deterministic failures
@@ -118,7 +155,9 @@ sci-libs/pastix no-tests # tons of sandbox violation when attempting to run test
 sys-apps/attr no-tests # fails tests regardless
 sys-apps/bolt no-tests # usual MALLOC_PERTURB_ failures
 sys-apps/coreutils no-tests # fails tests regardless
+sys-apps/diffutils no-tests # regression?
 sys-apps/gawk no-tests # fails regardless
+sys-apps/sed no-tests # 3 tests failing, possibly due to upgrade
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
 sys-block/thin-provisioning-tools no-tests # fails in every conceivable way
 sys-devel/autoconf no-tests # tests take forever, 2 slots, no will to debug it further

@@ -4,7 +4,9 @@ dev-db/sqlite gcc-no-lto
 dev-lang/tcl gcc-no-lto
 dev-libs/ell gcc-no-lto # fails to link/test otherwise
 dev-libs/glib gcc-no-lto # fails tests otherwise
+dev-libs/json-c gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto # fails otherwise
+dev-libs/serd gcc-no-lto
 dev-python/cffi gcc-no-lto # fails tests otherwise
 dev-python/mypy gcc-no-lto
 dev-python/numpy gcc-no-lto

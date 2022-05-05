@@ -12,12 +12,14 @@ media-libs/libgphoto2 gcc
 media-libs/vulkan-layers gcc
 media-libs/xvid gcc
 net-dialup/ppp gcc
+net-dns/libidn2 gcc
 net-misc/x11-ssh-askpass gcc
 net-wireless/cowpatty gcc
 sci-libs/hdf5 gcc
 sci-libs/spqr gcc
 sci-mathematics/yafu gcc
 sys-apps/fwupd-efi gcc
+sys-auth/oath-toolkit gcc
 sys-boot/grub gcc
 sys-fs/udisks gcc
 sys-kernel/gentoo-sources gcc

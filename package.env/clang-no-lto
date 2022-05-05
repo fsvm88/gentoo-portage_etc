@@ -3,6 +3,7 @@ app-emulation/libvirt clang-no-lto
 app-emulation/wine-vanilla clang-no-lto
 app-text/libetonyek clang-no-lto
 app-text/libqxp clang-no-lto
+app-text/ps2pkm clang-no-lto
 app-text/texlive-core clang-no-lto
 dev-cpp/glibmm clang-no-lto
 dev-lang/lua clang-no-lto
@@ -15,6 +16,8 @@ dev-libs/libffi clang-no-lto
 dev-libs/libtomcrypt clang-no-lto # fails to link otherwise
 dev-libs/rocr-runtime clang-no-lto
 dev-libs/weston clang-no-lto
+dev-perl/DBI clang-no-lto
+dev-python/pandas clang-no-lto
 dev-python/scipy clang-no-lto
 dev-scheme/guile clang-no-lto
 dev-util/dialog clang-no-lto

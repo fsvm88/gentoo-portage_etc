@@ -126,6 +126,7 @@ dev-vcs/git-filter-repo no-tests # fails most likely because of git version 2.35
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gnome-base/gnome-keyring no-tests # non-deterministic failures
+gui-libs/gtk no-tests # Glibc regression?
 kde-frameworks/kquickcharts no-tests # fails regardless
 kde-plasma/drkonqi no-tests # fails cleanuptest
 kde-plasma/libksysguard no-tests
@@ -133,6 +134,7 @@ media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
 media-gfx/ocrmypdf no-tests
 media-libs/audiofile no-tests # does not compile with clang, fails tests with gcc and gcc-no-lto
 media-libs/gst-plugins-base no-tests # fails regardless
+media-libs/gst-plugins-good no-tests # regressed 1 test
 media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
 media-libs/libvpx no-tests # tests pass all the time, but they take so stupidly long it's not even funny
@@ -152,11 +154,13 @@ net-misc/rclone no-tests # requires golangci-lint, not sure where to find that
 net-vpn/ocserv no-tests # fails regardless
 net-wireless/bluez no-tests # fails regardless
 sci-libs/pastix no-tests # tons of sandbox violation when attempting to run tests
+sys-apps/accountsservice no-tests # MALLOC_PERTURB tests fail...
 sys-apps/attr no-tests # fails tests regardless
 sys-apps/bolt no-tests # usual MALLOC_PERTURB_ failures
 sys-apps/coreutils no-tests # fails tests regardless
 sys-apps/diffutils no-tests # regression?
 sys-apps/gawk no-tests # fails regardless
+sys-apps/keyutils no-tests # regression in 1.6.3
 sys-apps/sed no-tests # 3 tests failing, possibly due to upgrade
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
 sys-block/thin-provisioning-tools no-tests # fails in every conceivable way

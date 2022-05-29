@@ -1,0 +1,78 @@
+
+# HG changeset patch
+# User Nika Layzell <nika@thelayzells.com>
+# Date 1651525704 0
+# Node ID 5ceef5fe85bd77e0a04ce270babf6ccd3d45cc57
+# Parent  6fde32cc23134e4ffcb775b71b93831ec77cd2be
+Bug 1745641 - IPC connection errors should be debug-only warnings, r=ipc-reviewers,mccr8
+
+Differential Revision: https://phabricator.services.mozilla.com/D145258
+
+diff --git a/ipc/glue/MessageChannel.cpp b/ipc/glue/MessageChannel.cpp
+--- a/ipc/glue/MessageChannel.cpp
++++ b/ipc/glue/MessageChannel.cpp
+@@ -554,22 +554,31 @@ bool MessageChannel::DispatchingSyncMess
+ 
+ int MessageChannel::DispatchingSyncMessageNestedLevel() const {
+   mMonitor->AssertCurrentThreadOwns();
+   return mTransactionStack
+              ? mTransactionStack->DispatchingSyncMessageNestedLevel()
+              : 0;
+ }
+ 
++static const char* StringFromIPCSide(Side side) {
++  switch (side) {
++    case ChildSide:
++      return "Child";
++    case ParentSide:
++      return "Parent";
++    default:
++      return "Unknown";
++  }
++}
++
+ static void PrintErrorMessage(Side side, const char* channelName,
+                               const char* msg) {
+-  const char* from = (side == ChildSide)
+-                         ? "Child"
+-                         : ((side == ParentSide) ? "Parent" : "Unknown");
+-  printf_stderr("\n###!!! [%s][%s] Error: %s\n\n", from, channelName, msg);
++  printf_stderr("\n###!!! [%s][%s] Error: %s\n\n", StringFromIPCSide(side),
++                channelName, msg);
+ }
+ 
+ bool MessageChannel::Connected() const {
+   mMonitor->AssertCurrentThreadOwns();
+   return ChannelConnected == mChannelState;
+ }
+ 
+ bool MessageChannel::CanSend() const {
+@@ -1818,20 +1827,23 @@ void MessageChannel::ReportConnectionErr
+     case ChannelError:
+       errorMsg = "Channel error: cannot send/recv";
+       break;
+ 
+     default:
+       MOZ_CRASH("unreached");
+   }
+ 
+-  char reason[512];
+-  SprintfLiteral(reason, "%s(msgname=%s) %s", aFunctionName,
+-                 IPC::StringFromIPCMessageType(aMsgType), errorMsg);
+-  PrintErrorMessage(mSide, mName, reason);
++  // IPC connection errors are fairly common, especially "Channel closing: too
++  // late to send/recv, messages will be lost", so shouldn't be being reported
++  // on release builds, as that's misleading as to their severity.
++  NS_WARNING(nsPrintfCString("IPC Connection Error: [%s][%s] %s(msgname=%s) %s",
++                             StringFromIPCSide(mSide), mName, aFunctionName,
++                             IPC::StringFromIPCMessageType(aMsgType), errorMsg)
++                 .get());
+ 
+   MonitorAutoUnlock unlock(*mMonitor);
+   mListener->ProcessingError(MsgDropped, errorMsg);
+ }
+ 
+ void MessageChannel::ReportMessageRouteError(const char* channelName) const {
+   PrintErrorMessage(mSide, channelName, "Need a route");
+   mListener->ProcessingError(MsgRouteError, "MsgRouteError");
+

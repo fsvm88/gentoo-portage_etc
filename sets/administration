@@ -25,3 +25,4 @@ sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof
 sys-process/parallel
+app-portage/smart-live-rebuild

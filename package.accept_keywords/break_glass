@@ -59,3 +59,6 @@
 <x11-libs/libdrm-2.4.111
 <x11-misc/adriconf-2.5
 <x11-terms/alacritty-0.11
+<dev-libs/icu-71.1-r99
+<dev-util/cbindgen-0.24
+<gui-apps/grim-1.4.1

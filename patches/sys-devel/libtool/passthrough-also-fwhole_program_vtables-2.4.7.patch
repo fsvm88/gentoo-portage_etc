@@ -1,0 +1,22 @@
+diff -Nuar libtool-2.4.7.orig/build-aux/ltmain.in libtool-2.4.7/build-aux/ltmain.in
+--- libtool-2.4.7.orig/build-aux/ltmain.in	2022-03-17 03:43:39.000000000 +0100
++++ libtool-2.4.7/build-aux/ltmain.in	2022-06-14 17:34:01.677289819 +0200
+@@ -5411,6 +5411,7 @@
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+       -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -fwhole-program-vtables| \
+       -specs=*|-fsanitize=*|-fuse-ld=*|-Wa,*)
+         func_quote_arg pretty "$arg"
+ 	arg=$func_quote_arg_result
+diff -Nuar libtool-2.4.7.orig/build-aux/ltmain.sh libtool-2.4.7/build-aux/ltmain.sh
+--- libtool-2.4.7.orig/build-aux/ltmain.sh	2022-06-14 17:31:48.287177049 +0200
++++ libtool-2.4.7/build-aux/ltmain.sh	2022-06-14 17:34:18.488309234 +0200
+@@ -7571,6 +7571,7 @@
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+       -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -fwhole-program-vtables| \
+       -specs=*|-fsanitize=*|-fuse-ld=*|-Wa,*)
+         func_quote_arg pretty "$arg"
+ 	arg=$func_quote_arg_result

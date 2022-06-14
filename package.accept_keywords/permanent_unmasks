@@ -37,3 +37,4 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/rust
 www-client/firefox
+dev-util/shellcheck-bin

@@ -1,6 +1,5 @@
 app-admin/awscli
 app-crypt/easy-rsa
-media-sound/teamspeak-client
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/tcptraceroute

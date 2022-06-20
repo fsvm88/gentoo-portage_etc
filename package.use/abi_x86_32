@@ -70,6 +70,7 @@ media-libs/libjpeg-turbo abi_x86_32
 media-libs/libogg abi_x86_32
 media-libs/libpng abi_x86_32
 media-libs/libpng-compat abi_x86_32
+media-libs/libpulse abi_x86_32
 media-libs/libsdl2 abi_x86_32
 media-libs/libsndfile abi_x86_32
 media-libs/libtheora abi_x86_32
@@ -186,4 +187,3 @@ x11-libs/libXv abi_x86_32
 x11-libs/libXxf86vm  abi_x86_32
 x11-libs/pango abi_x86_32
 x11-libs/pixman abi_x86_32
-media-libs/libpulse abi_x86_32

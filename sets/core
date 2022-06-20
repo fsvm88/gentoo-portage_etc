@@ -1,4 +1,5 @@
 app-admin/sudo
+app-misc/jq
 app-misc/symlinks
 app-portage/mirrorselect
 app-shells/zsh
@@ -15,4 +16,3 @@ sys-kernel/linux-firmware
 sys-process/schedtool
 sys-process/time
 www-client/links
-app-misc/jq

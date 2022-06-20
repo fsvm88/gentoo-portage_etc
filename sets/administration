@@ -8,6 +8,7 @@ app-misc/fdupes
 app-misc/tmux
 app-portage/cpuid2cpuflags
 app-portage/layman
+app-portage/smart-live-rebuild
 app-shells/bash-completion
 net-dns/bind-tools
 net-firewall/conntrack-tools
@@ -25,4 +26,3 @@ sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof
 sys-process/parallel
-app-portage/smart-live-rebuild

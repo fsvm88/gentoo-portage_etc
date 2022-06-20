@@ -12,6 +12,7 @@ dev-util/clinfo
 dev-util/hip
 dev-util/rocm-cmake
 dev-util/rocminfo
+dev-util/shellcheck-bin
 games-util/esteam
 games-util/game-device-udev-rules
 games-util/steam-client-meta
@@ -37,4 +38,3 @@ sys-kernel/linux-headers
 sys-libs/glibc
 virtual/rust
 www-client/firefox
-dev-util/shellcheck-bin

@@ -6,7 +6,7 @@
 <dev-libs/icu-71.1-r99
 <dev-libs/libappindicator-12.11
 <dev-libs/libclc-15
-<dev-libs/nss-3.79
+<dev-libs/nss-3.81
 <dev-libs/plasma-wayland-protocols-1.8
 <dev-perl/URI-Encode-1.1.2
 <dev-python/astroid-2.11.4
@@ -31,6 +31,7 @@
 <media-libs/avidemux-plugins-2.8
 <media-libs/dav1d-1.1
 <media-libs/icc-profiles-openicc-1.4
+<media-libs/libepoxy-1.6
 <media-libs/libplacebo-3.121
 <media-video/avidemux-2.8
 <media-video/mpv-0.35
@@ -49,7 +50,7 @@
 <sys-devel/llvm-15
 <sys-devel/llvm-common-15
 <sys-devel/llvmgold-15
-<sys-kernel/gentoo-sources-5.18.0
+<sys-kernel/gentoo-sources-5.19.0
 <sys-libs/compiler-rt-15
 <sys-libs/compiler-rt-sanitizers-15
 <sys-libs/ldb-2.5.1

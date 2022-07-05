@@ -1,1 +1,2 @@
+sys-fs/zfs gcc
 sys-fs/zfs-kmod gcc

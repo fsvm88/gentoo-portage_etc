@@ -70,10 +70,9 @@ media-libs/waffle gbm
 media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
-media-sound/pulseaudio gnome
-media-sound/pulseaudio native-headset
+media-sound/pulseaudio gnome native-headset -daemon
 media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
-media-video/pipewire aptx echo-cancel extra ldac
+media-video/pipewire aptx echo-cancel extra ldac sound-server
 net-analyzer/wireshark -qt4
 net-dns/avahi autoipd mdnsresponder-compat
 net-dns/avahi python

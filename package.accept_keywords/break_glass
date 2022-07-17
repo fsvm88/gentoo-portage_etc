@@ -8,11 +8,13 @@
 <dev-libs/libclc-15
 <dev-libs/nss-3.81
 <dev-libs/plasma-wayland-protocols-1.8
+<dev-libs/wayland-1.22
 <dev-perl/URI-Encode-1.1.2
 <dev-python/astroid-2.11.4
 <dev-python/capturer-3.1
 <dev-python/coloredlogs-16
 <dev-python/humanfriendly-11
+<dev-python/ipykernel-6.16
 <dev-python/lit-15
 <dev-python/pdfrw-0.5
 <dev-python/verboselogs-1.8
@@ -21,6 +23,7 @@
 <dev-util/colm-0.15
 <dev-util/lldb-15
 <dev-util/ragel-7.1
+<dev-util/wayland-scanner-1.22
 <dev-vcs/git-filter-repo-2.35
 <dev-vcs/git-lfs-3.2
 <gui-apps/grim-1.4.1
@@ -43,6 +46,7 @@
 <net-libs/webkit-gtk-2.37
 <net-misc/nyx-2.2
 <sci-mathematics/yafu-1.35
+<sys-apps/portage-3.0.31
 <sys-devel/clang-15
 <sys-devel/clang-common-15
 <sys-devel/clang-runtime-15

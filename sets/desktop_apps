@@ -15,7 +15,7 @@ kde-apps/krdc
 kde-apps/kwalletmanager
 kde-apps/spectacle
 kde-apps/sweeper
-kde-apps/zeroconf-ioslave
 media-sound/pavucontrol
+net-misc/kio-zeroconf
 net-print/hplip-plugin
 sys-power/acpilight

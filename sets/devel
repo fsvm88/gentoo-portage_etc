@@ -8,6 +8,7 @@ dev-lang/mono
 dev-python/notebook
 dev-python/pylint
 dev-python/virtualenv
+dev-util/ccache
 dev-util/cloc
 dev-util/lldb
 dev-util/meld

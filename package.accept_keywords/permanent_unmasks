@@ -30,7 +30,7 @@ net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-astronomy/stellarium
 sci-misc/boinc
 sys-apps/fwupd
-sys-apps/portage
+#sys-apps/portage
 sys-devel/llvm-roc
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware

@@ -3,6 +3,7 @@ app-containers/docker-cli no-tests # requires gotestsum, not sure where to find 
 app-crypt/hashcat no-tests
 app-editors/vim no-tests # fails regardless
 app-emulation/vkd3d no-tests # fails regardless
+app-metrics/node_exporter no-tests # test regressions
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite
 app-shells/fish no-tests # regression on 1 test
@@ -159,6 +160,7 @@ sys-apps/attr no-tests # fails tests regardless
 sys-apps/bolt no-tests # usual MALLOC_PERTURB_ failures
 sys-apps/coreutils no-tests # fails tests regardless
 sys-apps/diffutils no-tests # regression?
+sys-apps/fwupd no-tests # regressions with tests
 sys-apps/gawk no-tests # fails regardless
 sys-apps/keyutils no-tests # regression in 1.6.3
 sys-apps/sed no-tests # 3 tests failing, possibly due to upgrade

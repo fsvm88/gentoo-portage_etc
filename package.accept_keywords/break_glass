@@ -46,8 +46,10 @@
 <net-libs/stem-1.9
 <net-libs/webkit-gtk-2.37
 <net-misc/nyx-2.2
+<net-p2p/transmission-3.00-r99
 <sci-mathematics/yafu-1.35
 <sys-apps/portage-3.0.31
+<sys-cluster/minikube-1.27
 <sys-devel/clang-15
 <sys-devel/clang-common-15
 <sys-devel/clang-runtime-15

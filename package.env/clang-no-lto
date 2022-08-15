@@ -36,6 +36,7 @@ sys-apps/sandbox clang-no-lto
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto
 sys-libs/libxcrypt clang-no-lto
+sys-process/criu clang-no-lto
 sys-process/numactl clang-no-lto
 sys-process/time clang-no-lto
 x11-libs/pango clang-no-lto

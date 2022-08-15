@@ -26,5 +26,6 @@ dev-vcs/tig
 media-gfx/graphviz
 net-misc/postman-bin
 sys-apps/pkgcore
+sys-cluster/minikube
 sys-devel/gdb
 sys-libs/ncurses-compat

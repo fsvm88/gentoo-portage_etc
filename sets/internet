@@ -14,6 +14,7 @@ net-misc/netkit-telnetd
 net-misc/nyx
 net-misc/wakeonlan
 net-misc/whois
+net-p2p/transmission
 net-proxy/torsocks
 net-vpn/tor
 net-wireless/iw

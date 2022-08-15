@@ -1,6 +1,7 @@
 app-admin/sysstat isag lm_sensors
 app-arch/bzip2 static-libs
 app-arch/zstd static-libs
+app-containers/crun criu
 app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-crypt/qca -qt4

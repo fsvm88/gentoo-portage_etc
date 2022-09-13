@@ -34,7 +34,6 @@ dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
 dev-python/aiohttp no-tests
 dev-python/argh no-tests # fails regardless
 dev-python/astroid no-tests # regression
-dev-python/async_timeout no-tests
 dev-python/attrs no-tests # break depcycle
 dev-python/beautifulsoup4 no-tests
 dev-python/colorama no-tests # weird imports in tests

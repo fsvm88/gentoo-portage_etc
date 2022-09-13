@@ -111,6 +111,7 @@ sys-devel/llvm-roc runtime
 sys-kernel/linux-firmware savedconfig
 sys-libs/glibc gd
 sys-libs/ldb python
+sys-libs/libcap static-libs
 sys-libs/libcxx libcxxabi libunwind -libcxxrt
 sys-libs/libomp hwloc
 sys-libs/libomp offload

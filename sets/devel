@@ -3,7 +3,6 @@ app-admin/terraform
 app-containers/docker-compose
 app-editors/vscode
 app-portage/portage-utils
-app-portage/repoman
 dev-lang/mono
 dev-python/notebook
 dev-python/pylint

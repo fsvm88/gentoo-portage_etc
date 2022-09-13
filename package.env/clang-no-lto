@@ -6,7 +6,6 @@ app-text/libqxp clang-no-lto
 app-text/ps2pkm clang-no-lto
 app-text/texlive-core clang-no-lto
 dev-cpp/glibmm clang-no-lto
-dev-lang/lua clang-no-lto
 dev-lang/python clang-no-lto
 dev-lang/spidermonkey clang-no-lto
 dev-libs/elfutils clang-no-lto

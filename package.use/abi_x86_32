@@ -126,7 +126,6 @@ sys-fs/udev abi_x86_32
 sys-libs/binutils-libs abi_x86_32
 sys-libs/cracklib abi_x86_32
 sys-libs/db abi_x86_32
-sys-libs/e2fsprogs-libs abi_x86_32
 sys-libs/gdbm abi_x86_32
 sys-libs/gpm abi_x86_32
 sys-libs/ldb abi_x86_32

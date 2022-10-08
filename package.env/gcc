@@ -10,6 +10,7 @@ dev-util/xdelta gcc
 media-libs/audiofile gcc
 media-libs/ftgl gcc
 media-libs/glm gcc
+media-libs/leptonica gcc
 media-libs/libass gcc
 media-libs/libgphoto2 gcc
 media-libs/vulkan-layers gcc

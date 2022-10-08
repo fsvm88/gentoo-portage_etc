@@ -13,7 +13,7 @@ app-text/texlive extra
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads
-dev-lang/python lto sqlite tk pgo
+dev-lang/python lto sqlite tk -pgo # pgo triggers test
 dev-lang/rust abi_x86_32
 dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-bootstrap system-llvm
 dev-lang/spidermonkey lto
@@ -44,7 +44,7 @@ dev-util/lldb lzma
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
-gui-libs/wlroots x11-backend
+gui-libs/wlroots tinywl
 kde-plasma/kwin multimedia
 kde-plasma/plasma-workspace qalculate
 media-gfx/exiv2 xmp

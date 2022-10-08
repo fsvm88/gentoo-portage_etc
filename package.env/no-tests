@@ -14,7 +14,7 @@ dev-cpp/clucene no-tests
 dev-cpp/eigen no-tests # fails regardless
 dev-db/sqlite no-tests # regresses too easily
 dev-lang/mono no-tests
-dev-lang/python:3.9 no-tests # fails tests after upgrade
+dev-lang/python no-tests # tests fail regardless
 dev-lang/ruby no-tests
 dev-lang/spidermonkey no-tests
 dev-lang/tcl no-tests
@@ -133,6 +133,7 @@ kde-plasma/libksysguard no-tests
 media-gfx/gscan2pdf no-tests # fails regardless, hangs most of the time
 media-gfx/ocrmypdf no-tests
 media-libs/audiofile no-tests # does not compile with clang, fails tests with gcc and gcc-no-lto
+media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
 media-libs/gst-plugins-base no-tests # fails regardless
 media-libs/gst-plugins-good no-tests # regressed 1 test
 media-libs/libepoxy no-tests # fails in every conceivable way

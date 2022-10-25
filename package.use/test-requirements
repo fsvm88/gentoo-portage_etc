@@ -7,7 +7,6 @@ dev-libs/glib utils
 dev-libs/json-glib abi_x86_32
 dev-libs/libzip tools
 dev-libs/nss utils
-dev-libs/weston headless
 dev-python/QtPy testlib
 dev-util/cunit abi_x86_32
 media-gfx/fontforge python

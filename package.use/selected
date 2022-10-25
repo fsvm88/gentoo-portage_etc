@@ -8,7 +8,6 @@ app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-portage/layman sync-plugin-portage
 dev-lang/rust rust-src
-dev-libs/weston colord fbdev ivi wayland-compositor xwayland -screen-sharing
 dev-python/PyQt5 webchannel
 dev-util/bazel tools
 dev-util/perf -clang
@@ -16,11 +15,6 @@ dev-util/strace -unwind
 dev-vcs/subversion -dso
 games-util/steam-client-meta trayicon
 gui-wm/sway tray
-kde-plasma/libksysguard -detailedmemory
-kde-plasma/plasma-desktop touchpad
-kde-plasma/plasma-meta -crypt
-kde-plasma/plasma-meta thunderbolt
-kde-plasma/powerdevil brightness-control
 media-fonts/fonts-meta ms
 media-gfx/graphviz python
 media-gfx/sane-frontends gimp
@@ -31,7 +25,7 @@ media-video/mpv archive bluray drm gbm libmpv lua tools
 media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
-net-analyzer/wireshark smi -qt4
+net-analyzer/wireshark smi -qt4 qt5
 net-firewall/nftables xtables
 net-im/slack appindicator
 net-im/teams -system-ffmpeg -system-mesa
@@ -54,5 +48,5 @@ sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
 virtual/wine -d3d9 -staging
-www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast pgo -X
+www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast -pgo -X
 x11-apps/mesa-progs gles2

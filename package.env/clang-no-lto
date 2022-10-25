@@ -14,7 +14,6 @@ dev-libs/libbsd clang-no-lto
 dev-libs/libffi clang-no-lto
 dev-libs/libtomcrypt clang-no-lto # fails to link otherwise
 dev-libs/rocr-runtime clang-no-lto
-dev-libs/weston clang-no-lto
 dev-perl/DBI clang-no-lto
 dev-python/pandas clang-no-lto
 dev-python/scipy clang-no-lto
@@ -38,5 +37,6 @@ sys-libs/libxcrypt clang-no-lto
 sys-process/criu clang-no-lto
 sys-process/numactl clang-no-lto
 sys-process/time clang-no-lto
+www-client/firefox clang-no-lto
 x11-libs/pango clang-no-lto
 x11-misc/sddm clang-no-lto

@@ -1,12 +1,11 @@
 app-misc/openrgb
 app-office/libreoffice
-dev-libs/weston
+gui-apps/gtkgreet
 gui-apps/mako
 gui-apps/swaybg
 gui-apps/swayidle
 gui-apps/swaylock
 gui-libs/display-manager-init
-kde-plasma/plasma-meta
 media-fonts/fonts-meta
 media-video/libva-utils
 x11-terms/alacritty

@@ -75,6 +75,7 @@ media-libs/libsdl2 abi_x86_32
 media-libs/libsndfile abi_x86_32
 media-libs/libtheora abi_x86_32
 media-libs/libv4l abi_x86_32
+media-libs/libva abi_x86_32
 media-libs/libvorbis abi_x86_32
 media-libs/libvpx abi_x86_32
 media-libs/libwebp abi_x86_32
@@ -161,8 +162,6 @@ x11-libs/libdrm abi_x86_32
 x11-libs/libICE abi_x86_32
 x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
-x11-libs/libva abi_x86_32
-x11-libs/libva-compat abi_x86_32
 x11-libs/libvdpau abi_x86_32
 x11-libs/libX11 abi_x86_32
 x11-libs/libXau abi_x86_32

@@ -37,4 +37,3 @@ dev-qt/qtx11extras gcc-no-lto
 dev-qt/qtxml gcc-no-lto
 dev-qt/qtxmlpatterns gcc-no-lto
 media-video/smplayer clang-no-lto
-media-video/vlc clang-no-lto

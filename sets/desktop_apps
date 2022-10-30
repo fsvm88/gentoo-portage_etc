@@ -1,7 +1,9 @@
 app-text/zathura-meta
 gui-apps/grim
 gui-apps/slurp
+gui-apps/waybar
 gui-apps/wf-recorder
+media-fonts/fontawesome
 media-sound/pavucontrol
 net-print/hplip-plugin
 sys-power/acpilight

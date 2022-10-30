@@ -24,6 +24,7 @@ dev-libs/crypto++ no-tests
 dev-libs/elfutils no-tests
 dev-libs/libappindicator:2 no-tests # fails regardless
 dev-libs/libdbusmenu no-tests # dep stops at py3.9
+dev-libs/libfmt no-tests # broken
 dev-libs/libindicator no-tests # dep stops at py3.9
 dev-libs/quazip no-tests # regression with Clang 14.0.1?
 dev-libs/rocm-comgr no-tests # specific tests fails with all configs
@@ -138,7 +139,6 @@ media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
 media-libs/libvpx no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 media-libs/mesa no-tests # not required, lengthy
-media-video/vlc no-tests # fails regardless
 net-analyzer/nmap no-tests # fails regardless
 net-libs/gnutls no-tests # fails regardless
 net-libs/grpc no-tests

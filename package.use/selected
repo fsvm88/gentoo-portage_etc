@@ -14,6 +14,7 @@ dev-util/perf -clang
 dev-util/strace -unwind
 dev-vcs/subversion -dso
 games-util/steam-client-meta trayicon
+gui-apps/waybar network tray
 gui-wm/sway tray
 media-fonts/fonts-meta ms
 media-gfx/graphviz python
@@ -22,7 +23,6 @@ media-libs/opencv lto -gtk3
 media-libs/opencv python
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
-media-video/vlc archive bluray cddb chromaprint chromecast dav1d kate libtiger matroska opus postproc sdl-image sftp soxr speex tremor twolame vpx
 net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4 qt5
@@ -34,7 +34,6 @@ net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-print/hplip-plugin orblite
 net-print/hplip snmp
-net-vpn/networkmanager-openvpn -gtk
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 net-wireless/blueman appindicator
 sci-libs/tensorflow opencl python rocm xla

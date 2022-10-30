@@ -32,7 +32,7 @@ dev-python/PyQt5 designer location multimedia positioning sensors serialport sql
 dev-python/pyside2 testlib
 dev-python/QtPy printsupport pyside2
 dev-qt/designer -phonon
-dev-qt/qtgui accessibility eglfs evdev libinput
+dev-qt/qtgui eglfs evdev libinput
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
 dev-qt/qtwebengine geolocation
@@ -56,6 +56,7 @@ media-libs/libpng apng
 media-libs/libsamplerate sndfile
 media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
+media-libs/libva -opengl
 media-libs/libvpx postproc svc
 media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/mlt jack fftw
@@ -81,7 +82,6 @@ net-libs/webkit-gtk gles2
 net-libs/zeromq drafts
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
-net-misc/networkmanager -resolvconf -bluetooth -modemmanager -ppp
 net-misc/spice-gtk -gstreamer python usbredir
 net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks

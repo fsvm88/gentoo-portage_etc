@@ -1,10 +1,10 @@
 media-gfx/gimp
+media-gfx/imv
 media-libs/vulkan-loader
 media-sound/audacity
 media-video/avidemux
 media-video/mpv
 media-video/smplayer
-media-video/vlc
 media-video/wireplumber
 net-wireless/blueman
 x11-apps/mesa-progs

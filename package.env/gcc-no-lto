@@ -23,9 +23,6 @@ net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
 net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
-net-misc/networkmanager gcc-no-lto
-net-vpn/networkmanager-fortisslvpn gcc-no-lto
-net-vpn/networkmanager-l2tp gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config

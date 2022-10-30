@@ -2,8 +2,10 @@
 <app-emulation/wine-gecko-2.47.99
 <app-portage/mirrorselect-2.3.1
 <app-text/tessdata_best-5
+<dev-libs/date-3.1
 <dev-libs/libappindicator-12.11
 <dev-libs/libclc-15
+<dev-libs/libfmt-9.2
 <dev-libs/nss-3.85
 <dev-libs/wayland-protocols-1.28
 <dev-perl/URI-Encode-1.1.2
@@ -11,6 +13,7 @@
 <dev-python/humanfriendly-11
 <dev-python/lit-15
 <dev-python/pdfrw-0.5
+<dev-python/pikepdf-6.3
 <dev-ruby/bundler-2.2.26
 <dev-util/colm-0.15
 <dev-util/lldb-15
@@ -19,6 +22,7 @@
 <dev-vcs/git-filter-repo-2.35
 <gui-apps/gtkgreet-0.8
 <gui-libs/wlroots-9999
+<media-fonts/fontawesome-6.2
 <media-gfx/img2pdf-0.5
 <media-libs/avidemux-core-2.8
 <media-libs/avidemux-plugins-2.8

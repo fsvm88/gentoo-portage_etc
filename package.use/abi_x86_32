@@ -109,7 +109,6 @@ net-libs/libssh2 abi_x86_32
 net-libs/libssh abi_x86_32
 net-libs/nghttp2 abi_x86_32
 net-misc/curl abi_x86_32
-net-misc/networkmanager abi_x86_32
 net-print/cups abi_x86_32
 sys-apps/acl abi_x86_32
 sys-apps/attr abi_x86_32

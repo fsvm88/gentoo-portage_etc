@@ -1,1 +1,5 @@
-net-vpn/networkmanager-openvpn
+net-dialup/xl2tpd
+net-vpn/openconnect
+net-vpn/openfortivpn
+net-vpn/openvpn
+net-vpn/strongswan

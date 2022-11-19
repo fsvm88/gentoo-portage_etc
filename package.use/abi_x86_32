@@ -28,6 +28,7 @@ dev-libs/libffi abi_x86_32
 dev-libs/libgcrypt abi_x86_32
 dev-libs/libgpg-error abi_x86_32
 dev-libs/libindicator abi_x86_32
+dev-libs/libpcre2 abi_x86_32
 dev-libs/libpcre abi_x86_32
 dev-libs/libtasn1 abi_x86_32
 dev-libs/libudfread abi_x86_32

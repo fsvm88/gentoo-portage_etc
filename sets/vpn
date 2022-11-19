@@ -1,5 +1,5 @@
 net-dialup/xl2tpd
+net-vpn/libreswan
 net-vpn/openconnect
 net-vpn/openfortivpn
 net-vpn/openvpn
-net-vpn/strongswan

@@ -12,6 +12,7 @@ app-text/zathura no-tests # TODO: remove this when clang-14 is out, it's an LLD 
 dev-cpp/abseil-cpp no-tests # broken LSAN test
 dev-cpp/clucene no-tests
 dev-cpp/eigen no-tests # fails regardless
+dev-db/mariadb no-tests # regressed with clang-15?
 dev-db/sqlite no-tests # regresses too easily
 dev-lang/mono no-tests
 dev-lang/python no-tests # tests fail regardless
@@ -22,16 +23,21 @@ dev-lang/tk no-tests # tests hang all the time, no use in running them
 dev-libs/criterion no-tests # fails regardless
 dev-libs/crypto++ no-tests
 dev-libs/elfutils no-tests
+dev-libs/glib no-tests # regression in new version
 dev-libs/libappindicator:2 no-tests # fails regardless
 dev-libs/libdbusmenu no-tests # dep stops at py3.9
 dev-libs/libfmt no-tests # broken
 dev-libs/libindicator no-tests # dep stops at py3.9
+dev-libs/libpcre2 no-tests # regressed with clang-15?
+dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
 dev-libs/quazip no-tests # regression with Clang 14.0.1?
 dev-libs/rocm-comgr no-tests # specific tests fails with all configs
 dev-libs/rocm-device-libs no-tests # specific tests fails with all configs
 dev-libs/rocm-opencl-runtime no-tests # test suite requires X server
 dev-lua/lutok no-tests
 dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
+dev-perl/PDF-Builder no-tests # regressed with clang-15?
+dev-perl/Proc-ProcessTable no-tests # regressed with clang-15?
 dev-python/aiohttp no-tests
 dev-python/argh no-tests # fails regardless
 dev-python/astroid no-tests # regression
@@ -135,6 +141,7 @@ media-libs/audiofile no-tests # does not compile with clang, fails tests with gc
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
 media-libs/gst-plugins-base no-tests # fails regardless
 media-libs/gst-plugins-good no-tests # regressed 1 test
+media-libs/leptonica no-tests # regressed with clang-15?
 media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
 media-libs/libvpx no-tests # tests pass all the time, but they take so stupidly long it's not even funny
@@ -166,6 +173,7 @@ sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandb
 sys-block/thin-provisioning-tools no-tests # fails in every conceivable way
 sys-devel/autoconf no-tests # tests take forever, 2 slots, no will to debug it further
 sys-devel/binutils no-tests # fails regardless
+sys-devel/clang no-tests # clang-15 regressions
 sys-devel/gcc no-tests
 sys-devel/gdb no-tests # fails regardless
 sys-devel/lld no-tests # custom patches
@@ -180,5 +188,6 @@ sys-libs/tevent no-tests # fails regardless
 sys-process/psmisc no-tests # fails regardless, missing test expect file?
 www-client/chromium no-tests
 www-client/firefox no-tests
+x11-libs/gdk-pixbuf no-tests # regressed with clang-15?
 x11-libs/pango no-tests # fails regardless
 x11-libs/wxGTK no-tests # broken, bug #876613

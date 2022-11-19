@@ -1,6 +1,6 @@
+app-cdr/cdrtools clang-no-lto
 app-crypt/gcr clang-no-lto # fails tests with LTO
 app-emulation/libvirt clang-no-lto
-app-emulation/wine-vanilla clang-no-lto
 app-text/libetonyek clang-no-lto
 app-text/libqxp clang-no-lto
 app-text/ps2pkm clang-no-lto
@@ -34,7 +34,6 @@ sys-apps/sandbox clang-no-lto
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto
 sys-libs/libxcrypt clang-no-lto
-sys-process/criu clang-no-lto
 sys-process/numactl clang-no-lto
 sys-process/time clang-no-lto
 www-client/firefox clang-no-lto

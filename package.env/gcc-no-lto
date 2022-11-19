@@ -8,6 +8,7 @@ dev-libs/glib gcc-no-lto # fails tests otherwise
 dev-libs/json-c gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto # fails otherwise
 dev-libs/serd gcc-no-lto
+dev-libs/zziplib gcc-no-lto
 dev-python/cffi gcc-no-lto # fails tests otherwise
 dev-python/mypy gcc-no-lto
 dev-python/numpy gcc-no-lto
@@ -27,5 +28,6 @@ sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config
 sys-libs/glibc gcc-no-lto
+sys-process/criu gcc-no-lto
 x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports
 x11-libs/pixman gcc-no-lto

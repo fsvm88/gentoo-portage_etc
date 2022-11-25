@@ -9,6 +9,7 @@ dev-cpp/glibmm clang-no-lto
 dev-lang/rust clang-no-lto
 dev-lang/spidermonkey clang-no-lto
 dev-libs/elfutils clang-no-lto
+dev-libs/gobject-introspection clang-no-lto
 dev-libs/grantlee clang-no-lto
 dev-libs/libbsd clang-no-lto
 dev-libs/libffi clang-no-lto
@@ -30,7 +31,6 @@ sys-apps/acl clang-no-lto
 sys-apps/attr clang-no-lto
 sys-apps/fwupd clang-no-lto
 sys-apps/pciutils clang-no-lto
-sys-apps/sandbox clang-no-lto
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto
 sys-libs/libxcrypt clang-no-lto

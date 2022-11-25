@@ -1,0 +1,27 @@
+diff -Nuar minikube-1.27.1-vendor.orig/pkg/drivers/kic/types.go minikube-1.27.1-vendor/pkg/drivers/kic/types.go
+--- minikube-1.27.1-vendor.orig/pkg/drivers/kic/types.go	2022-10-18 03:47:17.000000000 +0200
++++ minikube-1.27.1-vendor/pkg/drivers/kic/types.go	2022-11-06 21:56:08.117846342 +0100
+@@ -24,9 +24,9 @@
+ 
+ const (
+ 	// Version is the current version of kic
+-	Version = "v0.0.35"
++	Version = "v0.0.34"
+ 	// SHA of the kic base image
+-	baseImageSHA = "e6f9b2700841634f3b94907f9cfa6785ca4409ef8e428a0322c1781e809d311b"
++        baseImageSHA = "f2a1e577e43fd6769f35cdb938f6d21c3dacfd763062d119cade738fa244720c"
+ 	// The name of the GCR kicbase repository
+ 	gcrRepo = "gcr.io/k8s-minikube/kicbase"
+ 	// The name of the Dockerhub kicbase repository
+diff -Nuar minikube-1.27.1-vendor.orig/site/content/en/docs/commands/start.md minikube-1.27.1-vendor/site/content/en/docs/commands/start.md
+--- minikube-1.27.1-vendor.orig/site/content/en/docs/commands/start.md	2022-10-18 03:47:17.000000000 +0200
++++ minikube-1.27.1-vendor/site/content/en/docs/commands/start.md	2022-11-06 21:56:49.381787891 +0100
+@@ -26,7 +26,7 @@
+       --apiserver-names strings           A set of apiserver names which are used in the generated certificate for kubernetes.  This can be used if you want to make the apiserver available from outside the machine
+       --apiserver-port int                The apiserver listening port (default 8443)
+       --auto-update-drivers               If set, automatically updates drivers to the latest version. Defaults to true. (default true)
+-      --base-image string                 The base image to use for docker/podman drivers. Intended for local development. (default "gcr.io/k8s-minikube/kicbase:v0.0.35@sha256:e6f9b2700841634f3b94907f9cfa6785ca4409ef8e428a0322c1781e809d311b")
++      --base-image string                 The base image to use for docker/podman drivers. Intended for local development. (default "gcr.io/k8s-minikube/kicbase@sha256:f2a1e577e43fd6769f35cdb938f6d21c3dacfd763062d119cade738fa244720c")
+       --binary-mirror string              Location to fetch kubectl, kubelet, & kubeadm binaries from.
+       --cache-images                      If true, cache docker images for the current bootstrapper and load them into the machine. Always false with --driver=none. (default true)
+       --cert-expiration duration          Duration until minikube certificate expiration, defaults to three years (26280h). (default 26280h0m0s)

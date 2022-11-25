@@ -1,4 +1,3 @@
-dev-libs/ocl-icd
 dev-libs/rocm-opencl-runtime
 #dev-libs/rocm-smi-lib
 #dev-libs/rocr-debug-agent

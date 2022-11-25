@@ -1,0 +1,21 @@
+diff -Nuar lld.orig/ELF/Config.h lld/ELF/Config.h
+--- a/lld/ELF/Config.h	2021-09-24 18:18:10.000000000 +0200
++++ b/lld/ELF/Config.h	2021-10-24 14:54:41.470814420 +0200
+@@ -148,7 +148,7 @@
+   bool armHasBlx = false;
+   bool armHasMovtMovw = false;
+   bool armJ1J2BranchEncoding = false;
+-  bool asNeeded = false;
++  bool asNeeded = true;
+   BsymbolicKind bsymbolic = BsymbolicKind::None;
+   bool callGraphProfileSort;
+   bool checkSections;
+@@ -172,7 +172,7 @@
+   bool fortranCommon;
+   bool gcSections;
+   bool gdbIndex;
+-  bool gnuHash = false;
++  bool gnuHash = true;
+   bool gnuUnique;
+   bool hasDynSymTab;
+   bool ignoreDataAddressEquality;

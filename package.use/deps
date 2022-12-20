@@ -18,6 +18,7 @@ dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-bootstr
 dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
+dev-libs/libclc spirv
 dev-libs/libpcre2 pcre16 pcre32
 dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 precompute-ecmult

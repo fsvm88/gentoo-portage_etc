@@ -3,6 +3,7 @@ app-containers/docker-cli no-tests # requires gotestsum, not sure where to find 
 app-crypt/hashcat no-tests
 app-editors/vim no-tests # fails regardless
 app-emulation/vkd3d no-tests # fails regardless
+app-i18n/ibus no-tests # they hang anyway
 app-metrics/node_exporter no-tests # test regressions
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # broken test suite
@@ -35,6 +36,7 @@ dev-libs/rocm-comgr no-tests # specific tests fails with all configs
 dev-libs/rocm-device-libs no-tests # specific tests fails with all configs
 dev-libs/rocm-opencl-runtime no-tests # test suite requires X server
 dev-lua/lutok no-tests
+dev-perl/DBI no-tests # fails for unknown reasons
 dev-perl/Gtk3-ImageView no-tests # fails with clang, hangs with gcc
 dev-perl/PDF-Builder no-tests # regressed with clang-15?
 dev-perl/Proc-ProcessTable no-tests # regressed with clang-15?
@@ -130,6 +132,7 @@ dev-util/ctags no-tests # fails regardless
 dev-util/cucumber no-tests
 dev-util/pkgcheck no-tests # regressions that break most of the stuff
 dev-util/scons no-tests # tests hangs because python multiprocessing sucks (and something is left hanging)
+dev-util/umockdev no-tests # requires gphoto2 and xinput, which are not in test deps
 dev-vcs/git-filter-repo no-tests # fails most likely because of git version 2.35, to reenable after upgrade
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
@@ -141,11 +144,14 @@ media-libs/audiofile no-tests # does not compile with clang, fails tests with gc
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
 media-libs/gst-plugins-base no-tests # fails regardless
 media-libs/gst-plugins-good no-tests # regressed 1 test
+media-libs/gst-plugins-ugly no-tests # forces deps on gstreamer[test] otherwise, and that has regressed
+media-libs/gstreamer no-tests # regression from 1.20.3
 media-libs/leptonica no-tests # regressed with clang-15?
 media-libs/libepoxy no-tests # fails in every conceivable way
 media-libs/libplacebo no-tests # fails regardless, opengl test
 media-libs/libvpx no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 media-libs/mesa no-tests # not required, lengthy
+media-plugins/gst-plugins-libav no-tests # forces deps on gstreamer[test] otherwise, and that has regressed
 net-analyzer/nmap no-tests # fails regardless
 net-libs/gnutls no-tests # fails regardless
 net-libs/grpc no-tests
@@ -154,6 +160,7 @@ net-libs/nodejs no-tests # as expected of JS, tests are broken
 net-libs/stem no-tests # fails regardless
 net-mail/mailutils no-tests # fails putmail tests, not sure why
 net-misc/curl no-tests # fails tests regardless
+net-misc/networkmanager no-tests # stupid MALLOC_PERTURB stuff
 net-misc/nyx no-tests
 net-misc/openssh no-tests # tests fail, known bug, to remove after upgrade to 8.7
 net-misc/rclone no-tests # requires golangci-lint, not sure where to find that
@@ -177,6 +184,7 @@ sys-devel/clang no-tests # clang-15 regressions
 sys-devel/gcc no-tests
 sys-devel/gdb no-tests # fails regardless
 sys-devel/lld no-tests # custom patches
+sys-devel/llvm no-tests # regressed for 1 test
 sys-kernel/linux-headers no-tests
 sys-libs/compiler-rt-sanitizers no-tests # fails regardless, too big not to fail
 sys-libs/db no-tests

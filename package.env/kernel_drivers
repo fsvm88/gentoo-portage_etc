@@ -1,2 +1,2 @@
-sys-fs/zfs gcc
-sys-fs/zfs-kmod gcc
+#sys-fs/zfs-kmod gcc-no-lto
+sys-fs/zfs-kmod kernel-drivers-clang

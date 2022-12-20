@@ -1,0 +1,15 @@
+BUILD_FIXES="LLVM=1 LLVM_IAS=1"
+KERNEL_AR="llvm-ar"
+KERNEL_CC="clang"
+KERNEL_LD="ld.lld"
+KERNEL_NM="llvm-nm"
+KERNEL_OBJCOPY="llvm-objcopy"
+KERNEL_OBJDUMP="llvm-objdump"
+KERNEL_RANLIB="llvm-ranlib"
+KERNEL_READELF="llvm-readelf"
+KERNEL_STRIP="llvm-strip"
+KERNEL_LLVM=1
+LLVM=1
+LLVM_IAS=1
+KERNEL_LLVM=1
+KERNEL_LLVM_IAS=1

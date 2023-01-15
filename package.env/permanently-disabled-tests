@@ -1,0 +1,10 @@
+app-office/libreoffice no-tests # too big
+dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
+# dev-python/* no-tests # break depcycleS
+dev-qt/* no-tests # Qt testing is a nightmare
+dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
+dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
+media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
+media-libs/mesa no-tests # not required (-9999), lengthy
+sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
+www-client/firefox no-tests

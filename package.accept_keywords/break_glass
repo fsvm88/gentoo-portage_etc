@@ -1,6 +1,7 @@
 <app-cdr/cdrtools-3.03
 <app-containers/cni-plugins-1.2
 <app-editors/vscode-1.99
+app-misc/radeontop **
 <app-portage/mirrorselect-2.3.1
 <app-text/tessdata_best-5
 <dev-db/mariadb-10.7
@@ -8,7 +9,7 @@
 <dev-libs/libappindicator-12.11
 <dev-libs/libclc-15
 <dev-libs/libfmt-9.2
-<dev-libs/nss-3.86
+<dev-libs/nss-3.88
 <dev-libs/wayland-protocols-1.32
 <dev-perl/URI-Encode-1.1.2
 <dev-python/coloredlogs-15.1

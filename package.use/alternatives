@@ -1,0 +1,3 @@
+app-alternatives/awk reference
+app-alternatives/bzip2 -reference pbzip2
+app-alternatives/gzip -reference pigz

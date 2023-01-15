@@ -1,4 +1,7 @@
-app-text/scdoc **
-gui-apps/waybar **
-gui-libs/wlroots **
-gui-wm/sway **
+app-text/scdoc
+gui-apps/swaybg
+gui-apps/swayidle
+gui-apps/swaylock
+gui-apps/waybar
+gui-libs/wlroots
+gui-wm/sway

@@ -1,4 +1,3 @@
-app-admin/syslog-ng python
 app-arch/brotli python
 app-crypt/p11-kit abi_x86_32
 app-misc/pax-utils python

@@ -1,7 +1,6 @@
 app-admin/checksec
 app-admin/eclean-kernel
 app-admin/logrotate
-app-admin/syslog-ng
 app-crypt/gentoo-keys
 app-eselect/eselect-repository
 app-misc/fdupes

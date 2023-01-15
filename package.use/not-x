@@ -1,0 +1,4 @@
+#dev-cpp/cairomm X # required by cairo itself
+#media-libs/libglvnd -X
+#media-video/mpv -X -opengl
+#x11-libs/cairo X # required by libreoffice, dev-dotnet/libgdiplus

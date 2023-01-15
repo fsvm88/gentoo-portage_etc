@@ -13,6 +13,7 @@ dev-util/hip
 dev-util/rocm-cmake
 dev-util/rocminfo
 dev-util/shellcheck-bin
+dev-vcs/git-filter-repo
 games-util/esteam
 games-util/game-device-udev-rules
 games-util/steam-client-meta

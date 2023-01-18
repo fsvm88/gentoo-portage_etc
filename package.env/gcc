@@ -27,6 +27,7 @@ sci-mathematics/yafu gcc
 sys-apps/fwupd-efi gcc
 sys-auth/oath-toolkit gcc
 sys-boot/grub gcc
+sys-devel/binutils gcc # fails tests with clang otherwise
 sys-fs/udisks gcc
 sys-kernel/gentoo-sources gcc
 sys-libs/compiler-rt:14.0.6 gcc

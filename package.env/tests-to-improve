@@ -1,0 +1,6 @@
+app-i18n/ibus no-tests # tests hang, possibly due to required input
+app-shells/bash-completion no-tests # fails testSudo:test_1
+dev-libs/libfmt no-tests # always fails regardless of compiler
+dev-perl/Proc-ProcessTable no-tests # hangs
+sys-devel/clang no-tests # possibly some regressions in tests?
+sys-devel/lld no-tests # most foreign architectures fail, perhaps because of custom patches?

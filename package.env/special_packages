@@ -1,4 +1,6 @@
+dev-qt/* gcc-no-lto
 media-libs/vidstab fopenmp
+#media-video/smplayer clang-no-lto
 sci-libs/tensorflow clang-no-lto-no-debug
 sci-libs/tensorflow-estimator disable-network-sandbox
 #sys-devel/clang extra_cmake-llvm
@@ -7,6 +9,10 @@ sci-libs/tensorflow-estimator disable-network-sandbox
 #sys-devel/lldb extra_cmake-llvm
 #sys-devel/lld extra_cmake-llvm
 #sys-devel/llvm extra_cmake-llvm
+#sys-fs/zfs-kmod gcc-no-lto
+sys-fs/zfs-kmod kernel-drivers-clang
+sys-libs/efivar no-lld
 www-client/chromium ccache
 www-client/chromium chromium
 www-client/chromium gcc-no-lto-no-debug
+dev-lang/mono gcc-no-lto-no-debug

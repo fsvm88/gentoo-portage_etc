@@ -1,4 +1,5 @@
 app-emulation/wine-vanilla gcc-no-lto # after so many years of supporting clang, they introduced -mabi=ms, which is not available there
+app-i18n/ibus gcc-no-lto
 app-misc/openrgb gcc-no-lto
 dev-cpp/doctest gcc-no-lto # does not compile at all with clang
 dev-db/sqlite gcc-no-lto

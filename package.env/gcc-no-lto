@@ -26,6 +26,7 @@ net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
 net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
+net-misc/x11-ssh-askpass gcc-no-lto
 sci-libs/lapack gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config

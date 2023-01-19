@@ -1,29 +1,8 @@
 app-arch/wimlib gcc
-dev-lang/go gcc # cannot be compiled even with clang-no-lto
-#dev-python/pyzmq gcc-no-lto
+dev-lang/go gcc
 dev-util/colm gcc
 gnome-base/gnome-keyring gcc
-media-gfx/gimp gcc
 media-libs/audiofile gcc
-media-libs/ftgl gcc
-media-libs/glm gcc
-media-libs/leptonica gcc
-media-libs/libass gcc
 media-libs/libgphoto2 gcc
-media-libs/vulkan-layers gcc
 media-libs/xvid gcc
-net-dialup/ppp gcc
-net-fs/nfs-utils gcc
-net-misc/rsync gcc
-net-misc/x11-ssh-askpass gcc
 net-wireless/cowpatty gcc
-sci-libs/hdf5 gcc
-sci-libs/spqr gcc
-sci-mathematics/yafu gcc
-sys-apps/fwupd-efi gcc
-sys-auth/oath-toolkit gcc
-sys-boot/grub gcc
-sys-devel/binutils gcc # fails tests with clang otherwise
-sys-fs/udisks gcc
-sys-kernel/gentoo-sources gcc
-sys-libs/db gcc

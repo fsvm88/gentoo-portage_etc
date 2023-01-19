@@ -1,3 +1,4 @@
 app-arch/libarchive clang-no-lto
 dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE)
+dev-util/perf clang-no-lto
 www-client/firefox clang-no-lto # this is handled by the ebuild

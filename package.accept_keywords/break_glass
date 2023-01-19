@@ -22,6 +22,7 @@ app-misc/radeontop **
 <dev-ruby/rubygems-3.4.4
 <dev-util/colm-0.15
 <dev-util/lldb-15
+<dev-util/perf-6.1
 <dev-util/ragel-7.1
 <gui-apps/gtkgreet-0.8
 <gui-libs/wlroots-9999

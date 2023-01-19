@@ -1,0 +1,101 @@
+diff -Nuar firefox-109.0.orig/build/moz.configure/lto-pgo.configure firefox-109.0/build/moz.configure/lto-pgo.configure
+--- firefox-109.0.orig/build/moz.configure/lto-pgo.configure	2023-01-18 23:53:00.073939686 +0100
++++ firefox-109.0/build/moz.configure/lto-pgo.configure	2023-01-18 23:55:09.983989320 +0100
+@@ -246,9 +246,11 @@
+         if value == "full":
+             cflags.append("-flto")
+             ldflags.append("-flto")
++            ldflags.append("-fwhole-program-vtables")
+         else:
+             cflags.append("-flto=thin")
+             ldflags.append("-flto=thin")
++            ldflags.append("-fwhole-program-vtables")
+ 
+         if target.os == "Android" and value == "cross":
+             # Work around https://github.com/rust-lang/rust/issues/90088
+diff -Nuar firefox-109.0.orig/js/src/ctypes/libffi/configure firefox-109.0/js/src/ctypes/libffi/configure
+--- firefox-109.0.orig/js/src/ctypes/libffi/configure	2023-01-12 21:02:02.000000000 +0100
++++ firefox-109.0/js/src/ctypes/libffi/configure	2023-01-19 00:01:43.334033792 +0100
+@@ -14569,6 +14569,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-109.0.orig/js/src/ctypes/libffi/ltmain.sh firefox-109.0/js/src/ctypes/libffi/ltmain.sh
+--- firefox-109.0.orig/js/src/ctypes/libffi/ltmain.sh	2023-01-12 21:02:02.000000000 +0100
++++ firefox-109.0/js/src/ctypes/libffi/ltmain.sh	2023-01-19 00:02:04.494033037 +0100
+@@ -7276,7 +7276,7 @@
+       # -stdlib=*            select c++ std lib with clang
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -O*|-g*|-flto*|-fwhole-program-vtables*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
+       -specs=*)
+         func_quote_for_eval "$arg"
+ 	arg=$func_quote_for_eval_result
+diff -Nuar firefox-109.0.orig/js/src/ctypes/libffi/m4/libtool.m4 firefox-109.0/js/src/ctypes/libffi/m4/libtool.m4
+--- firefox-109.0.orig/js/src/ctypes/libffi/m4/libtool.m4	2023-01-12 21:02:02.000000000 +0100
++++ firefox-109.0/js/src/ctypes/libffi/m4/libtool.m4	2023-01-19 00:01:24.774034251 +0100
+@@ -7517,6 +7517,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-109.0.orig/modules/freetype2/builds/unix/aclocal.m4 firefox-109.0/modules/freetype2/builds/unix/aclocal.m4
+--- firefox-109.0.orig/modules/freetype2/builds/unix/aclocal.m4	2023-01-12 21:02:07.000000000 +0100
++++ firefox-109.0/modules/freetype2/builds/unix/aclocal.m4	2023-01-19 00:03:24.774028098 +0100
+@@ -7539,6 +7539,7 @@
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+ case "$CC $CFLAGS " in #(
+ *\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
++*\ -fwhole-program-vtables*\ *) CFLAGS="$CFLAGS -fno-whole-program-vtables" ;;
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
+diff -Nuar firefox-109.0.orig/modules/freetype2/builds/unix/ltmain.sh firefox-109.0/modules/freetype2/builds/unix/ltmain.sh
+--- firefox-109.0.orig/modules/freetype2/builds/unix/ltmain.sh	2023-01-12 21:02:06.000000000 +0100
++++ firefox-109.0/modules/freetype2/builds/unix/ltmain.sh	2023-01-19 00:03:43.374026513 +0100
+@@ -7560,7 +7560,7 @@
+       # -Wa,*                Pass flags directly to the assembler
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
++      -O*|-g*|-flto*|-fwhole-program-vtables*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
+       -specs=*|-fsanitize=*|-fuse-ld=*|-Wa,*)
+         func_quote_arg pretty "$arg"
+ 	arg=$func_quote_arg_result
+diff -Nuar firefox-109.0.orig/third_party/libwebrtc/build/config/compiler/BUILD.gn firefox-109.0/third_party/libwebrtc/build/config/compiler/BUILD.gn
+--- firefox-109.0.orig/third_party/libwebrtc/build/config/compiler/BUILD.gn	2023-01-12 21:02:15.000000000 +0100
++++ firefox-109.0/third_party/libwebrtc/build/config/compiler/BUILD.gn	2023-01-18 23:59:59.244033698 +0100
+@@ -651,6 +651,7 @@
+ 
+     cflags += [
+       "-flto=thin",
++      "-fwhole-program-vtables",
+       "-fsplit-lto-unit",
+     ]
+ 
+@@ -671,7 +672,7 @@
+         "/lldltocachepolicy:$cache_policy",
+       ]
+     } else {
+-      ldflags += [ "-flto=thin" ]
++      ldflags += [ "-flto=thin", "-fwhole-program-vtables" ]
+ 
+       # Enabling ThinLTO on Chrome OS too, in an effort to reduce the memory
+       # usage in crbug.com/1038040. Note this will increase build time in
+@@ -697,7 +698,7 @@
+       if (is_chromeos_ash) {
+         # Not much performance difference was noted between the default (100)
+         # and these. ARM was originally set lower than x86 to keep the size
+-        # bloat of ThinLTO to <10%, but that's potentially no longer true.
++    # bloat of ThinLTO to <10%, but that's potentially no longer true.
+         # FIXME(inglorion): maybe tune these?
+         if (target_cpu == "arm" || target_cpu == "arm64") {
+           import_instr_limit = 20

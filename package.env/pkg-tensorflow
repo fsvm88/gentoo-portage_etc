@@ -1,1 +1,2 @@
+sci-libs/tensorflow clang-no-lto-no-debug
 sci-libs/tensorflow-estimator disable-network-sandbox

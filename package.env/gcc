@@ -7,6 +7,7 @@ dev-lang/ocaml gcc
 dev-python/pyzmq gcc-no-lto
 dev-util/colm gcc
 dev-util/xdelta gcc
+gnome-base/gnome-keyring gcc
 media-gfx/gimp gcc
 media-libs/audiofile gcc
 media-libs/ftgl gcc

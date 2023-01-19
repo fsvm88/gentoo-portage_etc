@@ -1,6 +1,7 @@
-app-i18n/ibus no-tests # tests hang, possibly due to required input
-app-shells/bash-completion no-tests # fails testSudo:test_1
-dev-libs/libfmt no-tests # always fails regardless of compiler
-dev-perl/Proc-ProcessTable no-tests # hangs
-sys-devel/clang no-tests # possibly some regressions in tests?
-sys-devel/lld no-tests # most foreign architectures fail, perhaps because of custom patches?
+dev-libs/libfmt no-tests # fails regardless of compiler
+media-gfx/img2pdf no-tests # failures due to possibly broken python
+media-libs/gst-plugins-good no-tests # fails regardless of compiler
+net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
+net-vpn/ocserv no-tests # fails regardless of compilers
+sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
+sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?

@@ -1,12 +1,12 @@
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
-app-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 app-i18n/ibus no-tests # tests hang regardless of compiler
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # fails a sudo test, for whatever reason
 app-text/docbook2X no-tests # fails no matter what, think the test suite is broken
 app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
+dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-libs/glib no-tests # fails regardless of compiler
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb

@@ -51,4 +51,5 @@ app-misc/radeontop **
 <sys-libs/libcxxabi-15
 <sys-libs/libomp-15
 <sys-libs/libudev-compat-187
+<x11-libs/libX11-1.8.4
 <x11-terms/alacritty-0.12

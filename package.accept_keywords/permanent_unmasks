@@ -1,6 +1,7 @@
 app-arch/zstd
 app-emulation/wine-mono
 app-emulation/wine-vanilla
+app-shells/fish
 dev-lang/rust
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs

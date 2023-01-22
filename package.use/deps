@@ -95,6 +95,7 @@ sys-apps/systemd xkb
 sys-apps/util-linux static-libs
 sys-boot/grub mount
 sys-devel/binutils cxx
+sys-devel/clang-common hardened
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-devel/llvm gold udis86

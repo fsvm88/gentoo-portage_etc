@@ -1,5 +1,17 @@
 app-arch/libarchive clang-no-lto
+app-cdr/cdrtools clang-no-lto # fails with LTO
+app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
+app-text/libetonyek clang-no-lto # fails with LTO
+app-text/ps2pkm clang-no-lto # fails with LTO
+dev-cpp/glibmm clang-no-lto # fails with LTO
 dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE)
+dev-libs/libbsd clang-no-lto # fails tests with LTO
+dev-util/dialog clang-no-lto
 dev-util/perf clang-no-lto
+media-libs/libfreehand clang-no-lto # fails with LTO
+media-libs/libvisio clang-no-lto
 sci-libs/hdf5 clang-no-lto
+sys-apps/acl clang-no-lto # fails with LTO
+sys-apps/sandbox clang-no-lto # fails with LTO
+sys-libs/libosinfo clang-no-lto # fails with LTO
 www-client/firefox clang-no-lto # this is handled by the ebuild

@@ -7,7 +7,6 @@ dev-util/colm gcc
 gnome-base/gnome-keyring gcc
 media-gfx/pngquant gcc # fails tests with clang
 media-libs/audiofile gcc
-media-libs/giflib gcc # fails tests with clang
 media-libs/libgphoto2 gcc
 media-libs/xvid gcc
 net-wireless/cowpatty gcc

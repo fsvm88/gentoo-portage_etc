@@ -20,7 +20,7 @@ games-util/game-device-udev-rules
 games-util/steam-client-meta
 games-util/steam-launcher
 games-util/steam-meta
-gui-apps/wf-recorder
+gui-apps/wf-recorder **
 media-gfx/ocrmypdf
 media-video/pipewire
 net-analyzer/nmap

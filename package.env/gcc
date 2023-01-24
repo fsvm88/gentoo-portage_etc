@@ -10,3 +10,5 @@ media-libs/audiofile gcc
 media-libs/libgphoto2 gcc
 media-libs/xvid gcc
 net-wireless/cowpatty gcc
+sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
+sys-devel/binutils gcc

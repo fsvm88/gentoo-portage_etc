@@ -14,7 +14,7 @@ dev-java/icedtea infinality
 dev-lang/perl ithreads
 dev-lang/python lto sqlite tk -pgo # pgo triggers test
 dev-lang/rust abi_x86_32
-dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler -system-bootstrap system-llvm
+dev-lang/rust cargo clippy nightly rls rustfmt parallel-compiler profiler rust-analyzer wasm -system-bootstrap system-llvm
 dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand

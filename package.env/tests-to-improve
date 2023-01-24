@@ -1,12 +1,15 @@
+app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
 app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
 app-text/libqxp clang-no-lto # fails tests with LTO
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
+dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 media-gfx/img2pdf no-tests # failures due to possibly broken python
 media-libs/gst-plugins-good no-tests # fails regardless of compiler
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-mail/mailutils no-tests # fails tests regardless
 net-vpn/ocserv no-tests # fails regardless of compilers
+sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
 sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?

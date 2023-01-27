@@ -8,9 +8,7 @@ media-gfx/libimagequant fopenmp
 media-gfx/pngquant fopenmp
 media-libs/libmypaint fopenmp
 media-libs/libsoundtouch fopenmp
-media-libs/opencv fopenmp
 media-libs/vidstab fopenmp
-sci-libs/fftw fopenmp
 sys-devel/clang-runtime fopenmp
 sys-devel/gettext fopenmp
 virtual/fortran fopenmp

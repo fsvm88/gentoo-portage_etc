@@ -1,0 +1,11 @@
+app-containers/docker-compose python_targets_python3_10
+dev-python/exceptiongroup python_targets_python3_10
+dev-python/platformdirs python_targets_python3_10
+dev-python/pyGPG python_targets_python3_10
+dev-python/setuptools python_targets_python3_10
+dev-python/setuptools_scm python_targets_python3_10
+net-misc/nyx python_targets_python3_10
+net-wireless/aircrack-ng python_targets_python3_10
+sys-fs/zfs python_targets_python3_10
+sys-process/criu python_targets_python3_10
+sys-process/iotop python_targets_python3_10

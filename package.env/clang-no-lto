@@ -1,6 +1,7 @@
 app-arch/libarchive clang-no-lto
 app-cdr/cdrtools clang-no-lto # fails with LTO
 app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
+app-emulation/libvirt clang-no-lto # fails one specific test - regressed?
 app-text/libetonyek clang-no-lto # fails with LTO
 app-text/ps2pkm clang-no-lto # fails with LTO
 dev-cpp/glibmm clang-no-lto # fails with LTO

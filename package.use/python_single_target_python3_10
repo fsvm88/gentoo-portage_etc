@@ -1,7 +1,3 @@
-media-libs/avidemux-plugins python_single_target_python3_10
 media-libs/lv2 python_single_target_python3_10
 net-dns/avahi python_single_target_python3_10
-net-fs/samba python_single_target_python3_10
 net-print/hplip python_single_target_python3_10
-sys-libs/ldb python_single_target_python3_10
-sys-libs/tevent python_single_target_python3_10

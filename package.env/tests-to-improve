@@ -11,5 +11,6 @@ net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-mail/mailutils no-tests # fails tests regardless
 net-vpn/ocserv no-tests # fails regardless of compilers
 sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
+sys-devel/libtool no-tests # regressed compared to non-r1
 sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?

@@ -5,10 +5,10 @@ app-containers/crun criu
 app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-emulation/libvirt-glib python
-app-emulation/libvirt nfs
 app-text/tesseract osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
+dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
 dev-lang/perl ithreads

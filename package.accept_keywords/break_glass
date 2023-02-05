@@ -1,11 +1,15 @@
 <app-cdr/cdrtools-3.03
 <app-containers/cni-plugins-1.2
+<app-containers/docker-buildx-0.10
+<app-containers/docker-compose-2.13
 <app-editors/vscode-1.99
+<app-emulation/libvirt-8.10
 <app-emulation/virt-manager-4.2
 <app-metrics/node_exporter-1.5
 app-misc/radeontop **
 <app-portage/mirrorselect-2.3.1
 <app-text/tessdata_best-5
+<dev-db/postgresql-16
 <dev-libs/date-3.1
 <dev-libs/libappindicator-12.11
 <dev-libs/libclc-15
@@ -17,11 +21,14 @@ app-misc/radeontop **
 <dev-python/coloredlogs-15.1
 <dev-python/ensurepip-setuptools-67
 <dev-python/humanfriendly-11
+<dev-python/libvirt-python-8.10
 <dev-python/lit-15
+<dev-python/packaging-24
 <dev-python/pdfrw-0.5
 <dev-python/pikepdf-6.3
 <dev-python/platformdirs-2.6.3
 <dev-python/setuptools-67
+<dev-python/setuptools-67.1
 <dev-python/setuptools_scm-7.2
 <dev-python/verboselogs-1.8
 <dev-ruby/kpeg-1.3.3
@@ -36,11 +43,11 @@ app-misc/radeontop **
 <media-fonts/fontawesome-6.2
 <media-gfx/fontforge-20230201
 <media-gfx/img2pdf-0.5
-<media-libs/avidemux-core-2.8
-<media-libs/avidemux-plugins-2.8
+<media-libs/avidemux-core-2.8.2
+<media-libs/avidemux-plugins-2.8.2
 <media-libs/icc-profiles-openicc-1.4
 <media-libs/lv2-1.18.11
-<media-video/avidemux-2.8
+<media-video/avidemux-2.8.2
 <net-fs/samba-4.17
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
@@ -66,5 +73,6 @@ app-misc/radeontop **
 <sys-libs/libomp-15
 <sys-libs/libudev-compat-187
 <sys-libs/tevent-0.14
+<sys-process/iotop-0.7
 <x11-libs/libX11-1.8.4
 <x11-terms/alacritty-0.12

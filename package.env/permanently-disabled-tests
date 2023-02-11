@@ -1,3 +1,4 @@
+app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group

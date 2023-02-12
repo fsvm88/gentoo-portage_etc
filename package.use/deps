@@ -100,7 +100,6 @@ sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-devel/llvm gold udis86
 sys-devel/llvm-roc runtime
-sys-kernel/linux-firmware savedconfig
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcap static-libs

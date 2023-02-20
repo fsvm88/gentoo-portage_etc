@@ -119,4 +119,5 @@ virtual/rust abi_x86_32
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb wayland
 x11-libs/libdrm libkms video_cards_amdgpu
+x11-libs/libdrm video_cards_radeon
 x11-libs/wxGTK webkit

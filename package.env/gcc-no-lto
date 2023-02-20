@@ -24,6 +24,7 @@ media-libs/giflib gcc-no-lto # this seems to compile fine with 'gcc' (GCC w/ LTO
 media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise
 media-libs/x264 gcc-no-lto
+media-sound/audacity gcc-no-lto # clang-15: no viable constructor or deduction guide for deduction of template arguments of 'owner_less'
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto

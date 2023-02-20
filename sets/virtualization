@@ -1,6 +1,5 @@
 app-containers/docker
 app-containers/docker-buildx
-app-containers/lxc
 app-containers/podman
 app-emulation/virt-manager
 app-emulation/virt-viewer

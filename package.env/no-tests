@@ -2,17 +2,25 @@ app-admin/awscli no-tests # thousands and thousands of tests (which is nice), bu
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
+app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
 app-i18n/ibus no-tests # tests hang regardless of compiler
+app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
 app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # fails a sudo test, for whatever reason
 app-text/docbook2X no-tests # fails no matter what, think the test suite is broken
+app-text/libqxp clang-no-lto # fails tests with LTO
 app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
+dev-cpp/cpp-httplib no-tests # fails lots of random tests
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-libs/glib no-tests # fails regardless of compiler
+dev-libs/libcdio no-tests
+dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
+dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
+dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
 dev-perl/IO-Tty no-tests # likely broken test suite
 dev-perl/Proc-ProcessTable no-tests # hangs
@@ -24,20 +32,31 @@ dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gui-libs/gtk no-tests # likely MALLOC_PERTURB_ crap, everything fails with SIGSEGV
 media-gfx/gscan2pdf no-tests # tests hang
+media-gfx/img2pdf no-tests # failures due to possibly broken python
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
 media-libs/gst-plugins-base no-tests # fails regardless of compiler
+media-libs/gst-plugins-good no-tests # fails regardless of compiler
 media-libs/libepoxy no-tests # fails tests regardless of compiler
 media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then
 media-libs/mesa no-tests # not required (-9999), lengthy
+net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
+net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-libs/nodejs no-tests # not even trying this one...
 net-libs/stem no-tests # fails tests regardless of compiler
+net-mail/mailutils no-tests # fails tests regardless
 net-misc/networkmanager gcc-no-lto # fails tests with any other configuration
+net-vpn/ocserv no-tests # fails regardless of compilers
+net-vpn/tor no-tests # regressed with 0.4.7.13-r1?
 sys-apps/coreutils no-tests # fail on malloc because of sandbox
 sys-apps/keyutils no-tests # one of the tests fails with disk quota exceeded...
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
+sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
 sys-devel/autoconf no-tests # nobody ever saw these finish
 sys-devel/clang no-tests # fails 3 tests - possibly regression
 sys-devel/gcc no-tests # not worth running...
+sys-devel/libtool no-tests # regressed compared to non-r1
+sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
+sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
 www-client/firefox no-tests

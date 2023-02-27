@@ -27,6 +27,7 @@ dev-python/unittest-or-fail python_targets_python3_10
 dev-python/webencodings python_targets_python3_10
 #dev-python/wheel python_targets_python3_10
 dev-python/wheel python_targets_python3_10
+net-libs/stem python_targets_python3_10
 net-misc/nyx python_targets_python3_10
 net-wireless/aircrack-ng python_targets_python3_10
 sys-fs/zfs python_targets_python3_10

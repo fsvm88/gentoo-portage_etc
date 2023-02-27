@@ -25,7 +25,6 @@ media-gfx/ocrmypdf
 media-video/pipewire
 net-analyzer/nmap
 net-im/slack
-net-im/teams
 net-misc/postman-bin
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-astronomy/stellarium

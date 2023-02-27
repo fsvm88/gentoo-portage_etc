@@ -1,6 +1,6 @@
 <app-cdr/cdrtools-3.03
 <app-containers/cni-plugins-1.2
-<app-containers/docker-buildx-0.10
+<app-containers/docker-buildx-0.11
 <app-containers/docker-compose-2.13
 <app-editors/vscode-1.99
 <app-emulation/libvirt-8.10
@@ -10,6 +10,7 @@ app-misc/radeontop **
 <app-portage/mirrorselect-2.3.1
 <app-text/tessdata_best-5
 <dev-db/postgresql-16
+<dev-lang/go-1.21
 <dev-libs/date-3.1
 <dev-libs/libappindicator-12.11
 <dev-libs/libclc-15
@@ -65,7 +66,7 @@ app-misc/radeontop **
 <sys-devel/llvm-common-15
 <sys-devel/llvmgold-15
 <sys-kernel/genkernel-4.4
-<sys-kernel/gentoo-sources-6.2
+<sys-kernel/gentoo-sources-6.3
 <sys-libs/compiler-rt-15
 <sys-libs/compiler-rt-sanitizers-15
 <sys-libs/ldb-2.7

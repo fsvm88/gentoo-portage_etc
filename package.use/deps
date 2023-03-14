@@ -69,8 +69,7 @@ media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
 media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vidstab vpx
 media-video/pipewire aptx echo-cancel extra ldac sound-server
-net-dns/avahi autoipd mdnsresponder-compat
-net-dns/avahi python
+net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script
 net-firewall/iptables conntrack netlink
 net-fs/cifs-utils -acl
@@ -103,11 +102,11 @@ sys-devel/llvm-roc runtime
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcap static-libs
-sys-libs/libcxx libcxxabi libunwind -libcxxrt
+sys-libs/libcxx libcxxabi
 sys-libs/libomp hwloc
 sys-libs/libomp offload
-sys-libs/libunwind debug-frame libatomic
 sys-libs/libxcrypt static-libs
+sys-libs/llvm-libunwind static-libs
 sys-libs/ncurses static-libs tinfo
 sys-libs/talloc python
 sys-libs/tdb python

@@ -42,8 +42,7 @@ sci-libs/tensorflow opencl python rocm xla
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
-sys-devel/clang:14 default-lld
-sys-devel/clang-common default-lld
+sys-devel/clang-common default-compiler-rt default-libcxx default-lld
 sys-devel/clang-runtime crt
 sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse

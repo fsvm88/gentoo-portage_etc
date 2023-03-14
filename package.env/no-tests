@@ -59,6 +59,7 @@ sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
+sys-libs/liburing no-tests # tests crash kernel, fail regardless
 www-client/firefox no-tests
 x11-libs/gdk-pixbuf no-tests # fails regardless of compiler
 x11-libs/wxGTK no-tests # broken, bug #876613

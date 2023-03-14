@@ -11,7 +11,6 @@ dev-python/lxml python_targets_python3_10
 dev-python/more-itertools python_targets_python3_10
 dev-python/nspektr python_targets_python3_10
 dev-python/ordered-set python_targets_python3_10
-#dev-python/packaging python_targets_python3_10
 dev-python/packaging python_targets_python3_10
 dev-python/pillow python_targets_python3_10
 dev-python/platformdirs python_targets_python3_10
@@ -20,12 +19,11 @@ dev-python/pydantic python_targets_python3_10
 dev-python/pygments python_targets_python3_10
 dev-python/pygobject python_targets_python3_10
 dev-python/setuptools python_targets_python3_10
-dev-python/setuptools_scm python_targets_python3_10
+dev-python/setuptools-scm python_targets_python3_10
 dev-python/six python_targets_python3_10
 dev-python/typing-extensions python_targets_python3_10
 dev-python/unittest-or-fail python_targets_python3_10
 dev-python/webencodings python_targets_python3_10
-#dev-python/wheel python_targets_python3_10
 dev-python/wheel python_targets_python3_10
 net-libs/stem python_targets_python3_10
 net-misc/nyx python_targets_python3_10

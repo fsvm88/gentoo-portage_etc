@@ -1,2 +1,2 @@
-media-libs/lv2 python_single_target_python3_10
+net-dns/avahi python_single_target_python3_10 -python_single_target_python3_11
 net-print/hplip python_single_target_python3_10

@@ -1,0 +1,26 @@
+diff -Nuar grub-2.06.orig/util/grub.d/10_linux.in grub-2.06/util/grub.d/10_linux.in
+--- grub-2.06.orig/util/grub.d/10_linux.in	2023-03-07 23:59:50.826788995 +0100
++++ grub-2.06/util/grub.d/10_linux.in	2023-03-08 00:01:51.719012211 +0100
+@@ -72,6 +72,9 @@
+ 	fi;;
+     xzfs)
+ 	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
++        if [ "${rpool}" = "" ]; then
++            rpool=`/usr/sbin/zfs list | awk '{if( $5 == "/" ) { print $1; }}' | sed "s:/.*::" | head -1`
++        fi
+ 	bootfs="`make_system_path_relative_to_its_root / | sed -e "s,@$,,"`"
+ 	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
+ 	;;
+diff -Nuar grub-2.06.orig/util/grub.d/20_linux_xen.in grub-2.06/util/grub.d/20_linux_xen.in
+--- grub-2.06.orig/util/grub.d/20_linux_xen.in	2023-03-07 23:59:50.256780234 +0100
++++ grub-2.06/util/grub.d/20_linux_xen.in	2023-03-08 00:02:09.209384158 +0100
+@@ -80,6 +80,9 @@
+ 	fi;;
+     xzfs)
+ 	rpool=`${grub_probe} --device ${GRUB_DEVICE} --target=fs_label 2>/dev/null || true`
++        if [ "${rpool}" = "" ]; then
++            rpool=`/usr/sbin/zfs list | awk '{if( $5 == "/" ) { print $1; }}' | sed "s:/.*::" | head -1`
++        fi
+ 	bootfs="`make_system_path_relative_to_its_root / | sed -e "s,@$,,"`"
+ 	LINUX_ROOT_DEVICE="ZFS=${rpool}${bootfs%/}"
+ 	;;

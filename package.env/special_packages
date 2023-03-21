@@ -13,6 +13,8 @@ sci-libs/tensorflow-estimator disable-network-sandbox
 #sys-fs/zfs-kmod gcc-no-lto
 sys-fs/zfs-kmod kernel-drivers-clang
 sys-libs/efivar no-lld
+sys-libs/libcap no-compiler-rt
+sys-process/tini no-compiler-rt
 www-client/chromium ccache
 www-client/chromium chromium
 www-client/chromium gcc-no-lto-no-debug

@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} --rtlib=libgcc --unwindlib=libgcc"
+CXXFLAGS="${CXXFLAGS} --rtlib=libgcc --unwindlib=libgcc"

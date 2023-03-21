@@ -3,13 +3,12 @@ dev-lang/go gcc
 dev-libs/libffi gcc
 dev-libs/mpfr gcc
 dev-util/ccache gcc
-dev-util/colm gcc
 gnome-base/gnome-keyring gcc
 media-gfx/pngquant gcc # fails tests with clang
 media-libs/audiofile gcc
-media-libs/avidemux-core gcc-no-lto # fails with clang due to type narrowing issues
 media-libs/libgphoto2 gcc
 media-libs/xvid gcc
 net-wireless/cowpatty gcc
 sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
 sys-devel/binutils gcc
+sys-fs/udisks gcc # fails tests with clang 15.0.7

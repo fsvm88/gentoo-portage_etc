@@ -11,6 +11,7 @@ app-text/docbook2X no-tests # fails no matter what, think the test suite is brok
 app-text/libqxp clang-no-lto # fails tests with LTO
 app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
 dev-cpp/cpp-httplib no-tests # fails lots of random tests
+dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
@@ -27,6 +28,8 @@ dev-perl/Proc-ProcessTable no-tests # hangs
 dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
+dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
+dev-util/spirv-llvm-translator no-tests # fails ALL tests with ANY configuration, not sure what is broken
 dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEPENDS
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
@@ -39,6 +42,7 @@ media-libs/gst-plugins-good no-tests # fails regardless of compiler
 media-libs/libepoxy no-tests # fails tests regardless of compiler
 media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then
 media-libs/mesa no-tests # not required (-9999), lengthy
+net-analyzer/nmap no-tests # fails tests regardless of config
 net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-libs/nodejs no-tests # not even trying this one...
@@ -56,6 +60,7 @@ sys-devel/clang no-tests # fails 3 tests - possibly regression
 sys-devel/gcc no-tests # not worth running...
 sys-devel/libtool no-tests # regressed compared to non-r1
 sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
+sys-devel/llvm no-tests # x86 is broken with default-compiler-rt and default-libcxx
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...

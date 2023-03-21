@@ -2,7 +2,6 @@ media-gfx/gimp
 media-gfx/imv
 media-libs/vulkan-loader
 media-sound/audacity
-media-video/avidemux
 media-video/mpv
 media-video/smplayer
 media-video/wireplumber

@@ -1,6 +1,6 @@
 app-emulation/wine-vanilla gcc-no-lto # after so many years of supporting clang, they introduced -mabi=ms, which is not available there
 app-i18n/ibus gcc-no-lto
-app-misc/openrgb gcc-no-lto
+#app-misc/openrgb gcc-no-lto
 dev-cpp/doctest gcc-no-lto # does not compile at all with clang
 dev-db/sqlite gcc-no-lto
 dev-lang/tcl gcc-no-lto
@@ -24,14 +24,16 @@ media-libs/giflib gcc-no-lto # this seems to compile fine with 'gcc' (GCC w/ LTO
 media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise
 media-libs/x264 gcc-no-lto
-media-sound/audacity gcc-no-lto # clang-15: no viable constructor or deduction guide for deduction of template arguments of 'owner_less'
+#media-sound/audacity gcc-no-lto # clang-15: no viable constructor or deduction guide for deduction of template arguments of 'owner_less'
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
 net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
+sci-astronomy/calcmysky gcc-no-lto # good old trusty Qt libs raise all sorts of issues with LTO in 2023
 sci-libs/lapack gcc-no-lto
+sys-apps/sandbox gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config
 sys-libs/glibc gcc-no-lto

@@ -1,0 +1,92 @@
+From 3ace9dea01f2088e81c0b90ca8e07faad7364eca Mon Sep 17 00:00:00 2001
+From: Rich Ercolani <rincebrain@gmail.com>
+Date: Thu, 23 Mar 2023 03:45:42 -0400
+Subject: [PATCH] An attempt at 6.3 compat
+
+Signed-off-by: Rich Ercolani <rincebrain@gmail.com>
+---
+ config/kernel-generic_io_acct.m4              | 28 +++++++++++++++----
+ include/os/linux/kernel/linux/blkdev_compat.h |  9 ++++--
+ 2 files changed, 30 insertions(+), 7 deletions(-)
+
+diff --git a/config/kernel-generic_io_acct.m4 b/config/kernel-generic_io_acct.m4
+index a8a448c6fe9..2e30c480030 100644
+--- a/config/kernel-generic_io_acct.m4
++++ b/config/kernel-generic_io_acct.m4
+@@ -2,7 +2,20 @@ dnl #
+ dnl # Check for generic io accounting interface.
+ dnl #
+ AC_DEFUN([ZFS_AC_KERNEL_SRC_GENERIC_IO_ACCT], [
+-	ZFS_LINUX_TEST_SRC([bdev_io_acct], [
++	ZFS_LINUX_TEST_SRC([bdev_io_acct_62], [
++		#include <linux/blkdev.h>
++	], [
++		struct block_device *bdev = NULL;
++		struct bio *bio = NULL;
++		unsigned long passed_time = 0;
++		unsigned long start_time;
++
++		start_time = bdev_start_io_acct(bdev, bio_op(bio),
++		    bio_sectors(bio), passed_time);
++		bdev_end_io_acct(bdev, bio_op(bio), bio_sectors(bio), start_time);
++	])
++
++	ZFS_LINUX_TEST_SRC([bdev_io_acct_old], [
+ 		#include <linux/blkdev.h>
+ 	], [
+ 		struct block_device *bdev = NULL;
+@@ -68,13 +81,17 @@ AC_DEFUN([ZFS_AC_KERNEL_GENERIC_IO_ACCT], [
+ 	dnl # disk_start_io_acct() and disk_end_io_acct() have been replaced by
+ 	dnl # bdev_start_io_acct() and bdev_end_io_acct().
+ 	dnl #
+-	AC_MSG_CHECKING([whether generic bdev_*_io_acct() are available])
+-	ZFS_LINUX_TEST_RESULT([bdev_io_acct], [
++	AC_MSG_CHECKING([whether 6.2+ bdev_*_io_acct() are available])
++	ZFS_LINUX_TEST_RESULT([bdev_io_acct_62], [
+ 		AC_MSG_RESULT(yes)
+-		AC_DEFINE(HAVE_BDEV_IO_ACCT, 1, [bdev_*_io_acct() available])
++		AC_DEFINE(HAVE_BDEV_IO_ACCT_62, 1, [bdev_*_io_acct() available])
+ 	], [
+ 		AC_MSG_RESULT(no)
+-
++		AC_MSG_CHECKING([whether pre-6.3 bdev_*_io_acct() are available])
++		ZFS_LINUX_TEST_RESULT([bdev_io_acct_old], [
++			AC_MSG_RESULT(yes)
++			AC_DEFINE(HAVE_BDEV_IO_ACCT_OLD, 1, [bdev_*_io_acct() available])
++		], [
+ 		dnl #
+ 		dnl # 5.12 API,
+ 		dnl #
+@@ -137,3 +154,4 @@ AC_DEFUN([ZFS_AC_KERNEL_GENERIC_IO_ACCT], [
+ 		])
+ 	])
+ ])
++])
+\ No newline at end of file
+diff --git a/include/os/linux/kernel/linux/blkdev_compat.h b/include/os/linux/kernel/linux/blkdev_compat.h
+index f04eb5b2593..470abbd3454 100644
+--- a/include/os/linux/kernel/linux/blkdev_compat.h
++++ b/include/os/linux/kernel/linux/blkdev_compat.h
+@@ -592,7 +592,10 @@ blk_generic_start_io_acct(struct request_queue *q __attribute__((unused)),
+     struct gendisk *disk __attribute__((unused)),
+     int rw __attribute__((unused)), struct bio *bio)
+ {
+-#if defined(HAVE_BDEV_IO_ACCT)
++#if defined(HAVE_BDEV_IO_ACCT_62)
++	return (bdev_start_io_acct(bio->bi_bdev, bio_op(bio),
++	    bio_sectors(bio), jiffies));
++#elif defined(HAVE_BDEV_IO_ACCT_OLD)
+ 	return (bdev_start_io_acct(bio->bi_bdev, bio_sectors(bio),
+ 	    bio_op(bio), jiffies));
+ #elif defined(HAVE_DISK_IO_ACCT)
+@@ -618,7 +621,9 @@ blk_generic_end_io_acct(struct request_queue *q __attribute__((unused)),
+     struct gendisk *disk __attribute__((unused)),
+     int rw __attribute__((unused)), struct bio *bio, unsigned long start_time)
+ {
+-#if defined(HAVE_BDEV_IO_ACCT)
++#if defined(HAVE_BDEV_IO_ACCT_62)
++	bdev_end_io_acct(bio->bi_bdev, bio_op(bio), bio_sectors(bio), start_time);
++#elif defined(HAVE_BDEV_IO_ACCT_OLD)
+ 	bdev_end_io_acct(bio->bi_bdev, bio_op(bio), start_time);
+ #elif defined(HAVE_DISK_IO_ACCT)
+ 	disk_end_io_acct(disk, bio_op(bio), start_time);

@@ -16,6 +16,7 @@ dev-db/mariadb no-tests # another one which takes ~ life of the universe to fini
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-libs/glib no-tests # fails regardless of compiler
+dev-libs/libappindicator:2 no-tests # fails tests with any configuration
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"

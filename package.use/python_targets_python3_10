@@ -1,5 +1,6 @@
 dev-python/autocommand python_targets_python3_10
 dev-python/certifi python_targets_python3_10
+dev-python/cython python_targets_python3_10
 dev-python/dbus-python python_targets_python3_10
 dev-python/distro python_targets_python3_10
 dev-python/flit_core python_targets_python3_10

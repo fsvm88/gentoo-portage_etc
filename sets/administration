@@ -20,6 +20,7 @@ sys-apps/hdparm
 sys-apps/man-pages
 sys-apps/mlocate
 sys-apps/ripgrep
+sys-auth/pam_u2f
 sys-fs/ncdu
 sys-process/fcron
 sys-process/lsof

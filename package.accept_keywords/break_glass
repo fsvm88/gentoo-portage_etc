@@ -44,6 +44,7 @@ app-misc/radeontop **
 <sci-mathematics/yafu-1.35
 <sys-apps/hwloc-2.10
 <sys-apps/sandbox-2.31
+<sys-auth/pam_u2f-1.3
 <sys-cluster/minikube-1.28
 <sys-devel/clang-16
 <sys-devel/clang-common-16

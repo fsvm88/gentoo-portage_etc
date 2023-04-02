@@ -1,4 +1,6 @@
 app-containers/cri-o
+sys-cluster/cilium-cli
+sys-cluster/hubble
 sys-cluster/kubeadm
 sys-cluster/kubectl
 sys-cluster/kubelet

@@ -9,6 +9,7 @@ app-portage/eix optimization sqlite tools
 app-text/tesseract float32
 dev-lang/rust rust-src
 dev-libs/qxlsx qt5
+dev-libs/rocr-runtime non-free
 dev-python/PyQt5 webchannel
 dev-util/bazel tools
 dev-util/perf clang libpfm

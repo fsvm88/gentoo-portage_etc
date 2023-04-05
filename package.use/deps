@@ -63,6 +63,7 @@ media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/mlt jack fftw
 media-libs/vulkan-loader layers
 media-libs/waffle gbm
+media-libs/x265 pic
 media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2

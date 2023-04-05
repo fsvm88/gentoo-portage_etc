@@ -1,5 +1,4 @@
 app-arch/zstd
-app-containers/cri-o
 app-emulation/wine-mono
 app-emulation/wine-vanilla
 app-shells/fish
@@ -32,11 +31,6 @@ sci-astronomy/stellarium
 sci-misc/boinc
 sys-apps/fwupd
 #sys-apps/portage
-sys-cluster/cilium-cli
-sys-cluster/hubble
-sys-cluster/kubeadm
-sys-cluster/kubectl
-sys-cluster/kubelet
 sys-cluster/minikube
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware

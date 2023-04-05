@@ -79,7 +79,6 @@ net-libs/gtk-vnc python
 net-libs/libnm-glib abi_x86_32
 net-libs/nodejs inspector lto
 net-libs/webkit-gtk gles2
-net-libs/zeromq drafts
 net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/spice-gtk -gstreamer python usbredir

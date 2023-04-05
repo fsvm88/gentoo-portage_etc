@@ -41,6 +41,7 @@ app-misc/radeontop **
 <net-print/hplip-plugin-3.22.11
 <net-vpn/libreswan-5
 <net-wireless/lorcon-2021
+<sci-astronomy/calcmysky-0.3.1
 <sci-mathematics/yafu-1.35
 <sys-apps/hwloc-2.10
 <sys-apps/sandbox-2.31
@@ -61,6 +62,7 @@ app-misc/radeontop **
 <sys-libs/libcxxabi-16
 <sys-libs/libomp-16
 <sys-libs/libudev-compat-187
+<sys-power/cpupower-6.3
 <sys-process/iotop-0.7
 <x11-libs/wxGTK-3.3
 <x11-terms/alacritty-0.12

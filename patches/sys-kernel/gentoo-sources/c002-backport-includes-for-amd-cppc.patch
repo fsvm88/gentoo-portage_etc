@@ -1,0 +1,98 @@
+diff '--color=auto' -Nuar linux-6.2.9.orig/include/acpi/cppc_acpi.h linux-6.2.9/include/acpi/cppc_acpi.h
+--- linux-6.2.9.orig/include/acpi/cppc_acpi.h	2023-03-30 12:51:43.000000000 +0200
++++ linux-6.2.9/include/acpi/cppc_acpi.h	2023-04-03 22:23:00.376629517 +0200
+@@ -108,12 +108,14 @@
+ 	u32 lowest_nonlinear_perf;
+ 	u32 lowest_freq;
+ 	u32 nominal_freq;
++	u32 energy_perf;
+ };
+ 
+ struct cppc_perf_ctrls {
+ 	u32 max_perf;
+ 	u32 min_perf;
+ 	u32 desired_perf;
++	u32 energy_perf;
+ };
+ 
+ struct cppc_perf_fb_ctrs {
+@@ -149,6 +151,8 @@
+ extern bool cpc_supported_by_cpu(void);
+ extern int cpc_read_ffh(int cpunum, struct cpc_reg *reg, u64 *val);
+ extern int cpc_write_ffh(int cpunum, struct cpc_reg *reg, u64 val);
++extern int cppc_get_epp_perf(int cpunum, u64 *epp_perf);
++extern int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable);
+ #else /* !CONFIG_ACPI_CPPC_LIB */
+ static inline int cppc_get_desired_perf(int cpunum, u64 *desired_perf)
+ {
+@@ -202,6 +206,14 @@
+ {
+ 	return -ENOTSUPP;
+ }
++static inline int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
++{
++	return -ENOTSUPP;
++}
++static inline int cppc_get_epp_perf(int cpunum, u64 *epp_perf)
++{
++	return -ENOTSUPP;
++}
+ #endif /* !CONFIG_ACPI_CPPC_LIB */
+ 
+ #endif /* _CPPC_ACPI_H*/
+diff '--color=auto' -Nuar linux-6.2.9.orig/include/linux/amd-pstate.h linux-6.2.9/include/linux/amd-pstate.h
+--- linux-6.2.9.orig/include/linux/amd-pstate.h	2023-03-30 12:51:43.000000000 +0200
++++ linux-6.2.9/include/linux/amd-pstate.h	2023-04-03 22:20:21.770095377 +0200
+@@ -12,6 +12,11 @@
+ 
+ #include <linux/pm_qos.h>
+ 
++#define AMD_CPPC_EPP_PERFORMANCE		0x00
++#define AMD_CPPC_EPP_BALANCE_PERFORMANCE	0x80
++#define AMD_CPPC_EPP_BALANCE_POWERSAVE		0xBF
++#define AMD_CPPC_EPP_POWERSAVE			0xFF
++
+ /*********************************************************************
+  *                        AMD P-state INTERFACE                       *
+  *********************************************************************/
+@@ -47,6 +52,10 @@
+  * @prev: Last Aperf/Mperf/tsc count value read from register
+  * @freq: current cpu frequency value
+  * @boost_supported: check whether the Processor or SBIOS supports boost mode
++ * @epp_policy: Last saved policy used to set energy-performance preference
++ * @epp_cached: Cached CPPC energy-performance preference value
++ * @policy: Cpufreq policy value
++ * @cppc_cap1_cached Cached MSR_AMD_CPPC_CAP1 register value
+  *
+  * The amd_cpudata is key private data for each CPU thread in AMD P-State, and
+  * represents all the attributes and goals that AMD P-State requests at runtime.
+@@ -72,6 +81,29 @@
+ 
+ 	u64	freq;
+ 	bool	boost_supported;
++
++	/* EPP feature related attributes*/
++	s16	epp_policy;
++	s16	epp_cached;
++	u32	policy;
++	u64	cppc_cap1_cached;
++	bool	suspended;
++};
++
++/*
++ * enum amd_pstate_mode - driver working mode of amd pstate
++ */
++enum amd_pstate_mode {
++	AMD_PSTATE_DISABLE = 0,
++	AMD_PSTATE_PASSIVE,
++	AMD_PSTATE_ACTIVE,
++	AMD_PSTATE_MAX,
+ };
+ 
++static const char * const amd_pstate_mode_string[] = {
++	[AMD_PSTATE_DISABLE]     = "disable",
++	[AMD_PSTATE_PASSIVE]     = "passive",
++	[AMD_PSTATE_ACTIVE]      = "active",
++	NULL,
++};
+ #endif /* _LINUX_AMD_PSTATE_H */

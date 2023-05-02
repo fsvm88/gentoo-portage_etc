@@ -23,6 +23,7 @@ dev-libs/libappindicator abi_x86_32
 dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
 dev-libs/libdbusmenu abi_x86_32
+dev-libs/libev abi_x86_32
 dev-libs/libevent abi_x86_32
 dev-libs/libffi abi_x86_32
 dev-libs/libgcrypt abi_x86_32
@@ -87,7 +88,6 @@ media-libs/openjpeg abi_x86_32
 media-libs/opus abi_x86_32
 media-libs/speexdsp abi_x86_32
 media-libs/tiff abi_x86_32
-media-libs/vidstab abi_x86_32
 media-libs/vulkan-layers abi_x86_32
 media-libs/vulkan-loader abi_x86_32
 media-libs/x264 abi_x86_32
@@ -100,6 +100,7 @@ media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 media-video/pipewire abi_x86_32
 net-dns/avahi abi_x86_32
+net-dns/c-ares abi_x86_32
 net-dns/libidn2 abi_x86_32
 net-fs/samba abi_x86_32
 net-libs/gnutls abi_x86_32

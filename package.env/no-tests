@@ -45,6 +45,7 @@ media-libs/libvpx no-tests # greater chance of an asteroid hitting a very popula
 media-libs/mesa no-tests # not required (-9999), lengthy
 net-analyzer/nmap no-tests # fails tests regardless of config
 net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
+net-firewall/iptables no-tests # regression from 1.8.8-r5 on xlate-test.py
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-libs/nodejs no-tests # not even trying this one...
 net-libs/stem no-tests # fails tests regardless of compiler
@@ -65,6 +66,7 @@ sys-devel/llvm no-tests # x86 is broken with default-compiler-rt and default-lib
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
+sys-libs/libseccomp no-tests # regression due to clang-16?
 sys-libs/liburing no-tests # tests crash kernel, fail regardless
 www-client/firefox no-tests
 x11-libs/gdk-pixbuf no-tests # fails regardless of compiler

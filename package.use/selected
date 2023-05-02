@@ -16,7 +16,7 @@ dev-util/perf clang libpfm
 dev-util/strace -unwind
 dev-vcs/subversion -dso
 games-util/steam-client-meta trayicon
-gui-apps/waybar network tray
+gui-apps/waybar evdev libinput network pipewire tray -pulseaudio
 gui-wm/sway tray
 media-fonts/fonts-meta ms
 media-gfx/graphviz python

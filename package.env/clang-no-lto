@@ -14,6 +14,10 @@ media-libs/libvisio clang-no-lto
 sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto # fails with LTO
 sys-apps/sandbox clang-no-lto # fails with LTO
+#sys-devel/clang clang-no-lto # handled by special_packages cmake_extra-llvm
+#sys-devel/lldb clang-no-lto # handled by special_packages cmake_extra-llvm
+#sys-devel/lld clang-no-lto # handled by special_packages cmake_extra-llvm
+#sys-devel/llvm clang-no-lto # handled by special_packages cmake_extra-llvm
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto # fails with LTO
 www-client/firefox clang-no-lto # this is handled by the ebuild

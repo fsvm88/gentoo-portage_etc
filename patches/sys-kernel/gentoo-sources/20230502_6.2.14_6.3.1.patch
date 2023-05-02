@@ -1,6 +1,115 @@
-diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.2.9/drivers/cpufreq/amd-pstate.c
---- linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c	2023-03-30 12:51:43.000000000 +0200
-+++ linux-6.2.9/drivers/cpufreq/amd-pstate.c	2023-04-03 21:45:03.038543143 +0200
+diff -Nuar linux-6.2.14.orig/drivers/acpi/cppc_acpi.c linux-6.2.14/drivers/acpi/cppc_acpi.c
+--- linux-6.2.14.orig/drivers/acpi/cppc_acpi.c	2023-05-01 01:29:23.000000000 +0200
++++ linux-6.2.14/drivers/acpi/cppc_acpi.c	2023-05-02 23:19:59.218314386 +0200
+@@ -193,7 +193,7 @@
+ };
+ ATTRIBUTE_GROUPS(cppc);
+ 
+-static struct kobj_type cppc_ktype = {
++static const struct kobj_type cppc_ktype = {
+ 	.sysfs_ops = &kobj_sysfs_ops,
+ 	.default_groups = cppc_groups,
+ };
+@@ -595,6 +595,7 @@
+ 
+ /**
+  * pcc_data_alloc() - Allocate the pcc_data memory for pcc subspace
++ * @pcc_ss_id: PCC Subspace index as in the PCC client ACPI package.
+  *
+  * Check and allocate the cppc_pcc_data memory.
+  * In some processor configurations it is possible that same subspace
+@@ -1154,6 +1155,19 @@
+ }
+ 
+ /**
++ * cppc_get_epp_perf - Get the epp register value.
++ * @cpunum: CPU from which to get epp preference value.
++ * @epp_perf: Return address.
++ *
++ * Return: 0 for success, -EIO otherwise.
++ */
++int cppc_get_epp_perf(int cpunum, u64 *epp_perf)
++{
++	return cppc_get_perf(cpunum, ENERGY_PERF, epp_perf);
++}
++EXPORT_SYMBOL_GPL(cppc_get_epp_perf);
++
++/**
+  * cppc_get_perf_caps - Get a CPU's performance capabilities.
+  * @cpunum: CPU from which to get capabilities info.
+  * @perf_caps: ptr to cppc_perf_caps. See cppc_acpi.h
+@@ -1365,6 +1379,60 @@
+ }
+ EXPORT_SYMBOL_GPL(cppc_get_perf_ctrs);
+ 
++/*
++ * Set Energy Performance Preference Register value through
++ * Performance Controls Interface
++ */
++int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
++{
++	int pcc_ss_id = per_cpu(cpu_pcc_subspace_idx, cpu);
++	struct cpc_register_resource *epp_set_reg;
++	struct cpc_register_resource *auto_sel_reg;
++	struct cpc_desc *cpc_desc = per_cpu(cpc_desc_ptr, cpu);
++	struct cppc_pcc_data *pcc_ss_data = NULL;
++	int ret;
++
++	if (!cpc_desc) {
++		pr_debug("No CPC descriptor for CPU:%d\n", cpu);
++		return -ENODEV;
++	}
++
++	auto_sel_reg = &cpc_desc->cpc_regs[AUTO_SEL_ENABLE];
++	epp_set_reg = &cpc_desc->cpc_regs[ENERGY_PERF];
++
++	if (CPC_IN_PCC(epp_set_reg) || CPC_IN_PCC(auto_sel_reg)) {
++		if (pcc_ss_id < 0) {
++			pr_debug("Invalid pcc_ss_id for CPU:%d\n", cpu);
++			return -ENODEV;
++		}
++
++		if (CPC_SUPPORTED(auto_sel_reg)) {
++			ret = cpc_write(cpu, auto_sel_reg, enable);
++			if (ret)
++				return ret;
++		}
++
++		if (CPC_SUPPORTED(epp_set_reg)) {
++			ret = cpc_write(cpu, epp_set_reg, perf_ctrls->energy_perf);
++			if (ret)
++				return ret;
++		}
++
++		pcc_ss_data = pcc_data[pcc_ss_id];
++
++		down_write(&pcc_ss_data->pcc_lock);
++		/* after writing CPC, transfer the ownership of PCC to platform */
++		ret = send_pcc_cmd(pcc_ss_id, CMD_WRITE);
++		up_write(&pcc_ss_data->pcc_lock);
++	} else {
++		ret = -ENOTSUPP;
++		pr_debug("_CPC in PCC is not supported\n");
++	}
++
++	return ret;
++}
++EXPORT_SYMBOL_GPL(cppc_set_epp_perf);
++
+ /**
+  * cppc_set_enable - Set to enable CPPC on the processor by writing the
+  * Continuous Performance Control package EnableRegister field.
+@@ -1536,6 +1604,7 @@
+ 
+ /**
+  * cppc_get_transition_latency - returns frequency transition latency in ns
++ * @cpu_num: CPU number for per_cpu().
+  *
+  * ACPI CPPC does not explicitly specify how a platform can specify the
+  * transition latency for performance change requests. The closest we have
+diff -Nuar linux-6.2.14.orig/drivers/cpufreq/amd-pstate.c linux-6.2.14/drivers/cpufreq/amd-pstate.c
+--- linux-6.2.14.orig/drivers/cpufreq/amd-pstate.c	2023-05-01 01:29:23.000000000 +0200
++++ linux-6.2.14/drivers/cpufreq/amd-pstate.c	2023-05-02 23:19:59.211647720 +0200
 @@ -59,8 +59,171 @@
   * we disable it by default to go acpi-cpufreq on these processors and add a
   * module parameter to be able to enable it manually for debugging.
@@ -232,7 +341,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  }
  
  /*
-@@ -589,13 +764,151 @@
+@@ -589,13 +764,149 @@
  
  	perf = READ_ONCE(cpudata->highest_perf);
  
@@ -313,22 +422,20 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
 +
 +	switch(mode_idx) {
 +	case AMD_PSTATE_DISABLE:
-+		if (!current_pstate_driver)
-+			return -EINVAL;
-+		if (cppc_state == AMD_PSTATE_ACTIVE)
-+			return -EBUSY;
-+		cpufreq_unregister_driver(current_pstate_driver);
-+		amd_pstate_driver_cleanup();
++		if (current_pstate_driver) {
++			cpufreq_unregister_driver(current_pstate_driver);
++			amd_pstate_driver_cleanup();
++		}
 +		break;
 +	case AMD_PSTATE_PASSIVE:
 +		if (current_pstate_driver) {
 +			if (current_pstate_driver == &amd_pstate_driver)
 +				return 0;
 +			cpufreq_unregister_driver(current_pstate_driver);
-+			cppc_state = AMD_PSTATE_PASSIVE;
-+			current_pstate_driver = &amd_pstate_driver;
 +		}
 +
++		current_pstate_driver = &amd_pstate_driver;
++		cppc_state = AMD_PSTATE_PASSIVE;
 +		ret = cpufreq_register_driver(current_pstate_driver);
 +		break;
 +	case AMD_PSTATE_ACTIVE:
@@ -336,10 +443,10 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
 +			if (current_pstate_driver == &amd_pstate_epp_driver)
 +				return 0;
 +			cpufreq_unregister_driver(current_pstate_driver);
-+			current_pstate_driver = &amd_pstate_epp_driver;
-+			cppc_state = AMD_PSTATE_ACTIVE;
 +		}
 +
++		current_pstate_driver = &amd_pstate_epp_driver;
++		cppc_state = AMD_PSTATE_ACTIVE;
 +		ret = cpufreq_register_driver(current_pstate_driver);
 +		break;
 +	default:
@@ -385,7 +492,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  
  static struct freq_attr *amd_pstate_attr[] = {
  	&amd_pstate_max_freq,
-@@ -604,6 +917,313 @@
+@@ -604,6 +915,313 @@
  	NULL,
  };
  
@@ -699,7 +806,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  static struct cpufreq_driver amd_pstate_driver = {
  	.flags		= CPUFREQ_CONST_LOOPS | CPUFREQ_NEED_UPDATE_LIMITS,
  	.verify		= amd_pstate_verify,
-@@ -617,6 +1237,20 @@
+@@ -617,6 +1235,20 @@
  	.attr		= amd_pstate_attr,
  };
  
@@ -720,7 +827,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  static int __init amd_pstate_init(void)
  {
  	int ret;
-@@ -626,10 +1260,10 @@
+@@ -626,10 +1258,10 @@
  	/*
  	 * by default the pstate driver is disabled to load
  	 * enable the amd_pstate passive mode driver explicitly
@@ -734,7 +841,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  		return -ENODEV;
  	}
  
-@@ -645,7 +1279,8 @@
+@@ -645,7 +1277,8 @@
  	/* capability check */
  	if (boot_cpu_has(X86_FEATURE_CPPC)) {
  		pr_debug("AMD CPPC MSR based functionality is supported\n");
@@ -744,7 +851,7 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  	} else {
  		pr_debug("AMD CPPC shared memory based functionality is supported\n");
  		static_call_update(amd_pstate_enable, cppc_enable);
-@@ -656,34 +1291,65 @@
+@@ -656,34 +1289,65 @@
  	/* enable amd pstate feature */
  	ret = amd_pstate_enable(true);
  	if (ret) {
@@ -821,3 +928,101 @@ diff '--color=auto' -Nuar linux-6.2.9.orig/drivers/cpufreq/amd-pstate.c linux-6.
  MODULE_AUTHOR("Huang Rui <ray.huang@amd.com>");
  MODULE_DESCRIPTION("AMD Processor P-state Frequency Driver");
 -MODULE_LICENSE("GPL");
+diff -Nuar linux-6.2.14.orig/include/acpi/cppc_acpi.h linux-6.2.14/include/acpi/cppc_acpi.h
+--- linux-6.2.14.orig/include/acpi/cppc_acpi.h	2023-05-01 01:29:23.000000000 +0200
++++ linux-6.2.14/include/acpi/cppc_acpi.h	2023-05-02 23:19:59.221647719 +0200
+@@ -108,12 +108,14 @@
+ 	u32 lowest_nonlinear_perf;
+ 	u32 lowest_freq;
+ 	u32 nominal_freq;
++	u32 energy_perf;
+ };
+ 
+ struct cppc_perf_ctrls {
+ 	u32 max_perf;
+ 	u32 min_perf;
+ 	u32 desired_perf;
++	u32 energy_perf;
+ };
+ 
+ struct cppc_perf_fb_ctrs {
+@@ -149,6 +151,8 @@
+ extern bool cpc_supported_by_cpu(void);
+ extern int cpc_read_ffh(int cpunum, struct cpc_reg *reg, u64 *val);
+ extern int cpc_write_ffh(int cpunum, struct cpc_reg *reg, u64 val);
++extern int cppc_get_epp_perf(int cpunum, u64 *epp_perf);
++extern int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable);
+ #else /* !CONFIG_ACPI_CPPC_LIB */
+ static inline int cppc_get_desired_perf(int cpunum, u64 *desired_perf)
+ {
+@@ -202,6 +206,14 @@
+ {
+ 	return -ENOTSUPP;
+ }
++static inline int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
++{
++	return -ENOTSUPP;
++}
++static inline int cppc_get_epp_perf(int cpunum, u64 *epp_perf)
++{
++	return -ENOTSUPP;
++}
+ #endif /* !CONFIG_ACPI_CPPC_LIB */
+ 
+ #endif /* _CPPC_ACPI_H*/
+diff -Nuar linux-6.2.14.orig/include/linux/amd-pstate.h linux-6.2.14/include/linux/amd-pstate.h
+--- linux-6.2.14.orig/include/linux/amd-pstate.h	2023-05-01 01:29:23.000000000 +0200
++++ linux-6.2.14/include/linux/amd-pstate.h	2023-05-02 23:19:59.214981053 +0200
+@@ -12,6 +12,11 @@
+ 
+ #include <linux/pm_qos.h>
+ 
++#define AMD_CPPC_EPP_PERFORMANCE		0x00
++#define AMD_CPPC_EPP_BALANCE_PERFORMANCE	0x80
++#define AMD_CPPC_EPP_BALANCE_POWERSAVE		0xBF
++#define AMD_CPPC_EPP_POWERSAVE			0xFF
++
+ /*********************************************************************
+  *                        AMD P-state INTERFACE                       *
+  *********************************************************************/
+@@ -47,6 +52,10 @@
+  * @prev: Last Aperf/Mperf/tsc count value read from register
+  * @freq: current cpu frequency value
+  * @boost_supported: check whether the Processor or SBIOS supports boost mode
++ * @epp_policy: Last saved policy used to set energy-performance preference
++ * @epp_cached: Cached CPPC energy-performance preference value
++ * @policy: Cpufreq policy value
++ * @cppc_cap1_cached Cached MSR_AMD_CPPC_CAP1 register value
+  *
+  * The amd_cpudata is key private data for each CPU thread in AMD P-State, and
+  * represents all the attributes and goals that AMD P-State requests at runtime.
+@@ -72,6 +81,29 @@
+ 
+ 	u64	freq;
+ 	bool	boost_supported;
++
++	/* EPP feature related attributes*/
++	s16	epp_policy;
++	s16	epp_cached;
++	u32	policy;
++	u64	cppc_cap1_cached;
++	bool	suspended;
++};
++
++/*
++ * enum amd_pstate_mode - driver working mode of amd pstate
++ */
++enum amd_pstate_mode {
++	AMD_PSTATE_DISABLE = 0,
++	AMD_PSTATE_PASSIVE,
++	AMD_PSTATE_ACTIVE,
++	AMD_PSTATE_MAX,
+ };
+ 
++static const char * const amd_pstate_mode_string[] = {
++	[AMD_PSTATE_DISABLE]     = "disable",
++	[AMD_PSTATE_PASSIVE]     = "passive",
++	[AMD_PSTATE_ACTIVE]      = "active",
++	NULL,
++};
+ #endif /* _LINUX_AMD_PSTATE_H */

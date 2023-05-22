@@ -1,8 +1,2 @@
-<app-containers/cri-o-1.27
-<app-containers/cri-tools-1.27
-<sys-cluster/cilium-cli-0.14
-<sys-cluster/hubble-0.14
-<sys-cluster/kubeadm-1.27
 <sys-cluster/kubectl-1.27
-<sys-cluster/kubelet-1.27
-<sys-cluster/minikube-1.27
+<sys-cluster/minikube-1.31

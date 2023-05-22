@@ -1,0 +1,12 @@
+app-crypt/libsecret gcc-no-lto # clang-16 woes
+app-text/djvu gcc # clang 16 woes
+dev-libs/atf gcc # clang 16 woes
+dev-libs/nspr no-tests # clang 16 incompat pointer types in one of the tests
+dev-perl/XML-LibXML gcc-no-lto # clang 16 woes
+dev-util/ccache no-tests # test regressions with clang-16
+dev-util/kyua gcc # clang 16 woes
+media-gfx/sane-frontends gcc # does not find sane-backend headers otherwise
+net-misc/freerdp gcc-no-lto # clang 16 woes
+net-misc/netkit-telnetd gcc # clang 16 woes
+net-print/hplip gcc # clang 16 woes
+sys-process/daemontools gcc # clang 16 woes

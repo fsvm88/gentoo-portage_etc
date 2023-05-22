@@ -1,0 +1,18 @@
+--- wxWidgets-3.0.5.1.orig/configure.in	2023-05-07 17:58:28.699461101 +0200
++++ wxWidgets-3.0.5.1/configure.in	2023-05-07 18:02:49.003633297 +0200
+@@ -2439,6 +2439,7 @@
+                     [
+                         #include <zlib.h>
+                         #include <stdio.h>
++                        #include <stdlib.h>
+ 
+                         int main()
+                         {
+@@ -2507,6 +2508,7 @@
+                 [
+                     #include <png.h>
+                     #include <stdio.h>
++                    #include <stdlib.h>
+ 
+                     int main()
+                     {

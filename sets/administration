@@ -1,7 +1,6 @@
 app-admin/checksec
 app-admin/eclean-kernel
 app-admin/logrotate
-app-crypt/gentoo-keys
 app-eselect/eselect-repository
 app-misc/fdupes
 app-misc/tmux
@@ -15,6 +14,8 @@ net-ftp/tftp-hpa
 net-misc/chrony
 net-misc/wakeonlan
 net-vpn/wireguard-tools
+sec-keys/openpgp-keys-gentoo-auth
+sec-keys/openpgp-keys-gentoo-release
 sys-apps/fwupd
 sys-apps/hdparm
 sys-apps/man-pages

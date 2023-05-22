@@ -1,6 +1,6 @@
 dev-lang/mono gcc-no-lto-no-debug
 dev-qt/* gcc-no-lto
-#media-video/smplayer clang-no-lto
+net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 sci-libs/tensorflow clang-no-lto-no-debug
 sci-libs/tensorflow-estimator disable-network-sandbox
 sys-devel/clang extra_cmake-llvm

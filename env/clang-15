@@ -1,0 +1,2 @@
+CC="clang-15"
+CXX="clang++-15"

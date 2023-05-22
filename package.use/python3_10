@@ -3,7 +3,7 @@ dev-python/certifi python_targets_python3_10
 dev-python/cython python_targets_python3_10
 dev-python/dbus-python python_targets_python3_10
 dev-python/distro python_targets_python3_10
-dev-python/flit_core python_targets_python3_10
+dev-python/flit-core python_targets_python3_10
 dev-python/gpep517 python_targets_python3_10
 dev-python/html5lib python_targets_python3_10
 dev-python/inflect python_targets_python3_10
@@ -34,10 +34,9 @@ dev-python/typing-extensions python_targets_python3_10
 dev-python/unittest-or-fail python_targets_python3_10
 dev-python/webencodings python_targets_python3_10
 dev-python/wheel python_targets_python3_10
-net-dns/avahi python_single_target_python3_10 -python_single_target_python3_11
+# move dev-python/flit_core dev-python/flit-core
 net-libs/stem python_targets_python3_10
 net-misc/nyx python_targets_python3_10
-net-print/hplip python_single_target_python3_10
 net-wireless/aircrack-ng python_targets_python3_10
 net-wireless/lorcon python_targets_python3_10
 sys-fs/zfs python_targets_python3_10

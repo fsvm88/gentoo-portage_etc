@@ -20,6 +20,7 @@ dev-python/pexpect gcc-no-lto
 dev-util/cmocka gcc-no-lto # -no-lto because revdevps otherwise fail at linking stage
 dev-util/patchelf gcc-no-lto
 dev-util/valgrind gcc-no-lto
+gnome-base/dconf gcc-no-lto # still times out on one test
 media-libs/giflib gcc-no-lto # this seems to compile fine with 'gcc' (GCC w/ LTO), but it produces a statically linked binary that contains no symbols.. not sure how tests even pass...
 media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise
@@ -30,6 +31,7 @@ net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
 net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
+net-misc/spice-gtk gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
 sci-astronomy/calcmysky gcc-no-lto # good old trusty Qt libs raise all sorts of issues with LTO in 2023
 sci-libs/lapack gcc-no-lto
@@ -40,3 +42,4 @@ sys-libs/glibc gcc-no-lto
 sys-process/criu gcc-no-lto
 x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports
 x11-libs/pixman gcc-no-lto
+x11-libs/wxGTK:3.0-gtk3 gcc-no-lto # could use gcc, but then revdeps fail to find symbols - guess building is not perfect with GCC+LTO

@@ -3,9 +3,6 @@ app-misc/jq
 app-misc/symlinks
 app-portage/mirrorselect
 app-shells/fish
-app-shells/zsh
-app-shells/zsh-completions
-app-shells/zsh-syntax-highlighting
 dev-util/shadowman
 sys-apps/gptfdisk
 sys-apps/irqbalance

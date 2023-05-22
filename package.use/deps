@@ -24,6 +24,7 @@ dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 precompute-ecmult
 dev-libs/libxml2 python
 dev-libs/protobuf python
+dev-libs/sord tools
 dev-libs/xmlsec nss
 dev-perl/DBD-mysql mysql
 dev-python/ipython matplotlib nbconvert notebook

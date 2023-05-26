@@ -58,7 +58,9 @@ net-libs/nodejs no-tests # not even trying this one...
 net-libs/stem no-tests # fails tests regardless of compiler
 net-mail/mailutils no-tests # fails tests regardless
 net-misc/networkmanager gcc-no-lto # fails tests with any other configuration
+net-p2p/transmission no-tests # regression due to clang-16/gcc-12?
 net-vpn/ocserv no-tests # fails regardless of compilers
+net-vpn/openconnect no-tests # regression due to clang-16/gcc-12?
 net-vpn/tor no-tests # regressed with 0.4.7.13-r1?
 sys-apps/attr no-tests # regression? fails tests regardless
 sys-apps/coreutils no-tests # fail on malloc because of sandbox

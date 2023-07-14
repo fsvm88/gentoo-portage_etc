@@ -1,6 +1,7 @@
 dev-lang/mono gcc-no-lto-no-debug
 dev-qt/* gcc-no-lto
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
+net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
 sci-libs/tensorflow clang-no-lto-no-debug
 sci-libs/tensorflow-estimator disable-network-sandbox
 sys-devel/clang extra_cmake-llvm
@@ -9,6 +10,7 @@ sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
 #sys-fs/zfs-kmod gcc-no-lto
 sys-fs/zfs-kmod kernel-drivers-clang
+sys-fs/zfs-kmod no-usersandbox # thinLTO access issues
 sys-libs/efivar no-lld
 sys-libs/libcap no-compiler-rt
 sys-process/tini no-compiler-rt

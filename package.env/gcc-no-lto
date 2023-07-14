@@ -15,7 +15,6 @@ dev-libs/serd gcc-no-lto
 dev-libs/zziplib gcc-no-lto
 dev-python/cffi gcc-no-lto # fails tests otherwise
 dev-python/mypy gcc-no-lto
-dev-python/numpy gcc-no-lto
 dev-python/pexpect gcc-no-lto
 dev-util/cmocka gcc-no-lto # -no-lto because revdevps otherwise fail at linking stage
 dev-util/patchelf gcc-no-lto
@@ -36,6 +35,7 @@ net-misc/x11-ssh-askpass gcc-no-lto
 sci-astronomy/calcmysky gcc-no-lto # good old trusty Qt libs raise all sorts of issues with LTO in 2023
 sci-libs/lapack gcc-no-lto
 sys-apps/sandbox gcc-no-lto
+sys-devel/binutils gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-devel/libtool gcc-no-lto # tests fail with any other config
 sys-libs/glibc gcc-no-lto

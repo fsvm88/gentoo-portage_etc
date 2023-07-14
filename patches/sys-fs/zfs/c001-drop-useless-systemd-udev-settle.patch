@@ -1,0 +1,46 @@
+diff -Nuar zfs-2.1.12.orig/etc/systemd/system/zfs-import-cache.service.in zfs-2.1.12/etc/systemd/system/zfs-import-cache.service.in
+--- zfs-2.1.12.orig/etc/systemd/system/zfs-import-cache.service.in	2023-06-07 01:20:49.100592526 +0200
++++ zfs-2.1.12/etc/systemd/system/zfs-import-cache.service.in	2023-06-19 20:41:48.498949094 +0200
+@@ -2,8 +2,6 @@
+ Description=Import ZFS pools by cache file
+ Documentation=man:zpool(8)
+ DefaultDependencies=no
+-Requires=systemd-udev-settle.service
+-After=systemd-udev-settle.service
+ After=cryptsetup.target
+ After=multipathd.service
+ After=systemd-remount-fs.service
+diff -Nuar zfs-2.1.12.orig/etc/systemd/system/zfs-import-scan.service.in zfs-2.1.12/etc/systemd/system/zfs-import-scan.service.in
+--- zfs-2.1.12.orig/etc/systemd/system/zfs-import-scan.service.in	2023-06-07 01:20:49.100592526 +0200
++++ zfs-2.1.12/etc/systemd/system/zfs-import-scan.service.in	2023-06-19 20:41:30.875978667 +0200
+@@ -2,8 +2,6 @@
+ Description=Import ZFS pools by device scanning
+ Documentation=man:zpool(8)
+ DefaultDependencies=no
+-Requires=systemd-udev-settle.service
+-After=systemd-udev-settle.service
+ After=cryptsetup.target
+ After=multipathd.service
+ Before=zfs-import.target
+diff -Nuar zfs-2.1.12.orig/etc/systemd/system/zfs-mount.service.in zfs-2.1.12/etc/systemd/system/zfs-mount.service.in
+--- zfs-2.1.12.orig/etc/systemd/system/zfs-mount.service.in	2023-06-07 01:20:49.100592526 +0200
++++ zfs-2.1.12/etc/systemd/system/zfs-mount.service.in	2023-06-19 20:41:42.705732769 +0200
+@@ -2,7 +2,6 @@
+ Description=Mount ZFS filesystems
+ Documentation=man:zfs(8)
+ DefaultDependencies=no
+-After=systemd-udev-settle.service
+ After=zfs-import.target
+ After=systemd-remount-fs.service
+ Before=local-fs.target
+diff -Nuar zfs-2.1.12.orig/etc/systemd/system/zfs-volume-wait.service.in zfs-2.1.12/etc/systemd/system/zfs-volume-wait.service.in
+--- zfs-2.1.12.orig/etc/systemd/system/zfs-volume-wait.service.in	2023-06-07 01:20:49.100592526 +0200
++++ zfs-2.1.12/etc/systemd/system/zfs-volume-wait.service.in	2023-06-19 20:41:54.752158606 +0200
+@@ -1,7 +1,6 @@
+ [Unit]
+ Description=Wait for ZFS Volume (zvol) links in /dev
+ DefaultDependencies=no
+-After=systemd-udev-settle.service
+ After=zfs-import.target
+ ConditionPathIsDirectory=/sys/module/zfs
+ 

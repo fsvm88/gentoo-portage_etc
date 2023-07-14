@@ -1,5 +1,2 @@
-app-arch/lrzip
 app-arch/p7zip
-app-arch/pbzip2
-app-arch/pigz
 app-arch/zstd

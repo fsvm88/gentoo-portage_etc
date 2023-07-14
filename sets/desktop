@@ -4,7 +4,7 @@ gui-apps/mako
 gui-apps/swaybg
 gui-apps/swayidle
 gui-apps/swaylock
-gui-libs/display-manager-init
+gui-libs/xdg-desktop-portal-wlr
 media-fonts/fonts-meta
 media-video/libva-utils
 x11-terms/alacritty

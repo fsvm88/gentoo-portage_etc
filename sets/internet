@@ -1,15 +1,10 @@
-app-admin/awscli
-app-crypt/easy-rsa
 net-analyzer/nmap
 net-analyzer/tcpdump
 net-analyzer/tcptraceroute
 net-analyzer/traceroute
 net-analyzer/wireshark
 net-dns/bind-tools
-net-ftp/lftp
-net-ftp/ncftp
 net-libs/miniupnpc
-net-misc/drive
 net-misc/netkit-telnetd
 net-misc/nyx
 net-misc/wakeonlan

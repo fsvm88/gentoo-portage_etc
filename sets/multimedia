@@ -3,7 +3,6 @@ media-gfx/imv
 media-libs/vulkan-loader
 media-sound/audacity
 media-video/mpv
-media-video/smplayer
 media-video/wireplumber
 net-wireless/blueman
 x11-apps/mesa-progs

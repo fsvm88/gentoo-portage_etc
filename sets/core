@@ -1,9 +1,7 @@
 app-admin/sudo
 app-misc/jq
 app-misc/symlinks
-app-portage/mirrorselect
 app-shells/fish
-dev-util/shadowman
 sys-apps/gptfdisk
 sys-apps/irqbalance
 sys-apps/nvme-cli
@@ -11,6 +9,4 @@ sys-boot/grub
 sys-boot/os-prober
 sys-kernel/genkernel
 sys-kernel/linux-firmware
-sys-process/schedtool
 sys-process/time
-www-client/links

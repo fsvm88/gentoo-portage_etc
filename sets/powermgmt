@@ -4,7 +4,4 @@ app-admin/sysstat
 sys-power/acpid
 sys-power/acpitool
 sys-power/cpupower
-sys-power/powerstat
 sys-power/powertop
-sys-power/thermald
-sys-process/nmon

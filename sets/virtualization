@@ -1,7 +1,3 @@
-app-containers/docker
-app-containers/docker-buildx
 app-containers/podman
 app-emulation/virt-manager
 app-emulation/virt-viewer
-app-emulation/winetricks
-app-emulation/wine-vanilla

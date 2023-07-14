@@ -5,4 +5,3 @@ sys-cluster/hubble
 sys-cluster/kubeadm
 sys-cluster/kubectl
 sys-cluster/kubelet
-sys-cluster/minikube

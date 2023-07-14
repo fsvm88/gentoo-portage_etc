@@ -1,2 +1,2 @@
-CFLAGS="-O3 -march=native -pipe -glldb -fopenmp"
+CFLAGS="-O3 -march=native -pipe -glldb -fopenmp -gline-tables-only"
 CXXFLAGS="${CFLAGS}"

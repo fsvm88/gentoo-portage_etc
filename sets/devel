@@ -15,3 +15,4 @@ dev-vcs/git-filter-repo
 dev-vcs/git-flow
 dev-vcs/git-lfs
 dev-vcs/tig
+sys-devel/mold

@@ -9,7 +9,6 @@ sys-devel/clang-runtime
 sys-devel/lld
 sys-devel/llvm
 sys-devel/llvm-common
-sys-devel/llvmgold
 sys-libs/compiler-rt
 sys-libs/compiler-rt-sanitizers
 sys-libs/libcxx

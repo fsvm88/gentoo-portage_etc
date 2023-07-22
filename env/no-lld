@@ -1,2 +1,3 @@
 CFLAGS="${CFLAGS} -fuse-ld=bfd"
 CXXFLAGS="${CFLAGS} -fuse-ld=bfd"
+LDFLAGS="-Wl,-O3,-z,now,--as-needed,--gc-sections"

@@ -27,6 +27,7 @@ media-libs/opencv lto -gtk3
 media-libs/opencv python
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
+media-video/mpv -opengl
 net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4 qt5

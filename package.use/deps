@@ -8,6 +8,7 @@ app-emulation/libvirt-glib python
 app-text/tesseract osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
+dev-cpp/cairomm X
 dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
@@ -46,6 +47,7 @@ gnome-base/gvfs archive mtp
 gui-libs/wlroots tinywl
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
+media-gfx/imagemagick X
 media-libs/freetype harfbuzz infinality
 media-libs/gst-plugins-bad gles2
 media-libs/gst-plugins-bad wayland
@@ -91,6 +93,7 @@ net-wireless/bluez btpclient deprecated experimental extra-tools user-session
 net-wireless/lorcon python
 sci-geosciences/gpsd python
 sci-libs/hdf5 -threads
+sys-apps/dbus X
 sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd xkb
 sys-apps/util-linux static-libs
@@ -99,11 +102,12 @@ sys-devel/binutils cxx
 sys-devel/clang-common hardened
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
-sys-devel/llvm gold udis86
 sys-libs/glibc gd
 sys-libs/ldb python
 sys-libs/libcap static-libs
+sys-libs/libcxxabi static-libs
 sys-libs/libcxx libcxxabi
+sys-libs/libcxx static-libs
 sys-libs/libomp hwloc
 sys-libs/libomp offload
 sys-libs/libxcrypt static-libs
@@ -115,9 +119,11 @@ sys-libs/tevent python
 sys-libs/zlib minizip
 sys-libs/zlib static-libs
 virtual/libcrypt static-libs
-virtual/rust abi_x86_32
+virtual/rust abi_x86_32 rustfmt
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb wayland
+x11-libs/cairo X
+x11-libs/gtk+ X
 x11-libs/libdrm libkms video_cards_amdgpu
 x11-libs/libdrm video_cards_radeon
 x11-libs/wxGTK webkit

@@ -19,6 +19,7 @@ dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
 dev-libs/glib no-tests # fails regardless of compiler
 dev-libs/libappindicator:2 no-tests # fails tests with any configuration
+dev-libs/libbsd no-tests # 1 test is broken
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
@@ -29,10 +30,13 @@ dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
 dev-perl/IO-Tty no-tests # likely broken test suite
 dev-perl/Proc-ProcessTable no-tests # hangs
+dev-perl/XML-LibXML no-tests # fails tests regardless
 dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
+dev-util/cmake no-tests # regressions?
 dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
+dev-util/gtk-doc no-tests # fails tests regardless
 dev-util/spirv-llvm-translator no-tests # fails ALL tests with ANY configuration, not sure what is broken
 dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEPENDS
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
@@ -70,11 +74,11 @@ sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandb
 sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
 sys-devel/autoconf no-tests # nobody ever saw these finish
 sys-devel/automake no-tests # regression?
-sys-devel/clang no-tests # fails 3 tests - possibly regression
+sys-devel/clang no-tests # fails 3 tests
 sys-devel/gcc no-tests # not worth running...
 sys-devel/libtool no-tests # regressed compared to non-r1
-sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
-sys-devel/llvm no-tests # x86 is broken with default-compiler-rt and default-libcxx
+#sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
+sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...

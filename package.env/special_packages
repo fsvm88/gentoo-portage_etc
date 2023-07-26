@@ -1,5 +1,11 @@
 dev-lang/mono gcc-no-lto-no-debug
+dev-libs/jansson no-lld # this forces bfd linker
+dev-libs/libevdev no-gc-sections
+dev-libs/libinput no-gc-sections
+dev-libs/wayland no-gc-sections
 dev-qt/* gcc-no-lto
+net-wireless/bluez no-gc-sections
+net-wireless/iw no-gc-sections
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
 sci-libs/tensorflow clang-no-lto-no-debug
@@ -11,7 +17,6 @@ sys-devel/llvm extra_cmake-llvm
 #sys-fs/zfs-kmod gcc-no-lto
 sys-fs/zfs-kmod kernel-drivers-clang
 sys-fs/zfs-kmod no-usersandbox # thinLTO access issues
-sys-libs/efivar no-lld
 sys-libs/libcap no-compiler-rt
 sys-process/tini no-compiler-rt
 www-client/chromium ccache

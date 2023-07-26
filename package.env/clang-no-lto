@@ -4,9 +4,11 @@ app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
 app-emulation/libvirt clang-no-lto # fails one specific test - regressed?
 app-text/libetonyek clang-no-lto # fails with LTO
 app-text/ps2pkm clang-no-lto # fails with LTO
+app-text/texlive-core clang-no-lto
 dev-cpp/glibmm clang-no-lto # fails with LTO
+dev-lang/perl clang-no-lto
 dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE)
-dev-libs/libbsd clang-no-lto # fails tests with LTO
+dev-python/numpy clang-no-lto
 dev-util/dialog clang-no-lto
 dev-util/perf clang-no-lto
 media-libs/libfreehand clang-no-lto # fails with LTO
@@ -17,7 +19,6 @@ sys-apps/sandbox clang-no-lto # fails with LTO
 #sys-devel/clang clang-no-lto # handled by special_packages cmake_extra-llvm
 #sys-devel/lldb clang-no-lto # handled by special_packages cmake_extra-llvm
 #sys-devel/lld clang-no-lto # handled by special_packages cmake_extra-llvm
-#sys-devel/llvm clang-no-lto # handled by special_packages cmake_extra-llvm
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto # fails with LTO
 www-client/firefox clang-no-lto # this is handled by the ebuild

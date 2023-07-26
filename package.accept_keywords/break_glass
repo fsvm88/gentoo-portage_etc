@@ -9,7 +9,7 @@ app-misc/radeontop **
 <app-portage/mirrorselect-2.3.1
 <app-text/opensp-1.5.3
 <app-text/tessdata_best-5
-<dev-lang/spidermonkey-102.13.0
+<dev-lang/spidermonkey-102.14.0
 <dev-lang/vala-0.57
 <dev-libs/date-3.1
 <dev-libs/libappindicator-12.11
@@ -40,6 +40,7 @@ app-misc/radeontop **
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
 <net-vpn/libreswan-5
+<net-wireless/iw-5.20
 <sci-mathematics/yafu-1.35
 <sys-apps/hwloc-2.10
 <sys-apps/sandbox-2.31
@@ -52,13 +53,14 @@ app-misc/radeontop **
 <sys-devel/clang-toolchain-symlinks-17
 =sys-devel/gcc-12.3.1_p20230623
 <sys-devel/gcc-13.2
+<sys-devel/just-1.15
 <sys-devel/lld-17
 <sys-devel/lld-toolchain-symlinks-17
 <sys-devel/llvm-17
 <sys-devel/llvm-common-17
 <sys-devel/llvmgold-17
 <sys-devel/llvm-toolchain-symlinks-17
-<sys-kernel/gentoo-sources-6.4
+<sys-kernel/gentoo-sources-6.5
 <sys-libs/compiler-rt-17
 <sys-libs/compiler-rt-sanitizers-17
 <sys-libs/libcxx-17
@@ -68,6 +70,7 @@ app-misc/radeontop **
 <sys-libs/llvm-libunwind-17
 <sys-power/cpupower-6.3
 <sys-process/daemontools-0.76-r12
+<virtual/libudev-252
 <x11-libs/wxGTK-3.3
 <x11-terms/alacritty-0.12
 <x11-terms/alacritty-0.13

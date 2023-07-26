@@ -1,13 +1,15 @@
 app-arch/zstd
 app-emulation/wine-mono
 app-emulation/wine-vanilla
+app-portage/pycargoebuild
 app-shells/fish
-dev-lang/rust
+<dev-lang/rust-1.71.0-r1
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
 dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
+dev-util/cargo-ebuild
 dev-util/ccache
 dev-util/clinfo
 dev-util/hip

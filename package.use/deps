@@ -5,10 +5,10 @@ app-containers/crun criu
 app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-emulation/libvirt-glib python
+app-text/mupdf -opengl
 app-text/tesseract osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
-dev-cpp/cairomm X
 dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
 dev-java/icedtea infinality
@@ -20,6 +20,7 @@ dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
 dev-libs/libclc spirv
+dev-libs/libdbusmenu -gtk
 dev-libs/libpcre2 pcre16 pcre32
 dev-libs/libpcre pcre16
 dev-libs/libsecp256k1 precompute-ecmult
@@ -39,15 +40,16 @@ dev-qt/qtgui eglfs evdev libinput
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
 dev-qt/qtwebengine geolocation
+dev-qt/qtwidgets -gtk -gtk3
 dev-util/cmake system-jsoncpp
 dev-util/lldb lzma
+dev-util/perf -gtk
 dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots tinywl
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
-media-gfx/imagemagick X
 media-libs/freetype harfbuzz infinality
 media-libs/gst-plugins-bad gles2
 media-libs/gst-plugins-bad wayland
@@ -62,6 +64,7 @@ media-libs/libsdl2 gles2
 media-libs/libsdl2 gles haptic
 media-libs/libva -opengl
 media-libs/libvpx postproc svc
+media-libs/libwebp -opengl
 media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/mlt jack fftw
 media-libs/vulkan-loader layers
@@ -71,7 +74,7 @@ media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
-media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vpx
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vpx -opengl
 media-video/pipewire aptx echo-cancel extra ldac sound-server
 net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script
@@ -93,7 +96,6 @@ net-wireless/bluez btpclient deprecated experimental extra-tools user-session
 net-wireless/lorcon python
 sci-geosciences/gpsd python
 sci-libs/hdf5 -threads
-sys-apps/dbus X
 sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd xkb
 sys-apps/util-linux static-libs
@@ -122,8 +124,5 @@ virtual/libcrypt static-libs
 virtual/rust abi_x86_32 rustfmt
 x11-base/xorg-drivers -video_cards_intel -video_cards_nouveau -video_cards_nvidia
 x11-base/xorg-server glamor xnest xvfb wayland
-x11-libs/cairo X
-x11-libs/gtk+ X
-x11-libs/libdrm libkms video_cards_amdgpu
-x11-libs/libdrm video_cards_radeon
-x11-libs/wxGTK webkit
+x11-libs/libdrm libkms video_cards_amdgpu video_cards_radeon
+x11-libs/wxGTK webkit -tiff -spell

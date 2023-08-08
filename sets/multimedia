@@ -1,8 +1,6 @@
 media-gfx/gimp
 media-gfx/imv
 media-libs/vulkan-loader
-media-sound/audacity
+#media-sound/audacity
 media-video/mpv
 media-video/wireplumber
-net-wireless/blueman
-x11-apps/mesa-progs

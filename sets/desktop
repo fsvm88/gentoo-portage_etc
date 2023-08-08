@@ -1,4 +1,3 @@
-app-office/libreoffice
 gui-apps/gtkgreet
 gui-apps/mako
 gui-apps/swaybg
@@ -7,4 +6,5 @@ gui-apps/swaylock
 gui-libs/xdg-desktop-portal-wlr
 media-fonts/fonts-meta
 media-video/libva-utils
+x11-misc/xdg-user-dirs-gtk
 x11-terms/alacritty

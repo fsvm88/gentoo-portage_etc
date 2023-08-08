@@ -1,3 +1,4 @@
+app-accessibility/at-spi2-core no-tests # fails with timeout on 1 test
 app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
@@ -5,11 +6,11 @@ app-crypt/hashcat no-tests # cannot access video card, even though portage user 
 app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
 app-i18n/ibus no-tests # tests hang regardless of compiler
 app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
-app-office/libreoffice no-tests # too big
 app-shells/bash-completion no-tests # fails a sudo test, for whatever reason
 app-text/docbook2X no-tests # fails no matter what, think the test suite is broken
 app-text/enchant no-tests # regression with clang-16, doesn't build with GCC likely due to deps being compiled with LLD+LTO
 app-text/libqxp clang-no-lto # fails tests with LTO
+app-text/po4a no-tests # this brings in all of latex
 app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
 dev-cpp/cpp-httplib no-tests # fails lots of random tests
 dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
@@ -18,7 +19,6 @@ dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
 dev-libs/glib no-tests # fails regardless of compiler
-dev-libs/libappindicator:2 no-tests # fails tests with any configuration
 dev-libs/libbsd no-tests # 1 test is broken
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler

@@ -32,7 +32,6 @@ net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
 net-misc/spice-gtk gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
-sci-astronomy/calcmysky gcc-no-lto # good old trusty Qt libs raise all sorts of issues with LTO in 2023
 sci-libs/lapack gcc-no-lto
 sys-apps/sandbox gcc-no-lto
 sys-devel/binutils gcc-no-lto
@@ -42,4 +41,4 @@ sys-libs/glibc gcc-no-lto
 sys-process/criu gcc-no-lto
 x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports
 x11-libs/pixman gcc-no-lto
-x11-libs/wxGTK:3.0-gtk3 gcc-no-lto # could use gcc, but then revdeps fail to find symbols - guess building is not perfect with GCC+LTO
+x11-libs/wxGTK gcc-no-lto # could use clang, but then revdeps fail to find symbols due to LLD's imperfect scripting support (warnings during build)

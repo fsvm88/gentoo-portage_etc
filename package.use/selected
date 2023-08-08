@@ -1,10 +1,9 @@
 app-admin/testdisk ntfs reiserfs
 app-containers/docker overlay
-app-editors/vim python
+app-editors/vim python -sound
 app-emulation/libvirt libssh2 nfs pcap virt-network
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs
 app-emulation/wine-vanilla vkd3d -mingw -unwind
-app-office/libreoffice -postgres
 app-portage/eix optimization sqlite tools
 app-text/tesseract float32
 dev-lang/rust rust-src
@@ -16,7 +15,6 @@ dev-util/ccache -static-c++
 dev-util/perf clang libpfm
 dev-util/strace -unwind
 dev-vcs/subversion -dso
-games-util/steam-client-meta trayicon
 gui-apps/waybar evdev libinput network pipewire tray -pulseaudio
 gui-wm/sway tray
 media-fonts/fonts-meta ms
@@ -40,8 +38,6 @@ net-print/hplip-plugin orblite
 net-print/hplip snmp
 net-vpn/libreswan curl
 net-vpn/tor stats tor-hardening transparent-proxy upnp
-net-wireless/blueman appindicator
-sci-astronomy/calcmysky qt5
 sci-libs/tensorflow opencl python rocm xla
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions

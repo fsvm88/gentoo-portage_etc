@@ -1,4 +1,4 @@
+dev-libs/bemenu
 gui-apps/wl-clipboard
 gui-wm/sway
 media-sound/playerctl
-x11-misc/dmenu

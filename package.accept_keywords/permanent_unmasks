@@ -29,7 +29,7 @@ net-analyzer/nmap
 net-im/slack
 net-misc/postman-bin
 net-wireless/rtl8812au_aircrack-ng::pentoo
-sci-astronomy/stellarium
+#sci-astronomy/stellarium
 sci-misc/boinc
 sys-apps/fwupd
 #sys-apps/portage

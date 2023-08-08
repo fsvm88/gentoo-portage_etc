@@ -19,7 +19,6 @@ dev-libs/glib abi_x86_32
 dev-libs/gmp abi_x86_32
 dev-libs/icu abi_x86_32
 dev-libs/libaio abi_x86_32
-dev-libs/libappindicator abi_x86_32
 dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
 dev-libs/libdbusmenu abi_x86_32

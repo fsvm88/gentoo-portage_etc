@@ -40,6 +40,7 @@ app-misc/radeontop **
 <net-libs/libsoup-3.5
 <net-libs/nghttp2-1.53
 <net-libs/stem-1.9
+<net-mail/mailutils-3.17
 <net-misc/nyx-2.2
 <net-vpn/libreswan-5
 <net-wireless/iw-5.20
@@ -75,5 +76,4 @@ app-misc/radeontop **
 <sys-process/daemontools-0.76-r12
 <virtual/libudev-252
 <x11-libs/wxGTK-3.3
-<x11-terms/alacritty-0.12
 <x11-terms/alacritty-0.13

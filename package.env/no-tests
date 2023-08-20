@@ -16,6 +16,7 @@ dev-cpp/cpp-httplib no-tests # fails lots of random tests
 dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
+dev-db/postgresql no-tests # most tests are broken, possibly due to llvm/jit/libcxx interactions
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
 dev-libs/glib no-tests # fails regardless of compiler

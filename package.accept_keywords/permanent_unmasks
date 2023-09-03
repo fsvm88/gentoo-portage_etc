@@ -3,7 +3,7 @@ app-emulation/wine-mono
 app-emulation/wine-vanilla
 app-portage/pycargoebuild
 app-shells/fish
-<dev-lang/rust-1.71.9-r99
+dev-lang/rust
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
 dev-libs/rocm-opencl-runtime

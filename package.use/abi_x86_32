@@ -192,3 +192,4 @@ x11-libs/libXv abi_x86_32
 x11-libs/libXxf86vm  abi_x86_32
 x11-libs/pango abi_x86_32
 x11-libs/pixman abi_x86_32
+x11-libs/xcb-util-keysyms abi_x86_32

@@ -55,6 +55,7 @@ media-libs/gst-plugins-bad gles2
 media-libs/gst-plugins-bad wayland
 media-libs/gst-plugins-base gles2
 media-libs/lcms python
+media-libs/libglvnd X
 media-libs/libopenshot -imagemagick
 media-libs/libopenshot python
 media-libs/libplacebo glslang
@@ -65,7 +66,7 @@ media-libs/libsdl2 gles haptic
 media-libs/libva -opengl
 media-libs/libvpx postproc svc
 media-libs/libwebp -opengl
-media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
+media-libs/mesa X d3d9 opencl dri3 gbm gles2 llvm llvm-shared-libs vulkan zink
 media-libs/mlt jack fftw
 media-libs/vulkan-loader layers
 media-libs/waffle gbm

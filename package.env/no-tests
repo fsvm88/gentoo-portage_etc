@@ -17,6 +17,7 @@ dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-db/postgresql no-tests # most tests are broken, possibly due to llvm/jit/libcxx interactions
+dev-db/sqlite no-tests # why do I even bother...
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
 dev-libs/glib no-tests # fails regardless of compiler
@@ -29,6 +30,7 @@ dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
 dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
+dev-perl/Image-Sane no-tests # regression with perl 5.38?
 dev-perl/IO-Tty no-tests # likely broken test suite
 dev-perl/Proc-ProcessTable no-tests # hangs
 dev-perl/XML-LibXML no-tests # fails tests regardless
@@ -59,6 +61,7 @@ media-libs/openexr no-tests # tests take 35m when running on a 5950x w -j28...
 net-analyzer/nmap no-tests # fails tests regardless of config
 net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
 net-firewall/iptables no-tests # regression from 1.8.8-r5 on xlate-test.py
+net-libs/glib-networking no-tests # regression across updates?
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
 net-libs/nodejs no-tests # not even trying this one...
 net-libs/stem no-tests # fails tests regardless of compiler

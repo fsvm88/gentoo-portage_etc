@@ -1,0 +1,11 @@
+diff -Nuar zfs-2.1.12.orig/config/kernel-config-defined.m4 zfs-2.1.12/config/kernel-config-defined.m4
+--- zfs-2.1.12.orig/config/kernel-config-defined.m4	2023-06-07 01:20:48.388597221 +0200
++++ zfs-2.1.12/config/kernel-config-defined.m4	2023-09-02 20:05:14.796054757 +0200
+@@ -7,6 +7,7 @@
+ 	AS_IF([test "x$cross_compiling" != xyes], [
+ 		AC_RUN_IFELSE([
+ 			AC_LANG_PROGRAM([
++                                #include "string.h"
+ 				#include "$LINUX/include/linux/license.h"
+ 			], [
+ 				return !license_is_gpl_compatible(

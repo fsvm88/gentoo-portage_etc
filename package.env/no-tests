@@ -27,6 +27,7 @@ dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
+dev-libs/rocm-device-libs no-tests # regression building + testing?
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
 dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
@@ -54,6 +55,7 @@ media-libs/gst-plugins-good no-tests # fails regardless of compiler
 media-libs/leptonica no-tests # regression with clang-16?
 media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests
 media-libs/libepoxy no-tests # fails tests regardless of compiler
+media-libs/libjpeg-turbo no-tests # regressed 1 test in version 3.0.0
 media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then
 media-libs/lv2 no-tests # tests require codespell, not in the ebuild
 media-libs/mesa no-tests # not required (-9999), lengthy

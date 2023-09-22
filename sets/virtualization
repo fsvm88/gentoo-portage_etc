@@ -1,3 +1,4 @@
 app-containers/podman
 app-emulation/virt-manager
 app-emulation/virt-viewer
+dev-python/podman-compose

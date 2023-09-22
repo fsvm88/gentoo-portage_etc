@@ -3,6 +3,7 @@ app-admin/awscli no-tests # thousands and thousands of tests (which is nice), bu
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
+app-crypt/p11-kit no-tests # regressed after latest stable
 app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
 app-i18n/ibus no-tests # tests hang regardless of compiler
 app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means

@@ -1,0 +1,61 @@
+diff -Nuar mesa-9999.orig/src/gallium/targets/dri/dri.sym mesa-9999/src/gallium/targets/dri/dri.sym
+--- mesa-9999.orig/src/gallium/targets/dri/dri.sym	2023-10-15 01:15:23.046655998 +0200
++++ mesa-9999/src/gallium/targets/dri/dri.sym	1970-01-01 01:00:00.000000000 +0100
+@@ -1,11 +0,0 @@
+-{
+-	global:
+-		__driDriverGetExtensions*;
+-		nouveau_drm_screen_create;
+-		radeon_drm_winsys_create;
+-		amdgpu_winsys_create;
+-		fd_drm_screen_create_renderonly;
+-		ac_init_shared_llvm_once;
+-	local:
+-		*;
+-};
+diff -Nuar mesa-9999.orig/src/gallium/targets/dri/dri.sym.in mesa-9999/src/gallium/targets/dri/dri.sym.in
+--- mesa-9999.orig/src/gallium/targets/dri/dri.sym.in	1970-01-01 01:00:00.000000000 +0100
++++ mesa-9999/src/gallium/targets/dri/dri.sym.in	2023-10-15 01:16:43.473390193 +0200
+@@ -0,0 +1,11 @@
++{
++       global:
++               __driDriverGetExtensions*;
++               @nouveau_drm_screen_create@
++               @radeon_drm_winsys_create@
++               @amdgpu_winsys_create@
++               @fd_drm_screen_create_renderonly@
++               @ac_init_shared_llvm_once@
++       local:
++               *;
++};
+diff -Nuar mesa-9999.orig/src/gallium/targets/dri/meson.build mesa-9999/src/gallium/targets/dri/meson.build
+--- mesa-9999.orig/src/gallium/targets/dri/meson.build	2023-10-15 01:15:23.046655998 +0200
++++ mesa-9999/src/gallium/targets/dri/meson.build	2023-10-15 01:19:23.880191566 +0200
+@@ -28,9 +28,25 @@
+ gallium_dri_link_depends = []
+ gallium_dri_drivers = []
+ 
++dri_sym_config = configuration_data()
++
++foreach d : [[with_gallium_r300 or with_gallium_radeonsi or with_gallium_r600, 'radeon_drm_winsys_create'],
++               [with_gallium_radeonsi, 'amdgpu_winsys_create'],
++               [with_gallium_nouveau, 'nouveau_drm_screen_create'],
++               [with_gallium_freedreno, 'fd_drm_screen_create_renderonly'],
++               [with_llvm, 'ac_init_shared_llvm_once']]
++  if d[0]
++    dri_sym_config.set(d[1], d[1] + ';')
++  else
++    dri_sym_config.set(d[1], '')
++  endif
++endforeach
++
++dri_sym = configure_file(input : 'dri.sym.in', output : 'dri.sym', configuration : dri_sym_config)
++
+ if with_ld_version_script
+-  gallium_dri_ld_args += ['-Wl,--version-script', join_paths(meson.current_source_dir(), 'dri.sym')]
+-  gallium_dri_link_depends += files('dri.sym')
++  gallium_dri_ld_args += ['-Wl,--version-script', join_paths(meson.current_build_dir(), 'dri.sym')]
++  gallium_dri_link_depends += dri_sym
+ endif
+ if with_ld_dynamic_list
+   gallium_dri_ld_args += ['-Wl,--dynamic-list', join_paths(meson.current_source_dir(), '../dri.dyn')]

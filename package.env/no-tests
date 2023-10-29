@@ -7,6 +7,7 @@ app-crypt/p11-kit no-tests # regressed after latest stable
 app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
 app-i18n/ibus no-tests # tests hang regardless of compiler
 app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
+app-misc/jq no-tests # tests fail regardless
 app-shells/bash-completion no-tests # fails a sudo test, for whatever reason
 app-text/docbook2X no-tests # fails no matter what, think the test suite is broken
 app-text/enchant no-tests # regression with clang-16, doesn't build with GCC likely due to deps being compiled with LLD+LTO
@@ -19,9 +20,12 @@ dev-db/mariadb no-tests # another one which takes ~ life of the universe to fini
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-db/postgresql no-tests # most tests are broken, possibly due to llvm/jit/libcxx interactions
 dev-db/sqlite no-tests # why do I even bother...
+dev-lang/go no-tests # regresses with latest gcc? takes forever to fail
+dev-lang/perl no-tests # open bug since forever because tests fail when running with --quiet
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
 dev-libs/glib no-tests # fails regardless of compiler
+dev-libs/icu no-tests # fails tests for HebrewCalendarInTemporalLeapYear, regardless of compiler
 dev-libs/libbsd no-tests # 1 test is broken
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
@@ -30,6 +34,7 @@ dev-libs/nss no-tests # while it would be nice to have this library tested at al
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-libs/rocm-device-libs no-tests # regression building + testing?
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
+dev-perl/Alien-Build no-tests # regression w/ sandbox, missing file?
 dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
 dev-perl/Image-Sane no-tests # regression with perl 5.38?
@@ -51,6 +56,7 @@ gui-libs/gtk no-tests # likely MALLOC_PERTURB_ crap, everything fails with SIGSE
 media-gfx/gscan2pdf no-tests # tests hang
 media-gfx/img2pdf no-tests # failures due to possibly broken python
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
+media-libs/gegl no-tests # most likely a regression with ffmpeg6?
 media-libs/gst-plugins-base no-tests # fails regardless of compiler
 media-libs/gst-plugins-good no-tests # fails regardless of compiler
 media-libs/leptonica no-tests # regression with clang-16?
@@ -62,6 +68,7 @@ media-libs/lv2 no-tests # tests require codespell, not in the ebuild
 media-libs/mesa no-tests # not required (-9999), lengthy
 media-libs/openexr no-tests # tests take 35m when running on a 5950x w -j28...
 net-analyzer/nmap no-tests # fails tests regardless of config
+net-analyzer/tcpdump no-tests # requires samba for tests?! O_o
 net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
 net-firewall/iptables no-tests # regression from 1.8.8-r5 on xlate-test.py
 net-libs/glib-networking no-tests # regression across updates?
@@ -81,6 +88,7 @@ sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandb
 sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
 sys-devel/autoconf no-tests # nobody ever saw these finish
 sys-devel/automake no-tests # regression?
+sys-devel/binutils no-tests # regressed w clang-17 even though compiler is GCC?
 sys-devel/clang no-tests # fails 3 tests
 sys-devel/gcc no-tests # not worth running...
 sys-devel/libtool no-tests # regressed compared to non-r1
@@ -89,8 +97,10 @@ sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedA
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
+sys-libs/libcxx no-tests # regression in 17.x?
 sys-libs/libseccomp no-tests # regression due to clang-16?
 sys-libs/liburing no-tests # tests crash kernel, fail regardless
+sys-power/upower no-tests # regressions on touchpad tests?
 www-client/firefox no-tests
 x11-libs/gdk-pixbuf no-tests # fails regardless of compiler
 x11-libs/gtk+ no-tests # brings in X server

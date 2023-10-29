@@ -23,6 +23,7 @@ dev-libs/libbsd abi_x86_32
 dev-libs/libcroco abi_x86_32
 dev-libs/libdbusmenu abi_x86_32
 dev-libs/libev abi_x86_32
+dev-libs/libevdev abi_x86_32
 dev-libs/libevent abi_x86_32
 dev-libs/libffi abi_x86_32
 dev-libs/libgcrypt abi_x86_32
@@ -61,6 +62,7 @@ media-libs/freetype abi_x86_32
 media-libs/giflib abi_x86_32
 media-libs/glu abi_x86_32
 media-libs/harfbuzz abi_x86_32
+media-libs/lcms abi_x86_32
 media-libs/leptonica abi_x86_32
 media-libs/libaom abi_x86_32
 media-libs/libass abi_x86_32
@@ -125,7 +127,6 @@ sys-devel/clang-runtime abi_x86_32
 sys-devel/gettext abi_x86_32
 sys-devel/llvm abi_x86_32
 sys-fs/e2fsprogs abi_x86_32
-sys-fs/udev abi_x86_32
 sys-libs/binutils-libs abi_x86_32
 sys-libs/compiler-rt abi_x86_32
 sys-libs/compiler-rt-sanitizers abi_x86_32
@@ -163,6 +164,7 @@ virtual/opengl abi_x86_32
 virtual/pkgconfig abi_x86_32
 x11-base/xcb-proto abi_x86_32
 x11-libs/cairo abi_x86_32
+x11-libs/extest abi_x86_32
 x11-libs/gdk-pixbuf abi_x86_32
 x11-libs/gtk+ abi_x86_32
 x11-libs/libdrm abi_x86_32

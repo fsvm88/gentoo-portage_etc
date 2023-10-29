@@ -4,7 +4,6 @@ dev-libs/libevdev no-gc-sections
 dev-libs/libinput no-gc-sections
 dev-libs/wayland no-gc-sections
 dev-qt/* gcc-no-lto
-net-wireless/bluez no-gc-sections
 net-wireless/iw no-gc-sections
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues

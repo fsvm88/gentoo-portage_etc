@@ -1,6 +1,4 @@
 app-arch/zstd
-app-emulation/wine-mono
-app-emulation/wine-vanilla
 app-portage/pycargoebuild
 app-shells/fish
 dev-lang/rust
@@ -15,7 +13,6 @@ dev-util/clinfo
 dev-util/hip
 dev-util/rocm-cmake
 dev-util/rocminfo
-dev-util/shellcheck-bin
 dev-vcs/git-filter-repo
 games-util/esteam
 games-util/game-device-udev-rules
@@ -25,15 +22,13 @@ games-util/steam-meta
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf
 media-video/pipewire
-net-analyzer/nmap
 net-im/slack
-net-misc/postman-bin
 net-wireless/rtl8812au_aircrack-ng::pentoo
 #sci-astronomy/stellarium
 sci-misc/boinc
 sys-apps/fwupd
 #sys-apps/portage
-sys-cluster/minikube
+sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware
 sys-kernel/linux-headers

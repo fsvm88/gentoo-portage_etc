@@ -4,6 +4,7 @@ net-analyzer/tcptraceroute
 net-analyzer/traceroute
 net-analyzer/wireshark
 net-dns/bind-tools
+net-fs/cifs-utils
 net-libs/miniupnpc
 net-misc/netkit-telnetd
 net-misc/nyx

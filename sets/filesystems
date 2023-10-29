@@ -1,5 +1,7 @@
 app-misc/fdupes
+net-fs/cifs-utils
 sys-boot/woeusb
+sys-fs/bcachefs-tools
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools

@@ -28,6 +28,7 @@ app-misc/radeontop **
 <media-libs/alsa-lib-1.2.11
 <media-libs/icc-profiles-openicc-1.4
 <media-libs/libva-2.21
+<media-libs/webrtc-audio-processing-1.4
 <media-video/libva-utils-2.21
 <net-libs/gnutls-3.8.2
 <net-libs/libnsl-2.1
@@ -40,6 +41,7 @@ app-misc/radeontop **
 <sys-apps/hwloc-2.10
 <sys-apps/nvme-cli-2.7
 <sys-auth/pam_u2f-1.4
+<sys-cluster/kubelogin-1.29
 <sys-devel/clang-18
 <sys-devel/clang-common-18
 <sys-devel/clang-runtime-18

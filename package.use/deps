@@ -39,6 +39,7 @@ dev-qt/designer -phonon
 dev-qt/qtgui eglfs evdev libinput
 dev-qt/qtmultimedia widgets
 dev-qt/qtscript scripttools
+dev-qt/qtwayland compositor
 dev-qt/qtwebengine geolocation
 dev-qt/qtwidgets -gtk -gtk3
 dev-util/cmake system-jsoncpp

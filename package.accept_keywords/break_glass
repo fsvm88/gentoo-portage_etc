@@ -1,5 +1,9 @@
 <app-cdr/cdrtools-3.03
+<app-containers/containerd-1.7.9
 <app-containers/dnsname-cni-plugin-1.3.2
+<app-containers/docker-25
+<app-containers/docker-cli-25
+<app-containers/docker-compose-2.24
 <app-editors/vscode-1.99
 <app-emulation/qemu-8.2
 app-misc/radeontop **
@@ -14,12 +18,15 @@ app-misc/radeontop **
 <dev-python/coloredlogs-15.1
 <dev-python/humanfriendly-11
 <dev-python/lit-18
-<dev-python/podman-compose-1.0.7
+<dev-python/pikepdf-8.8
 <dev-util/cargo-c-0.9.28
 <dev-util/cbindgen-0.27
 <dev-util/lldb-18
 <dev-util/meson-1.3
 <dev-util/spirv-llvm-translator-18
+<dev-util/strace-6.7
+<dev-vcs/git-lfs-3.5
+<gnome-base/librsvg-2.58
 <gui-apps/gtkgreet-0.8
 <gui-apps/swaylock-1.7.3
 <gui-libs/xdg-desktop-portal-wlr-0.8
@@ -53,7 +60,8 @@ app-misc/radeontop **
 <sys-devel/llvm-common-18
 <sys-devel/llvmgold-18
 <sys-devel/llvm-toolchain-symlinks-18
-<sys-kernel/gentoo-sources-6.6
+<sys-kernel/genkernel-4.3.9
+<sys-kernel/gentoo-sources-6.7
 <sys-libs/compiler-rt-18
 <sys-libs/compiler-rt-sanitizers-18
 <sys-libs/glibc-2.39
@@ -65,5 +73,7 @@ app-misc/radeontop **
 <sys-libs/llvm-libunwind-18
 <sys-libs/slang-2.3.3-r99
 <sys-power/cpupower-6.3
+<sys-process/lsof-4.100
 <x11-libs/extest-0.1.1
+<x11-misc/xkeyboard-config-2.41
 <x11-terms/alacritty-0.13

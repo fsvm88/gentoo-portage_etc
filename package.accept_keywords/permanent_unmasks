@@ -1,4 +1,5 @@
 app-arch/zstd
+app-backup/btrbk
 app-portage/pycargoebuild
 app-shells/fish
 dev-lang/rust

@@ -15,6 +15,7 @@ net-wireless/cowpatty gcc
 sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
 sci-misc/boinc gcc # non-virtual thunk something
 sys-fs/udisks gcc # fails tests with clang 15.0.7
+sys-process/lsof gcc # regression with clang-17.0.6?
 =x11-libs/gtk+-2.24.33-r3 gcc
 x11-libs/libXt gcc # regression with clang-16 after recompiling world?
 x11-libs/startup-notification gcc

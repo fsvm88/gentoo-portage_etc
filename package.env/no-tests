@@ -52,6 +52,7 @@ dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEP
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gnome-base/dconf no-tests # regression? timing out on engine test
+gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months
 gui-libs/gtk no-tests # likely MALLOC_PERTURB_ crap, everything fails with SIGSEGV
 media-gfx/gscan2pdf no-tests # tests hang
 media-gfx/img2pdf no-tests # failures due to possibly broken python
@@ -59,6 +60,7 @@ media-libs/flac no-tests # tests can literally take more than a few hours on a m
 media-libs/gegl no-tests # most likely a regression with ffmpeg6?
 media-libs/gst-plugins-base no-tests # fails regardless of compiler
 media-libs/gst-plugins-good no-tests # fails regardless of compiler
+media-libs/lcms no-tests # regression: timeout-muTliplier
 media-libs/leptonica no-tests # regression with clang-16?
 media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests
 media-libs/libepoxy no-tests # fails tests regardless of compiler
@@ -96,6 +98,7 @@ sys-devel/libtool no-tests # regressed compared to non-r1
 sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
+sys-libs/efivar no-tests # regression?
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
 sys-libs/libcxx no-tests # regression in 17.x?
 sys-libs/libseccomp no-tests # regression due to clang-16?

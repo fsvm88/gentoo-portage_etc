@@ -1,4 +1,4 @@
-app-containers/podman
+app-containers/docker
+app-containers/docker-compose:2
 app-emulation/virt-manager
 app-emulation/virt-viewer
-dev-python/podman-compose

@@ -1,5 +1,7 @@
 app-arch/libarchive clang-no-lto
 app-cdr/cdrtools clang-no-lto # fails with LTO
+app-containers/containerd clang-no-lto
+app-containers/docker-compose clang-no-lto # LTO flags are stripped
 app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
 app-emulation/libvirt clang-no-lto # fails one specific test - regressed?
 app-text/libetonyek clang-no-lto # fails with LTO
@@ -11,11 +13,14 @@ dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhol
 dev-python/numpy clang-no-lto
 dev-util/dialog clang-no-lto
 dev-util/perf clang-no-lto
+dev-util/promu clang-no-lto
 media-libs/libfreehand clang-no-lto # fails with LTO
 media-libs/libvisio clang-no-lto
+net-misc/rclone clang-no-lto # golang prog
 sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto # fails with LTO
 sys-apps/sandbox clang-no-lto # fails with LTO
+sys-cluster/kubelogin clang-no-lto
 #sys-devel/clang clang-no-lto # handled by special_packages cmake_extra-llvm
 #sys-devel/lldb clang-no-lto # handled by special_packages cmake_extra-llvm
 #sys-devel/lld clang-no-lto # handled by special_packages cmake_extra-llvm

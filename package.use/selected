@@ -1,4 +1,5 @@
 app-admin/testdisk ntfs reiserfs
+app-backup/btrbk doc
 app-containers/docker overlay
 app-editors/vim python -sound
 app-emulation/libvirt libssh2 nfs pcap virt-network

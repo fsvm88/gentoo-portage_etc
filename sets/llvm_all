@@ -1,6 +1,6 @@
+dev-debug/lldb
 dev-libs/libclc
 dev-libs/libffi
-dev-util/lldb
 dev-util/spirv-llvm-translator
 sys-apps/hwloc
 sys-devel/clang

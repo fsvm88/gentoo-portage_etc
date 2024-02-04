@@ -5,6 +5,7 @@ app-admin/rasdaemon
 app-crypt/tpm2-tools
 app-eselect/eselect-repository
 app-misc/fdupes
+app-misc/mmv
 app-misc/tmux
 app-shells/bash-completion
 net-dns/bind-tools

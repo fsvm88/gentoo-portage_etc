@@ -1,15 +1,15 @@
 app-admin/helm
 app-editors/vscode
 app-portage/portage-utils
+dev-debug/lldb
+dev-debug/strace
 dev-python/pylint
 dev-python/virtualenv
 dev-util/ccache
 dev-util/cloc
-dev-util/lldb
 dev-util/meld
 dev-util/perf
 dev-util/shellcheck-bin
-dev-util/strace
 dev-vcs/git
 dev-vcs/git-filter-repo
 dev-vcs/git-flow

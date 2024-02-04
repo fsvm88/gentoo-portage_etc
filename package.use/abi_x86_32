@@ -7,6 +7,7 @@ app-arch/xz-utils abi_x86_32
 app-arch/zstd abi_x86_32
 app-crypt/libmd abi_x86_32
 app-text/tesseract abi_x86_32
+dev-cpp/gtest abi_x86_32
 dev-db/lmdb abi_x86_32
 dev-db/sqlite abi_x86_32
 dev-libs/atk abi_x86_32
@@ -50,6 +51,7 @@ dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
 dev-util/glslang abi_x86_32
 dev-util/spirv-tools abi_x86_32
+dev-util/vulkan-utility-libraries abi_x86_32
 dev-util/wayland-scanner abi_x86_32
 gnome-base/librsvg abi_x86_32
 media-gfx/graphite2 abi_x86_32
@@ -97,6 +99,7 @@ media-libs/xvid abi_x86_32
 media-plugins/alsa-plugins abi_x86_32
 media-sound/lame abi_x86_32
 media-sound/mpg123 abi_x86_32
+media-sound/mpg123-base abi_x86_32
 media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 media-video/pipewire abi_x86_32
@@ -171,6 +174,7 @@ x11-libs/libdrm abi_x86_32
 x11-libs/libICE abi_x86_32
 x11-libs/libpciaccess abi_x86_32
 x11-libs/libSM abi_x86_32
+x11-libs/libvdpau abi_x86_32
 x11-libs/libX11 abi_x86_32
 x11-libs/libXau abi_x86_32
 x11-libs/libxcb abi_x86_32

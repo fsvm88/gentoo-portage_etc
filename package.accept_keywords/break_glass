@@ -43,8 +43,6 @@ gui-wm/sway **
 <media-libs/vulkan-layers-1.3.276
 <media-libs/vulkan-loader-1.3.276
 <media-video/libva-utils-2.21
-# move dev-util/lldb dev-debug/lldb
-# move sys-devel/just dev-build/just
 <net-libs/gnutls-3.8.2
 <net-libs/libsoup-3.5
 <net-libs/stem-1.9

@@ -1,5 +1,6 @@
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
+dev-libs/rocminfo
 dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface

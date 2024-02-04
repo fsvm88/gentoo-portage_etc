@@ -2,6 +2,7 @@ app-arch/zstd
 app-backup/btrbk
 app-portage/pycargoebuild
 app-shells/fish
+dev-build/rocm-cmake
 dev-lang/rust
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
@@ -9,10 +10,8 @@ dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
 dev-util/cargo-ebuild
-dev-util/ccache
 dev-util/clinfo
 dev-util/hip
-dev-util/rocm-cmake
 dev-util/rocminfo
 dev-vcs/git-filter-repo
 games-util/esteam
@@ -20,13 +19,15 @@ games-util/game-device-udev-rules
 games-util/steam-client-meta
 games-util/steam-launcher
 games-util/steam-meta
+gui-apps/waybar **
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf
-media-video/pipewire
+# move dev-util/rocm-cmake dev-build/rocm-cmake
 net-im/slack
 net-wireless/rtl8812au_aircrack-ng::pentoo
 #sci-astronomy/stellarium
 sci-misc/boinc
+sys-apps/fwts **
 sys-apps/fwupd
 #sys-apps/portage
 sys-fs/bcachefs-tools **

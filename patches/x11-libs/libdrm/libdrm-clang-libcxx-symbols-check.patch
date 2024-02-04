@@ -1,0 +1,14 @@
+diff -Nuar libdrm-2.4.119.orig/symbols-check.py libdrm-2.4.119/symbols-check.py
+--- libdrm-2.4.119.orig/symbols-check.py	2023-12-21 12:49:36.000000000 +0100
++++ libdrm-2.4.119/symbols-check.py	2024-01-04 14:12:30.098094597 +0100
+@@ -16,6 +16,10 @@
+     '_end',
+     '_fini',
+     '_init',
++    '__cxa_finalize',
++    '__deregister_frame_info',
++    '__gmon_start__',
++    '__register_frame_info',
+ ]
+ 
+ 

@@ -1,5 +1,4 @@
 app-arch/libarchive clang-no-lto
-app-cdr/cdrtools clang-no-lto # fails with LTO
 app-containers/containerd clang-no-lto
 app-containers/docker-compose clang-no-lto # LTO flags are stripped
 app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
@@ -21,9 +20,6 @@ sci-libs/hdf5 clang-no-lto
 sys-apps/acl clang-no-lto # fails with LTO
 sys-apps/sandbox clang-no-lto # fails with LTO
 sys-cluster/kubelogin clang-no-lto
-#sys-devel/clang clang-no-lto # handled by special_packages cmake_extra-llvm
-#sys-devel/lldb clang-no-lto # handled by special_packages cmake_extra-llvm
-#sys-devel/lld clang-no-lto # handled by special_packages cmake_extra-llvm
 sys-fs/fuse clang-no-lto
 sys-libs/libosinfo clang-no-lto # fails with LTO
 www-client/firefox clang-no-lto # this is handled by the ebuild

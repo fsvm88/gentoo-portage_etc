@@ -1,7 +1,8 @@
+app-cdr/cdrtools gcc-no-lto
 app-crypt/p11-kit gcc-no-lto # this uses linker script versioning, which ofc breaks on lld
 app-emulation/wine-vanilla gcc-no-lto # after so many years of supporting clang, they introduced -mabi=ms, which is not available there
 app-i18n/ibus gcc-no-lto
-#app-misc/openrgb gcc-no-lto
+dev-build/libtool gcc-no-lto # tests fail with any other config
 dev-cpp/doctest gcc-no-lto # does not compile at all with clang
 dev-db/sqlite gcc-no-lto
 dev-lang/tcl gcc-no-lto
@@ -25,7 +26,6 @@ media-libs/giflib gcc-no-lto # this seems to compile fine with 'gcc' (GCC w/ LTO
 media-libs/harfbuzz gcc-no-lto
 media-libs/libglvnd gcc-no-lto # fails tests otherwise
 media-libs/x264 gcc-no-lto
-#media-sound/audacity gcc-no-lto # clang-15: no viable constructor or deduction guide for deduction of template arguments of 'owner_less'
 media-video/ffmpeg gcc-no-lto
 net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
@@ -37,7 +37,6 @@ sci-libs/lapack gcc-no-lto
 sys-apps/sandbox gcc-no-lto
 sys-devel/binutils gcc-no-lto
 sys-devel/gcc gcc-no-lto
-sys-devel/libtool gcc-no-lto # tests fail with any other config
 sys-process/criu gcc-no-lto
 x11-base/xorg-server gcc-no-lto # damned xorg-server always fails to start if LTO or Clang is used, probably relies on very old and broken behavior that only GCC supports
 x11-libs/pixman gcc-no-lto

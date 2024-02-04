@@ -4,7 +4,6 @@ dev-libs/libbsd gcc # fails to link
 dev-libs/libcdio gcc-no-lto
 dev-libs/openssl no-tests # regressed tests for whatever reason
 dev-libs/rocm-opencl-runtime gcc-no-lto
-dev-util/hip gcc-no-lto
 media-libs/alsa-lib gcc-no-lto
 media-libs/libpulse gcc-no-lto
 media-libs/libva gcc-no-lto

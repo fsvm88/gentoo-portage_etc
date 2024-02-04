@@ -14,6 +14,10 @@ app-text/enchant no-tests # regression with clang-16, doesn't build with GCC lik
 app-text/libqxp clang-no-lto # fails tests with LTO
 app-text/po4a no-tests # this brings in all of latex
 app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
+dev-build/autoconf no-tests # nobody ever saw these finish
+dev-build/automake no-tests # regression?
+dev-build/cmake no-tests # regressions?
+dev-build/libtool no-tests # regressed compared to non-r1
 dev-cpp/cpp-httplib no-tests # fails lots of random tests
 dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
@@ -29,6 +33,7 @@ dev-libs/icu no-tests # fails tests for HebrewCalendarInTemporalLeapYear, regard
 dev-libs/libbsd no-tests # 1 test is broken
 dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
+dev-libs/libportal no-tests # pulls in X
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
@@ -44,11 +49,11 @@ dev-perl/XML-LibXML no-tests # fails tests regardless
 dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
-dev-util/cmake no-tests # regressions?
 dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
 dev-util/gtk-doc no-tests # fails tests regardless
 dev-util/spirv-llvm-translator no-tests # fails ALL tests with ANY configuration, not sure what is broken
 dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEPENDS
+dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gnome-base/dconf no-tests # regression? timing out on engine test
@@ -72,6 +77,7 @@ media-libs/openexr no-tests # tests take 35m when running on a 5950x w -j28...
 net-analyzer/nmap no-tests # fails tests regardless of config
 net-analyzer/tcpdump no-tests # requires samba for tests?! O_o
 net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
+net-dns/c-ares no-tests # tests require gmock, which is not even in tree
 net-firewall/iptables no-tests # regression from 1.8.8-r5 on xlate-test.py
 net-libs/glib-networking no-tests # regression across updates?
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
@@ -85,17 +91,15 @@ net-vpn/openconnect no-tests # regression due to clang-16/gcc-12?
 net-vpn/tor no-tests # regressed with 0.4.7.13-r1?
 sys-apps/attr no-tests # regression? fails tests regardless
 sys-apps/coreutils no-tests # fail on malloc because of sandbox
+sys-apps/hwloc no-tests # fails 1 test, regression?
 sys-apps/keyutils no-tests # one of the tests fails with disk quota exceeded...
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
 sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
-sys-devel/autoconf no-tests # nobody ever saw these finish
-sys-devel/automake no-tests # regression?
 sys-devel/binutils no-tests # regressed w clang-17 even though compiler is GCC?
 sys-devel/clang no-tests # fails 3 tests
 sys-devel/gcc no-tests # not worth running...
-sys-devel/libtool no-tests # regressed compared to non-r1
-#sys-devel/lld no-tests # ~180 failures, possibly due to custom patches
 sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
+sys-devel/mold no-tests # half of the tests are broken, it seems
 sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
 sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
 sys-libs/efivar no-tests # regression?

@@ -1,12 +1,10 @@
 app-arch/wimlib gcc
-app-cdr/cdrtools gcc # have the patch for clang-16, but somehow clang still fails due to type issues that GCC does not seem to have
 dev-lang/go gcc
 dev-libs/libffi gcc
 dev-libs/mpfr gcc
 dev-libs/pkcs11-helper gcc # clang-16 woes
 dev-lua/lutok gcc # clang-16 woes
 gnome-base/gnome-keyring gcc
-#media-gfx/gimp gcc # fails tests with clang
 media-gfx/pngquant gcc # fails tests with clang
 media-libs/audiofile gcc
 media-libs/libgphoto2 gcc
@@ -14,7 +12,9 @@ media-libs/xvid gcc
 net-wireless/cowpatty gcc
 sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
 sci-misc/boinc gcc # non-virtual thunk something
+sys-apps/fwts gcc
 sys-fs/udisks gcc # fails tests with clang 15.0.7
+sys-power/pmtools gcc
 sys-process/lsof gcc # regression with clang-17.0.6?
 =x11-libs/gtk+-2.24.33-r3 gcc
 x11-libs/libXt gcc # regression with clang-16 after recompiling world?

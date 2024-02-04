@@ -14,12 +14,8 @@ sci-libs/tensorflow clang-no-lto-no-debug
 sci-libs/tensorflow-estimator disable-network-sandbox
 sys-cluster/kubelogin no-gc-sections
 sys-devel/clang extra_cmake-llvm
-#sys-devel/lldb extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
-#sys-fs/zfs-kmod gcc-no-lto
-#sys-fs/zfs-kmod kernel-drivers-clang
-#sys-fs/zfs-kmod no-usersandbox # thinLTO access issues
 sys-libs/libcap no-compiler-rt
 sys-process/tini no-compiler-rt
 www-client/chromium ccache

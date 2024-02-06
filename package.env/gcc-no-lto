@@ -33,6 +33,7 @@ net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
 net-misc/spice-gtk gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
+net-print/libcupsfilters gcc-no-lto # clang C++17 woes
 sci-libs/lapack gcc-no-lto
 sys-apps/sandbox gcc-no-lto
 sys-devel/binutils gcc-no-lto

@@ -6,6 +6,7 @@ sys-fs/bcachefs-tools
 sys-fs/btrfs-progs
 sys-fs/cryptsetup
 sys-fs/dosfstools
+sys-fs/duperemove
 sys-fs/exfatprogs
 sys-fs/fuse
 sys-fs/squashfs-tools

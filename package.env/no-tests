@@ -2,6 +2,7 @@ app-accessibility/at-spi2-core no-tests # fails with timeout on 1 test
 app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
+app-crypt/gpgme no-tests # fails json tests, regression in latest version
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
 app-crypt/p11-kit no-tests # regressed after latest stable
 app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
@@ -52,6 +53,7 @@ dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
 dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
 dev-util/gtk-doc no-tests # fails tests regardless
+dev-util/hip no-tests # broken test suite, recheck in 6mo
 dev-util/spirv-llvm-translator no-tests # fails ALL tests with ANY configuration, not sure what is broken
 dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEPENDS
 dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig

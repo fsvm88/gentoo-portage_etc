@@ -4,15 +4,13 @@ dev-libs/jansson no-lld # this forces bfd linker
 dev-libs/libevdev no-gc-sections
 dev-libs/libinput no-gc-sections
 dev-libs/wayland no-gc-sections
-dev-qt/* gcc-no-lto
+dev-qt/* clang-no-lto
 dev-util/promu no-gc-sections
 net-misc/rclone no-gc-sections
 net-proxy/dante no-gc-sections
 net-wireless/iw no-gc-sections
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
-sci-libs/tensorflow clang-no-lto-no-debug
-sci-libs/tensorflow-estimator disable-network-sandbox
 sys-cluster/kubelogin no-gc-sections
 sys-devel/clang extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
@@ -21,5 +19,4 @@ sys-libs/libcap no-compiler-rt
 sys-process/tini no-compiler-rt
 www-client/chromium ccache
 www-client/chromium chromium
-www-client/chromium gcc-no-lto-no-debug
 x11-libs/libxkbcommon no-gc-sections

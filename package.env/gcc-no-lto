@@ -20,7 +20,6 @@ dev-python/mypy gcc-no-lto
 dev-python/pexpect gcc-no-lto
 dev-util/cmocka gcc-no-lto # -no-lto because revdevps otherwise fail at linking stage
 dev-util/patchelf gcc-no-lto
-dev-util/valgrind gcc-no-lto
 gnome-base/dconf gcc-no-lto # still times out on one test
 media-libs/giflib gcc-no-lto # this seems to compile fine with 'gcc' (GCC w/ LTO), but it produces a statically linked binary that contains no symbols.. not sure how tests even pass...
 media-libs/harfbuzz gcc-no-lto

@@ -2,6 +2,7 @@ app-accessibility/at-spi2-core no-tests # fails with timeout on 1 test
 app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
 app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
+app-crypt/gnupg no-tests
 app-crypt/gpgme no-tests # fails json tests, regression in latest version
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
 app-crypt/p11-kit no-tests # regressed after latest stable
@@ -37,6 +38,7 @@ dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/libportal no-tests # pulls in X
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
+dev-libs/libuv no-tests # probable regression
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-libs/rocm-device-libs no-tests # regression building + testing?

@@ -1,4 +1,5 @@
 app-containers/docker
+app-containers/docker-buildx
 app-containers/docker-compose:2
 app-emulation/virt-manager
 app-emulation/virt-viewer

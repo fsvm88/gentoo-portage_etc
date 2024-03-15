@@ -1,3 +1,4 @@
+# Remove files that shall not be installed from this list.
 amd/amd_sev_fam17h_model0xh.sbin
 amd/amd_sev_fam17h_model3xh.sbin
 amd/amd_sev_fam19h_model0xh.sbin

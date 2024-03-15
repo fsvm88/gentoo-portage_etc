@@ -10,6 +10,7 @@ dev-libs/rocm-opencl-runtime
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
 dev-util/cargo-ebuild
+dev-util/cargo-license
 dev-util/clinfo
 dev-util/hip
 dev-util/rocminfo
@@ -25,7 +26,7 @@ media-gfx/ocrmypdf
 net-im/slack
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
-sys-apps/fwts **
+sys-apps/amdgpu_top
 sys-apps/fwupd
 sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs

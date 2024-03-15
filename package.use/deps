@@ -34,6 +34,7 @@ dev-libs/xmlsec nss
 dev-perl/DBD-mysql mysql
 dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
+dev-python/netaddr -cli
 dev-python/numpy lapack
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
 dev-python/pyside2 testlib
@@ -46,7 +47,6 @@ dev-qt/qtwayland compositor
 dev-qt/qtwebengine geolocation
 dev-qt/qtwidgets -gtk -gtk3
 dev-util/perf -gtk
-dev-util/systemtap libvirt sqlite
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots liftoff tinywl

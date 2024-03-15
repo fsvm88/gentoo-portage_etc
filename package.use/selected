@@ -12,7 +12,6 @@ dev-lang/rust rust-src
 dev-libs/qxlsx qt5
 dev-libs/rocr-runtime non-free
 dev-python/PyQt5 webchannel
-dev-util/bazel tools
 dev-util/ccache -static-c++
 dev-util/perf clang libpfm
 dev-vcs/subversion -dso
@@ -35,20 +34,20 @@ net-im/slack appindicator
 net-misc/remmina rdp spice telemetry vnc
 net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
+net-p2p/transmission qt6
 net-print/hplip-plugin orblite
 net-print/hplip snmp
 net-vpn/libreswan curl
 net-vpn/tor stats tor-hardening transparent-proxy upnp
-sci-libs/tensorflow opencl python rocm xla
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
 sys-devel/clang-common default-compiler-rt default-libcxx default-lld
 sys-devel/clang-runtime crt
-sys-devel/gdb python
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
 virtual/wine -d3d9 -staging
+www-client/chromium -X -system-png gtk4 libcxx screencast widevine qt6 qt5
 www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast -pgo -X
 x11-apps/mesa-progs gles2

@@ -1,17 +1,21 @@
-diff -Nuar chromium-88.0.4324.150.orig/build/config/compiler/BUILD.gn chromium-88.0.4324.150/build/config/compiler/BUILD.gn
---- chromium-88.0.4324.150.orig/build/config/compiler/BUILD.gn	2021-02-10 22:36:30.326577199 +0100
-+++ chromium-88.0.4324.150/build/config/compiler/BUILD.gn	2021-02-10 22:38:02.004278719 +0100
-@@ -608,10 +608,10 @@
-       # of "all" which means number of hardware threads) is faster.
-       ldflags += [ "-Wl,--thinlto-jobs=all" ]
+diff -Nuar chromium-122.0.6261.57.orig/build/config/compiler/BUILD.gn chromium-122.0.6261.57/build/config/compiler/BUILD.gn
+--- chromium-122.0.6261.57.orig/build/config/compiler/BUILD.gn	2024-02-22 23:11:04.830397099 +0100
++++ chromium-122.0.6261.57/build/config/compiler/BUILD.gn	2024-02-22 23:17:54.390390013 +0100
+@@ -688,10 +688,10 @@
+     ]
  
+     if (thin_lto_enable_cache) {
 -      # Limit the size of the ThinLTO cache to the lesser of 10% of
--      # available disk space, 10GB and 100000 files.
+-      # available disk space, 40GB and 100000 files.
 +      # Limit the size of the ThinLTO cache to the lesser of 25% of
-+      # available disk space, 24GB and 1000000 files.
++      # available disk space, 60GB and 1000000 files.
        cache_policy =
--          "cache_size=10%:cache_size_bytes=10g:cache_size_files=100000"
-+          "cache_size=25%:cache_size_bytes=24g:cache_size_files=1000000"
-       ldflags += [
-         "-Wl,--thinlto-cache-dir=" +
-             rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
+-          "cache_size=10%:cache_size_bytes=40g:cache_size_files=100000"
++          "cache_size=25%:cache_size_bytes=60g:cache_size_files=1000000"
+       cache_dir = rebase_path("$root_out_dir/thinlto-cache", root_build_dir)
+       if (is_win) {
+         ldflags += [
+diff: chromium-122.0.6261.57.orig/third_party/skia/bazel/external/expat/config/expat_config.h: File o directory non esistente
+diff: chromium-122.0.6261.57/third_party/skia/bazel/external/expat/config/expat_config.h: File o directory non esistente
+diff: chromium-122.0.6261.57.orig/third_party/skia/bazel/external/harfbuzz/config/config-override.h: File o directory non esistente
+diff: chromium-122.0.6261.57/third_party/skia/bazel/external/harfbuzz/config/config-override.h: File o directory non esistente

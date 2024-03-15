@@ -6,7 +6,6 @@
 app-misc/radeontop **
 app-text/scdoc **
 <app-text/tessdata_best-5
-<dev-build/just-1.25
 <dev-cpp/gtest-1.15
 <dev-debug/lldb-18
 <dev-libs/bemenu-0.7

@@ -3,6 +3,7 @@ dev-lang/mono gcc-no-lto-no-debug
 dev-libs/jansson no-lld # this forces bfd linker
 dev-libs/libevdev no-gc-sections
 dev-libs/libinput no-gc-sections
+dev-libs/nettle missing-fpic
 dev-libs/wayland no-gc-sections
 dev-qt/* clang-no-lto
 dev-util/promu no-gc-sections

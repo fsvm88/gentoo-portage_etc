@@ -7,6 +7,7 @@ app-crypt/gpgme no-tests # fails json tests, regression in latest version
 app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
 app-crypt/p11-kit no-tests # regressed after latest stable
 app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
+app-emulation/spice no-tests # regression, needs either testsuite changes or sandbox adaptations
 app-i18n/ibus no-tests # tests hang regardless of compiler
 app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
 app-misc/jq no-tests # tests fail regardless
@@ -31,6 +32,7 @@ dev-lang/perl no-tests # open bug since forever because tests fail when running 
 dev-lang/ruby no-tests # we do not want to test the infinite gemworld of ruby
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
 dev-lang/vala no-tests # fails 2 tests, regression?
+dev-libs/appstream-glib no-tests # regression, needs either testsuite changes or sandbox adaptations
 dev-libs/glib no-tests # fails regardless of compiler
 dev-libs/icu no-tests # fails tests for HebrewCalendarInTemporalLeapYear, regardless of compiler
 dev-libs/libbsd no-tests # 1 test is broken

@@ -2,5 +2,7 @@ media-gfx/gimp
 media-gfx/imv
 media-libs/vulkan-loader
 #media-sound/audacity
+media-sound/pavucontrol-qt
+media-sound/qpwgraph
 media-video/mpv
 media-video/wireplumber

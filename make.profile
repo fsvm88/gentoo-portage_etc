@@ -1,1 +1,1 @@
-../../nr/repos/gentoo/profiles/default/linux/amd64/17.1/desktop/systemd/merged-usr
+../../nr/repos/gentoo/profiles/default/linux/amd64/23.0/desktop/systemd

@@ -10,7 +10,7 @@ app-text/scdoc **
 <dev-debug/lldb-18
 <dev-libs/bemenu-0.7
 <dev-libs/libclc-18
-<dev-libs/nss-3.99
+<dev-libs/nss-3.100
 <dev-libs/spdlog-1.14
 <dev-perl/URI-Encode-1.1.2
 <dev-python/lit-18
@@ -20,7 +20,11 @@ app-text/scdoc **
 <gui-wm/sway-1.10
 <media-gfx/gimp-3 **
 <media-libs/alsa-lib-1.2.11
+<media-libs/gegl-0.4.49
 <media-libs/icc-profiles-openicc-1.4
+<media-sound/pavucontrol-qt-1.5
+<media-sound/qpwgraph-0.7
+<media-video/pipewire-1.1
 <net-libs/gnutls-3.8.2
 <net-libs/stem-1.9
 <net-mail/mailutils-3.17

@@ -17,5 +17,4 @@ sys-cluster/minikube
 sys-devel/gdb
 sys-libs/ncurses-compat
 sys-power/acpilight
-sys-process/schedtool
 www-client/links

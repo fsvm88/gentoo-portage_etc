@@ -89,6 +89,7 @@ media-libs/openal abi_x86_32
 media-libs/opencore-amr abi_x86_32
 media-libs/openjpeg abi_x86_32
 media-libs/opus abi_x86_32
+media-libs/shaderc abi_x86_32
 media-libs/speexdsp abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vulkan-layers abi_x86_32

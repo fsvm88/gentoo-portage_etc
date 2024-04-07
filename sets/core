@@ -10,4 +10,5 @@ sys-boot/os-prober
 sys-kernel/genkernel
 sys-kernel/installkernel
 sys-kernel/linux-firmware
+sys-process/schedtool
 sys-process/time

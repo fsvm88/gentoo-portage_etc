@@ -78,7 +78,7 @@ media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
-media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc vpx -opengl
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc shaderc vpx -opengl
 media-video/pipewire aptx echo-cancel extra ldac sound-server
 net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script
@@ -88,7 +88,7 @@ net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
 net-libs/libnm-glib abi_x86_32
-net-libs/nghttp2 utils
+net-libs/nghttp2 static-libs utils
 net-libs/nodejs inspector lto
 net-libs/webkit-gtk gles2
 net-misc/curl -adns

@@ -8,7 +8,7 @@ app-emulation/wine-vanilla vkd3d -mingw -unwind
 app-portage/eix optimization sqlite tools
 app-text/tesseract float32
 dev-debug/strace -unwind
-dev-lang/rust rust-src
+dev-lang/rust profiler rust-src
 dev-libs/qxlsx qt5
 dev-libs/rocr-runtime non-free
 dev-python/PyQt5 webchannel
@@ -47,6 +47,7 @@ sys-devel/clang-runtime crt
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
+virtual/rust profiler
 virtual/wine -d3d9 -staging
 www-client/chromium -X -system-png gtk4 libcxx screencast widevine qt6 qt5
 www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast -pgo -X

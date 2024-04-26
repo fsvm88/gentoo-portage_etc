@@ -1,0 +1,26 @@
+diff -Nuar accountsservice-23.13.9.orig/subprojects/mocklibc.wrap accountsservice-23.13.9/subprojects/mocklibc.wrap
+--- accountsservice-23.13.9.orig/subprojects/mocklibc.wrap	2023-03-27 21:27:39.000000000 +0200
++++ accountsservice-23.13.9/subprojects/mocklibc.wrap	2024-04-20 00:22:20.545602365 +0200
+@@ -8,3 +8,5 @@
+ patch_url = https://wrapdb.mesonbuild.com/v1/projects/mocklibc/1.0/2/get_zip
+ patch_filename = mocklibc-1.0-2-wrap.zip
+ patch_hash = 0280f96a2eeb3c023e5acf4e00cef03d362868218d4a85347ea45137c0ef6c56
++
++diff_files = mocklibc-print-indent.diff
+diff -Nuar accountsservice-23.13.9.orig/subprojects/packagecache/mocklibc-print-indent.diff accountsservice-23.13.9/subprojects/packagecache/mocklibc-print-indent.diff
+--- accountsservice-23.13.9.orig/subprojects/packagefiles/mocklibc-print-indent.diff	1970-01-01 01:00:00.000000000 +0100
++++ accountsservice-23.13.9/subprojects/packagefiles/mocklibc-print-indent.diff	2024-04-20 00:21:56.168934173 +0200
+@@ -0,0 +1,13 @@
++diff -up mocklibc-1.0/src/netgroup-debug.c.print-indent mocklibc-1.0/src/netgroup-debug.c
++--- mocklibc-1.0/src/netgroup-debug.c.print-indent	2023-04-11 10:20:53.717381559 -0400
+++++ mocklibc-1.0/src/netgroup-debug.c	2023-04-11 10:21:02.296270333 -0400
++@@ -21,6 +21,9 @@
++ #include <stdio.h>
++ #include <stdlib.h>
++ 
+++void print_indent (FILE        *stream,
+++                   unsigned int indent);
+++
++ void netgroup_debug_print_entry(struct entry *entry, FILE *stream, unsigned int indent) {
++   print_indent(stream, indent);
++ 

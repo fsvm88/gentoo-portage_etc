@@ -49,6 +49,6 @@ sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab
 virtual/rust profiler
 virtual/wine -d3d9 -staging
-www-client/chromium -X -system-png gtk4 libcxx screencast widevine qt6 qt5
+www-client/chromium -X -system-png gtk4 libcxx screencast widevine
 www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast -pgo -X
 x11-apps/mesa-progs gles2

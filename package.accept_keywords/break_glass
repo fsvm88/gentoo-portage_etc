@@ -1,9 +1,11 @@
+<app-admin/vault-1.17
 <app-cdr/cdrtools-3.03
 <app-containers/containerd-1.7.9
 <app-containers/docker-25
 <app-containers/docker-cli-25
 <app-containers/docker-compose-2.24
 app-misc/radeontop **
+<app-text/qpdf-11.10
 app-text/scdoc **
 <app-text/tessdata_best-5
 <dev-cpp/gtest-1.15
@@ -12,9 +14,12 @@ app-text/scdoc **
 <dev-libs/libclc-18
 <dev-libs/nss-3.100
 <dev-libs/spdlog-1.14
+<dev-libs/wayland-protocols-1.36
 <dev-perl/URI-Encode-1.1.2
 <dev-python/lit-18
+<dev-util/kyua-0.13-r4
 <dev-util/opencl-headers-2023.12.31
+<dev-util/rocm-smi-5.7.2
 <gui-apps/gtkgreet-0.8
 <gui-libs/xdg-desktop-portal-wlr-0.8
 <gui-wm/sway-1.10
@@ -28,10 +33,11 @@ app-text/scdoc **
 <net-libs/gnutls-3.8.2
 <net-libs/stem-1.9
 <net-mail/mailutils-3.17
-<net-misc/freerdp-3.3
+<net-misc/curl-8.7.1-r10
 <net-misc/nyx-2.2
 <net-wireless/iw-5.20
 <net-wireless/wireless-regdb-20231231
+<sci-libs/libqalculate-5.1
 <sys-apps/hwloc-2.10
 <sys-auth/oath-toolkit-2.6.12
 <sys-auth/pam_u2f-1.4
@@ -57,6 +63,8 @@ app-text/scdoc **
 <sys-libs/llvm-libunwind-18
 <sys-libs/slang-2.3.3-r99
 <sys-power/cpupower-6.3
+<www-client/chromium-125
+<x11-base/xcb-proto-1.18
 <x11-libs/extest-1.1
-<x11-libs/libxcb-1.17
+<x11-libs/libxcb-1.18
 <x11-terms/alacritty-0.14

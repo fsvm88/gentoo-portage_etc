@@ -27,6 +27,7 @@ net-im/slack
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/amdgpu_top
+sys-apps/cpuid
 sys-apps/fwupd
 sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs

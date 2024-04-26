@@ -51,10 +51,10 @@ dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
 dev-perl/Image-Sane no-tests # regression with perl 5.38?
 dev-perl/IO-Tty no-tests # likely broken test suite
 dev-perl/Proc-ProcessTable no-tests # hangs
-dev-perl/XML-LibXML no-tests # fails tests regardless
 dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
+dev-util/ccache no-tests # test regressions with clang-16, tests fail even with clang-17
 dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
 dev-util/gtk-doc no-tests # fails tests regardless
 dev-util/hip no-tests # broken test suite, recheck in 6mo
@@ -71,6 +71,7 @@ media-gfx/gscan2pdf no-tests # tests hang
 media-gfx/img2pdf no-tests # failures due to possibly broken python
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
 media-libs/gegl no-tests # most likely a regression with ffmpeg6?
+media-libs/gst-plugins-bad no-tests # would force gstreamer[test], which brings in Xvfb
 media-libs/gst-plugins-base no-tests # fails regardless of compiler
 media-libs/gst-plugins-good no-tests # fails regardless of compiler
 media-libs/lcms no-tests # regression: timeout-muTliplier
@@ -96,9 +97,11 @@ net-misc/networkmanager gcc-no-lto # fails tests with any other configuration
 net-p2p/transmission no-tests # regression due to clang-16/gcc-12?
 net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists
 net-print/libcupsfilters no-tests # probably requires linking in Qt for tests, but does not work?
+net-print/libppd no-tests # fails 1 test regardless
 net-vpn/ocserv no-tests # fails regardless of compilers
 net-vpn/openconnect no-tests # regression due to clang-16/gcc-12?
 net-vpn/tor no-tests # regressed with 0.4.7.13-r1?
+sys-apps/accountsservice no-tests # dbusmock tests fail due to flatpak?
 sys-apps/attr no-tests # regression? fails tests regardless
 sys-apps/coreutils no-tests # fail on malloc because of sandbox
 sys-apps/hwloc no-tests # fails 1 test, regression?

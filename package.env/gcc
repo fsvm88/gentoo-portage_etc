@@ -1,5 +1,6 @@
 app-arch/wimlib gcc
 dev-lang/go gcc
+dev-libs/jemalloc gcc
 dev-libs/libffi gcc
 dev-libs/mpfr gcc
 dev-libs/pkcs11-helper gcc # clang-16 woes

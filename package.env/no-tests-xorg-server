@@ -1,4 +1,3 @@
-app-crypt/libsecret no-tests # these would pull in xorg-server[xvfb] due to tests
 app-text/gspell no-tests # these would pull in xorg-server[xvfb] due to tests
 dev-cpp/gtkmm no-tests # these would pull in xorg-server[xvfb] due to tests
 dev-lang/tk no-tests # these would pull in xorg-server[xvfb] due to tests

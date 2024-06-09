@@ -19,7 +19,6 @@ games-util/esteam
 games-util/game-device-udev-rules
 games-util/steam-client-meta
 games-util/steam-launcher
-games-util/steam-meta
 gui-apps/waybar **
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf

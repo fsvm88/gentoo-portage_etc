@@ -44,6 +44,7 @@ sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
 sys-devel/clang-common default-compiler-rt default-libcxx default-lld
 sys-devel/clang-runtime crt
+sys-fs/btrfs-progs -convert
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-process/fcron system-crontab

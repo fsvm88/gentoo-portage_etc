@@ -14,12 +14,10 @@ dev-build/cmake system-jsoncpp
 dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
 dev-debug/lldb lzma
-dev-java/icedtea infinality
-dev-lang/perl ithreads
-dev-lang/python lto sqlite tk -pgo # pgo triggers test
+dev-lang/python lto pgo sqlite tk # pgo triggers test
 dev-lang/ruby -socks5
 dev-lang/rust abi_x86_32
-dev-lang/rust cargo clippy rls rustfmt parallel-compiler profiler rust-analyzer wasm -system-bootstrap system-llvm
+dev-lang/rust cargo clippy rls rustfmt parallel-compiler profiler rust-analyzer wasm system-bootstrap system-llvm
 dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
@@ -38,6 +36,7 @@ dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/netaddr -cli
 dev-python/numpy lapack
+dev-python/pdfminer-six image
 dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
 dev-python/pyside2 testlib
 dev-python/QtPy printsupport pyside2
@@ -59,8 +58,6 @@ media-libs/gst-plugins-bad gles2 wayland
 media-libs/gst-plugins-base gles2
 media-libs/lcms python
 media-libs/libglvnd X
-media-libs/libopenshot -imagemagick
-media-libs/libopenshot python
 media-libs/libplacebo glslang
 media-libs/libpng apng
 media-libs/libsamplerate sndfile

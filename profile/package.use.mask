@@ -1,1 +1,2 @@
+*/* -llvm_slot_18
 www-client/chromium -libcxx -lto -pgo

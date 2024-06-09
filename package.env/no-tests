@@ -107,6 +107,7 @@ sys-apps/coreutils no-tests # fail on malloc because of sandbox
 sys-apps/hwloc no-tests # fails 1 test, regression?
 sys-apps/keyutils no-tests # one of the tests fails with disk quota exceeded...
 sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
+sys-apps/util-linux no-tests # fails tests
 sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
 sys-devel/binutils no-tests # regressed w clang-17 even though compiler is GCC?
 sys-devel/clang no-tests # fails 3 tests

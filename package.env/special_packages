@@ -12,12 +12,13 @@ net-proxy/dante no-gc-sections
 net-wireless/iw no-gc-sections
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
+sys-apps/util-linux no-lld
 sys-cluster/kubelogin no-gc-sections
 sys-devel/clang extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
 sys-libs/libcap no-compiler-rt
 sys-process/tini no-compiler-rt
-www-client/chromium ccache
+#www-client/chromium ccache
 www-client/chromium chromium
 x11-libs/libxkbcommon no-gc-sections

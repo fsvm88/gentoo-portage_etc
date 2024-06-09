@@ -1,0 +1,12 @@
+diff -Nuar hwloc-2.9.3.orig/config/hwloc.m4 hwloc-2.9.3/config/hwloc.m4
+--- hwloc-2.9.3.orig/config/hwloc.m4	2024-04-27 13:03:04.080787661 +0200
++++ hwloc-2.9.3/config/hwloc.m4	2024-04-27 13:03:46.174207261 +0200
+@@ -1279,7 +1279,7 @@
+       if test "x$rocm_dir" != x; then
+          if test -d "$rocm_dir/include/rocm_smi"; then
+            HWLOC_RSMI_CPPFLAGS="-I$rocm_dir/include/"
+-           HWLOC_RSMI_LDFLAGS="-L$rocm_dir/lib/"
++           HWLOC_RSMI_LDFLAGS=""
+          else
+            # ROCm <5.2 only used its own rocm_smi/{include,lib} directories
+            HWLOC_RSMI_CPPFLAGS="-I$rocm_dir/rocm_smi/include/"

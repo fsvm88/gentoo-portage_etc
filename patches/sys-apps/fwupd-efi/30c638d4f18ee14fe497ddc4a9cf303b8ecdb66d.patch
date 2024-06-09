@@ -1,0 +1,25 @@
+From 30c638d4f18ee14fe497ddc4a9cf303b8ecdb66d Mon Sep 17 00:00:00 2001
+From: Callum Farmer <gmbr3@opensuse.org>
+Date: Wed, 24 Apr 2024 12:11:42 +0100
+Subject: [PATCH] Disable RELRO
+
+No point having PT_GNU_RELRO as ELF data won't exist when merging into PE32+ file
+
+Unbreaks lld usage which complains about linker script
+Copy of ncroxon/gnu-efi#5
+---
+ efi/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/efi/meson.build b/efi/meson.build
+index 945c7ab..75ade7a 100644
+--- a/efi/meson.build
++++ b/efi/meson.build
+@@ -206,6 +206,7 @@ efi_ldflags = ['-T',
+                '-Bsymbolic',
+                '-nostdlib',
+                '-znocombreloc',
++               '-znorelro',
+                '-L', efi_crtdir,
+                '-L', efi_libdir,
+                join_paths(efi_crtdir, arch_crt)]

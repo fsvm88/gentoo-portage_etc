@@ -1,3 +1,4 @@
 games-util/esteam
-games-util/steam-meta
+games-util/steam-launcher
 media-libs/sdl2-mixer
+x11-libs/libXtst

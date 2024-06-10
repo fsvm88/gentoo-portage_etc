@@ -4,6 +4,7 @@
 <app-containers/docker-25
 <app-containers/docker-cli-25
 <app-containers/docker-compose-2.24
+<app-emulation/libvirt-10.4
 app-misc/radeontop **
 <app-text/qpdf-11.10
 app-text/scdoc **
@@ -15,13 +16,16 @@ app-text/scdoc **
 <dev-libs/libfmt-9.2
 <dev-libs/nss-3.102
 <dev-libs/spdlog-1.14
+<dev-perl/Devel-CheckLib-1.170
 <dev-perl/URI-Encode-1.1.2
+<dev-python/libvirt-python-10.4
 <dev-python/lit-19
 <dev-util/hipcc-7
 <dev-util/rocm-smi-5.7.2
 <dev-util/spirv-llvm-translator-19
 <gui-apps/gtkgreet-0.8
 <media-gfx/gimp-3 **
+<media-libs/exempi-2.6.6
 <media-libs/gegl-0.4.49
 <media-libs/icc-profiles-openicc-1.4
 <media-sound/pavucontrol-qt-1.5

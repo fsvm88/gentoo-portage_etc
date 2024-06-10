@@ -3,6 +3,7 @@ app-backup/btrbk doc
 app-containers/docker overlay
 app-editors/vim python -sound
 app-emulation/libvirt libssh2 nfs pcap virt-network
+app-emulation/libvirt virtiofsd
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs -gtk
 app-emulation/wine-vanilla vkd3d -mingw -unwind
 app-portage/eix optimization sqlite tools

@@ -10,6 +10,7 @@ app-misc/radeontop **
 app-text/scdoc **
 <app-text/tessdata_best-5
 <dev-debug/lldb-19
+<dev-lang/perl-5.38.2-r7
 <dev-lang/spidermonkey-115.12
 <dev-libs/bemenu-0.7
 <dev-libs/libclc-19
@@ -58,6 +59,7 @@ app-text/scdoc **
 <sys-kernel/gentoo-sources-6.10
 <sys-libs/compiler-rt-19
 <sys-libs/compiler-rt-sanitizers-19
+<sys-libs/glibc-2.39-r10
 <sys-libs/libcxx-19
 <sys-libs/libcxxabi-19
 <sys-libs/libomp-19

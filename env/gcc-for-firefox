@@ -1,8 +1,0 @@
-CC="gcc"
-CXX="g++"
-CFLAGS="-O3 -march=native -pipe -ggdb"
-CXXFLAGS="${CFLAGS}"
-LDFLAGS="-Wl,-O3,-z,now,--as-needed,--gc-sections"
-AR="ar"
-NM="nm"
-RANLIB="ranlib"

@@ -1,27 +1,15 @@
-app-arch/wimlib gcc
-app-text/tesseract gcc
-dev-lang/go gcc
-dev-libs/atf gcc # symbols issue from dev-libs/kyua, not sure why
-dev-libs/jemalloc gcc
-dev-libs/libffi gcc
-dev-libs/libtomcrypt gcc # another package that blatantly ignores linker selection via libtool
-dev-libs/mpfr gcc
-dev-libs/pkcs11-helper gcc # clang-16 woes
-dev-lua/lutok gcc # clang-16 woes
-dev-util/kyua gcc # clang 16 woes, needs to stay the same as dev-libs/atf due to c++ syms
-gnome-base/gnome-keyring gcc
-media-libs/audiofile gcc
-media-libs/libgphoto2 gcc
-media-libs/xvid gcc
-net-libs/libnftnl gcc # linker scripts not supported by LLD
-net-wireless/cowpatty gcc
-sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
-sci-misc/boinc gcc # non-virtual thunk something
-sys-fs/cryptsetup gcc # linker scripts not supported by LLD
-sys-fs/udisks gcc # fails tests with clang 15.0.7
-sys-libs/binutils-libs gcc # fails with clang, for whatever reason
-sys-power/pmtools gcc
-sys-process/lsof gcc # regression with clang-17.0.6?
-=x11-libs/gtk+-2.24.33-r3 gcc
-x11-libs/libXt gcc # regression with clang-16 after recompiling world?
-x11-libs/startup-notification gcc
+app-text/tesseract gcc # __udiv3 symbol issues 2024.06.19
+dev-libs/atf gcc # symbols issue from dev-libs/kyua, not sure why 2024.06.19
+dev-libs/jemalloc gcc # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-libs/libffi gcc # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-libs/libtomcrypt gcc # another package that blatantly ignores linker selection via libtool 2024.06.18
+dev-libs/mpfr gcc # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-lua/lutok # symbols issue from dev-libs/atf, not sure why 2024.06.19
+dev-util/kyua gcc # symbols issue from dev-libs/atf, not sure why 2024.06.19
+media-libs/libgphoto2 gcc # both clang and clang-no-lto fail, symbol issues 2024.06.19
+net-libs/libnftnl gcc # linker scripts not supported by LLD 2024.06.18
+sci-misc/boinc gcc # undefined symbol: non-virtual thunk to wxGenericListCtrl... 2024.06.19
+sys-fs/cryptsetup gcc # linker scripts not supported by LLD 2024.06.19
+sys-fs/udisks gcc # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
+sys-libs/binutils-libs gcc # fails with clang, for whatever reason 2024.06.19
+x11-libs/libXt gcc # fails 1 test with clang(-no-lto) (core dump) 2024.06.19

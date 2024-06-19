@@ -27,7 +27,6 @@ dev-db/mariadb no-tests # another one which takes ~ life of the universe to fini
 dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
 dev-db/postgresql no-tests # most tests are broken, possibly due to llvm/jit/libcxx interactions
 dev-db/sqlite no-tests # why do I even bother...
-dev-lang/go no-tests # regresses with latest gcc? takes forever to fail
 dev-lang/perl no-tests # open bug since forever because tests fail when running with --quiet
 dev-lang/ruby no-tests # we do not want to test the infinite gemworld of ruby
 dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
@@ -66,6 +65,7 @@ dev-vcs/git-filter-repo no-tests # fails a couple tests, possibly git-version mi
 dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
 dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
 gnome-base/dconf no-tests # regression? timing out on engine test
+gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO
 gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months
 gui-libs/gtk no-tests # likely MALLOC_PERTURB_ crap, everything fails with SIGSEGV
 media-gfx/gscan2pdf no-tests # tests hang

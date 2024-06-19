@@ -10,7 +10,6 @@ dev-libs/libdbusmenu no-tests # these would pull in xorg-server[xvfb] due to tes
 dev-libs/libindicator no-tests # these would pull in xorg-server[xvfb] due to tests
 dev-perl/Gtk3-ImageView no-tests # these would pull in xorg-server[xvfb] due to tests
 dev-perl/Gtk3 no-tests # these would pull in xorg-server[xvfb] due to tests
-gnome-base/gnome-keyring no-tests # these would pull in xorg-server[xvfb] due to tests
 media-gfx/gimp no-tests # these would pull in xorg-server[xvfb] due to tests
 media-libs/gstreamer no-tests # these would pull in xorg-server[xvfb] due to tests
 media-libs/libglvnd no-tests # these would pull in xorg-server[xvfb] due to tests

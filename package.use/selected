@@ -7,14 +7,13 @@ app-emulation/libvirt virtiofsd
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs -gtk
 app-emulation/wine-vanilla vkd3d -mingw -unwind
 app-portage/eix optimization sqlite tools
-app-text/tesseract float32
 dev-debug/strace -unwind
 dev-lang/rust profiler rust-src
 dev-libs/qxlsx qt5
 dev-libs/rocr-runtime non-free
 dev-python/PyQt5 webchannel
 dev-util/ccache -static-c++
-dev-util/perf clang libpfm
+dev-util/perf clang libpfm -gtk
 dev-vcs/subversion -dso
 gui-apps/waybar evdev libinput network pipewire tray -pulseaudio
 gui-wm/sway tray
@@ -48,6 +47,7 @@ sys-devel/clang-runtime crt
 sys-fs/btrfs-progs -convert
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
+sys-kernel/installkernel dracut grub
 sys-process/fcron system-crontab
 virtual/rust profiler
 virtual/wine -d3d9 -staging

@@ -7,7 +7,7 @@ app-crypt/gpgme cxx
 app-crypt/pinentry gnome-keyring
 app-emulation/libvirt-glib python
 app-text/mupdf -opengl
-app-text/tesseract osd tiff -opencl
+app-text/tesseract float32 osd tiff -opencl
 app-text/texlive-core xetex
 app-text/texlive extra
 dev-build/cmake system-jsoncpp
@@ -47,7 +47,6 @@ dev-qt/qtscript scripttools
 dev-qt/qtwayland compositor
 dev-qt/qtwebengine geolocation
 dev-qt/qtwidgets -gtk -gtk3
-dev-util/perf -gtk
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots liftoff tinywl
@@ -107,7 +106,6 @@ sys-devel/clang-common hardened
 sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-libs/glibc gd
-sys-libs/ldb python
 sys-libs/libcap static-libs
 sys-libs/libcxxabi static-libs
 sys-libs/libcxx libcxxabi static-libs

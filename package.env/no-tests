@@ -1,6 +1,6 @@
 app-accessibility/at-spi2-core no-tests # fails with timeout on 1 test
 app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
-app-arch/libarchive no-tests # fails tests regardless of compiler and version updates
+app-arch/libarchive no-tests # tests hang indefinitely, see https://bugs.gentoo.org/932567
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
 app-crypt/gnupg no-tests
 app-crypt/gpgme no-tests # fails json tests, regression in latest version
@@ -36,7 +36,7 @@ dev-libs/appstream-glib no-tests # regression, needs either testsuite changes or
 dev-libs/glib no-tests # fails regardless of compiler
 dev-libs/icu no-tests # fails tests for HebrewCalendarInTemporalLeapYear, regardless of compiler
 dev-libs/libbsd no-tests # 1 test is broken
-dev-libs/libcdio no-tests
+#dev-libs/libcdio no-tests
 dev-libs/libfmt no-tests # fails regardless of compiler
 dev-libs/libportal no-tests # pulls in X
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
@@ -45,6 +45,7 @@ dev-libs/nss no-tests # while it would be nice to have this library tested at al
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
 dev-libs/rocm-device-libs no-tests # regression building + testing?
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
+dev-libs/xmlsec no-tests # 1.3.3 and 1.3.4 always fail same tests
 dev-perl/Alien-Build no-tests # regression w/ sandbox, missing file?
 dev-perl/Config-AutoConf no-tests # fails regardless of compiler
 dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
@@ -121,6 +122,7 @@ sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying th
 sys-libs/libcxx no-tests # regression in 17.x?
 sys-libs/libseccomp no-tests # regression due to clang-16?
 sys-libs/liburing no-tests # tests crash kernel, fail regardless
+sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455
 sys-power/upower no-tests # regressions on touchpad tests?
 www-client/firefox no-tests
 x11-libs/gdk-pixbuf no-tests # fails regardless of compiler

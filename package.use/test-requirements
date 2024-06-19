@@ -11,8 +11,7 @@ dev-libs/weston headless xwayland
 dev-python/QtPy testlib
 dev-util/cunit abi_x86_32
 media-gfx/fontforge python
-media-gfx/imagemagick corefonts
-media-gfx/imagemagick postscript
+media-gfx/imagemagick corefonts postscript
 media-gfx/sane-backends sane_backends_test
 media-libs/babl introspection
 media-libs/gegl introspection

@@ -11,8 +11,8 @@ dev-libs/ell gcc-no-lto # fails to link/test otherwise
 dev-libs/glib gcc-no-lto # fails tests otherwise
 dev-libs/json-c gcc-no-lto
 dev-libs/libgcrypt gcc-no-lto # fails otherwise
+dev-libs/libgudev gcc-no-lto # export-dynamic woes
 dev-libs/libical gcc-no-lto
-dev-libs/openssl gcc-no-lto
 dev-libs/serd gcc-no-lto
 dev-libs/zziplib gcc-no-lto
 dev-python/cffi gcc-no-lto # fails tests otherwise
@@ -30,11 +30,12 @@ net-dialup/ppp gcc-no-lto
 net-dialup/xl2tpd gcc-no-lto
 net-dns/libidn2 gcc-no-lto
 net-firewall/nftables gcc-no-lto
+net-libs/gtk-vnc gcc-no-lto # linker scripts not supported by LLD
 net-misc/spice-gtk gcc-no-lto
 net-misc/x11-ssh-askpass gcc-no-lto
 #net-print/libcupsfilters gcc-no-lto # clang C++17 woes
 sci-libs/lapack gcc-no-lto
-sys-apps/sandbox gcc-no-lto
+sys-apps/keyutils gcc-no-lto # linker scripts not supported by LLD, GCC+LTO breaks linking as well
 sys-devel/binutils gcc-no-lto
 sys-devel/gcc gcc-no-lto
 sys-process/criu gcc-no-lto

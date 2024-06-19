@@ -1,19 +1,25 @@
 app-arch/wimlib gcc
+app-text/tesseract gcc
 dev-lang/go gcc
+dev-libs/atf gcc # symbols issue from dev-libs/kyua, not sure why
 dev-libs/jemalloc gcc
 dev-libs/libffi gcc
+dev-libs/libtomcrypt gcc # another package that blatantly ignores linker selection via libtool
 dev-libs/mpfr gcc
 dev-libs/pkcs11-helper gcc # clang-16 woes
 dev-lua/lutok gcc # clang-16 woes
+dev-util/kyua gcc # clang 16 woes, needs to stay the same as dev-libs/atf due to c++ syms
 gnome-base/gnome-keyring gcc
-media-gfx/pngquant gcc # fails tests with clang
 media-libs/audiofile gcc
 media-libs/libgphoto2 gcc
 media-libs/xvid gcc
+net-libs/libnftnl gcc # linker scripts not supported by LLD
 net-wireless/cowpatty gcc
 sci-mathematics/yafu gcc # this nice guy hardcodes GCC as compiler... yay
 sci-misc/boinc gcc # non-virtual thunk something
+sys-fs/cryptsetup gcc # linker scripts not supported by LLD
 sys-fs/udisks gcc # fails tests with clang 15.0.7
+sys-libs/binutils-libs gcc # fails with clang, for whatever reason
 sys-power/pmtools gcc
 sys-process/lsof gcc # regression with clang-17.0.6?
 =x11-libs/gtk+-2.24.33-r3 gcc

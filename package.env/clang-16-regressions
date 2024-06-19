@@ -1,2 +1,0 @@
-dev-libs/atf gcc # clang 16 woes, to remove revdeps where possible
-dev-util/kyua gcc # clang 16 woes, needs to stay the same as dev-libs/atf due to c++ syms

@@ -1,25 +1,8 @@
-app-arch/libarchive clang-no-lto
-app-containers/containerd clang-no-lto
-app-containers/docker-compose clang-no-lto # LTO flags are stripped
-app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO
-app-emulation/libvirt clang-no-lto # fails one specific test - regressed?
-app-text/libetonyek clang-no-lto # fails with LTO
-app-text/ps2pkm clang-no-lto # fails with LTO
-app-text/texlive-core clang-no-lto
-dev-cpp/glibmm clang-no-lto # fails with LTO
-dev-lang/perl clang-no-lto
-dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE)
-dev-python/numpy clang-no-lto
-dev-util/dialog clang-no-lto
-dev-util/perf clang-no-lto
-dev-util/promu clang-no-lto
-media-libs/libfreehand clang-no-lto # fails with LTO
-media-libs/libvisio clang-no-lto
-net-misc/rclone clang-no-lto # golang prog
-sci-libs/hdf5 clang-no-lto
-sys-apps/acl clang-no-lto # fails with LTO
-sys-apps/sandbox clang-no-lto # fails with LTO
-sys-cluster/kubelogin clang-no-lto
-sys-fs/fuse clang-no-lto
-sys-libs/libosinfo clang-no-lto # fails with LTO
-www-client/firefox clang-no-lto # this is handled by the ebuild
+app-containers/containerd clang-no-lto # go package
+app-containers/docker-compose clang-no-lto # go package
+app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO still true as of 2024.06.17
+dev-cpp/glibmm clang-no-lto # both :0 and :4 fail 1 test if LTO is enabled 2024.06.17
+dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE) 2024.06.17
+dev-util/promu clang-no-lto # go package
+net-misc/rclone clang-no-lto # go package
+sys-cluster/kubelogin clang-no-lto # go package

@@ -1,14 +1,16 @@
+app-containers/docker-buildx clang-lto-no-fwhopr
 app-containers/docker-compose no-gc-sections
 dev-lang/mono gcc-no-lto-no-debug
 dev-libs/jansson no-lld # this forces bfd linker
 dev-libs/libevdev no-gc-sections
 dev-libs/libinput no-gc-sections
-dev-libs/nettle missing-fpic
 dev-libs/wayland no-gc-sections
 dev-qt/* clang-no-lto
 dev-util/promu no-gc-sections
+net-libs/webkit-gtk clang-w-lto-no-debug
 net-misc/rclone no-gc-sections
 net-proxy/dante no-gc-sections
+net-wireless/bluez gcc-no-lto-no-gc-sections
 net-wireless/iw no-gc-sections
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues

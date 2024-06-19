@@ -59,7 +59,10 @@ app-text/scdoc **
 <sys-devel/llvm-common-19
 <sys-devel/llvmgold-19
 <sys-devel/llvm-toolchain-symlinks-19
+<sys-kernel/dracut-103
+<sys-kernel/dracut-crypt-ssh-1.0.9
 <sys-kernel/gentoo-sources-6.10
+<sys-kernel/installkernel-40
 <sys-libs/compiler-rt-19
 <sys-libs/compiler-rt-sanitizers-19
 <sys-libs/glibc-2.39-r10

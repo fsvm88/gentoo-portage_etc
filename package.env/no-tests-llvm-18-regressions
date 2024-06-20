@@ -1,2 +1,2 @@
-sys-libs/libcxxabi no-tests # fails due to redefinition of _LIBCPP_HARDENING_MODE
-sys-libs/llvm-libunwind no-tests # fails due to redefinition of _LIBCPP_HARDENING_MODE
+sys-libs/libcxxabi no-tests # fails due to redefinition of _LIBCPP_HARDENING_MODE 2024.06.20
+sys-libs/llvm-libunwind no-tests # fails due to redefinition of _LIBCPP_HARDENING_MODE 2024.06.20

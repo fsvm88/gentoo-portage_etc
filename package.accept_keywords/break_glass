@@ -2,6 +2,7 @@
 <app-cdr/cdrtools-3.03
 <app-containers/containerd-1.7.9
 <app-containers/docker-25
+<app-containers/docker-buildx-0.11.3
 <app-containers/docker-cli-25
 <app-containers/docker-compose-2.27
 <app-emulation/libvirt-10.4
@@ -13,9 +14,11 @@ app-text/scdoc **
 <dev-debug/lldb-19
 <dev-lang/perl-5.38.2-r7
 <dev-lang/spidermonkey-115.12
+<dev-lang/tcl-8.6.15
 <dev-libs/bemenu-0.7
 <dev-libs/libclc-19
 <dev-libs/libfmt-9.2
+<dev-libs/libgudev-238-r3
 <dev-libs/nss-3.102
 <dev-libs/spdlog-1.14
 <dev-libs/xmlsec-1.3.5
@@ -31,15 +34,19 @@ app-text/scdoc **
 <media-gfx/gimp-3 **
 <media-libs/exempi-2.6.6
 <media-libs/gegl-0.4.49
+<media-libs/giflib-5.2.3
+<media-libs/harfbuzz-8.6.0
 <media-libs/icc-profiles-openicc-1.4
 <media-sound/pavucontrol-qt-1.5
 <media-sound/qpwgraph-0.7
+<media-video/ffmpeg-6.1.1-r7
 <media-video/pipewire-1.1
 <media-video/wireplumber-0.5.3
 <net-analyzer/net-snmp-5.9.5
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
 <net-wireless/iw-5.20
+<net-wireless/iw-6.8
 <net-wireless/wireless-regdb-20231231
 <sci-libs/libqalculate-5.1
 <sys-apps/flatpak-1.15

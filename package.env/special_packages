@@ -1,26 +1,20 @@
-app-containers/docker-buildx clang-lto-no-fwhopr
-app-containers/docker-compose no-gc-sections
-dev-lang/mono gcc-no-lto-no-debug
-dev-libs/jansson no-lld # this forces bfd linker
-dev-libs/libevdev no-gc-sections
-dev-libs/libinput no-gc-sections
-dev-libs/wayland no-gc-sections
-dev-qt/* clang-no-lto
-dev-util/promu no-gc-sections
-net-libs/webkit-gtk clang-w-lto-no-debug
-net-misc/rclone no-gc-sections
-net-proxy/dante no-gc-sections
-net-wireless/bluez gcc-no-lto-no-gc-sections
-net-wireless/iw no-gc-sections
+app-containers/docker-compose no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
+dev-libs/libevdev no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
+dev-libs/libinput no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
+dev-libs/wayland no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
+dev-qt/* clang-no-lto # Qt is known for not really supporting LTO builds, just disable it 2024.06.20
+dev-util/promu no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+net-libs/webkit-gtk clang-w-lto-no-debug # too long to retest again 2024.06.20 #TOOD
+net-misc/rclone no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+net-wireless/bluez gcc-no-lto-no-gc-sections # any other combination results in linking issues due to symbol encapsulation 2024.06.20
+net-wireless/iw no-gc-sections # linking issues due to symbol encapsulation 2024.06.20
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
-sys-apps/util-linux no-lld
-sys-cluster/kubelogin no-gc-sections
+sys-cluster/kubelogin no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 sys-devel/clang extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
-sys-libs/libcap no-compiler-rt
-sys-process/tini no-compiler-rt
-#www-client/chromium ccache
+sys-libs/glibc gcc-no-lto-no-gc-sections # glibc is quite fragile, don't mess too much with it 2024.06.20
+sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
 www-client/chromium chromium
-x11-libs/libxkbcommon no-gc-sections

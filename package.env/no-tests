@@ -1,128 +1,75 @@
-app-accessibility/at-spi2-core no-tests # fails with timeout on 1 test
-app-admin/awscli no-tests # thousands and thousands of tests (which is nice), but they take forever to run
-app-arch/libarchive no-tests # tests hang indefinitely, see https://bugs.gentoo.org/932567
+app-accessibility/at-spi2-core no-tests # last test times out, reported upstream with no solution 2024.06.20
+app-arch/libarchive no-tests # tests hang indefinitely, see https://bugs.gentoo.org/932567 2024.06.20
 app-containers/docker-buildx no-tests # broken tests regardless of configuration 2024.06.20
-app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further
-app-crypt/gnupg no-tests
-app-crypt/gpgme no-tests # fails json tests, regression in latest version
-app-crypt/hashcat no-tests # cannot access video card, even though portage user is part of video group
-app-emulation/qemu no-tests # fails tests regardless of compiler, regressed, aarch64 failures
-app-emulation/spice no-tests # regression, needs either testsuite changes or sandbox adaptations
-app-metrics/node_exporter no-tests # -buildmode=pie is not supported with -race... whatever that means
-app-misc/jq no-tests # tests fail regardless
-app-shells/bash-completion no-tests # fails a sudo test, for whatever reason
-app-text/docbook2X no-tests # fails no matter what, think the test suite is broken
-app-text/enchant no-tests # regression with clang-16, doesn't build with GCC likely due to deps being compiled with LLD+LTO
-app-text/libqxp clang-no-lto # fails tests with LTO
-app-text/po4a no-tests # this brings in all of latex
-app-text/zathura no-tests # sandbox test fails no matter compiler or CFLAGS combo
-dev-build/autoconf no-tests # nobody ever saw these finish
-dev-build/automake no-tests # regression?
-dev-build/cmake no-tests # regressions?
+app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further 2024.06.20
+app-crypt/gnupg no-tests # USE=tpm requires hardware to test with apparently 2024.06.20
+app-misc/jq no-tests # tests fail regardless of configuration 2024.06.20
+app-shells/bash-completion no-tests # fails some tests, not sure why 2024.06.20
+app-text/docbook2X no-tests # fails no matter what, think the test suite is broken 2024.06.20
+app-text/enchant no-tests # build the test suite breaks 2024.06.20
+app-text/po4a no-tests # this brings in all of latex 2024.06.20
+dev-build/autoconf no-tests # nobody ever saw these finish or pass 2024.06.20
+dev-build/automake no-tests # nobody ever saw these finish or pass 2024.06.20
+dev-build/cmake no-tests # 4 tests always fail regardless of config 2024.06.20
 dev-build/libtool no-tests # libtool is on life support, someday slibtool will be ready 2024.06.20
-dev-cpp/cpp-httplib no-tests # fails lots of random tests
-dev-db/mariadb-connector-c no-tests # fails due to unknown option when testing
-dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish
-dev-db/mariadb no-tests # we don't need to increase the Multi/Universe's entropy further... (super-long times)
-dev-db/postgresql no-tests # most tests are broken, possibly due to llvm/jit/libcxx interactions
+dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
-dev-lang/perl no-tests # open bug since forever because tests fail when running with --quiet
-dev-lang/ruby no-tests # we do not want to test the infinite gemworld of ruby
-dev-lang/swig no-tests # fails tests regardless of compiler, not sure why
-dev-lang/vala no-tests # fails 2 tests, regression?
-dev-libs/appstream-glib no-tests # regression, needs either testsuite changes or sandbox adaptations
-dev-libs/icu no-tests # fails tests for HebrewCalendarInTemporalLeapYear, regardless of compiler
-dev-libs/libbsd no-tests # 1 test is broken
-#dev-libs/libcdio no-tests
-dev-libs/libfmt no-tests # fails regardless of compiler
-dev-libs/libportal no-tests # pulls in X
-dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run
-dev-libs/libuv no-tests # probable regression
-dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it"
-dev-libs/rocm-comgr no-tests # fails tests regardless of compiler
-dev-libs/rocm-device-libs no-tests # regression building + testing?
-dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb
-dev-libs/xmlsec no-tests # 1.3.3 and 1.3.4 always fail same tests
-dev-perl/Alien-Build no-tests # regression w/ sandbox, missing file?
-dev-perl/Config-AutoConf no-tests # fails regardless of compiler
-dev-perl/Expect no-tests # fails regardless of compiler, broken tests?
-dev-perl/Gtk3-ImageView no-tests # tests fail regardless 2024.06.20
-dev-perl/Image-Sane no-tests # regression with perl 5.38?
-dev-perl/IO-Tty no-tests # likely broken test suite
-dev-perl/Proc-ProcessTable no-tests # hangs
+dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
+dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
+dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
+dev-libs/libfmt no-tests # assert-test is broken regardless of config 2024.06.21
+dev-libs/libportal no-tests # 1 test is broken regardless of config 2024.06.21
+dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run 2024.06.21
+dev-libs/libuv no-tests # fails regardless of config 2024.06.21
+dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it" 2024.06.21
+dev-libs/rocm-comgr no-tests # fails tests regardless of compiler 2024.06.21 TODO
+dev-libs/rocm-device-libs no-tests # regression building + testing? 2024.06.21 TODO
+dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb 2024.06.21 TODO
+dev-libs/xmlsec no-tests # fails tests regardless of config 2024.06.21
+dev-perl/Config-AutoConf no-tests # fails tests regardless of config 2024.06.21
+dev-perl/Gtk3-ImageView no-tests # tests fail regardless of config 2024.06.20
+dev-perl/Image-Sane no-tests # tests fail because it grabs *FLAGS from base perl 2024.06.21
+dev-perl/Proc-ProcessTable no-tests # still hangs 2024.06.21
 dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
-dev-util/ccache no-tests # test regressions with clang-16, tests fail even with clang-17
-dev-util/colm no-tests # 1 test fails with clang, works with GCC, but now that we're on libcxx we would need to keep the whole dependency chain in sync
-dev-util/gtk-doc no-tests # fails tests regardless
-dev-util/hip no-tests # broken test suite, recheck in 6mo
-dev-util/spirv-llvm-translator no-tests # fails ALL tests with ANY configuration, not sure what is broken
-dev-util/umockdev no-tests # requires gphoto2 and xinput for testing, not in DEPENDS
-dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig
-dev-vcs/git-filter-repo no-tests # fails a couple tests, possibly git-version mismatch?
-dev-vcs/mercurial no-tests # takes forever, never seen them pass or fail
-dev-vcs/subversion no-tests # tests pass all the time, but they take so stupidly long it's not even funny
-gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO
-gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months
-gui-libs/gtk no-tests # likely MALLOC_PERTURB_ crap, everything fails with SIGSEGV
-media-gfx/gscan2pdf no-tests # tests hang
-media-gfx/img2pdf no-tests # failures due to possibly broken python
-media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it
-media-libs/gegl no-tests # most likely a regression with ffmpeg6?
-media-libs/gst-plugins-bad no-tests # would force gstreamer[test], which brings in Xvfb
-media-libs/gst-plugins-base no-tests # fails regardless of compiler
-media-libs/gst-plugins-good no-tests # fails regardless of compiler
+dev-util/ccache no-tests # tests probably fail because of /var/tmp/portage on tmpfs 2024.06.21
+dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
+dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
+dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig 2024.06.21
+gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO 2024.06.21
+gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months 2024.06.21
+gui-libs/gtk no-tests # failing a few tests out of 4300, too long to run regularly 2024.06.21
+media-gfx/gscan2pdf no-tests # brings in sane-* stuff, sane-frontends fails to build and test 2024.06.21 
+media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.06.21
+media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it 2024.06.21
+media-libs/gegl no-tests # fails regardless of config 2024.06.21
 media-libs/harfbuzz no-tests # 1 test always broken, on all configurations 2024.06.20
-media-libs/lcms no-tests # regression: timeout-muTliplier
-media-libs/leptonica no-tests # regression with clang-16?
-media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests
-media-libs/libepoxy no-tests # fails tests regardless of compiler
-media-libs/libjpeg-turbo no-tests # regressed 1 test in version 3.0.0
-media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then
-media-libs/lv2 no-tests # tests require codespell, not in the ebuild
+media-libs/leptonica no-tests # fails tests regardless of config 2024.06.21
+media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests 2024.06.21
+media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then 2024.06.21
 media-libs/mesa no-tests # not required (-9999), lengthy
-media-libs/openexr no-tests # tests take 35m when running on a 5950x w -j28...
 media-sound/playerctl no-tests # bring in a ton of python stuff, disable for now 2024.06.20
-net-analyzer/nmap no-tests # fails tests regardless of config
-net-analyzer/tcpdump no-tests # requires samba for tests?! O_o
-net-analyzer/wireshark no-tests # requires pytest w/ py3.10, could be re-enabled when ebuild supports py3.11
-net-dns/c-ares no-tests # tests require gmock, which is not even in tree
-net-firewall/iptables no-tests # regression from 1.8.8-r5 on xlate-test.py
-net-libs/glib-networking no-tests # regression across updates?
-net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers
-net-libs/nodejs no-tests # not even trying this one...
-net-libs/stem no-tests # fails tests regardless of compiler
-net-mail/mailutils no-tests # fails tests regardless
-net-p2p/transmission no-tests # regression due to clang-16/gcc-12?
-net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists
-net-print/libppd no-tests # fails 1 test regardless
-net-vpn/ocserv no-tests # fails regardless of compilers
-net-vpn/openconnect no-tests # regression due to clang-16/gcc-12?
-net-vpn/tor no-tests # regressed with 0.4.7.13-r1?
-sys-apps/accountsservice no-tests # dbusmock tests fail due to flatpak?
-sys-apps/attr no-tests # regression? fails tests regardless
-sys-apps/coreutils no-tests # fail on malloc because of sandbox
-sys-apps/hwloc no-tests # fails 1 test, regression?
-sys-apps/keyutils no-tests # one of the tests fails with disk quota exceeded...
-sys-apps/systemd no-tests # ebuild explicitly states this will fail due to sandboxing features
+net-analyzer/nmap no-tests # tests fail regardless of config 2024.06.21
+net-analyzer/tcpdump no-tests # requires samba for tests?! O_o 2024.06.21
+net-analyzer/wireshark no-tests # fails tests regardless of config 2024.06.21
+net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers 2024.06.21
+net-libs/nodejs no-tests # tests fail regardless of config 2024.06.21
+net-libs/stem no-tests # tests fail regardless of config, python syntax problems 2024.06.21
+net-mail/mailutils no-tests # fails tests regardless of config 2024.06.21
+net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists 2024.06.21
+sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
+sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21
+sys-apps/keyutils no-tests # fails tests regardless of config, probably needs access to kernel keyring 2024.06.21 
 sys-apps/util-linux no-tests # tests broken under any configuration 2024.06.20
-sys-auth/oath-toolkit no-tests # always fails same 2 tests regardless of compiler
-sys-devel/binutils no-tests # tests fail in all configurations
-sys-devel/clang no-tests # fails 3 tests
-sys-devel/gcc no-tests # not worth running...
+sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
+sys-devel/clang no-tests # fails 1 hlsl test, to retest later
+sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024.06.22
 sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
-sys-devel/mold no-tests # half of the tests are broken, it seems
-sys-libs/compiler-rt-sanitizers no-tests # fails 2k tests?
-sys-libs/db no-tests # not even gonna attempt this one. nopenopenope. hope every project will drop it in the next 12mo
-sys-libs/efivar no-tests # regression?
+sys-libs/compiler-rt-sanitizers gcc-no-lto # fails 2k tests?
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
-sys-libs/libcxx no-tests # regression in 17.x?
-sys-libs/libseccomp no-tests # regression due to clang-16?
-sys-libs/liburing no-tests # tests crash kernel, fail regardless
-sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455
-sys-power/upower no-tests # regressions on touchpad tests?
-www-client/firefox no-tests
-x11-libs/gdk-pixbuf no-tests # fails regardless of compiler
-x11-libs/gtk+ no-tests # brings in X server
+sys-libs/libseccomp gcc # regression due to clang-16?
+sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22
+www-client/firefox no-tests # 2024.06.22
+x11-libs/gdk-pixbuf no-tests # tests fail regardless of config 2024.06.22
 x11-libs/wxGTK no-tests # broken tests bug #876613, tests segfault when compiled 2024.06.20

@@ -1,8 +1,10 @@
 app-containers/docker-compose no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+app-metrics/node_exporter no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
 dev-libs/libevdev no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
 dev-libs/libinput no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
 dev-libs/wayland no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
+dev-libs/weston no-gc-sections # linking issues due to symbol encapsulation 2024.06.21
 dev-qt/* clang-no-lto # Qt is known for not really supporting LTO builds, just disable it 2024.06.20
 dev-util/promu no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 net-libs/webkit-gtk clang-w-lto-no-debug # too long to retest again 2024.06.20 #TOOD

@@ -8,8 +8,10 @@ dev-lua/lutok # symbols issue from dev-libs/atf, not sure why 2024.06.19
 dev-util/cmocka gcc # clang(-no-lto) segfault when testing regexes 2024.06.20
 dev-util/kyua gcc # symbols issue from dev-libs/atf, not sure why 2024.06.19
 media-libs/libgphoto2 gcc # both clang and clang-no-lto fail, symbol issues 2024.06.19
+net-firewall/iptables gcc # fails tests otherwise 2024.06.21
 net-libs/libnftnl gcc # linker scripts not supported by LLD 2024.06.18
 sci-misc/boinc gcc # undefined symbol: non-virtual thunk to wxGenericListCtrl... 2024.06.19
+sys-devel/mold gcc # fails to test with clang 2024.06.22
 sys-fs/cryptsetup gcc # linker scripts not supported by LLD 2024.06.19
 sys-fs/udisks gcc # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
 sys-libs/binutils-libs gcc # fails with clang, for whatever reason 2024.06.19

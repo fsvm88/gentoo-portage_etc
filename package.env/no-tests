@@ -66,9 +66,8 @@ sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
 sys-devel/clang no-tests # fails 1 hlsl test, to retest later
 sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024.06.22
 sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
-sys-libs/compiler-rt-sanitizers gcc-no-lto # fails 2k tests?
+sys-libs/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all the time 2024.06.22
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
-sys-libs/libseccomp gcc # regression due to clang-16?
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22
 www-client/firefox no-tests # 2024.06.22
 x11-libs/gdk-pixbuf no-tests # tests fail regardless of config 2024.06.22

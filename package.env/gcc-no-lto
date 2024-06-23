@@ -1,7 +1,9 @@
 dev-build/libtool gcc-no-lto # libtool is on life support, someday slibtool will be ready 2024.06.20
 dev-libs/elfutils gcc-no-lto # breaks tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
+dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20
 dev-util/patchelf gcc-no-lto # clang(-no-lto) fails on shared-rpath test, gcc+LTO has linking issues 2024.06.20
 gnome-base/dconf gcc-no-lto # breaks tests withc clang(-no-lto) and gcc+LTO 2024.06.20
+media-libs/exempi gcc-no-lto # doesn't configure with clang(-no-lto) due to broken boost detection 2024.06.22
 media-libs/libglvnd gcc-no-lto # breaks tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
 media-video/ffmpeg gcc-no-lto # breaks compiling tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
 net-libs/gtk-vnc gcc-no-lto # breaks linking due to linker scripts not supported by LLD 2024.06.20

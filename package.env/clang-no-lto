@@ -2,6 +2,7 @@ app-containers/containerd clang-no-lto # go package
 app-containers/docker-buildx clang-no-lto # go package
 app-containers/docker-compose clang-no-lto # go package
 app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO still true as of 2024.06.17
+app-crypt/sbsigntools clang-no-lto # tests fail at linking 2024.06.22
 app-metrics/node_exporter clang-no-lto # go package
 dev-cpp/glibmm clang-no-lto # both :0 and :4 fail 1 test if LTO is enabled 2024.06.17
 dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE) 2024.06.17

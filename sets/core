@@ -1,4 +1,6 @@
 app-admin/sudo
+app-crypt/efitools
+app-crypt/sbsigntools
 app-misc/jq
 app-misc/symlinks
 app-shells/fish
@@ -6,7 +8,9 @@ sys-apps/gptfdisk
 sys-apps/irqbalance
 sys-apps/nvme-cli
 sys-boot/grub
+sys-boot/mokutil
 sys-boot/os-prober
+sys-boot/shim
 sys-kernel/dracut
 sys-kernel/dracut-crypt-ssh
 sys-kernel/installkernel

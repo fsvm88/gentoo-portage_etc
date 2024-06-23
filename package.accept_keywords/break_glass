@@ -48,6 +48,7 @@ app-text/scdoc **
 <media-video/pipewire-1.1
 <media-video/wireplumber-0.5.3
 <net-analyzer/net-snmp-5.9.5
+<net-libs/gnutls-3.9
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
 <net-wireless/iw-5.20
@@ -60,6 +61,8 @@ app-text/scdoc **
 <sys-apps/util-linux-2.41
 <sys-auth/oath-toolkit-2.6.12
 <sys-auth/pam_u2f-1.4
+<sys-boot/mokutil-0.7
+<sys-boot/shim-15.9
 <sys-cluster/kubelogin-1.29
 <sys-devel/clang-19
 <sys-devel/clang-common-19

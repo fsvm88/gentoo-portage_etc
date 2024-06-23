@@ -42,6 +42,7 @@ gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple month
 gui-libs/gtk no-tests # failing a few tests out of 4300, too long to run regularly 2024.06.21
 media-gfx/gscan2pdf no-tests # brings in sane-* stuff, sane-frontends fails to build and test 2024.06.21 
 media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.06.21
+media-libs/exempi no-tests # cannot link against boost because boost builds with clang, ABI incompatibility 2024.06.22
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it 2024.06.21
 media-libs/gegl no-tests # fails regardless of config 2024.06.21
 media-libs/harfbuzz no-tests # 1 test always broken, on all configurations 2024.06.20

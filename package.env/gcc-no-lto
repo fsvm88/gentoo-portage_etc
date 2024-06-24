@@ -1,3 +1,4 @@
+app-crypt/p11-kit gcc-no-lto # otherwise breaks symbol versioning, and stuff like pinentry cannot work 2024.06.25
 dev-build/libtool gcc-no-lto # libtool is on life support, someday slibtool will be ready 2024.06.20
 dev-libs/elfutils gcc-no-lto # breaks tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
 dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20

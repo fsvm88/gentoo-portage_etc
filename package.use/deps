@@ -98,9 +98,8 @@ sci-geosciences/gpsd python
 sci-libs/hdf5 -threads
 sys-apps/hwloc rocm
 sys-apps/man-pages -l10n_de -l10n_it
-sys-apps/systemd xkb
+sys-apps/systemd boot ukify xkb
 sys-apps/util-linux static-libs
-sys-boot/grub device-mapper mount
 sys-devel/binutils cxx
 sys-devel/clang-common hardened
 sys-devel/clang-runtime libcxx

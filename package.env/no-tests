@@ -62,6 +62,7 @@ net-print/cups no-tests # fails test: cannot create directory .../cups-tests: fi
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
 sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21
 sys-apps/keyutils no-tests # fails tests regardless of config, probably needs access to kernel keyring 2024.06.21 
+sys-apps/systemd no-tests # all tests pass except for ukify ones, which want to access the live system to test booted kernel uname scraping
 sys-apps/util-linux no-tests # tests broken under any configuration 2024.06.20
 sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
 sys-devel/clang no-tests # fails 1 hlsl test, to retest later

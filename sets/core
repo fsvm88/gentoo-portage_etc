@@ -7,9 +7,7 @@ app-shells/fish
 sys-apps/gptfdisk
 sys-apps/irqbalance
 sys-apps/nvme-cli
-sys-boot/grub
 sys-boot/mokutil
-sys-boot/os-prober
 sys-boot/shim
 sys-kernel/dracut
 sys-kernel/dracut-crypt-ssh

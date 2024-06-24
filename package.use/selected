@@ -47,7 +47,7 @@ sys-devel/clang-runtime crt
 sys-fs/btrfs-progs -convert
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
-sys-kernel/installkernel dracut grub
+sys-kernel/installkernel dracut systemd-boot uki ukify
 sys-process/fcron system-crontab
 virtual/rust profiler
 virtual/wine -d3d9 -staging

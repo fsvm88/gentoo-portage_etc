@@ -29,7 +29,9 @@ app-text/scdoc **
 <dev-perl/URI-Encode-1.1.2
 <dev-python/libvirt-python-10.4
 <dev-python/lit-19
+<dev-util/bpftool-6.10
 <dev-util/hipcc-7
+<dev-util/opencl-headers-2024.05.09
 <dev-util/perf-6.10
 <dev-util/rocm-smi-5.7.2
 <dev-util/spirv-llvm-translator-19
@@ -51,6 +53,8 @@ app-text/scdoc **
 <net-libs/gnutls-3.9
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
+<net-misc/openssh-9.8
+<net-p2p/transmission-4.0.7
 <net-wireless/iw-5.20
 <net-wireless/iw-6.8
 <net-wireless/wireless-regdb-20231231

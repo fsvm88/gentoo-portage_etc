@@ -7,6 +7,7 @@ dev-libs/glib utils
 dev-libs/json-glib abi_x86_32
 dev-libs/libzip tools
 dev-libs/nss utils
+dev-libs/simdjson tools
 dev-libs/weston headless xwayland
 dev-python/QtPy testlib
 dev-util/cunit abi_x86_32
@@ -18,5 +19,6 @@ media-libs/gegl introspection
 media-libs/gexiv2 python
 media-libs/soxr examples
 net-libs/gnutls tools pkcs11
+net-libs/ngtcp2 static-libs
 sci-libs/adolc sparse
 sys-libs/libblockdev introspection lvm

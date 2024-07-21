@@ -54,6 +54,7 @@ dev-util/spirv-tools abi_x86_32
 dev-util/vulkan-utility-libraries abi_x86_32
 dev-util/wayland-scanner abi_x86_32
 gnome-base/librsvg abi_x86_32
+gui-libs/libdecor abi_x86_32
 media-gfx/graphite2 abi_x86_32
 media-libs/alsa-lib abi_x86_32
 media-libs/aribb24 abi_x86_32
@@ -81,6 +82,7 @@ media-libs/libsndfile abi_x86_32
 media-libs/libtheora abi_x86_32
 media-libs/libv4l abi_x86_32
 media-libs/libva abi_x86_32
+media-libs/libvmaf abi_x86_32
 media-libs/libvorbis abi_x86_32
 media-libs/libvpx abi_x86_32
 media-libs/libwebp abi_x86_32
@@ -91,6 +93,7 @@ media-libs/openjpeg abi_x86_32
 media-libs/opus abi_x86_32
 media-libs/shaderc abi_x86_32
 media-libs/speexdsp abi_x86_32
+media-libs/svt-av1 abi_x86_32
 media-libs/tiff abi_x86_32
 media-libs/vulkan-layers abi_x86_32
 media-libs/vulkan-loader abi_x86_32

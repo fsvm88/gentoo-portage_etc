@@ -146,3 +146,5 @@ amdtee/773bd96f-b83f-4d52-b12dc529b13d8543.bin
 amdtee/amd_pmf_v3.bin
 dabusb/firmware.fw
 dabusb/bitstream.bin
+rtl_bt/rtl8761bu_config.bin
+rtl_bt/rtl8761bu_fw.bin

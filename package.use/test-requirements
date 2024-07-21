@@ -17,6 +17,7 @@ media-gfx/sane-backends sane_backends_test
 media-libs/babl introspection
 media-libs/gegl introspection
 media-libs/gexiv2 python
+media-libs/libsdl2 static-libs
 media-libs/soxr examples
 net-libs/gnutls tools pkcs11
 net-libs/ngtcp2 static-libs

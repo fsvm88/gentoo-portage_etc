@@ -74,7 +74,7 @@ media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
-media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc shaderc vpx -opengl
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc rav1e shaderc svt-av1 vmaf vpx -opengl
 media-video/pipewire aptx echo-cancel extra ldac sound-server
 net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script

@@ -12,6 +12,7 @@ app-misc/radeontop **
 app-text/scdoc **
 <app-text/tessdata_best-5
 <app-text/tesseract-5.5
+<dev-build/meson-1.5.1
 <dev-debug/lldb-19
 <dev-lang/perl-5.38.2-r7
 <dev-lang/spidermonkey-115.12
@@ -21,6 +22,7 @@ app-text/scdoc **
 <dev-libs/libclc-19
 <dev-libs/libfmt-9.2
 <dev-libs/libgudev-238-r3
+<dev-libs/nettle-3.11
 <dev-libs/nss-3.102
 <dev-libs/spdlog-1.14
 <dev-libs/weston-13.0.4
@@ -89,6 +91,7 @@ app-text/scdoc **
 <sys-kernel/gentoo-sources-6.10
 <sys-kernel/gentoo-sources-6.11
 <sys-kernel/installkernel-40
+<sys-libs/binutils-libs-2.42-r10
 <sys-libs/compiler-rt-19
 <sys-libs/compiler-rt-sanitizers-19
 <sys-libs/glibc-2.39-r10

@@ -12,6 +12,7 @@ dev-build/autoconf no-tests # nobody ever saw these finish or pass 2024.06.20
 dev-build/automake no-tests # nobody ever saw these finish or pass 2024.06.20
 dev-build/cmake no-tests # 4 tests always fail regardless of config 2024.06.20
 dev-build/libtool no-tests # libtool is on life support, someday slibtool will be ready 2024.06.20
+dev-build/meson no-tests # python failures during tests, regression, disable for now 2024.07.27
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21

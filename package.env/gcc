@@ -15,6 +15,5 @@ sys-apps/fwupd-efi gcc # clang(-no-lto) fails due to linking with LLD not suppor
 sys-devel/mold gcc # fails to test with clang 2024.06.22
 sys-fs/cryptsetup gcc # linker scripts not supported by LLD 2024.06.19
 sys-fs/udisks gcc # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
-sys-libs/binutils-libs gcc # fails with clang, for whatever reason 2024.06.19
 sys-libs/libseccomp gcc # fails tests with clang(-no-lto) 2024.06.22
 x11-libs/libXt gcc # fails 1 test with clang(-no-lto) (core dump) 2024.06.19

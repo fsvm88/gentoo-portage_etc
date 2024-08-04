@@ -17,6 +17,7 @@ sys-cluster/kubelogin no-gc-sections # go package, otherwise fails to link prope
 sys-devel/clang extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
+sys-libs/binutils-libs gcc-no-lto-no-gc-sections # fails with clang, could be LTOd, but required to be no-gc-sections for dev-util/perf, which otherwise won't find symbols 2024.08.04
 sys-libs/glibc gcc-no-lto-no-gc-sections # glibc is quite fragile, don't mess too much with it 2024.06.20
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
 www-client/chromium chromium

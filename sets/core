@@ -5,7 +5,6 @@ app-misc/jq
 app-misc/symlinks
 app-shells/fish
 sys-apps/gptfdisk
-sys-apps/irqbalance
 sys-apps/nvme-cli
 sys-boot/mokutil
 sys-boot/shim

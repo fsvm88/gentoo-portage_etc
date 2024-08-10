@@ -86,7 +86,7 @@ app-text/scdoc **
 <sys-devel/llvm-toolchain-symlinks-19
 <sys-devel/mold-2.32
 <sys-fs/cryptsetup-2.8
-<sys-kernel/dracut-103
+<sys-kernel/dracut-104
 <sys-kernel/dracut-crypt-ssh-1.0.9
 <sys-kernel/gentoo-sources-6.10
 <sys-kernel/gentoo-sources-6.11

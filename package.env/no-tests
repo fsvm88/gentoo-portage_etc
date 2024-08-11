@@ -15,6 +15,7 @@ dev-build/libtool no-tests # libtool is on life support, someday slibtool will b
 dev-build/meson no-tests # python failures during tests, regression, disable for now 2024.07.27
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
+dev-lang/go no-tests # 1.22.6 fails test_asan.go 2024.08.10
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
 dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
@@ -37,6 +38,7 @@ dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
 dev-util/ccache no-tests # tests probably fail because of /var/tmp/portage on tmpfs 2024.06.21
 dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
 dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
+dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
 dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig 2024.06.21
 gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO 2024.06.21
 gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months 2024.06.21

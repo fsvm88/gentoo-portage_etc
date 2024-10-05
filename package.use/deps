@@ -65,7 +65,7 @@ media-libs/libsdl2 gles haptic
 media-libs/libva -opengl
 media-libs/libvpx postproc svc
 media-libs/libwebp -opengl
-media-libs/mesa d3d9 opencl dri3 gbm gles2 llvm vulkan zink -opencl
+media-libs/mesa d3d9 dri3 llvm vulkan -opencl
 media-libs/mlt jack fftw
 media-libs/vulkan-loader layers
 media-libs/waffle gbm
@@ -84,7 +84,9 @@ net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
 net-libs/libnm-glib abi_x86_32
+net-libs/libssh static-libs
 net-libs/nghttp2 static-libs utils
+net-libs/nghttp3 static-libs
 net-libs/nodejs inspector lto
 net-libs/webkit-gtk gles2
 net-misc/curl -adns
@@ -111,7 +113,6 @@ sys-libs/libcxx libcxxabi static-libs
 sys-libs/libomp hwloc
 sys-libs/libomp offload
 sys-libs/libxcrypt static-libs
-sys-libs/llvm-libunwind static-libs
 sys-libs/ncurses static-libs tinfo
 sys-libs/talloc python
 sys-libs/tdb python

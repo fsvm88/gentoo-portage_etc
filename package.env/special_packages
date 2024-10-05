@@ -1,4 +1,5 @@
 app-containers/docker-compose no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+app-containers/docker no-gc-sections # go package, otherwise fails to link properly 2024.10.05
 app-containers/runc clang-no-lto # does not properly filter -fwhole-program-vtables 2024.08.10
 app-metrics/node_exporter no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20

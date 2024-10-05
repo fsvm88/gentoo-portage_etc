@@ -5,7 +5,7 @@ dev-libs/libbpf gcc # fails to link due to linker scripts 2024.06.25
 dev-libs/libffi gcc # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
 dev-libs/libtomcrypt gcc # another package that blatantly ignores linker selection via libtool 2024.06.18
 dev-libs/mpfr gcc # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
-dev-lua/lutok # symbols issue from dev-libs/atf, not sure why 2024.06.19
+dev-lua/lutok gcc # symbols issue from dev-libs/atf, not sure why 2024.06.19
 dev-util/bpftool gcc # fails to build with clang due to missing libbfd?
 dev-util/kyua gcc # symbols issue from dev-libs/atf, not sure why 2024.06.19
 media-libs/libgphoto2 gcc # both clang and clang-no-lto fail, symbol issues 2024.06.19

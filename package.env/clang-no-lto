@@ -1,5 +1,7 @@
 app-containers/containerd clang-no-lto # go package
 app-containers/docker-buildx clang-no-lto # go package
+app-containers/docker clang-no-lto # go package
+app-containers/docker-cli clang-no-lto # go package
 app-containers/docker-compose clang-no-lto # go package
 app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO still true as of 2024.06.17
 app-crypt/sbsigntools clang-no-lto # tests fail at linking 2024.06.22

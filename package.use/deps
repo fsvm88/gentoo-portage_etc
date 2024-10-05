@@ -83,7 +83,6 @@ net-fs/cifs-utils -acl
 net-fs/cifs-utils -ads
 net-fs/samba client gnutls winbind -fam -gpg -system-mitkrb5
 net-libs/gtk-vnc python
-net-libs/libnm-glib abi_x86_32
 net-libs/libssh static-libs
 net-libs/nghttp2 static-libs utils
 net-libs/nghttp3 static-libs

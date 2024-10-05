@@ -17,7 +17,6 @@ dev-util/rocminfo
 dev-vcs/git-filter-repo
 games-util/esteam
 games-util/game-device-udev-rules
-games-util/steam-client-meta
 games-util/steam-launcher
 gui-apps/waybar **
 gui-apps/wf-recorder **
@@ -28,6 +27,7 @@ sci-misc/boinc
 sys-apps/amdgpu_top
 sys-apps/cpuid
 sys-apps/fwupd
+sys-devel/mold
 sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware

@@ -16,9 +16,11 @@ dev-build/meson no-tests # python failures during tests, regression, disable for
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
 dev-lang/go no-tests # 1.22.6 fails test_asan.go 2024.08.10
+dev-lang/ruby no-tests # regressions on test_fiber and test_thread with -r1, 2024.08.21
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
 dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
+dev-libs/libei no-tests # fails tests due to recursion limit, not sure if this is an actual failure 2024.09.26
 dev-libs/libfmt no-tests # assert-test is broken regardless of config 2024.06.21
 dev-libs/libportal no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run 2024.06.21
@@ -36,6 +38,7 @@ dev-python/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES
 dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
 dev-util/ccache no-tests # tests probably fail because of /var/tmp/portage on tmpfs 2024.06.21
+dev-util/colm no-tests # broken tests, possibly due to --as-needed 2024.09.07
 dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
 dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
 dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
@@ -51,6 +54,8 @@ media-libs/gegl no-tests # fails regardless of config 2024.06.21
 media-libs/harfbuzz no-tests # 1 test always broken, on all configurations 2024.06.20
 media-libs/leptonica no-tests # fails tests regardless of config 2024.06.21
 media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests 2024.06.21
+media-libs/libjpeg-turbo no-tests # probably 1 test regression 2024.09.26
+media-libs/libsdl2 no-tests # regressed x86_32 testautomation 2.28.5 -> 2.30.7 2024.09.30
 media-libs/libvpx no-tests # greater chance of an asteroid hitting a very populated city than this to finish testing before then 2024.06.21
 media-libs/mesa no-tests # not required (-9999), lengthy
 media-sound/playerctl no-tests # bring in a ton of python stuff, disable for now 2024.06.20
@@ -74,6 +79,7 @@ sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024
 sys-devel/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 sys-libs/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all the time 2024.06.22
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
+sys-libs/liburing no-tests # regression in 2.7-r1 2024.09.28
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22
 www-client/firefox no-tests # 2024.06.22
 x11-libs/gdk-pixbuf no-tests # tests fail regardless of config 2024.06.22

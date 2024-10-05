@@ -11,6 +11,7 @@ dev-util/kyua gcc # symbols issue from dev-libs/atf, not sure why 2024.06.19
 media-libs/libgphoto2 gcc # both clang and clang-no-lto fail, symbol issues 2024.06.19
 net-firewall/iptables gcc # fails tests otherwise 2024.06.21
 net-libs/libnftnl gcc # linker scripts not supported by LLD 2024.06.18
+sys-apps/dbus-broker gcc-no-lto # fails 1 test with clang(-no-lto) c-stdaux 2024.10.01
 sys-apps/fwupd-efi gcc # clang(-no-lto) fails due to linking with LLD not supporting -pie + -shared 2024.06.23
 sys-devel/mold gcc # fails to test with clang 2024.06.22
 sys-fs/cryptsetup gcc # linker scripts not supported by LLD 2024.06.19

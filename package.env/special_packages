@@ -2,6 +2,7 @@ app-containers/docker-compose no-gc-sections # go package, otherwise fails to li
 app-containers/runc clang-no-lto # does not properly filter -fwhole-program-vtables 2024.08.10
 app-metrics/node_exporter no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
+dev-libs/libei no-gc-sections # fails tests linking due to undefined symbols otherwise 2024.09.26
 dev-libs/libevdev no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
 dev-libs/libinput no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
 dev-libs/wayland no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
@@ -22,3 +23,4 @@ sys-libs/binutils-libs gcc-no-lto-no-gc-sections # fails with clang, could be LT
 sys-libs/glibc gcc-no-lto-no-gc-sections # glibc is quite fragile, don't mess too much with it 2024.06.20
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
 www-client/chromium chromium
+x11-misc/rendercheck no-gc-sections # fails due to undefined symbols otherwise 2024.09.07

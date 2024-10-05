@@ -10,4 +10,3 @@ dev-util/promu clang-no-lto # go package
 media-libs/x264 clang-no-lto # configure fails endianness test for clang configuration 2024.06.20
 net-misc/rclone clang-no-lto # go package
 sys-cluster/kubelogin clang-no-lto # go package
-sys-libs/liburing clang-no-lto # fails linking with LTO 2024.06.22

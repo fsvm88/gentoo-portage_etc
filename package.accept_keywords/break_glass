@@ -5,7 +5,6 @@
 <app-containers/docker-buildx-0.15
 <app-containers/docker-cli-28
 <app-containers/runc-1.1.15
-<app-editors/vscode-1.93.2
 <app-emulation/libvirt-10.7
 <app-emulation/qemu-9.1
 app-misc/radeontop **
@@ -23,7 +22,6 @@ app-text/scdoc **
 <dev-util/hipcc-7
 <dev-util/opencl-headers-2024.05.09
 <dev-util/perf-6.11
-<dev-util/rocm-smi-5.7.2
 <dev-util/spirv-llvm-translator-19
 <dev-vcs/git-2.47.0
 <gui-apps/gtkgreet-0.8
@@ -38,6 +36,7 @@ app-text/scdoc **
 <net-analyzer/net-snmp-5.9.5
 <net-libs/stem-1.9
 <net-misc/nyx-2.2
+<net-misc/socat-1.8.0.2
 <net-p2p/transmission-4.0.7
 <sys-apps/flatpak-1.15
 <sys-apps/fwupd-efi-1.7
@@ -58,7 +57,7 @@ app-text/scdoc **
 <sys-devel/llvm-toolchain-symlinks-19
 <sys-firmware/seabios-bin-1.16.4
 <sys-kernel/dracut-crypt-ssh-1.0.9
-<sys-kernel/gentoo-sources-6.11
+<sys-kernel/gentoo-sources-6.12
 <sys-libs/binutils-libs-2.42-r10
 <sys-libs/compiler-rt-19
 <sys-libs/compiler-rt-sanitizers-19

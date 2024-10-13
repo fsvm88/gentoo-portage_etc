@@ -67,6 +67,7 @@ net-libs/nodejs no-tests # tests fail regardless of config 2024.06.21
 net-libs/stem no-tests # tests fail regardless of config, python syntax problems 2024.06.21
 net-mail/mailutils no-tests # fails tests regardless of config 2024.06.21
 net-misc/openssh no-tests # regressed tests randomly, without USE changes, compiler changes, anything else 2024.07.04
+net-misc/socat no-tests # multiple tests regressions from 1.7 to 1.8* 2024.10.09
 net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists 2024.06.21
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
 sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21

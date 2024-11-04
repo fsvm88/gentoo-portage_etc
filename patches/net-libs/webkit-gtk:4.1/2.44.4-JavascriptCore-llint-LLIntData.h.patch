@@ -1,0 +1,57 @@
+diff '--color=auto' -Nuar webkitgtk-2.44.4.orig/Source/JavaScriptCore/llint/LLIntData.h webkitgtk-2.44.4/Source/JavaScriptCore/llint/LLIntData.h
+--- webkitgtk-2.44.4.orig/Source/JavaScriptCore/llint/LLIntData.h	2024-08-19 13:10:16.296131600 +0200
++++ webkitgtk-2.44.4/Source/JavaScriptCore/llint/LLIntData.h	2024-11-04 16:14:25.079245680 +0100
+@@ -217,7 +217,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ 
+@@ -227,7 +227,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ 
+@@ -237,7 +237,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ #else // not ENABLE(JIT)
+@@ -361,7 +361,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ 
+@@ -371,7 +371,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ 
+@@ -381,7 +381,7 @@
+ #if COMPILER(MSVC)
+     return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).taggedPtr());
+ #else
+-    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr());
++    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr<>());
+ #endif
+ }
+ #else // not ENABLE(JIT)

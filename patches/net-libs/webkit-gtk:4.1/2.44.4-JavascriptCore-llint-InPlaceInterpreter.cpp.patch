@@ -1,0 +1,47 @@
+diff '--color=auto' -Nuar webkitgtk-2.44.4.orig/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp webkitgtk-2.44.4/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp
+--- webkitgtk-2.44.4.orig/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp	2024-08-19 13:10:16.296131600 +0200
++++ webkitgtk-2.44.4/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp	2024-11-04 16:36:25.555595447 +0100
+@@ -43,8 +43,8 @@
+ do { \
+     void* base = reinterpret_cast<void*>(ipint_unreachable_validate); \
+     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
+-    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
+-    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
++    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
++    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
+     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
+ } while (false);
+ 
+@@ -52,8 +52,8 @@
+ do { \
+     void* base = reinterpret_cast<void*>(ipint_i32_trunc_sat_f32_s_validate); \
+     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
+-    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
+-    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
++    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
++    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
+     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
+ } while (false);
+ 
+@@ -61,8 +61,8 @@
+ do { \
+     void* base = reinterpret_cast<void*>(ipint_simd_v128_load_mem_validate); \
+     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
+-    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
+-    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
++    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
++    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
+     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
+ } while (false);
+ 
+@@ -70,8 +70,8 @@
+ do { \
+     void* base = reinterpret_cast<void*>(ipint_memory_atomic_notify_validate); \
+     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
+-    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
+-    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
++    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
++    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
+     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
+ } while (false);
+ 

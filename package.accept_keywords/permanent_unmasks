@@ -2,10 +2,10 @@ app-arch/zstd
 app-backup/btrbk
 app-portage/pycargoebuild
 app-shells/fish
+app-text/vale
 dev-lang/rust
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
-dev-util/cargo-ebuild
 dev-util/cargo-license
 dev-util/clinfo
 dev-util/hip

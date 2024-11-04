@@ -1,6 +1,7 @@
 app-admin/helm
 app-editors/vscode
 app-portage/portage-utils
+app-text/vale
 dev-debug/lldb
 dev-debug/strace
 dev-python/pylint

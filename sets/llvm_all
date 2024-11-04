@@ -1,5 +1,4 @@
 dev-debug/lldb
-dev-libs/libclc
 dev-libs/libffi
 dev-util/spirv-llvm-translator
 sys-apps/hwloc
@@ -10,7 +9,6 @@ sys-devel/lld
 sys-devel/llvm
 sys-devel/llvm-common
 sys-libs/compiler-rt
-sys-libs/compiler-rt-sanitizers
 sys-libs/libcxx
 sys-libs/libcxxabi
 sys-libs/libomp

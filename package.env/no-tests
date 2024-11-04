@@ -3,6 +3,9 @@ app-arch/libarchive no-tests # tests hang indefinitely, see https://bugs.gentoo.
 app-containers/docker-buildx no-tests # broken tests regardless of configuration 2024.06.20
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further 2024.06.20
 app-crypt/gnupg no-tests # USE=tpm requires hardware to test with apparently 2024.06.20
+app-crypt/tpm2-abrmd no-tests # fails 2 tests, probably due to wrong code 2024.10.21
+app-crypt/tpm2-tools no-tests # fails tests, probably due to wrong code 2024.10.21
+app-crypt/tpm2-tss no-tests # fails tests, probably due to wrong code 2024.10.21
 app-misc/jq no-tests # tests fail regardless of configuration 2024.06.20
 app-shells/bash-completion no-tests # fails some tests, not sure why 2024.06.20
 app-text/docbook2X no-tests # fails no matter what, think the test suite is broken 2024.06.20
@@ -16,12 +19,18 @@ dev-build/meson no-tests # python failures during tests, regression, disable for
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
 dev-lang/go no-tests # 1.22.6 fails test_asan.go 2024.08.10
+dev-lang/python:3.13 no-tests # tests are broken for 3.13.0 2024.10.27
 dev-lang/ruby no-tests # regressions on test_fiber and test_thread with -r1, 2024.08.21
+dev-lang/spidermonkey no-tests # 128 fails 2x tests: timezone and Intl data 2024.10.27
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
+dev-libs/gjs no-tests # fails 1x test with clang, fails a different test with GCC 2024.10.27
+dev-libs/icu no-tests # fails intltest regardless of config 2024.10.29
 dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libei no-tests # fails tests due to recursion limit, not sure if this is an actual failure 2024.09.26
 dev-libs/libfmt no-tests # assert-test is broken regardless of config 2024.06.21
+dev-libs/libgudev no-tests # fails same tests in any configuration 2024.10.27
+dev-libs/libgusb no-tests # fails same tests in any configuration 2024.10.27
 dev-libs/libportal no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run 2024.06.21
 dev-libs/libuv no-tests # fails regardless of config 2024.06.21
@@ -82,6 +91,9 @@ sys-libs/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all t
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
 sys-libs/liburing no-tests # regression in 2.7-r1 2024.09.28
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22
+sys-power/switcheroo-control no-tests # all tests broken with all configs, not sure what's happening here 2024.10.27
+www-client/chromium no-tests # fails 23 tests, too long to test anyway 2024.10.30
 www-client/firefox no-tests # 2024.06.22
 x11-libs/gdk-pixbuf no-tests # tests fail regardless of config 2024.06.22
+x11-libs/gtk+:3 no-tests # regression with clang-19? 2024.11.01
 x11-libs/wxGTK no-tests # broken tests bug #876613, tests segfault when compiled 2024.06.20

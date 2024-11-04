@@ -1,0 +1,1 @@
+sys-libs/libcxx no-tests # _LIBCPP_HARDENING_MODE redefs 2024.11.03

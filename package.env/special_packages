@@ -1,27 +1,16 @@
-app-containers/docker-compose no-gc-sections # go package, otherwise fails to link properly 2024.06.20
-app-containers/docker no-gc-sections # go package, otherwise fails to link properly 2024.10.05
+acct-user/greetd acct-user_greetd # using sway as main backend, need to remove the init of XDG portal* when using it as a greeter, otherwise will wait for unit start timeout 2024.11.03
 app-containers/runc clang-no-lto # does not properly filter -fwhole-program-vtables 2024.08.10
-app-metrics/node_exporter no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+app-crypt/efitools gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
+app-crypt/sbsigntools gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
+app-text/vale clang-no-lto # go package, otherwise fails to link properly 2024.10.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
-dev-libs/libei no-gc-sections # fails tests linking due to undefined symbols otherwise 2024.09.26
-dev-libs/libevdev no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
-dev-libs/libinput no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
-dev-libs/wayland no-gc-sections # breaks due to encapsulated symbols and --gc-sections 2024.06.20
-dev-libs/weston no-gc-sections # linking issues due to symbol encapsulation 2024.06.21
 dev-qt/* clang-no-lto # Qt is known for not really supporting LTO builds, just disable it 2024.06.20
-dev-util/promu no-gc-sections # go package, otherwise fails to link properly 2024.06.20
 net-libs/webkit-gtk clang-w-lto-no-debug # too long to retest again 2024.06.20 #TOOD
-net-misc/rclone no-gc-sections # go package, otherwise fails to link properly 2024.06.20
-net-wireless/bluez gcc-no-lto-no-gc-sections # any other combination results in linking issues due to symbol encapsulation 2024.06.20
-net-wireless/iw no-gc-sections # linking issues due to symbol encapsulation 2024.06.20
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
-sys-cluster/kubelogin no-gc-sections # go package, otherwise fails to link properly 2024.06.20
+sys-apps/fwupd-efi gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
 sys-devel/clang extra_cmake-llvm
 sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
-sys-libs/binutils-libs gcc-no-lto-no-gc-sections # fails with clang, could be LTOd, but required to be no-gc-sections for dev-util/perf, which otherwise won't find symbols 2024.08.04
-sys-libs/glibc gcc-no-lto-no-gc-sections # glibc is quite fragile, don't mess too much with it 2024.06.20
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
 www-client/chromium chromium
-x11-misc/rendercheck no-gc-sections # fails due to undefined symbols otherwise 2024.09.07

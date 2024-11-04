@@ -1,14 +1,38 @@
 app-crypt/p11-kit gcc-no-lto # otherwise breaks symbol versioning, and stuff like pinentry cannot work 2024.06.25
+app-text/tesseract gcc-no-lto # __udiv3 symbol issues 2024.06.19
 dev-build/libtool gcc-no-lto # libtool is on life support, someday slibtool will be ready 2024.06.20
+dev-libs/atf gcc-no-lto # symbols issue from dev-libs/kyua, not sure why 2024.06.19
 dev-libs/elfutils gcc-no-lto # breaks tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
+dev-libs/jemalloc gcc-no-lto # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-libs/libbpf gcc-no-lto # fails to link due to linker scripts 2024.06.25
+dev-libs/libffi gcc-no-lto # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-libs/libtomcrypt gcc-no-lto # another package that blatantly ignores linker selection via libtool 2024.06.18
+dev-libs/mpfr gcc-no-lto # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
+dev-lua/lutok gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19
+dev-util/bpftool gcc-no-lto # fails to build with clang due to missing libbfd?
 dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20
+dev-util/kyua gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19
 dev-util/patchelf gcc-no-lto # clang(-no-lto) fails on shared-rpath test, gcc+LTO has linking issues 2024.06.20
+dev-util/unifdef gcc-no-lto # clang-19 regressions on tests 2024.10.27
 gnome-base/dconf gcc-no-lto # breaks tests withc clang(-no-lto) and gcc+LTO 2024.06.20
 media-libs/exempi gcc-no-lto # doesn't configure with clang(-no-lto) due to broken boost detection 2024.06.22
 media-libs/libglvnd gcc-no-lto # breaks tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
+media-libs/libgphoto2 gcc-no-lto # both clang and clang-no-lto fail, symbol issues 2024.06.19
 media-video/ffmpeg gcc-no-lto # breaks compiling tests with clang(-no-lto), gcc+LTO breaks linking 2024.06.20
+net-firewall/iptables gcc-no-lto # fails tests otherwise 2024.06.21
 net-libs/gtk-vnc gcc-no-lto # breaks linking due to linker scripts not supported by LLD 2024.06.20
+net-libs/libnftnl gcc-no-lto # linker scripts not supported by LLD 2024.06.18
 net-misc/networkmanager gcc-no-lto # clang(-no-lto) generates a mismatch in exported syms, gcc+LTO fails at linking 2024.06.20
 sci-libs/lapack gcc-no-lto # blissfully ignores linker usage during configure 2024.06.20
+sys-apps/dbus-broker gcc-no-lto # fails 1 test with clang(-no-lto) c-stdaux 2024.10.01
+sys-apps/fwupd-efi gcc-no-lto # clang(-no-lto) fails due to linking with LLD not supporting -pie + -shared 2024.06.23
 sys-apps/keyutils gcc-no-lto # linker scripts not supported by LLD, GCC+LTO breaks linking as well
+sys-devel/bpf-toolchain gcc-no-lto # fails with clang 2024.11.04
 sys-devel/gcc gcc-no-lto # fails to compile quite early with clang 2024.06.20
+#sys-devel/mold gcc-no-lto # fails to test with clang 2024.06.22
+sys-fs/cryptsetup gcc-no-lto # linker scripts not supported by LLD 2024.06.19
+sys-fs/udisks gcc-no-lto # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
+sys-libs/glibc gcc-no-lto # clang is not really supported unless USE=custom-flags # 2024.11.04
+sys-libs/libseccomp gcc-no-lto # fails tests with clang(-no-lto) 2024.06.22
+sys-libs/nss_wrapper gcc-no-lto # fails 1x test with clang-19, regression? 2024.10.27
+x11-libs/libXt gcc-no-lto # fails 1 test with clang(-no-lto) (core dump) 2024.06.19

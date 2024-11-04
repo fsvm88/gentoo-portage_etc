@@ -1,11 +1,12 @@
 app-admin/testdisk ntfs reiserfs
 app-backup/btrbk doc
+app-backup/btrbk -mbuffer
 app-containers/docker overlay
 app-editors/vim python -sound
 app-emulation/libvirt libssh2 nfs pcap virt-network
 app-emulation/libvirt virtiofsd
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs -gtk
-app-emulation/wine-vanilla vkd3d -mingw -unwind
+app-emulation/wine-vanilla mingw vkd3d -unwind
 app-portage/eix optimization sqlite tools
 cosmic-de/cosmic-meta store
 cosmic-de/pop-theme-meta gtk-theme
@@ -46,13 +47,13 @@ sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
 sys-devel/clang-common default-compiler-rt default-libcxx default-lld
 sys-devel/clang-runtime crt
+sys-devel/llvm binutils-plugin
 sys-fs/btrfs-progs -convert
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink
 sys-kernel/installkernel dracut systemd-boot uki ukify
 sys-process/fcron system-crontab
 virtual/rust profiler
-virtual/wine -d3d9 -staging
 www-client/chromium -X -system-png gtk4 libcxx screencast widevine
 www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast pgo -X
 x11-apps/mesa-progs gles2

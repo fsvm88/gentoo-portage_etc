@@ -1,0 +1,2 @@
+dev-lang/spidermonkey -llvm_slot_18
+www-client/firefox -llvm_slot_18

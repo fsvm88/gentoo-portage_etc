@@ -1,0 +1,14 @@
+app-emulation/wine-vanilla pulseaudio
+dev-qt/qtmultimedia pulseaudio
+games-util/esteam pulseaudio
+games-util/steam-launcher pulseaudio
+media-libs/libcanberra pulseaudio
+media-plugins/gst-plugins-meta pulseaudio
+media-plugins/mpg123-output-plugins pulseaudio
+media-sound/mpg123-base pulseaudio
+media-sound/mpg123 pulseaudio
+media-video/ffmpeg pulseaudio
+net-libs/gtk-vnc pulseaudio
+net-misc/freerdp pulseaudio
+www-client/chromium pulseaudio
+www-client/firefox pulseaudio

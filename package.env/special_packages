@@ -10,7 +10,7 @@ net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
 sys-apps/fwupd-efi gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
 sys-devel/clang extra_cmake-llvm
-sys-devel/lld extra_cmake-llvm
+#sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
 www-client/chromium chromium

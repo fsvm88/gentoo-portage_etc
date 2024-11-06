@@ -29,7 +29,7 @@ sys-apps/fwupd-efi gcc-no-lto # clang(-no-lto) fails due to linking with LLD not
 sys-apps/keyutils gcc-no-lto # linker scripts not supported by LLD, GCC+LTO breaks linking as well
 sys-devel/bpf-toolchain gcc-no-lto # fails with clang 2024.11.04
 sys-devel/gcc gcc-no-lto # fails to compile quite early with clang 2024.06.20
-#sys-devel/mold gcc-no-lto # fails to test with clang 2024.06.22
+sys-devel/mold gcc-no-lto # fails tests with clang, any config 2024.11.06
 sys-fs/cryptsetup gcc-no-lto # linker scripts not supported by LLD 2024.06.19
 sys-fs/udisks gcc-no-lto # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
 sys-libs/glibc gcc-no-lto # clang is not really supported unless USE=custom-flags # 2024.11.04

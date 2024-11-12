@@ -33,6 +33,7 @@ app-text/scdoc **
 <dev-util/perf-6.11
 <dev-util/spirv-llvm-translator-20
 <dev-vcs/git-2.47.0
+<gnome-base/librsvg-2.59
 <gui-apps/gtkgreet-0.8
 <gui-apps/swaybg-1.2.2
 <gui-libs/greetd-0.10.4
@@ -48,6 +49,7 @@ app-text/scdoc **
 <net-misc/nyx-2.2
 <net-misc/socat-1.8.0.2
 <net-p2p/transmission-4.0.7
+<sec-keys/openpgp-keys-kentoverstreet-20241231
 <sys-apps/flatpak-1.15
 <sys-apps/fwupd-efi-1.7
 <sys-apps/hwloc-2.10
@@ -81,7 +83,6 @@ app-text/scdoc **
 <sys-libs/libudev-compat-187
 <sys-libs/llvm-libunwind-20
 <sys-power/upower-6.11
-<www-client/chromium-131
 <x11-libs/extest-1.1
 <x11-libs/gtk+-3.24.42-r2
 <x11-terms/alacritty-0.14

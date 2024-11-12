@@ -13,6 +13,7 @@ dev-util/bpftool gcc-no-lto # fails to build with clang due to missing libbfd?
 dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20
 dev-util/kyua gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19
 dev-util/patchelf gcc-no-lto # clang(-no-lto) fails on shared-rpath test, gcc+LTO has linking issues 2024.06.20
+dev-util/umockdev gcc-no-lto # broken with lld 2024.11.07
 dev-util/unifdef gcc-no-lto # clang-19 regressions on tests 2024.10.27
 gnome-base/dconf gcc-no-lto # breaks tests withc clang(-no-lto) and gcc+LTO 2024.06.20
 media-libs/exempi gcc-no-lto # doesn't configure with clang(-no-lto) due to broken boost detection 2024.06.22

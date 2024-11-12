@@ -13,4 +13,3 @@ sys-devel/clang extra_cmake-llvm
 #sys-devel/lld extra_cmake-llvm
 sys-devel/llvm extra_cmake-llvm
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20
-www-client/chromium chromium

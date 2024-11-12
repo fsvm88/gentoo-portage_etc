@@ -10,5 +10,4 @@ media-sound/mpg123 pulseaudio
 media-video/ffmpeg pulseaudio
 net-libs/gtk-vnc pulseaudio
 net-misc/freerdp pulseaudio
-www-client/chromium pulseaudio
 www-client/firefox pulseaudio

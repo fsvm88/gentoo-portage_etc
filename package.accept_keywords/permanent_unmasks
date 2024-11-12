@@ -27,5 +27,4 @@ sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware
 sys-kernel/linux-headers
-virtual/rust
 www-client/firefox

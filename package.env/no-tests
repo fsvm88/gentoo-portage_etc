@@ -51,6 +51,7 @@ dev-util/colm no-tests # broken tests, possibly due to --as-needed 2024.09.07
 dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
 dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
 dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
+dev-util/umockdev no-tests # broken with gcc-no-lto 2024.11.07
 dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig 2024.06.21
 gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO 2024.06.21
 gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months 2024.06.21
@@ -92,7 +93,7 @@ sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying th
 sys-libs/liburing no-tests # regression in 2.7-r1 2024.09.28
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22
 sys-power/switcheroo-control no-tests # all tests broken with all configs, not sure what's happening here 2024.10.27
-www-client/chromium no-tests # fails 23 tests, too long to test anyway 2024.10.30
+sys-power/upower no-tests # umockdev barely works it seems with clang-19 and lld
 www-client/firefox no-tests # 2024.06.22
 x11-libs/gdk-pixbuf no-tests # tests fail regardless of config 2024.06.22
 x11-libs/gtk+:3 no-tests # regression with clang-19? 2024.11.01

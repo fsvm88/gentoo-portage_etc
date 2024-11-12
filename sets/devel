@@ -10,6 +10,7 @@ dev-util/ccache
 dev-util/cloc
 dev-util/meld
 dev-util/perf
+dev-util/pkgcheck
 dev-util/shellcheck-bin
 dev-vcs/git
 dev-vcs/git-filter-repo

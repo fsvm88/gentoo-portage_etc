@@ -30,7 +30,7 @@ app-text/scdoc **
 <dev-python/lit-20
 <dev-util/hipcc-7
 <dev-util/opencl-headers-2024.05.09
-<dev-util/perf-6.11
+<dev-util/perf-6.13
 <dev-util/spirv-llvm-translator-20
 <dev-vcs/git-2.47.0
 <gnome-base/librsvg-2.59

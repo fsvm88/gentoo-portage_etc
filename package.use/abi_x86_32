@@ -45,7 +45,6 @@ dev-libs/opencl-icd-loader abi_x86_32
 dev-libs/openssl abi_x86_32
 dev-libs/popt abi_x86_32
 dev-libs/wayland abi_x86_32
-dev-python/subunit abi_x86_32
 dev-util/cmocka abi_x86_32
 dev-util/cppunit abi_x86_32
 dev-util/glslang abi_x86_32

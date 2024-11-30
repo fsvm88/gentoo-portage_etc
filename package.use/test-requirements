@@ -9,7 +9,6 @@ dev-libs/libzip tools
 dev-libs/nss utils
 dev-libs/simdjson tools
 dev-libs/weston headless xwayland
-dev-python/QtPy testlib
 dev-util/cunit abi_x86_32
 media-gfx/fontforge python
 media-gfx/imagemagick corefonts postscript

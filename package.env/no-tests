@@ -30,7 +30,6 @@ dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libei no-tests # fails tests due to recursion limit, not sure if this is an actual failure 2024.09.26
 dev-libs/libfmt no-tests # assert-test is broken regardless of config 2024.06.21
 dev-libs/libgudev no-tests # fails same tests in any configuration 2024.10.27
-dev-libs/libgusb no-tests # fails same tests in any configuration 2024.10.27
 dev-libs/libportal no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run 2024.06.21
 dev-libs/libuv no-tests # fails regardless of config 2024.06.21

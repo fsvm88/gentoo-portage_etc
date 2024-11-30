@@ -14,7 +14,6 @@ dev-debug/strace -unwind
 dev-lang/rust profiler rust-src
 dev-libs/qxlsx qt5
 dev-libs/rocr-runtime non-free
-dev-python/PyQt5 webchannel
 dev-util/ccache -static-c++
 dev-util/perf clang libpfm capstone -gtk
 dev-vcs/subversion -dso

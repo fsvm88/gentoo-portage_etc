@@ -37,10 +37,7 @@ dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/netaddr -cli
 dev-python/numpy lapack
-dev-python/pdfminer-six image
-dev-python/PyQt5 designer location multimedia positioning sensors serialport sql testlib x11extras xmlpatterns
 dev-python/pyside2 testlib
-dev-python/QtPy printsupport pyside2
 dev-qt/designer -phonon
 dev-qt/qtgui eglfs evdev libinput
 dev-qt/qtmultimedia widgets

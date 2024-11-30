@@ -1,0 +1,11 @@
+diff '--color=auto' -Nuar bluez-5.79.orig/acinclude.m4 bluez-5.79/acinclude.m4
+--- bluez-5.79.orig/acinclude.m4	2024-03-07 16:15:07.000000000 +0100
++++ bluez-5.79/acinclude.m4	2024-11-27 12:03:06.918001362 +0100
+@@ -135,7 +135,6 @@
+ 		misc_ldflags="$misc_ldflags --coverage"
+ 	fi
+ 	misc_cflags="$misc_cflags -ffunction-sections -fdata-sections"
+-	misc_ldflags="$misc_ldflags -Wl,--gc-sections"
+ 	AC_SUBST([MISC_CFLAGS], $misc_cflags)
+ 	AC_SUBST([MISC_LDFLAGS], $misc_ldflags)
+ ])

@@ -1,0 +1,18 @@
+NAVI10 and NAVI12 are not marked conformant, however NAVI14 is (which is a lower tier).
+
+These will never be marked conformant as per https://gitlab.freedesktop.org/mesa/mesa/-/issues/5759
+
+Just get rid of all attempts of sway, wgpu (cosmic), ..... of saying the driver doesn't work.
+
+diff '--color=auto' -Nuar mesa-9999.orig/src/amd/vulkan/radv_physical_device.c mesa-9999/src/amd/vulkan/radv_physical_device.c
+--- mesa-9999.orig/src/amd/vulkan/radv_physical_device.c	2024-12-05 23:58:17.253672086 +0100
++++ mesa-9999/src/amd/vulkan/radv_physical_device.c	2024-12-06 00:03:20.686944266 +0100
+@@ -142,6 +142,8 @@
+       case CHIP_VEGA10:
+       case CHIP_RENOIR:
+       /* GFX10 */
++      case CHIP_NAVI10:
++      case CHIP_NAVI12:
+       case CHIP_NAVI14:
+       /* GFX10.3 */
+       case CHIP_NAVI21:

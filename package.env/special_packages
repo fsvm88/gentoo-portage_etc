@@ -5,11 +5,12 @@ app-crypt/sbsigntools gnu-objcopy # llvm-objcopy does not support efi-app-x86_64
 app-text/vale clang-no-lto # go package, otherwise fails to link properly 2024.10.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
 dev-qt/* clang-no-lto # Qt is known for not really supporting LTO builds, just disable it 2024.06.20
+llvm-core/clang:18 clang-no-lto # linking w/ LTO against libcxx:19 cannot work, ever
+llvm-core/clang:19 extra_cmake-llvm # clang-18 cannot be compiled with LTO
+llvm-core/clang:20 extra_cmake-llvm
+llvm-core/llvm extra_cmake-llvm
 net-libs/webkit-gtk clang-w-lto-no-debug # too long to retest again 2024.06.20 #TOOD
 net-wireless/rtl8812au_aircrack-ng kernel-drivers-clang
 net-wireless/rtl8812au_aircrack-ng no-usersandbox # thinLTO access issues
 sys-apps/fwupd-efi gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
-sys-devel/clang extra_cmake-llvm
-#sys-devel/lld extra_cmake-llvm
-sys-devel/llvm extra_cmake-llvm
 sys-libs/libcap no-compiler-rt # fails at linking due to unknown symbols 2024.06.20

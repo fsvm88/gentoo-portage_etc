@@ -19,6 +19,9 @@ dev-util/perf clang libpfm capstone -gtk
 dev-vcs/subversion -dso
 gui-apps/waybar evdev libinput network tray
 gui-wm/sway tray
+llvm-core/clang-common default-compiler-rt default-libcxx default-lld
+llvm-core/clang-runtime crt
+llvm-core/llvm binutils-plugin
 media-fonts/fonts-meta ms
 media-gfx/graphviz python
 media-gfx/imv -freeimage
@@ -44,9 +47,6 @@ net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb
-sys-devel/clang-common default-compiler-rt default-libcxx default-lld
-sys-devel/clang-runtime crt
-sys-devel/llvm binutils-plugin
 sys-fs/btrfs-progs -convert
 sys-fs/ntfs3g -external-fuse
 sys-kernel/gentoo-sources experimental symlink

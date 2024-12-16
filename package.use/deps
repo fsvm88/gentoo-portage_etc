@@ -13,7 +13,6 @@ app-text/texlive extra
 dev-build/cmake system-jsoncpp
 dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
-dev-debug/lldb lzma
 dev-lang/python lto pgo sqlite tk # pgo triggers test
 dev-lang/ruby -socks5
 dev-lang/rust abi_x86_32
@@ -48,6 +47,13 @@ dev-qt/qtwidgets -gtk -gtk3
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots liftoff tinywl
+llvm-core/clang-common hardened
+llvm-core/clang-runtime libcxx
+llvm-core/lldb lzma
+llvm-runtimes/libcxxabi static-libs
+llvm-runtimes/libcxx libcxxabi static-libs
+llvm-runtimes/openmp hwloc
+llvm-runtimes/openmp offload
 media-gfx/exiv2 xmp
 media-gfx/imagemagick perl
 media-libs/freetype harfbuzz infinality
@@ -100,15 +106,9 @@ sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd boot ukify xkb
 sys-apps/util-linux static-libs
 sys-devel/binutils cxx
-sys-devel/clang-common hardened
-sys-devel/clang-runtime libcxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-libs/glibc gd
 sys-libs/libcap static-libs
-sys-libs/libcxxabi static-libs
-sys-libs/libcxx libcxxabi static-libs
-sys-libs/libomp hwloc
-sys-libs/libomp offload
 sys-libs/libxcrypt static-libs
 sys-libs/ncurses static-libs tinfo
 sys-libs/talloc python

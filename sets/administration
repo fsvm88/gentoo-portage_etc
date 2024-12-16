@@ -21,5 +21,6 @@ sys-apps/mlocate
 sys-apps/ripgrep
 sys-auth/pam_u2f
 sys-fs/ncdu
+sys-libs/libfaketime
 sys-process/fcron
 sys-process/lsof

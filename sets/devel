@@ -2,7 +2,6 @@ app-admin/helm
 app-editors/vscode
 app-portage/portage-utils
 app-text/vale
-dev-debug/lldb
 dev-debug/strace
 dev-python/pylint
 dev-python/virtualenv
@@ -17,4 +16,5 @@ dev-vcs/git-filter-repo
 dev-vcs/git-flow
 dev-vcs/git-lfs
 dev-vcs/tig
+llvm-core/lldb
 sys-devel/mold

@@ -37,3 +37,4 @@ sys-libs/glibc gcc-no-lto # clang is not really supported unless USE=custom-flag
 sys-libs/libseccomp gcc-no-lto # fails tests with clang(-no-lto) 2024.06.22
 sys-libs/nss_wrapper gcc-no-lto # fails 1x test with clang-19, regression? 2024.10.27
 x11-libs/libXt gcc-no-lto # fails 1 test with clang(-no-lto) (core dump) 2024.06.19
+sys-libs/libfaketime gcc-no-lto

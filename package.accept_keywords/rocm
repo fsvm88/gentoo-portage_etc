@@ -2,5 +2,10 @@
 <dev-libs/rocm-comgr-7
 <dev-libs/rocm-device-libs-7
 <dev-libs/rocm-opencl-runtime-7
+<dev-libs/rocprofiler-register-7
+<dev-util/hip-7 **
+<dev-util/hipcc-7 **
 <dev-util/rocminfo-7
 <dev-util/rocm-smi-7
+<dev-util/rocprofiler-7
+<dev-util/roctracer-7

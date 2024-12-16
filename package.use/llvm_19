@@ -3,4 +3,5 @@ dev-db/postgresql:17 -llvm_slot_18
 dev-lang/spidermonkey -llvm_slot_18
 dev-util/perf -llvm_slot_18
 media-libs/mesa -llvm_slot_18
+sys-fs/bcachefs-tools -llvm_slot_18
 www-client/firefox -llvm_slot_18

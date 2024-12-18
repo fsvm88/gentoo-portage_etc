@@ -16,6 +16,7 @@ games-util/steam-launcher
 gui-apps/waybar **
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf
+media-video/shotcut
 net-im/slack
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc

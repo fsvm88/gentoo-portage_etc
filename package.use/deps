@@ -44,6 +44,7 @@ dev-qt/qtscript scripttools
 dev-qt/qtwayland compositor
 dev-qt/qtwebengine geolocation
 dev-qt/qtwidgets -gtk -gtk3
+dev-util/bpftool llvm
 dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots liftoff tinywl

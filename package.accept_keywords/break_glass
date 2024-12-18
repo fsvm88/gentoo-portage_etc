@@ -9,6 +9,7 @@
 app-misc/radeontop **
 app-text/scdoc **
 <app-text/tessdata_best-5
+<app-text/tesseract-5.6.0
 <dev-build/libtool-2.5.4
 <dev-go/enumer-1.5.11
 <dev-lang/rust-common-1.84.0
@@ -21,6 +22,8 @@ app-text/scdoc **
 <dev-python/cppheaderparser-2.7.5
 <dev-python/libvirt-python-10.9
 <dev-python/lit-20
+<dev-util/bpftool-7.6
+<dev-util/gdbus-codegen-2.83.0
 <dev-util/hipcc-7
 <dev-util/perf-6.13
 <dev-util/rocprofiler-6.4
@@ -50,6 +53,8 @@ app-text/scdoc **
 <llvm-runtimes/libcxxabi-20
 <llvm-runtimes/libunwind-20
 <llvm-runtimes/openmp-20
+<media-libs/babl-0.1.111
+<media-libs/gegl-0.4.51
 <media-libs/leptonica-1.84.2
 <media-libs/libvmaf-3.1
 <media-libs/svt-av1-2.1.3

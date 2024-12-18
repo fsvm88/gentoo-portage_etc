@@ -34,7 +34,7 @@ sys-devel/mold gcc-no-lto # fails tests with clang, any config 2024.11.06
 sys-fs/cryptsetup gcc-no-lto # linker scripts not supported by LLD 2024.06.19
 sys-fs/udisks gcc-no-lto # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
 sys-libs/glibc gcc-no-lto # clang is not really supported unless USE=custom-flags # 2024.11.04
+sys-libs/libfaketime gcc-no-lto
 sys-libs/libseccomp gcc-no-lto # fails tests with clang(-no-lto) 2024.06.22
 sys-libs/nss_wrapper gcc-no-lto # fails 1x test with clang-19, regression? 2024.10.27
 x11-libs/libXt gcc-no-lto # fails 1 test with clang(-no-lto) (core dump) 2024.06.19
-sys-libs/libfaketime gcc-no-lto

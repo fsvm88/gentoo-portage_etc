@@ -1,0 +1,40 @@
+From a9036ccbe2549cbfbbad660a4d0e70627ea35a5c Mon Sep 17 00:00:00 2001
+From: Melissa Wen <mwen@igalia.com>
+Date: Tue, 17 Dec 2024 13:26:55 -0300
+Subject: [PATCH] drm/amd/display: fix divide error in plane scale calcs
+
+dm_get_plane_scale doesn't take into account plane scaled size equal to
+zero, leading to a kernel oops for division by zero. Fix by setting
+out-scale size as zero when the dst size is zero, similar to what is
+done by drm_calc_scale(). This issue started with the introduction of
+cursor ovelay mode that uses this function to assess cursor mode changes
+via dm_crtc_get_cursor_mode() before checking plane state.
+
+Fixes: 1b04dcca4fb1 ("drm/amd/display: Introduce overlay cursor mode")
+Link: https://gitlab.freedesktop.org/drm/amd/-/issues/3729
+Reported-by: Fabio Scaccabarozzi <>
+Co-developed-by: Fabio Scaccabarozzi <>
+Signed-off-by: Fabio Scaccabarozzi <>
+Signed-off-by: Melissa Wen <mwen@igalia.com>
+---
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+index 85f21db6ef24..2c795b867c1c 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -11124,8 +11124,8 @@ dm_get_plane_scale(struct drm_plane_state *plane_state,
+ 	int plane_src_w, plane_src_h;
+ 
+ 	dm_get_oriented_plane_size(plane_state, &plane_src_w, &plane_src_h);
+-	*out_plane_scale_w = plane_state->crtc_w * 1000 / plane_src_w;
+-	*out_plane_scale_h = plane_state->crtc_h * 1000 / plane_src_h;
++	*out_plane_scale_w = plane_src_w ? plane_state->crtc_w * 1000 / plane_src_w : 0;
++	*out_plane_scale_h = plane_src_h ? plane_state->crtc_h * 1000 / plane_src_h : 0;
+ }
+ 
+ /*
+-- 
+2.45.2
+

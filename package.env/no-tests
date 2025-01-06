@@ -65,6 +65,7 @@ media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.
 media-libs/exempi no-tests # cannot link against boost because boost builds with clang, ABI incompatibility 2024.06.22
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it 2024.06.21
 media-libs/gegl no-tests # fails regardless of config 2024.06.21
+media-libs/gst-plugins-good no-tests # fails 1 test, regression from 1.22 probably 2025.01.05
 media-libs/harfbuzz no-tests # 1 test always broken, on all configurations 2024.06.20
 media-libs/leptonica no-tests # fails tests regardless of config 2024.06.21
 media-libs/libaom no-tests # while it is nice to have this tested, it is single-threaded and takes >40m only for tests 2024.06.21

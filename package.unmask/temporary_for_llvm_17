@@ -1,3 +1,4 @@
+dev-build/rocm-cmake
 dev-libs/rocm-comgr
 dev-libs/rocm-device-libs
 dev-libs/rocm-opencl-runtime
@@ -6,3 +7,4 @@ dev-libs/roct-thunk-interface
 dev-util/hip
 dev-util/hipcc
 dev-util/rocminfo
+dev-util/rocm-smi

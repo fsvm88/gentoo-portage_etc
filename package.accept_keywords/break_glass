@@ -88,7 +88,7 @@ app-text/scdoc **
 <media-plugins/gst-plugins-vpx-1.25
 <media-plugins/gst-plugins-x264-1.25
 <media-sound/qpwgraph-0.8
-<media-video/ffmpeg-7
+<media-video/ffmpeg-7.2
 <media-video/mediainfo-24.12
 <net-libs/stem-1.9
 <net-libs/webkit-gtk-2.46.5

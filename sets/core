@@ -4,6 +4,7 @@ app-crypt/sbsigntools
 app-misc/jq
 app-misc/symlinks
 app-shells/fish
+sys-apps/dbus-broker
 sys-apps/gptfdisk
 sys-apps/nvme-cli
 sys-boot/mokutil

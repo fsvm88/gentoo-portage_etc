@@ -4,11 +4,11 @@ app-portage/pycargoebuild
 app-shells/fish
 app-text/vale
 dev-lang/rust
+dev-lang/rust-common
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
 dev-util/cargo-license
 dev-util/clinfo
-dev-util/hip
 dev-vcs/git-filter-repo
 games-util/esteam
 games-util/game-device-udev-rules
@@ -16,12 +16,10 @@ games-util/steam-launcher
 gui-apps/waybar **
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf
-media-video/shotcut
 net-im/slack
 net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/amdgpu_top
-sys-apps/cpuid
 sys-apps/fwupd
 sys-devel/mold
 sys-fs/bcachefs-tools **

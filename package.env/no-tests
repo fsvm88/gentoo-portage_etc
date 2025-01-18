@@ -38,7 +38,6 @@ dev-libs/nss no-tests # while it would be nice to have this library tested at al
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler 2024.06.21 TODO
 dev-libs/rocm-device-libs no-tests # regression building + testing? 2024.06.21 TODO
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb 2024.06.21 TODO
-dev-libs/rocprofiler-register no-tests # fails 1x test for no discernible reason 2024.12.08
 dev-libs/xmlsec no-tests # fails tests regardless of config 2024.06.21
 dev-perl/Config-AutoConf no-tests # fails tests regardless of config 2024.06.21
 dev-perl/Gtk3-ImageView no-tests # tests fail regardless of config 2024.06.20
@@ -60,6 +59,7 @@ gui-libs/gtk no-tests # failing a few tests out of 4300, too long to run regular
 llvm-core/clang no-tests # fails 1 hlsl test, to retest later
 llvm-core/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 llvm-runtimes/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all the time 2024.06.22
+llvm-runtimes/offload no-tests # 2x tests hang for more than 45m at 100% CPU 2025.01.16
 media-gfx/gscan2pdf no-tests # brings in sane-* stuff, sane-frontends fails to build and test 2024.06.21 
 media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.06.21
 media-libs/exempi no-tests # cannot link against boost because boost builds with clang, ABI incompatibility 2024.06.22

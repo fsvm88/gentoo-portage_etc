@@ -1,0 +1,11 @@
+diff '--color=auto' -Nuar mesa-9999.orig/src/gallium/drivers/radeonsi/si_state_draw.cpp mesa-9999/src/gallium/drivers/radeonsi/si_state_draw.cpp
+--- mesa-9999.orig/src/gallium/drivers/radeonsi/si_state_draw.cpp	2025-01-14 22:46:45.258393704 +0100
++++ mesa-9999/src/gallium/drivers/radeonsi/si_state_draw.cpp	2025-01-14 22:47:55.994911759 +0100
+@@ -16,6 +16,7 @@
+ #include "ac_rtld.h"
+ #include "si_build_pm4.h"
+ #include "si_tracepoints.h"
++#include <algorithm>
+ 
+ #if (GFX_VER == 6)
+ #define GFX(name) name##GFX6

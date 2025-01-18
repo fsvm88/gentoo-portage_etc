@@ -1,6 +1,5 @@
 app-admin/testdisk ntfs reiserfs
-app-backup/btrbk doc
-app-backup/btrbk -mbuffer
+app-backup/btrbk doc -mbuffer
 app-containers/docker overlay
 app-editors/vim python -sound
 app-emulation/libvirt libssh2 nfs pcap virt-network
@@ -20,7 +19,7 @@ dev-vcs/subversion -dso
 gui-apps/waybar evdev libinput network tray
 gui-wm/sway tray
 llvm-core/clang-common default-compiler-rt default-libcxx default-lld
-llvm-core/clang-runtime crt
+llvm-core/clang-runtime crt offload
 llvm-core/llvm binutils-plugin
 media-fonts/fonts-meta ms
 media-gfx/graphviz python

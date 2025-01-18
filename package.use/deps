@@ -21,7 +21,6 @@ dev-lang/spidermonkey lto
 dev-libs/elfutils static-libs
 dev-libs/json-c cpu-flags-x86-rdrand
 dev-libs/libbytesize python
-dev-libs/libclc spirv
 dev-libs/libdbusmenu -gtk
 dev-libs/libpcre2 pcre16 pcre32
 dev-libs/libpcre pcre16
@@ -36,7 +35,6 @@ dev-python/ipython matplotlib nbconvert notebook
 dev-python/matplotlib tk
 dev-python/netaddr -cli
 dev-python/numpy lapack
-dev-python/pyside2 testlib
 dev-qt/designer -phonon
 dev-qt/qtgui eglfs evdev libinput
 dev-qt/qtmultimedia widgets

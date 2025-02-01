@@ -1,0 +1,9 @@
+app-emulation/libvirt-glib no-mold # fails check-syms test 2025.02.01
+app-emulation/libvirt no-mold # fails check-syms test 2025.02.01
+app-emulation/wine-vanilla no-mold # fails configuring with mold 2025.02.01
+llvm-core/lldb no-mold # llvm-tblgen is linked via clang, does not supply CFLAGS, even when told to 2025.02.01
+net-misc/freerdp no-mold # fails to pass LTO flags to clang as linker even when supplied 2025.02.01
+sys-libs/libcap no-mold # one test segfaults 2025.02.01
+sys-libs/libosinfo no-mold # fails check-symfile test 2025.02.01
+www-client/firefox no-mold # fails linking due to discarded COMDAT section due to ODR violation? 2025.01.22
+x11-libs/libdrm no-mold # fails symbols check test 2025.02.01

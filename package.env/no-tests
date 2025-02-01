@@ -40,6 +40,7 @@ dev-libs/rocm-device-libs no-tests # regression building + testing? 2024.06.21 T
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb 2024.06.21 TODO
 dev-libs/xmlsec no-tests # fails tests regardless of config 2024.06.21
 dev-perl/Config-AutoConf no-tests # fails tests regardless of config 2024.06.21
+dev-perl/Glib-Object-Introspection no-tests # fails 1 test regardless of linker 2025.02.01
 dev-perl/Gtk3-ImageView no-tests # tests fail regardless of config 2024.06.20
 dev-perl/Image-Sane no-tests # tests fail because it grabs *FLAGS from base perl 2024.06.21
 dev-perl/Proc-ProcessTable no-tests # still hangs 2024.06.21
@@ -94,6 +95,7 @@ sys-apps/systemd no-tests # all tests pass except for ukify ones, which want to 
 sys-apps/util-linux no-tests # tests broken under any configuration 2024.06.20
 sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
 sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024.06.22
+sys-devel/mold no-tests # fails tests because it doesn't pass -fuse-ld=mold during tests, and compilers default to their favourites 2025.01.18
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
 sys-libs/liburing no-tests # regression in 2.7-r1 2024.09.28
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22

@@ -1,0 +1,1 @@
+LDFLAGS="-Wl,-O3,-z,now,--as-needed,--lto-O3,--icf=safe"

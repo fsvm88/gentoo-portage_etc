@@ -1,0 +1,38 @@
+diff '--color=auto' -Nuar libtool-2.5.4.orig/build-aux/ltmain.in libtool-2.5.4/build-aux/ltmain.in
+--- libtool-2.5.4.orig/build-aux/ltmain.in	2024-11-20 20:01:08.000000000 +0100
++++ libtool-2.5.4/build-aux/ltmain.in	2025-01-20 23:58:17.686346740 +0100
+@@ -5555,6 +5555,7 @@
+       # -tp=*                Portland pgcc target processor selection
+       # --sysroot=*          for sysroot support
+       # -O*, -g*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
++      # -fwhole-program-vtables
+       # -specs=*             GCC specs files
+       # -stdlib=*            select c++ std lib with clang
+       # -fdiagnostics-color* simply affects output
+@@ -5575,6 +5576,7 @@
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+       -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-no-canonical-prefixes| \
++      -fwhole-program-vtables*| \
+       -stdlib=*|-rtlib=*|--unwindlib=*| \
+       -specs=*|-fsanitize=*|-fno-sanitize*|-shared-libsan|-static-libsan| \
+       -ffile-prefix-map=*|-fdebug-prefix-map=*|-fmacro-prefix-map=*|-fprofile-prefix-map=*| \
+diff '--color=auto' -Nuar libtool-2.5.4.orig/build-aux/ltmain.sh libtool-2.5.4/build-aux/ltmain.sh
+--- libtool-2.5.4.orig/build-aux/ltmain.sh	2025-01-20 23:56:48.816217622 +0100
++++ libtool-2.5.4/build-aux/ltmain.sh	2025-01-20 23:58:46.316387690 +0100
+@@ -7715,6 +7715,7 @@
+       # -tp=*                Portland pgcc target processor selection
+       # --sysroot=*          for sysroot support
+       # -O*, -g*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
++      # -fwhole-program-vtables
+       # -specs=*             GCC specs files
+       # -stdlib=*            select c++ std lib with clang
+       # -fdiagnostics-color* simply affects output
+@@ -7735,6 +7736,7 @@
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+       -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-no-canonical-prefixes| \
++      -fwhole-program-vtables*| \
+       -stdlib=*|-rtlib=*|--unwindlib=*| \
+       -specs=*|-fsanitize=*|-fno-sanitize*|-shared-libsan|-static-libsan| \
+       -ffile-prefix-map=*|-fdebug-prefix-map=*|-fmacro-prefix-map=*|-fprofile-prefix-map=*| \

@@ -3,7 +3,7 @@
 <app-containers/docker-28
 <app-containers/docker-buildx-0.20
 <app-containers/docker-cli-28
-<app-emulation/libvirt-10.9
+<app-emulation/libvirt-10.11
 <app-emulation/qemu-9.2
 app-misc/radeontop **
 app-text/scdoc **
@@ -12,17 +12,21 @@ app-text/scdoc **
 <dev-go/enumer-1.5.11
 <dev-lang/rust-common-1.84.0
 <dev-libs/bemenu-0.7
+<dev-libs/cxxopts-3.2.2
 <dev-libs/gjs-1.83
 <dev-libs/glib-2.83
 <dev-libs/gobject-introspection-2.83
 <dev-libs/gobject-introspection-common-2.83
 <dev-libs/libffi-3.4.6-r3
 <dev-libs/nss-3.108
-<dev-python/libvirt-python-10.9
+<dev-libs/simdjson-3.11.6
+<dev-python/libvirt-python-10.11
 <dev-python/lit-20
+<dev-util/cargo-c-0.10.9
 <dev-util/gdbus-codegen-2.83.0
 <dev-util/perf-6.13
 <dev-vcs/git-2.47.0
+<dev-vcs/git-2.49
 <gui-apps/gtkgreet-0.8
 <gui-apps/swaylock-1.9
 =gui-apps/yofi-9999
@@ -80,15 +84,17 @@ app-text/scdoc **
 <media-video/ffmpeg-7.2
 <media-video/mediainfo-24.12
 <net-libs/stem-1.9
+<net-misc/freerdp-3.10
 <net-misc/nyx-2.2
 <net-misc/socat-1.8.0.2
+<net-vpn/openvpn-2.7
 <sec-keys/openpgp-keys-kentoverstreet-20241231
 <sys-apps/hwloc-2.10
 <sys-cluster/kubectl-1.31.3
 <sys-devel/binutils-2.44
 <sys-devel/gcc-14.3
 <sys-kernel/dracut-crypt-ssh-1.0.9
-<sys-kernel/gentoo-sources-6.13
+<sys-kernel/gentoo-sources-6.14
 <sys-libs/binutils-libs-2.44
 <sys-libs/libudev-compat-187
 <x11-themes/adw-gtk3-5.4

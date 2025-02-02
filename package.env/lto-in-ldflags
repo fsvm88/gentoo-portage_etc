@@ -4,7 +4,6 @@ app-arch/p7zip lto-in-ldflags
 app-arch/pigz lto-in-ldflags
 app-arch/unzip lto-in-ldflags
 app-arch/zip lto-in-ldflags
-app-crypt/gcr lto-in-ldflags
 app-crypt/hashcat lto-in-ldflags
 app-crypt/rhash lto-in-ldflags
 app-editors/vim-core lto-in-ldflags
@@ -14,7 +13,6 @@ app-text/mandoc lto-in-ldflags
 app-text/mupdf lto-in-ldflags
 app-text/openjade lto-in-ldflags
 app-text/scdoc lto-in-ldflags
-dev-cpp/glibmm lto-in-ldflags
 dev-go/enumer lto-in-ldflags
 dev-lang/luajit lto-in-ldflags
 dev-lang/perl lto-in-ldflags
@@ -26,19 +24,7 @@ dev-libs/mpdecimal lto-in-ldflags
 dev-libs/nss lto-in-ldflags
 dev-libs/tree-sitter-bash lto-in-ldflags
 dev-libs/tree-sitter lto-in-ldflags
-dev-libs/xmlsec lto-in-ldflags
-dev-perl/ExtUtils-CChecker lto-in-ldflags
 dev-perl/Module-Build lto-in-ldflags
-dev-perl/XS-Parse-Keyword lto-in-ldflags
-dev-ruby/date lto-in-ldflags
-dev-ruby/debug lto-in-ldflags
-dev-ruby/io-console lto-in-ldflags
-dev-ruby/json lto-in-ldflags
-dev-ruby/psych lto-in-ldflags
-dev-ruby/racc lto-in-ldflags
-dev-ruby/rbs lto-in-ldflags
-dev-ruby/stringio lto-in-ldflags
-dev-ruby/strscan lto-in-ldflags
 dev-tcltk/blt lto-in-ldflags
 media-gfx/xsane lto-in-ldflags
 media-libs/freetype lto-in-ldflags
@@ -70,9 +56,6 @@ sys-fs/btrfs-progs lto-in-ldflags
 sys-fs/e2fsprogs lto-in-ldflags
 sys-fs/squashfs-tools lto-in-ldflags
 sys-kernel/dracut lto-in-ldflags
-sys-libs/efivar lto-in-ldflags
-sys-libs/libcap lto-in-ldflags
-sys-libs/libosinfo lto-in-ldflags
 sys-libs/readline lto-in-ldflags
 sys-process/schedtool lto-in-ldflags
 x11-libs/wxGTK lto-in-ldflags

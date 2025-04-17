@@ -1,4 +1,6 @@
+app-crypt/efitools gcc-no-lto # now also lld throws errors about non-contig sections, upstream doesn't care about clang+lld 2025.04.06
 app-crypt/p11-kit gcc-no-lto # otherwise breaks symbol versioning, and stuff like pinentry cannot work 2024.06.25
+app-crypt/sbsigntools gcc-no-lto # now also lld throws errors about non-contig sections, upstream doesn't care about clang+lld 2025.04.06
 app-text/tesseract gcc-no-lto # __udiv3 symbol issues 2024.06.19
 dev-build/libtool gcc-no-lto # libtool is on life support, someday slibtool will be ready 2024.06.20
 dev-libs/atf gcc-no-lto # symbols issue from dev-libs/kyua, not sure why 2024.06.19
@@ -9,6 +11,7 @@ dev-libs/libffi gcc-no-lto # both clang and clang-no-lto fail tests, but GCC pas
 dev-libs/libtomcrypt gcc-no-lto # another package that blatantly ignores linker selection via libtool 2024.06.18
 dev-libs/mpfr gcc-no-lto # both clang and clang-no-lto fail tests, but GCC passes them 2024.06.19
 dev-lua/lutok gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19
+dev-python/zstandard gcc-no-lto # fails to build due to pycparser woes 2025.03.02
 dev-util/bpftool gcc-no-lto # fails to build with clang due to missing libbfd?
 dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20
 dev-util/kyua gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19

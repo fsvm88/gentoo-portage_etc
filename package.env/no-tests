@@ -25,6 +25,7 @@ dev-lang/ruby no-tests # regressions on test_fiber and test_thread with -r1, 202
 dev-lang/spidermonkey no-tests # 128 fails 2x tests: timezone and Intl data 2024.10.27
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
+dev-libs/date no-tests # broken test suite wants timezone db in work folder 2025.04.17
 dev-libs/gjs no-tests # fails 1x test with clang, fails a different test with GCC 2024.10.27
 dev-libs/icu no-tests # fails intltest regardless of config 2024.10.29
 dev-libs/libbsd no-tests # 1 test is broken regardless of config 2024.06.21
@@ -38,6 +39,7 @@ dev-libs/nss no-tests # while it would be nice to have this library tested at al
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler 2024.06.21 TODO
 dev-libs/rocm-device-libs no-tests # regression building + testing? 2024.06.21 TODO
 dev-libs/rocm-opencl-runtime no-tests # requires an actual GPU, not a fake screen via Xvfb 2024.06.21 TODO
+dev-libs/roct-thunk-interface no-tests # some tests allocate all allocatable memory and reliably crash the machine 2025.02.08
 dev-libs/xmlsec no-tests # fails tests regardless of config 2024.06.21
 dev-perl/Config-AutoConf no-tests # fails tests regardless of config 2024.06.21
 dev-perl/Glib-Object-Introspection no-tests # fails 1 test regardless of linker 2025.02.01
@@ -57,6 +59,7 @@ dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, whic
 gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO 2024.06.21
 gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months 2024.06.21
 gui-libs/gtk no-tests # failing a few tests out of 4300, too long to run regularly 2024.06.21
+gui-libs/libadwaita no-tests # regresses 2 tests with version 1.6.2 2025.04.06
 llvm-core/clang no-tests # fails 1 hlsl test, to retest later
 llvm-core/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 llvm-runtimes/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all the time 2024.06.22
@@ -93,9 +96,9 @@ sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21
 sys-apps/keyutils no-tests # fails tests regardless of config, probably needs access to kernel keyring 2024.06.21 
 sys-apps/systemd no-tests # all tests pass except for ukify ones, which want to access the live system to test booted kernel uname scraping
 sys-apps/util-linux no-tests # tests broken under any configuration 2024.06.20
+sys-apps/xdg-desktop-portal no-tests # fails tests due to access to /dev/fuse? 2025.04.04
 sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
 sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024.06.22
-sys-devel/mold no-tests # fails tests because it doesn't pass -fuse-ld=mold during tests, and compilers default to their favourites 2025.01.18
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...
 sys-libs/liburing no-tests # regression in 2.7-r1 2024.09.28
 sys-libs/timezone-data no-tests # tests fail, known https://bugs.gentoo.org/928455 2024.06.22

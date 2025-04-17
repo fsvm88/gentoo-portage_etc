@@ -16,13 +16,11 @@ games-util/steam-launcher
 gui-apps/waybar **
 gui-apps/wf-recorder **
 media-gfx/ocrmypdf
+media-video/obs-studio
 net-im/slack
-net-wireless/rtl8812au_aircrack-ng::pentoo
 sci-misc/boinc
 sys-apps/amdgpu_top
 sys-apps/fwupd
-sys-devel/mold
-sys-fs/bcachefs-tools **
 sys-fs/btrfs-progs
 sys-kernel/linux-firmware
 sys-kernel/linux-headers

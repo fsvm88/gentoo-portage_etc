@@ -1,0 +1,13 @@
+diff '--color=auto' -Nuar pycargoebuild-0.14.0.orig/pycargoebuild/cargo.py pycargoebuild-0.14.0/pycargoebuild/cargo.py
+--- pycargoebuild-0.14.0.orig/pycargoebuild/cargo.py	2025-03-21 17:04:46.864099500 +0000
++++ pycargoebuild-0.14.0/pycargoebuild/cargo.py	2025-04-12 18:27:12.782671469 +0100
+@@ -245,9 +245,6 @@
+                         "Git crate with no fragment identifier (i.e. commit "
+                         f"identifier): {p['source']!r}")
+                 repo = parsed_url.path.strip("/").removesuffix(".git")
+-                if repo.count("/") != 1:
+-                    raise RuntimeError("Invalid GitHub/GitLab URL: "
+-                                       f"{p['source']}")
+                 yield GitCrate(
+                     name=p["name"],
+                     version=p["version"],

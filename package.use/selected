@@ -36,7 +36,6 @@ net-analyzer/wireshark smi -qt4 qt5
 net-firewall/nftables xtables
 net-im/slack appindicator
 net-misc/remmina rdp spice telemetry vnc
-net-p2p/bitcoind bitcoin_policy spamfilter ljr upnp
 net-p2p/go-ethereum evm opencl
 net-p2p/transmission qt6
 net-print/hplip-plugin orblite

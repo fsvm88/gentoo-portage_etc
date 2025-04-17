@@ -1,3 +1,0 @@
-CFLAGS="-O3 -march=native -pipe"
-CXXFLAGS="${CFLAGS}"
-LDFLAGS="-Wl,-O3,-z,now,--as-needed,--icf=safe"

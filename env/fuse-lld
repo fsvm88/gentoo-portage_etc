@@ -1,3 +1,0 @@
-CFLAGS="${CFLAGS} -fuse-ld=lld"
-CXXFLAGS="${CXXFLAGS} -fuse-ld=lld"
-

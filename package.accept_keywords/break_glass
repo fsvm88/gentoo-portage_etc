@@ -6,11 +6,13 @@
 <app-containers/docker-cli-28.1
 <app-containers/docker-compose-2.35
 <app-containers/runc-1.2.7
+<app-crypt/rpm-sequoia-1.9
 <app-emulation/qemu-9.2
 app-misc/radeontop **
 app-text/scdoc **
 <dev-lang/rust-bin-1.87
 <dev-lang/rust-common-1.87.0
+<dev-lang/spidermonkey-129
 <dev-lang/vala-0.57
 <dev-libs/bemenu-0.7
 <dev-libs/cxxopts-3.2.2
@@ -24,7 +26,9 @@ app-text/scdoc **
 <dev-python/lit-20
 =dev-python/pycparser-9999
 <dev-util/cargo-c-0.10.12
+<dev-util/github-cli-2.69
 <dev-util/perf-6.13
+<dev-util/spirv-llvm-translator-20
 <gnome-base/gvfs-1.57
 <gui-apps/gtkgreet-0.8
 =gui-apps/yofi-9999
@@ -52,8 +56,6 @@ app-text/scdoc **
 <media-libs/svt-av1-3.1
 <media-sound/qpwgraph-0.8.2
 <media-video/ffmpeg-7.2
-<net-libs/stem-1.9
-<net-misc/nyx-2.2
 <net-print/libcupsfilters-2.2
 <sys-apps/hwloc-2.10
 <sys-apps/portage-3.0.69

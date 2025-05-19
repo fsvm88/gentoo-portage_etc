@@ -8,6 +8,7 @@ dev-python/virtualenv
 dev-util/android-udev-rules
 dev-util/ccache
 dev-util/cloc
+dev-util/github-cli
 dev-util/meld
 dev-util/perf
 dev-util/pkgcheck

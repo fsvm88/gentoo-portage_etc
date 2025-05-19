@@ -64,6 +64,7 @@ llvm-core/clang no-tests # fails 1 hlsl test, to retest later
 llvm-core/llvm no-tests # fails Support/./SupportTests/AlignOfTest/BasicAlignedArray in any configuration
 llvm-runtimes/compiler-rt-sanitizers no-tests # not sure why tests fail linkage all the time 2024.06.22
 llvm-runtimes/offload no-tests # 2x tests hang for more than 45m at 100% CPU 2025.01.16
+llvm-runtimes/openmp no-tests # fails atomic/omp_atomic.c test 2025.05.12
 media-gfx/gscan2pdf no-tests # brings in sane-* stuff, sane-frontends fails to build and test 2024.06.21 
 media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.06.21
 media-libs/exempi no-tests # cannot link against boost because boost builds with clang, ABI incompatibility 2024.06.22
@@ -85,7 +86,6 @@ net-analyzer/tcpdump no-tests # requires samba for tests?! O_o 2024.06.21
 net-analyzer/wireshark no-tests # fails tests regardless of config 2024.06.21
 net-libs/libsoup:2.4 no-tests # 2.4 fails regardless of compilers 2024.06.21
 net-libs/nodejs no-tests # tests fail regardless of config 2024.06.21
-net-libs/stem no-tests # tests fail regardless of config, python syntax problems 2024.06.21
 net-mail/mailutils no-tests # fails tests regardless of config 2024.06.21
 net-misc/openssh no-tests # regressed tests randomly, without USE changes, compiler changes, anything else 2024.07.04
 net-misc/socat no-tests # multiple tests regressions from 1.7 to 1.8* 2024.10.09
@@ -97,6 +97,7 @@ sys-apps/keyutils no-tests # fails tests regardless of config, probably needs ac
 sys-apps/systemd no-tests # all tests pass except for ukify ones, which want to access the live system to test booted kernel uname scraping
 sys-apps/util-linux no-tests # tests broken under any configuration 2024.06.20
 sys-apps/xdg-desktop-portal no-tests # fails tests due to access to /dev/fuse? 2025.04.04
+sys-cluster/kubelogin no-tests # fails to link tests due to -pie + -race 2025.04.27
 sys-devel/binutils no-tests # tests fail regardless of config 2024.06.22
 sys-devel/gcc no-tests # not worth running, take forever and do not pass... 2024.06.22
 sys-libs/glibc no-tests # fails even with just GCC anyway, no point in trying them...

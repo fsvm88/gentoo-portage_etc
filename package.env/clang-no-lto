@@ -7,6 +7,7 @@ app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO still true as
 app-metrics/node_exporter clang-no-lto # go package
 dev-cpp/glibmm clang-no-lto # both :0 and :4 fail 1 test if LTO is enabled 2024.06.17
 dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE) 2024.06.17
+dev-util/github-cli clang-no-lto # go package
 dev-util/promu clang-no-lto # go package
 media-libs/x264 clang-no-lto # configure fails endianness test for clang configuration 2024.06.20
 net-misc/rclone clang-no-lto # go package

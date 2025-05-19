@@ -7,8 +7,8 @@ app-emulation/libvirt virtiofsd
 app-emulation/qemu io-uring spice usbredir nfs vhost-user-fs virgl virtfs -gtk
 app-emulation/wine-vanilla mingw vkd3d -unwind
 app-portage/eix optimization sqlite tools
-cosmic-de/cosmic-meta store
-cosmic-de/pop-theme-meta gtk-theme
+cosmic-base/cosmic-meta store
+cosmic-base/pop-theme-meta gtk-theme
 dev-debug/strace -unwind
 dev-lang/rust profiler rust-src
 dev-libs/qxlsx qt5

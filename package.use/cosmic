@@ -1,2 +1,2 @@
-cosmic-de/cosmic-settings openvpn
-cosmic-de/* debug-line-tables-only max-opt
+cosmic-base/cosmic-settings openvpn
+cosmic-base/* debug-line-tables-only max-opt

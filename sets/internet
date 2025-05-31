@@ -10,6 +10,7 @@ net-misc/ndisc6
 net-misc/wakeonlan
 net-misc/whois
 net-p2p/transmission
+net-p2p/transmission-remote-gtk
 net-proxy/torsocks
 net-vpn/tor
 net-wireless/iw

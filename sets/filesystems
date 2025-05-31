@@ -1,5 +1,4 @@
 app-backup/btrbk
-app-misc/fdupes
 net-fs/cifs-utils
 sys-fs/bcachefs-tools
 sys-fs/btrfs-progs

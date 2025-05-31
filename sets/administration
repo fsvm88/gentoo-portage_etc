@@ -5,7 +5,7 @@ app-admin/rasdaemon
 app-arch/rpm
 app-crypt/tpm2-tools
 app-eselect/eselect-repository
-app-misc/fdupes
+#app-misc/fdupes
 app-misc/mmv
 app-misc/tmux
 app-shells/bash-completion

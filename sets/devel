@@ -1,7 +1,6 @@
 app-admin/helm
 app-editors/vscode
 app-portage/portage-utils
-app-text/vale
 dev-debug/strace
 dev-python/pylint
 dev-python/virtualenv

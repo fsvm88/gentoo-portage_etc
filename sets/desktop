@@ -1,9 +1,6 @@
-cosmic-base/cosmic-meta
 gui-apps/gtkgreet
 gui-apps/mako
-gui-apps/swaybg
-gui-apps/swayidle
-gui-apps/swaylock
+gui-apps/wl-clipboard
 gui-libs/xdg-desktop-portal-wlr
 media-fonts/fonts-meta
 media-gfx/sane-airscan

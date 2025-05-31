@@ -38,8 +38,7 @@ net-im/slack appindicator
 net-misc/remmina rdp spice telemetry vnc
 net-p2p/go-ethereum evm opencl
 net-p2p/transmission qt6
-net-print/hplip-plugin orblite
-net-print/hplip snmp
+net-p2p/transmission-remote-gtk geoip
 net-vpn/libreswan curl
 net-vpn/tor stats tor-hardening transparent-proxy upnp
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
@@ -51,5 +50,5 @@ sys-kernel/gentoo-sources experimental symlink
 sys-kernel/installkernel dracut systemd-boot uki ukify
 sys-process/fcron system-crontab
 virtual/rust profiler
-www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite wifi startup-notification screencast pgo wasm-sandbox -X
+www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite system-pipewire wifi startup-notification screencast pgo -wasm-sandbox -X
 x11-apps/mesa-progs gles2

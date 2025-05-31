@@ -1,0 +1,6 @@
+dev-libs/rocm-comgr llvm_slot_19
+dev-libs/rocm-device-libs llvm_slot_19
+dev-libs/rocr-runtime llvm_slot_19
+dev-libs/roct-thunk-interface llvm_slot_19
+dev-util/hipcc llvm_slot_19
+dev-util/hip llvm_slot_19

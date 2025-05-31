@@ -77,7 +77,7 @@ media-plugins/gst-plugins-gtk gles2
 media-plugins/gst-plugins-meta lame vpx
 media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
-media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc rav1e shaderc svt-av1 vmaf vpx -opengl
+media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc shaderc svt-av1 vmaf vpx -opengl
 media-video/pipewire aptx echo-cancel extra ldac sound-server
 net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script
@@ -91,13 +91,11 @@ net-libs/nghttp2 static-libs utils
 net-libs/nghttp3 static-libs
 net-libs/nodejs inspector lto
 net-libs/webkit-gtk gles2
-net-misc/curl -adns
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/spice-gtk -gstreamer python usbredir
 net-print/cups-filters ipp_autosetup pclm
 net-vpn/openvpn down-root socks
 net-wireless/bluez btpclient deprecated experimental extra-tools user-session
-net-wireless/lorcon python
 sci-geosciences/gpsd python
 sci-libs/hdf5 -threads
 sys-apps/hwloc rocm

@@ -14,6 +14,7 @@ dev-lua/lutok gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06
 dev-python/zstandard gcc-no-lto # fails to build due to pycparser woes 2025.03.02
 dev-util/bpftool gcc-no-lto # fails to build with clang due to missing libbfd?
 dev-util/cmocka gcc-no-lto # clang(-no-lto) segfault when testing regexes, gcc+LTO drops ~all symbols that are required to use the library 2024.06.20
+dev-util/dialog gcc-no-lto
 dev-util/kyua gcc-no-lto # symbols issue from dev-libs/atf, not sure why 2024.06.19
 dev-util/patchelf gcc-no-lto # clang(-no-lto) fails on shared-rpath test, gcc+LTO has linking issues 2024.06.20
 dev-util/umockdev gcc-no-lto # broken with lld 2024.11.07
@@ -31,6 +32,7 @@ sci-libs/lapack gcc-no-lto # blissfully ignores linker usage during configure 20
 sys-apps/dbus-broker gcc-no-lto # fails 1 test with clang(-no-lto) c-stdaux 2024.10.01
 sys-apps/fwupd-efi gcc-no-lto # clang(-no-lto) fails due to linking with LLD not supporting -pie + -shared 2024.06.23
 sys-apps/keyutils gcc-no-lto # linker scripts not supported by LLD, GCC+LTO breaks linking as well
+sys-apps/memtest86+ gcc-no-lto
 sys-devel/bpf-toolchain gcc-no-lto # fails with clang 2024.11.04
 sys-devel/gcc gcc-no-lto # fails to compile quite early with clang 2024.06.20
 sys-fs/cryptsetup gcc-no-lto # linker scripts not supported by LLD 2024.06.19

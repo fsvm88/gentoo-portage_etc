@@ -16,6 +16,7 @@ dev-build/automake no-tests # nobody ever saw these finish or pass 2024.06.20
 dev-build/cmake no-tests # 4 tests always fail regardless of config 2024.06.20
 dev-build/libtool no-tests # libtool is on life support, someday slibtool will be ready 2024.06.20
 dev-build/meson no-tests # python failures during tests, regression, disable for now 2024.07.27
+dev-cpp/catch no-tests # one test broken with clang-20 https://github.com/catchorg/Catch2/issues/2981 2025.05.23
 dev-cpp/glog no-tests # fails tests in any other config 2024.12.08
 dev-db/mariadb no-tests # another one which takes ~ life of the universe to finish, we don't need to increase the Multi/Universe's entropy further...
 dev-db/sqlite no-tests # takes forever to run, most likely would fail anyway, avoid them 2024.06.20
@@ -25,6 +26,7 @@ dev-lang/ruby no-tests # regressions on test_fiber and test_thread with -r1, 202
 dev-lang/spidermonkey no-tests # 128 fails 2x tests: timezone and Intl data 2024.10.27
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
+dev-libs/boost no-tests # lots of tests fail to compile with clang-20, let alone run 2025.05.23
 dev-libs/date no-tests # broken test suite wants timezone db in work folder 2025.04.17
 dev-libs/gjs no-tests # fails 1x test with clang, fails a different test with GCC 2024.10.27
 dev-libs/icu no-tests # fails intltest regardless of config 2024.10.29
@@ -35,6 +37,7 @@ dev-libs/libgudev no-tests # fails same tests in any configuration 2024.10.27
 dev-libs/libportal no-tests # 1 test is broken regardless of config 2024.06.21
 dev-libs/libusb no-tests # they always pass, but they are single-threaded and take forever to run 2024.06.21
 dev-libs/libuv no-tests # fails regardless of config 2024.06.21
+dev-libs/nspr no-tests # broken by clang-20 2025.05.23
 dev-libs/nss no-tests # while it would be nice to have this library tested at all times, 2h of sequential tests doesn't cut it as "worth it" 2024.06.21
 dev-libs/rocm-comgr no-tests # fails tests regardless of compiler 2024.06.21 TODO
 dev-libs/rocm-device-libs no-tests # regression building + testing? 2024.06.21 TODO
@@ -89,6 +92,7 @@ net-libs/nodejs no-tests # tests fail regardless of config 2024.06.21
 net-mail/mailutils no-tests # fails tests regardless of config 2024.06.21
 net-misc/openssh no-tests # regressed tests randomly, without USE changes, compiler changes, anything else 2024.07.04
 net-misc/socat no-tests # multiple tests regressions from 1.7 to 1.8* 2024.10.09
+net-p2p/transmission-remote-gtk no-tests # fails tests 2025.05.31
 net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists 2024.06.21
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
 sys-apps/fwupd no-tests # fu-self-test times out and gets killed 2024.12.17

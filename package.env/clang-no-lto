@@ -14,3 +14,4 @@ llvm-runtimes/offload clang-no-lto # incorrectly filters -fwhole-program-vtable,
 media-libs/x264 clang-no-lto # configure fails endianness test for clang configuration 2024.06.20
 net-misc/rclone clang-no-lto # go package
 sys-cluster/kubelogin clang-no-lto # go package
+sys-fs/bcachefs-tools clang-no-lto # fails to build with LTO due to flag strippings 2025.06.08 somewhere

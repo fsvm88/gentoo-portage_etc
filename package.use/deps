@@ -59,6 +59,7 @@ media-libs/freetype harfbuzz infinality
 media-libs/gst-plugins-bad gles2 wayland
 media-libs/gst-plugins-base gles2
 media-libs/lcms python
+media-libs/libcanberra alsa
 media-libs/libglvnd X
 media-libs/libplacebo glslang
 media-libs/libpng apng
@@ -70,6 +71,7 @@ media-libs/libvpx postproc svc
 media-libs/libwebp -opengl
 media-libs/mesa d3d9 dri3 llvm vulkan -opencl
 media-libs/mlt jack fftw
+media-libs/opus custom-modes
 media-libs/vulkan-loader layers
 media-libs/waffle gbm
 media-libs/x265 pic
@@ -102,6 +104,7 @@ sys-apps/hwloc rocm
 sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd boot ukify xkb
 sys-apps/util-linux static-libs
+sys-auth/oath-toolkit pskc
 sys-devel/binutils cxx
 sys-devel/gcc graphite lto pie pgo ssp -sanitize
 sys-libs/glibc gd

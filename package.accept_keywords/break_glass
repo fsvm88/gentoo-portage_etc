@@ -72,6 +72,7 @@ app-text/scdoc **
 sys-fs/bcachefs-tools **
 <sys-kernel/dracut-crypt-ssh-1.0.9
 <sys-kernel/gentoo-sources-6.16
+<sys-libs/glibc-2.42
 <sys-libs/libudev-compat-187
 <x11-libs/wxGTK-3.2.9
 <x11-themes/adw-gtk3-5.4

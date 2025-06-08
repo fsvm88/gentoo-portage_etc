@@ -13,8 +13,6 @@ dev-vcs/git-filter-repo
 games-util/esteam
 games-util/game-device-udev-rules
 games-util/steam-launcher
-gui-apps/waybar **
-gui-apps/wf-recorder **
 media-gfx/ocrmypdf
 media-video/obs-studio
 net-im/slack

@@ -1,2 +1,1 @@
-www-client/chromium -libcxx -lto -pgo
 */* -llvm_slot_20

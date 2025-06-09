@@ -65,11 +65,12 @@ app-text/scdoc **
 <net-libs/webkit-gtk-2.49-r500
 <net-p2p/transmission-remote-gtk-1.7
 <net-print/libcupsfilters-2.2
+<sci-libs/nlopt-2.11
 <sys-apps/coreutils-9.8
 <sys-apps/hwloc-2.10
 <sys-apps/portage-3.0.69
 <sys-devel/gcc-14.3
-sys-fs/bcachefs-tools **
+sys-fs/bcachefs-tools
 <sys-kernel/dracut-crypt-ssh-1.0.9
 <sys-kernel/gentoo-sources-6.16
 <sys-libs/glibc-2.42

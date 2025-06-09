@@ -1,4 +1,4 @@
-app-admin/testdisk ntfs reiserfs
+app-admin/testdisk ntfs reiserfs -gui
 app-backup/btrbk doc -mbuffer
 app-containers/docker overlay
 app-editors/vim python -sound

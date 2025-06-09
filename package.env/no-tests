@@ -94,6 +94,8 @@ net-misc/openssh no-tests # regressed tests randomly, without USE changes, compi
 net-misc/socat no-tests # multiple tests regressions from 1.7 to 1.8* 2024.10.09
 net-p2p/transmission-remote-gtk no-tests # fails tests 2025.05.31
 net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists 2024.06.21
+sci-astronomy/calcmysky no-tests # fails tests no matter the config 2025.06.09
+sci-libs/nlopt no-tests # tests require fortran, and cmake+fortran passes CFLAGS as FFLAGS, which fails configure 2025.06.09
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
 sys-apps/fwupd no-tests # fu-self-test times out and gets killed 2024.12.17
 sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21

@@ -41,6 +41,7 @@ net-p2p/transmission qt6
 net-p2p/transmission-remote-gtk geoip
 net-vpn/libreswan curl
 net-vpn/tor stats tor-hardening transparent-proxy upnp
+sci-astronomy/stellarium libcxx
 sys-apps/fwupd archive gnutls gusb logitech nvme thunderbolt tpm uefi
 sys-apps/portage doc native-extensions
 sys-apps/smartmontools update-drivedb

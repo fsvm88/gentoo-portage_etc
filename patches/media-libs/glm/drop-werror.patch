@@ -1,0 +1,25 @@
+diff '--color=auto' -Nuar glm-1.0.1.orig/test/CMakeLists.txt glm-1.0.1/test/CMakeLists.txt
+--- glm-1.0.1.orig/test/CMakeLists.txt	2025-06-08 18:59:14.913725060 +0100
++++ glm-1.0.1/test/CMakeLists.txt	2025-06-08 19:00:15.673811142 +0100
+@@ -10,21 +10,11 @@
+ 		message("GLM: Clang - ${CMAKE_CXX_COMPILER_ID} compiler")
+ 	endif()
+ 
+-	if(NOT GLM_DISABLE_AUTO_DETECTION)
+-		add_compile_options(-Werror -Weverything)
+-	endif()
+-
+ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+ 	if(NOT GLM_QUIET)
+ 		message("GLM: GCC - ${CMAKE_CXX_COMPILER_ID} compiler")
+ 	endif()
+ 
+-	if(NOT GLM_DISABLE_AUTO_DETECTION)
+-		add_compile_options(-Werror)
+-#		add_compile_options(-Wpedantic)
+-#		add_compile_options(-Wall)
+-#		add_compile_options(-Wextra)
+-	endif()
+ 	add_compile_options(-O2)
+ 	#add_compile_options(-Wno-long-long)
+ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")

@@ -54,6 +54,7 @@ dev-qt/* no-tests # Qt testing is a nightmare
 dev-ruby/* no-tests # latest movie: PORTAGE INFINITY DEPCYCLES ^2
 dev-util/ccache no-tests # tests probably fail because of /var/tmp/portage on tmpfs 2024.06.21
 dev-util/colm no-tests # broken tests, possibly due to --as-needed 2024.09.07
+dev-util/glslang no-tests # fails tests since 2025.06.19
 dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
 dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
 dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
@@ -94,6 +95,7 @@ net-misc/openssh no-tests # regressed tests randomly, without USE changes, compi
 net-misc/socat no-tests # multiple tests regressions from 1.7 to 1.8* 2024.10.09
 net-p2p/transmission-remote-gtk no-tests # fails tests 2025.05.31
 net-print/cups no-tests # fails test: cannot create directory .../cups-tests: file exists 2024.06.21
+net-print/libcupsfilters no-tests # waiting for https://bugs.gentoo.org/953639 to be solved 2025.06.22
 sci-astronomy/calcmysky no-tests # fails tests no matter the config 2025.06.09
 sci-libs/nlopt no-tests # tests require fortran, and cmake+fortran passes CFLAGS as FFLAGS, which fails configure 2025.06.09
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21

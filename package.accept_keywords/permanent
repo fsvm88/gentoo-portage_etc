@@ -1,5 +1,6 @@
 app-arch/zstd
 app-backup/btrbk
+app-editors/zed
 app-emulation/wine-vanilla
 app-portage/pycargoebuild
 app-shells/fish

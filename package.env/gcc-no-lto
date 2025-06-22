@@ -35,6 +35,7 @@ sys-apps/keyutils gcc-no-lto # linker scripts not supported by LLD, GCC+LTO brea
 sys-apps/memtest86+ gcc-no-lto
 sys-devel/bpf-toolchain gcc-no-lto # fails with clang 2024.11.04
 sys-devel/gcc gcc-no-lto # fails to compile quite early with clang 2024.06.20
+sys-devel/mold gcc-no-lto # fails lots of tests with clang+lld+libcxx+thinlto 2025.06.19
 sys-fs/cryptsetup gcc-no-lto # linker scripts not supported by LLD 2024.06.19
 sys-fs/udisks gcc-no-lto # fails 1 test with clang(-no-lto) 18.0.7 2024.06.19
 sys-libs/glibc gcc-no-lto # clang is not really supported unless USE=custom-flags # 2024.11.04

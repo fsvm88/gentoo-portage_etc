@@ -89,3 +89,4 @@ sys-fs/bcachefs-tools
 <sys-libs/libudev-compat-187
 <x11-libs/wxGTK-3.2.9
 <x11-themes/adw-gtk3-5.4
+<sys-fs/ncdu-bin-3

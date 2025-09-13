@@ -74,7 +74,7 @@ sys-auth/pam_u2f
 sys-boot/mokutil
 sys-boot/shim
 sys-fs/ddrescue
-sys-fs/ncdu
+sys-fs/ncdu-bin
 sys-kernel/dracut
 sys-kernel/dracut-crypt-ssh
 sys-kernel/installkernel

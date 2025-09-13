@@ -6,7 +6,7 @@
 <app-containers/docker-cli-28.1
 <app-containers/docker-compose-2.35
 <app-containers/runc-1.2.7
-<app-crypt/rpm-sequoia-1.9
+<app-crypt/rpm-sequoia-1.10
 <app-emulation/qemu-9.2
 app-misc/radeontop **
 app-text/scdoc **
@@ -21,7 +21,9 @@ app-text/scdoc **
 <dev-libs/gjs-1.83
 <dev-libs/gobject-introspection-2.83
 <dev-libs/gobject-introspection-common-2.83
+<dev-libs/libcpuid-0.9
 <dev-libs/libtracefs-1.8.3
+<dev-libs/nspr-4.38
 <dev-libs/nss-3.120
 <dev-libs/simdjson-3.11.6
 <dev-libs/spdlog-1.16
@@ -38,7 +40,7 @@ app-text/scdoc **
 =gui-apps/yofi-9999
 <llvm-core/clang-21
 <llvm-core/clang-common-21
-<llvm-core/clang-runtime-21
+<llvm-core/clang-linker-config-21
 <llvm-core/clang-toolchain-symlinks-21
 <llvm-core/lld-21
 <llvm-core/lldb-21
@@ -47,6 +49,10 @@ app-text/scdoc **
 <llvm-core/llvm-common-21
 <llvm-core/llvmgold-21
 <llvm-core/llvm-toolchain-symlinks-21
+<llvm-runtimes/clang-rtlib-config-21
+<llvm-runtimes/clang-runtime-21
+<llvm-runtimes/clang-stdlib-config-21
+<llvm-runtimes/clang-unwindlib-config-21
 <llvm-runtimes/compiler-rt-21
 <llvm-runtimes/compiler-rt-sanitizers-21
 <llvm-runtimes/libcxx-21
@@ -56,23 +62,29 @@ app-text/scdoc **
 <llvm-runtimes/openmp-21
 <media-gfx/gimp-3.1
 <media-libs/babl-0.1.113
+<media-libs/babl-0.1.119
 <media-libs/gegl-0.4.59
+<media-libs/gegl-0.4.69
 <media-libs/libvmaf-3.1
-<media-libs/svt-av1-3.1
+<media-libs/svt-av1-3.2
 <media-sound/qpwgraph-0.8.2
 <media-video/ffmpeg-7.2
+<media-video/pipewire-1.5
+# move llvm-core/clang-runtime llvm-runtimes/clang-runtime
 <net-libs/mbedtls-3.7
 <net-libs/webkit-gtk-2.49-r500
 <net-p2p/transmission-remote-gtk-1.7
 <net-print/libcupsfilters-2.2
 <sci-libs/nlopt-2.11
 <sys-apps/coreutils-9.8
+<sys-apps/cpu-x-5.4
+<sys-apps/dbus-broker-38
 <sys-apps/hwloc-2.10
 <sys-apps/portage-3.0.69
 <sys-devel/gcc-14.3
 sys-fs/bcachefs-tools
 <sys-kernel/dracut-crypt-ssh-1.0.9
-<sys-kernel/gentoo-sources-6.16
+<sys-kernel/gentoo-sources-6.17
 <sys-libs/glibc-2.42
 <sys-libs/libudev-compat-187
 <x11-libs/wxGTK-3.2.9

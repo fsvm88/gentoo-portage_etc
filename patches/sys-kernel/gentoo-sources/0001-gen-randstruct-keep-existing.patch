@@ -1,0 +1,19 @@
+diff '--color=auto' -Nuar linux-6.16.7-gentoo.orig/scripts/gen-randstruct-seed.sh linux-6.16.7-gentoo/scripts/gen-randstruct-seed.sh
+--- linux-6.16.7-gentoo.orig/scripts/gen-randstruct-seed.sh	2025-07-27 22:26:38.000000000 +0100
++++ linux-6.16.7-gentoo/scripts/gen-randstruct-seed.sh	2025-09-12 10:27:58.411615459 +0100
+@@ -1,7 +1,11 @@
+ #!/bin/sh
+ # SPDX-License-Identifier: GPL-2.0
+ 
+-SEED=$(od -A n -t x8 -N 32 /dev/urandom | tr -d ' \n')
+-echo "$SEED" > "$1"
+-HASH=$(echo -n "$SEED" | sha256sum | cut -d" " -f1)
+-echo "#define RANDSTRUCT_HASHED_SEED \"$HASH\"" > "$2"
++if [ ! -f "$1" ]; then
++    SEED=$(od -A n -t x8 -N 32 /dev/urandom | tr -d ' \n')
++    echo "$SEED" > "$1"
++fi
++if [ ! -f "$2" ]; then
++    HASH=$(echo -n "$SEED" | sha256sum | cut -d" " -f1)
++    echo "#define RANDSTRUCT_HASHED_SEED \"$HASH\"" > "$2"
++fi

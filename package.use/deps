@@ -13,7 +13,7 @@ app-text/texlive extra
 dev-build/cmake system-jsoncpp
 dev-db/postgresql llvm uuid
 dev-db/sqlite secure-delete
-dev-lang/python lto pgo sqlite tk # pgo triggers test
+dev-lang/python lto sqlite tk # pgo triggers test
 dev-lang/ruby -socks5
 dev-lang/rust abi_x86_32
 dev-lang/rust cargo clippy rls rustfmt parallel-compiler profiler rust-analyzer wasm system-bootstrap system-llvm
@@ -47,8 +47,8 @@ dev-vcs/subversion -kwallet
 gnome-base/gvfs archive mtp
 gui-libs/wlroots liftoff tinywl
 llvm-core/clang-common hardened
-llvm-core/clang-runtime libcxx
 llvm-core/lldb lzma
+llvm-runtimes/clang-runtime libcxx
 llvm-runtimes/libcxxabi static-libs
 llvm-runtimes/libcxx libcxxabi static-libs
 llvm-runtimes/openmp hwloc
@@ -81,6 +81,7 @@ media-plugins/gst-plugins-vaapi gles2
 media-sound/pulseaudio gnome native-headset -daemon
 media-video/ffmpeg aacplus amr bluray chromium dav1d gmp libaom libaribb24 libdrm libtesseract libv4l openssl postproc shaderc svt-av1 vmaf vpx -opengl
 media-video/pipewire aptx echo-cancel extra ldac sound-server
+# move llvm-core/clang-runtime llvm-runtimes/clang-runtime
 net-dns/avahi autoipd mdnsresponder-compat python
 net-dns/dnsmasq script
 net-firewall/iptables conntrack netlink
@@ -91,7 +92,7 @@ net-libs/gtk-vnc python
 net-libs/libssh static-libs
 net-libs/nghttp2 static-libs utils
 net-libs/nghttp3 static-libs
-net-libs/nodejs inspector lto
+net-libs/nodejs inspector lto npm
 net-libs/webkit-gtk gles2
 net-misc/iputils arping clockdiff openssl rarpd tracepath traceroute -caps -filecaps
 net-misc/spice-gtk -gstreamer python usbredir
@@ -105,8 +106,8 @@ sys-apps/man-pages -l10n_de -l10n_it
 sys-apps/systemd boot ukify xkb
 sys-apps/util-linux static-libs
 sys-auth/oath-toolkit pskc
-sys-devel/binutils cxx
-sys-devel/gcc graphite lto pie pgo ssp -sanitize
+sys-devel/binutils cxx -pgo
+sys-devel/gcc graphite lto pie ssp -sanitize
 sys-libs/glibc gd
 sys-libs/libcap static-libs
 sys-libs/libxcrypt static-libs

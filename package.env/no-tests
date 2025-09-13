@@ -3,6 +3,8 @@ app-arch/libarchive no-tests # tests hang indefinitely, see https://bugs.gentoo.
 app-containers/docker-buildx no-tests # broken tests regardless of configuration 2024.06.20
 app-containers/docker-compose no-tests # tests require docker, which is working, but then of course network access is required, and a bit further 2024.06.20
 app-crypt/gnupg no-tests # USE=tpm requires hardware to test with apparently 2024.06.20
+app-crypt/libsecret no-tests # tpm2 tests fail as of 2025.07.05
+app-crypt/swtpm no-tests # fails 1 test regardless of LTO 2025.07.23
 app-crypt/tpm2-abrmd no-tests # fails 2 tests, probably due to wrong code 2024.10.21
 app-crypt/tpm2-tools no-tests # fails tests, probably due to wrong code 2024.10.21
 app-crypt/tpm2-tss no-tests # fails tests, probably due to wrong code 2024.10.21
@@ -27,6 +29,7 @@ dev-lang/spidermonkey no-tests # 128 fails 2x tests: timezone and Intl data 2024
 dev-lang/swig no-tests # fails tests regardless of compiler, somehow goes and fetches wrong CFLAGS 2024.06.21
 dev-libs/appstream-glib no-tests # fails tests regardless of config 2024.06.20
 dev-libs/boost no-tests # lots of tests fail to compile with clang-20, let alone run 2025.05.23
+dev-libs/concurrencykit no-tests # takes forever to run, fails ck_epoch test
 dev-libs/date no-tests # broken test suite wants timezone db in work folder 2025.04.17
 dev-libs/gjs no-tests # fails 1x test with clang, fails a different test with GCC 2024.10.27
 dev-libs/icu no-tests # fails intltest regardless of config 2024.10.29
@@ -60,6 +63,7 @@ dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
 dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
 dev-util/umockdev no-tests # broken with gcc-no-lto 2024.11.07
 dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig 2024.06.21
+gnome-base/dconf no-tests # engine test times out 2025.09.07
 gnome-base/gnome-keyring no-tests # broken tests, fail regardless of clang(-no-lto)?, hang on GCC+LTO 2024.06.21
 gnome-base/librsvg no-tests # 1 regression for x86_32, recheck in a couple months 2024.06.21
 gui-libs/gtk no-tests # failing a few tests out of 4300, too long to run regularly 2024.06.21
@@ -99,6 +103,7 @@ net-print/libcupsfilters no-tests # waiting for https://bugs.gentoo.org/953639 t
 sci-astronomy/calcmysky no-tests # fails tests no matter the config 2025.06.09
 sci-libs/nlopt no-tests # tests require fortran, and cmake+fortran passes CFLAGS as FFLAGS, which fails configure 2025.06.09
 sys-apps/accountsservice no-tests # fails tests regardless of config 2024.06.21
+sys-apps/dbus-broker no-tests # always fails 1 test dbus-broker:unit / D-Bus Socket Options 2025.09.07
 sys-apps/fwupd no-tests # fu-self-test times out and gets killed 2024.12.17
 sys-apps/hwloc no-tests # tests fail regardless of config 2024.06.21
 sys-apps/keyutils no-tests # fails tests regardless of config, probably needs access to kernel keyring 2024.06.21 

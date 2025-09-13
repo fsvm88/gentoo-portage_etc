@@ -1,0 +1,11 @@
+diff '--color=auto' -Nuar zed-0.191.4.orig/.cargo/config.toml zed-0.191.4/.cargo/config.toml
+--- zed-0.191.4.orig/.cargo/config.toml	2025-06-18 15:51:49.000000000 +0100
++++ zed-0.191.4/.cargo/config.toml	2025-06-29 18:17:40.466779409 +0100
+@@ -7,7 +7,6 @@
+ 
+ [target.x86_64-unknown-linux-gnu]
+ linker = "clang"
+-rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+ 
+ [target.aarch64-unknown-linux-gnu]
+ linker = "clang"

@@ -12,5 +12,4 @@ llvm-runtimes/libcxx
 llvm-runtimes/libcxxabi
 llvm-runtimes/libunwind
 llvm-runtimes/openmp
-# move llvm-core/clang-runtime llvm-runtimes/clang-runtime
 sys-apps/hwloc

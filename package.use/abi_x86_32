@@ -114,10 +114,8 @@ media-plugins/alsa-plugins abi_x86_32
 media-sound/lame abi_x86_32
 media-sound/mpg123 abi_x86_32
 media-sound/mpg123-base abi_x86_32
-media-sound/pulseaudio abi_x86_32
 media-video/ffmpeg abi_x86_32
 media-video/pipewire abi_x86_32
-# move llvm-core/clang-runtime llvm-runtimes/clang-runtime
 net-dns/avahi abi_x86_32
 net-dns/c-ares abi_x86_32
 net-dns/libidn2 abi_x86_32

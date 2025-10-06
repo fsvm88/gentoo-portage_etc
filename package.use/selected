@@ -18,7 +18,6 @@ dev-libs/rocr-runtime non-free
 dev-util/ccache -static-c++
 dev-util/perf clang libpfm capstone -gtk
 dev-vcs/subversion -dso
-gui-apps/waybar evdev libinput network tray
 gui-wm/sway tray
 llvm-core/clang-common default-compiler-rt default-libcxx default-lld
 llvm-core/llvm binutils-plugin
@@ -32,7 +31,6 @@ media-libs/opencv python
 media-video/mplayer bluray faac
 media-video/mpv archive bluray drm gbm libmpv lua tools
 media-video/mpv -opengl
-# move llvm-core/clang-runtime llvm-runtimes/clang-runtime
 net-analyzer/goaccess btree geoip geoipv2 tokyocabinet
 net-analyzer/nmap ncat nping nmap-update libssh2
 net-analyzer/wireshark smi -qt4 qt5
@@ -54,5 +52,5 @@ sys-kernel/gentoo-sources experimental symlink
 sys-kernel/installkernel dracut systemd-boot uki ukify
 sys-process/fcron system-crontab
 virtual/rust profiler
-www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite system-pipewire wifi startup-notification screencast pgo -wasm-sandbox -X
+www-client/firefox clang custom-cflags custom-optimization hardened libproxy lto system-harfbuzz system-av1 system-jpeg system-libevent system-png system-sqlite system-pipewire wifi startup-notification screencast pgo wasm-sandbox -X
 x11-apps/mesa-progs gles2

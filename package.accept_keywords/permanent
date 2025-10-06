@@ -1,17 +1,18 @@
 app-arch/zstd
 app-backup/btrbk
-app-editors/zed
 app-emulation/wine-vanilla
 app-portage/pycargoebuild
 app-shells/fish
 app-text/OCRmyPDF
-app-text/vale
+dev-build/slibtool
 dev-lang/rust
 dev-lang/rust-common
 dev-libs/rocr-runtime
 dev-libs/roct-thunk-interface
+dev-libs/sltdl
 dev-util/cargo-license
 dev-util/clinfo
+dev-util/dart-sass
 dev-util/rustup
 dev-vcs/git-filter-repo
 games-util/esteam
@@ -24,6 +25,6 @@ sci-misc/boinc
 sys-apps/amdgpu_top
 sys-apps/fwupd
 sys-fs/btrfs-progs
-sys-kernel/linux-firmware
+<sys-kernel/linux-firmware-99999999 **
 sys-kernel/linux-headers
 www-client/firefox

@@ -1,0 +1,3 @@
+CFLAGS="-O3 -march=native -pipe -glldb -flto=thin -fwhole-program-vtables -gline-tables-only"
+CXXFLAGS="${CFLAGS}"
+LDFLAGS="-Wl,-O3,-z,now,--as-needed,--lto-O3,--icf=safe,-z,pack-relative-relocs"

@@ -1,0 +1,4 @@
+LIBTOOLIZE=""
+LIBTOOL=""
+MAKEFLAGS=""
+MAKE="make"

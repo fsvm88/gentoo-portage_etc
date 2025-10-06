@@ -1,0 +1,16 @@
+app-text/hunspell no-slibtool # fails tests 2025.09.30
+app-text/tesseract no-slibtool # fails configure 2025.09.30
+dev-lang/perl no-slibtool # fails tests otherwise 2025.09.30
+dev-libs/dbus-glib no-slibtool # fails tests otherwise 2025.09.30
+dev-libs/libtomcrypt no-slibtool # fails to build otherwise 2025.09.30
+dev-libs/libxml2 no-slibtool # fails symbol versioning and flatpak complains all the time in the terminal 2025.09.28
+dev-libs/openssl no-slibtool # fails to build with missing command 2025.09.30
+media-gfx/imagemagick no-slibtool
+media-libs/alsa-lib no-slibtool # fails libtool scripts otherwise
+media-libs/libgphoto2 no-slibtool # fails tests 2025.09.30
+media-libs/libvorbis no-slibtool # tests 2025.09.30
+sys-apps/sandbox no-slibtool # fails to build 2025.09.30
+sys-devel/gcc no-slibtool # still-open bug #924150 2025.09.30
+sys-libs/gpm no-slibtool # fails configure 2025.09.30
+sys-libs/libxcrypt no-slibtool # fails tests 2025.09.30
+sys-process/procps no-slibtool # fails tests 2025.09.30

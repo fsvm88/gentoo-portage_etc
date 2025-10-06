@@ -16,7 +16,7 @@ app-text/po4a no-tests # this brings in all of latex 2024.06.20
 dev-build/autoconf no-tests # nobody ever saw these finish or pass 2024.06.20
 dev-build/automake no-tests # nobody ever saw these finish or pass 2024.06.20
 dev-build/cmake no-tests # 4 tests always fail regardless of config 2024.06.20
-dev-build/libtool no-tests # libtool is on life support, someday slibtool will be ready 2024.06.20
+dev-build/libtool no-tests # libtool is on life support, someday slibtool will be ready 2025.09.30
 dev-build/meson no-tests # python failures during tests, regression, disable for now 2024.07.27
 dev-cpp/catch no-tests # one test broken with clang-20 https://github.com/catchorg/Catch2/issues/2981 2025.05.23
 dev-cpp/glog no-tests # fails tests in any other config 2024.12.08
@@ -61,6 +61,7 @@ dev-util/glslang no-tests # fails tests since 2025.06.19
 dev-util/gtk-doc no-tests # fails tests regardless of config 2024.06.21
 dev-util/hip no-tests # broken test suite, recheck in 6mo 2024.06.21
 dev-util/maturin no-tests # fails to test cmd/publish.toml due to CARGO_BUILD_TARGET= difference 2024.08.10
+dev-util/pkgcheck no-tests # upstream https://github.com/pkgcore/pkgcheck/issues/760 2025.10.04
 dev-util/umockdev no-tests # broken with gcc-no-lto 2024.11.07
 dev-util/vulkan-utility-libraries no-tests # depends on dev-cpp/magic_enum, which has no multilib pkgconfig 2024.06.21
 gnome-base/dconf no-tests # engine test times out 2025.09.07
@@ -75,6 +76,7 @@ llvm-runtimes/offload no-tests # 2x tests hang for more than 45m at 100% CPU 202
 llvm-runtimes/openmp no-tests # fails atomic/omp_atomic.c test 2025.05.12
 media-gfx/gscan2pdf no-tests # brings in sane-* stuff, sane-frontends fails to build and test 2024.06.21 
 media-gfx/img2pdf no-tests # brings in 22 potentially problematic packages 2024.06.21
+media-libs/assimp no-tests # 6.0.2 fails some tests regardless of config
 media-libs/exempi no-tests # cannot link against boost because boost builds with clang, ABI incompatibility 2024.06.22
 media-libs/flac no-tests # tests can literally take more than a few hours on a multi-core machine with build dir mounted in RAM and 64GB of it... not worth it 2024.06.21
 media-libs/gegl no-tests # fails regardless of config 2024.06.21

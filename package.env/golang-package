@@ -1,0 +1,10 @@
+app-containers/containerd golang-package
+app-containers/docker-buildx golang-package
+app-containers/docker-cli golang-package
+app-containers/docker-compose golang-package
+app-containers/docker golang-package
+app-metrics/node_exporter golang-package
+dev-util/github-cli golang-package
+dev-util/promu golang-package
+net-misc/rclone golang-package
+sys-cluster/kubelogin golang-package

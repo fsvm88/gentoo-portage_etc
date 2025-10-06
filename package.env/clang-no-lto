@@ -1,17 +1,5 @@
-app-containers/containerd clang-no-lto # go package
-app-containers/docker-buildx clang-no-lto # go package
-app-containers/docker clang-no-lto # go package
-app-containers/docker-cli clang-no-lto # go package
-app-containers/docker-compose clang-no-lto # go package
-app-crypt/gcr:0 clang-no-lto # one test fails if compiled with LTO still true as of 2024.06.17
-app-metrics/node_exporter clang-no-lto # go package
-dev-cpp/glibmm clang-no-lto # both :0 and :4 fail 1 test if LTO is enabled 2024.06.17
-dev-lang/spidermonkey clang-no-lto # ebuild or configure strip -flto, but -fwhole-program-vtables is still passed, crashing the build (anyway has lto USE) 2024.06.17
-dev-libs/boost clang-no-lto
-dev-util/github-cli clang-no-lto # go package
-dev-util/promu clang-no-lto # go package
+dev-cpp/glibmm clang-no-lto # both :2 and :2.68 fail 1 test if LTO is enabled 2025.09.27
+dev-libs/boost clang-no-lto # build simply blows up with LTO with undefined symbols all over the place 2025.09.27
 llvm-runtimes/offload clang-no-lto # incorrectly filters -fwhole-program-vtable, messing with linking
-media-libs/x264 clang-no-lto # configure fails endianness test for clang configuration 2024.06.20
-net-misc/rclone clang-no-lto # go package
-sys-cluster/kubelogin clang-no-lto # go package
-sys-fs/bcachefs-tools clang-no-lto # fails to build with LTO due to flag strippings 2025.06.08 somewhere
+media-libs/x264 clang-no-lto # configure fails endianness test for clang configuration 2025.09.27
+sys-fs/bcachefs-tools clang-no-lto # fails to build with LTO due to flag strippings 2025.09.27 somewhere

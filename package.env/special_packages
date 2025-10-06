@@ -2,8 +2,6 @@ acct-user/greetd acct-user_greetd # using sway as main backend, need to remove t
 app-containers/runc clang-no-lto # does not properly filter -fwhole-program-vtables 2024.08.10
 app-crypt/efitools gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
 app-crypt/sbsigntools gnu-objcopy # llvm-objcopy does not support efi-app-x86_64 target (yet: https://github.com/llvm/llvm-project/issues/108609) 2024.10.21
-app-editors/zed app-editors-zed
-app-text/vale clang-no-lto # go package, otherwise fails to link properly 2024.10.20
 dev-libs/jansson no-lld # this forces bfd linker without filtering unsupported flags 2024.06.20
 dev-qt/* clang-no-lto # Qt is known for not really supporting LTO builds, just disable it 2024.06.20
 #llvm-core/clang:18 clang-no-lto # linking w/ LTO against libcxx:19 cannot work, ever

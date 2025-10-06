@@ -1,0 +1,6 @@
+dev-libs/libevdev no-gc-sections # tests 2025.09.30
+dev-libs/libinput no-gc-sections # tests 2025.09.30
+dev-libs/wayland no-gc-sections # tests 2025.09.30
+net-wireless/bluez no-gc-sections # tests 2025.09.30
+net-wireless/iw no-gc-sections # tests 2025.09.30
+x11-misc/rendercheck no-gc-sections # tests 2025.09.30
